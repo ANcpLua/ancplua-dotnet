@@ -16,8 +16,8 @@ for mixed build/test requests. The antipattern examples come from fixing real re
 | `msbuild` | csproj/props/targets edits, custom targets, package build assets, analyzer packaging, binlog diagnosis, build reviews |
 | `nuget-versions` | where versions live, `Version.props` truth chains, `global.json` pins and rollForward, CPM, NU error codes, Renovate annotations |
 | `analyzers` | how analyzers arrive, severity precedence, suppression hygiene, `CompilerVisibleProperty`, ANcpLua.Analyzers specifics |
-| `csharp-refactoring` | binding-aware structural changes, generated/partial code and runtime/API contracts |
-| `performance` | BenchmarkDotNet comparisons, CPU/GC/allocation evidence, hot-path reviews and crash/hang collection |
+| `csharp-refactoring` | binding-aware structural changes, complete constant/dead-code reconciliation, generated/partial code and runtime/API contracts |
+| `performance` | correlated logs/metrics/traces/spans/profiles, BenchmarkDotNet comparisons, hot-path reviews and crash/hang collection |
 | `release` | layered releases, tag-driven vs push-driven publishing, trusted publishing, candidate waves in consumers before publishing (`scripts/candidate-wave.sh`), waiting for the NuGet index (`scripts/wait-nuget.sh`), moving consumers |
 | `audit` | read-only fleet audits that separate certain fixes from judgment calls |
 
@@ -73,6 +73,13 @@ claude plugin eval .                            # full: 3 runs, with and without
 ```
 
 MSTest APIs and runner verification live in the companion repository.
+
+## 0.6.0
+
+Three focused agent starter prompts: runtime evidence, repository audit and complete
+constant/dead-check reconciliation. Follow indirect production uses and account for
+every inventory entry; correlate existing production telemetry before collecting more.
+Keep the seven skills and MSTest companion boundary. Mark local execution requirements.
 
 ## 0.5.1
 

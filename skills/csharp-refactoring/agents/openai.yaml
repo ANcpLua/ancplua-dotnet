@@ -1,6 +1,6 @@
 interface:
   display_name: "C# refactoring"
-  short_description: "Refactor C# while preserving observed contracts"
-  default_prompt: "Use $csharp-refactoring to make this structural C# change while preserving its observed contracts."
+  short_description: "Refactor C# and reconcile constants and dead code"
+  default_prompt: "Use $csharp-refactoring to reconcile every constant and dead check, including indirect production uses and measured costs."
 policy:
   allow_implicit_invocation: true

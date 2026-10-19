@@ -1,5 +1,25 @@
 # Runtime evidence
 
+## Start with existing production evidence
+
+Choose signals for the question rather than collecting everything. Tie them to
+the same deployed revision, configuration, operation and observation window.
+
+| Signal | What it establishes |
+| --- | --- |
+| Metrics | Rate, errors, latency distributions, saturation and whether the symptom is widespread. Compare equivalent workloads; averages can hide tails. |
+| Traces and spans | Critical path, dependencies, retries and where an operation waits. Correlate trace/span IDs with logs; account for sampling and overlapping child spans. |
+| Logs | Inputs, failures and state transitions around the affected operation. Correlation adds context; log count alone is not elapsed time or CPU cost. |
+| Profiles | CPU stacks, allocations, contention or waits attributable to code. Match the profiler's sample type to the claimed cost. |
+
+Use existing dashboards, queries and exported artifacts available to the agent.
+State missing access or instrumentation. Choose a bounded collection only when
+it resolves a named gap. Rank expensive checks by observed call frequency and
+per-call cost; distinguish measured redundant work from source hypotheses.
+Do not treat unsampled paths or absent log events as proof of dead code.
+
+## Targeted runtime collection
+
 Identify the actual process, runtime, architecture and diagnostic access before
 choosing a tool. CoreCLR examples below assume available tools and a writable
 artifact directory; replace `PID` and paths. Check the installed tool's help for

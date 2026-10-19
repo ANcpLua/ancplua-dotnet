@@ -32,6 +32,7 @@ read-only instruction, then merge the ledgers. Otherwise run the passes in seque
 | MSTest, when in scope | [Companion skill routing](references/mstest-routing.md) | delegate project setup, execution, extensions and test-quality analysis to their focused owners |
 | Release | `release` | publish workflows, gates, credentials model, tag hygiene |
 | Runtime cost, when requested | [performance](../performance/SKILL.md) | existing measurements or source hypotheses; retain the audit's read-only scope |
+| Constants/dead code, when requested | [constant reconciliation](../csharp-refactoring/references/constant-reconciliation.md) | complete declaration/caller inventory, indirect production uses, disposition and measured cost |
 
 Useful searches (ripgrep; skip `bin/`, `obj/`, `artifacts/`, `node_modules/`, `TestResults/`):
 

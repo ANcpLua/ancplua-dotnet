@@ -1,6 +1,6 @@
 interface:
   display_name: ".NET performance"
-  short_description: "Measure runtime cost and collect .NET diagnostics"
-  default_prompt: "Use $performance to investigate this .NET runtime problem with the smallest useful measurement."
+  short_description: "Correlate .NET telemetry and measure runtime cost"
+  default_prompt: "Use $performance to investigate this .NET runtime problem using logs, metrics, traces, spans and profiles."
 policy:
   allow_implicit_invocation: true

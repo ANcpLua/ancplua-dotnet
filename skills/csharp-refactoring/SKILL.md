@@ -1,6 +1,6 @@
 ---
 name: csharp-refactoring
-description: Refactor C# structure through renames, moves, extraction and deduplication while preserving observed contracts. Use for partial/generated declarations, serialization or reflection names, public APIs and conditional builds. Keep intentional behavior changes explicit; MSTest test design and review belong to mstest-extensions.
+description: Refactor C# and reconcile stale constants, dead checks and abandoned code, including indirect production uses. Use for renames, moves, deduplication, exhaustive cleanup, generated declarations and runtime/API contracts. MSTest test design and review belong to mstest-extensions.
 license: Apache-2.0
 ---
 
@@ -31,6 +31,13 @@ license: Apache-2.0
 | Type moved between assemblies | A same-name move may need `TypeForwardedTo` in the original assembly; a rename needs a different compatibility decision. |
 | Generated/partial code, friends, conditional builds | Follow generator ownership, `InternalsVisibleTo`, all declarations and each affected compilation. |
 | Wrapper removal or type merge | Retain compatibility adapters only for a real consumer boundary. Remove internal dead indirection once its callers are migrated. |
+
+## Constants and abandoned code
+
+For exhaustive cleanup, use [constant reconciliation](references/constant-reconciliation.md).
+Account for every declaration in scope, including retained and unresolved items;
+do not stop at an easy deletion shortlist. Use [performance](../performance/SKILL.md)
+for production telemetry and profiles when deciding which checks are expensive.
 
 For MSTest validation or changes to test code, select the focused skill through
 [companion routing](../audit/references/mstest-routing.md). Package/framework
