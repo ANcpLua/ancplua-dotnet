@@ -1,11 +1,10 @@
 ---
 name: build-change-reviewer
-description: Reviews a diff that touches .NET build, package or test-platform files (csproj, props, targets, Directory.Packages.props, Version.props, global.json, slnx, CI test steps) and reports only verified problems. Use before committing build changes or when reviewing a dependency-bump PR.
+description: Reviews a diff that touches .NET build or package files (csproj, props, targets, Directory.Packages.props, Version.props, global.json, slnx, CI build steps) and reports only verified problems. Use before committing build changes or when reviewing a dependency-bump PR. MSTest-specific concerns route to the companion plugin.
 tools: Read, Grep, Glob, Bash
 skills:
   - msbuild
   - nuget-versions
-  - mstest
   - analyzers
 ---
 
@@ -16,8 +15,9 @@ For each change, check:
 
 1. **Completeness.** If a version moved, did every place that holds that version move with it
    (`nuget-versions`, section 1)? If an SDK pin moved, did CI, templates and docs follow?
-2. **Correctness.** Apply `msbuild` `references/antipatterns.md` and the `nuget-versions` rules,
-   and the `mstest` rules for test projects and CI test commands.
+2. **Correctness.** Apply `msbuild` `references/antipatterns.md` and the `nuget-versions` rules.
+   For MSTest-specific changes, select the companion through
+   [MSTest routing](../skills/audit/references/mstest-routing.md); review without editing or running tests.
 3. **Analyzers.** No new blanket suppressions, no suppression of IDs that don't exist, severities
    changed only on purpose (`analyzers`).
 

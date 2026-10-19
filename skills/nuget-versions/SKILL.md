@@ -1,6 +1,6 @@
 ---
 name: nuget-versions
-description: Keeps .NET package and SDK versions correct across Central Package Management, Version.props truth chains, global.json (sdk pin, rollForward, msbuild-sdks, test runner) and Renovate. Use when adding or bumping a package, converting to CPM, fixing NU1008/NU1010/NU1102/NU1109/NU1605/NU190x, reviewing a Renovate PR that touched only part of a version, or deciding whether a local version override is still needed.
+description: Keeps .NET package and SDK versions correct across Central Package Management, Version.props truth chains, global.json (sdk pin, rollForward, msbuild-sdks) and Renovate. Use when adding or bumping a package, converting to CPM, fixing NU1008/NU1010/NU1102/NU1109/NU1605/NU190x, reviewing a Renovate PR that touched only part of a version, or deciding whether a local version override is still needed. MSTest runner/profile setup belongs to mstest-extensions.
 license: Apache-2.0
 ---
 
@@ -8,6 +8,9 @@ license: Apache-2.0
 
 Every package version lives in exactly one place. A change that moves a version moves every
 place that has to agree with it in the same commit, or it is half a change.
+
+Keep version-chain work here; route MSTest runner, profile and project semantics
+through the [companion routing table](../audit/references/mstest-routing.md).
 
 ## 1. Where versions live
 
@@ -17,7 +20,7 @@ place that has to agree with it in the same commit, or it is half a change.
 | Repo override | `Version.props` imported by `Directory.Packages.props` after the SDK copy | only values the SDK doesn't define, or values deliberately ahead of it |
 | CPM | `Directory.Packages.props` | `<PackageVersion Include="X" Version="$(XVersion)"/>`; `Update=` for packages the SDK injects |
 | Projects | `*.csproj` | `<PackageReference Include="X"/>` with no `Version` |
-| SDK pins | `global.json` | `sdk.version`, `sdk.rollForward`, `msbuild-sdks` (real MSBuild SDKs only), `test.runner` |
+| SDK pins | `global.json` | `sdk.version`, `sdk.rollForward`, `msbuild-sdks` (real MSBuild SDKs only) |
 
 Override invariant for a repo `Version.props` entry. Every entry is exactly one of:
 
@@ -34,8 +37,7 @@ get deleted. Audit by diffing against
 ```json
 {
   "sdk": { "version": "10.0.402", "rollForward": "latestFeature", "allowPrerelease": false },
-  "msbuild-sdks": { "ANcpLua.NET.Sdk": "3.4.50", "MSTest.Sdk": "4.5.1" },
-  "test": { "runner": "Microsoft.Testing.Platform" }
+  "msbuild-sdks": { "ANcpLua.NET.Sdk": "3.4.50" }
 }
 ```
 

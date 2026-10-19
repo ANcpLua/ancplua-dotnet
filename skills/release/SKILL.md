@@ -45,8 +45,9 @@ its own last published version, never the one being built. Consumers move last, 
 
 1. Make the change, update `CHANGELOG.md` and anything else that names the old version: docs,
    templates, `global.json`, `Version.props`. Search for the old value across the repository.
-2. Build and test locally the way CI does, for example `dotnet build -c Release` and
-   `dotnet test`. A broken commit must never reach a publishing branch or tag.
+2. Run the repository's build, pack and test entrypoints the way CI does. For MSTest
+   execution, use the [companion routing table](../audit/references/mstest-routing.md).
+   A broken commit must never reach a publishing branch or tag.
 3. Commit, push, then tag if publishing is tag-driven:
    `git tag vX.Y.Z && git push origin vX.Y.Z`.
 4. Watch the publish run: `gh run list --workflow <file> --limit 1`, then `gh run watch <id>`.

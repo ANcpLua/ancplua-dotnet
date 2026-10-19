@@ -6,5 +6,5 @@ Licensed under the Apache License, Version 2.0 (see LICENSE).
 Research input: the MSBuild, NuGet and test plugins of dotnet/skills
 (https://github.com/dotnet/skills, MIT License, Copyright (c) .NET Foundation and Contributors)
 were read as a catalogue of known antipatterns. The skills in this repository are written
-independently; facts specific to MSTest.Sdk 4.5.1 and Microsoft.Testing.Platform 2.5.1 were
-verified by building and running test projects against those versions.
+independently. MSTest-specific guidance and verification now belong to the
+MSTest Extensions companion (https://github.com/ANcpLua/mstest-extensions-plugin).

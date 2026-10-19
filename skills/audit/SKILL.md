@@ -1,6 +1,6 @@
 ---
 name: audit
-description: Audits one or more .NET repositories for build, package, analyzer and test-platform problems and separates certain fixes from judgment calls. Use when asked to check, compare or clean up how repositories build, pin SDKs, consume shared packages or analyzers, or run tests, or before a cross-repository version rollout.
+description: Audits one or more .NET repositories for build, package and analyzer problems and separates certain fixes from judgment calls. Use for repository or fleet build-policy audits, shared SDK/package consistency and cross-repository version rollouts. Focused MSTest setup, execution and test-quality reviews belong to mstest-extensions.
 license: Apache-2.0
 ---
 
@@ -14,8 +14,9 @@ someone opening the cited file.
 - Name the repositories and their default-branch state: `git -C <repo> status -sb`, and whether
   the working tree has someone else's uncommitted work (never touch it).
 - For a fleet audit, start with an inventory table: repository, `global.json` (`sdk.version`,
-  `rollForward`, `msbuild-sdks`, `test.runner`), SDK used by the projects, shared-package versions
-  and where each is set, test stack, release mechanism.
+  `rollForward`, `msbuild-sdks`), SDK used by the projects, shared-package versions
+  and where each is set, release mechanism. Include test-platform observations when requested,
+  using the [MSTest routing table](references/mstest-routing.md).
 
 ## 2. Passes
 
@@ -28,7 +29,7 @@ read-only instruction, then merge the ledgers. Otherwise run the passes in seque
 | Versions | `nuget-versions` | global.json, Version.props, Directory.Packages.props, csproj versions, Renovate annotations, stale overrides |
 | Build | `msbuild` (`references/antipatterns.md`) | csproj, props, targets, slnx, CI build steps |
 | Analyzers | `analyzers` | how analyzers arrive, analysis modes, every suppression, stale IDs |
-| Tests | `mstest` (`references/test-smells.md`) | test project shape, runner, profile, coverage, CI test commands, test code smells |
+| MSTest, when in scope | [Companion skill routing](references/mstest-routing.md) | delegate project setup, execution, extensions and test-quality analysis to their focused owners |
 | Release | `release` | publish workflows, gates, credentials model, tag hygiene |
 
 Useful searches (ripgrep; skip `bin/`, `obj/`, `artifacts/`, `node_modules/`, `TestResults/`):
@@ -38,18 +39,16 @@ rg -n --glob '*.{csproj,props,targets}' '<NoWarn>|WarningsNotAsErrors|TreatWarni
 rg -n --glob '{.editorconfig,*.globalconfig}' 'dotnet_diagnostic\.[A-Z]+[0-9]+\.severity'
 rg -n --glob '*.cs' '#pragma warning disable|SuppressMessage\('
 rg -n --glob '*.{csproj,props,targets}' 'Version="[0-9]|VersionOverride|LangVersion|<Nullable>'
-rg -n --glob '*.{csproj,props}' 'Microsoft\.NET\.Test\.Sdk|coverlet|TestingPlatformDotnetTestSupport|UseVSTest'
-rg -n --glob '*.{yml,yaml,sh,ps1,cs}' 'dotnet test[^\n]*(--filter|--logger|--collect|\| *(grep|tail|head))'
 ```
 
 ## 3. Classify every finding
 
 - **Certain**: objectively wrong, with exactly one correct fix that changes no intended behavior.
   Examples: a suppression of a rule ID that no longer exists, an override equal to SDK truth,
-  `msbuild-sdks` entries for packages that aren't MSBuild SDKs, VSTest flags under MTP.
+  `msbuild-sdks` entries for packages that aren't MSBuild SDKs.
 - **Judgment call**: several reasonable fixes, or the fix changes behavior someone may rely on
-  (raising a severity, deleting a blanket suppression that hides real diagnostics, switching
-  test frameworks). Give your recommended option and the reason, and don't apply it without
+  (raising a severity, deleting a blanket suppression that hides real diagnostics, changing
+  an import contract). Give your recommended option and the reason, and don't apply it without
   agreement.
 - **Veracity gate** before any "broken" verdict: is it broken today on every OS and CI, and has it
   shipped unchanged without failing? If not, call it a risk, not a defect.

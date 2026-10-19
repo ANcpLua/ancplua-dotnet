@@ -54,7 +54,7 @@ default is what you want.
 <WarningsAsErrors>$(WarningsAsErrors);CA1816;CA2000;CA2012;CA2016</WarningsAsErrors>
 ```
 
-The same applies to `NoWarn`, `DefineConstants` and `TestingPlatformCommandLineArguments`.
+The same applies to `NoWarn`, `DefineConstants` and `CompileDependsOn`.
 
 ## 5. A pragma hiding a false positive
 

@@ -6,6 +6,10 @@ license: Apache-2.0
 
 # Roslyn analyzer adoption and suppression hygiene
 
+Keep analyzer loading, packaging and severity configuration here. For an MSTest
+diagnostic's test-code correction, use the
+[companion routing table](../audit/references/mstest-routing.md).
+
 ## 1. How an analyzer reaches a project
 
 Find the path first. Each path has its own way to opt out and to pin the version:

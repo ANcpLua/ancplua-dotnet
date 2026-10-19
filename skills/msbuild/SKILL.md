@@ -1,10 +1,13 @@
 ---
 name: msbuild
-description: Writes and reviews MSBuild for SDK-style .NET repositories (csproj, Directory.Build.props/targets, Directory.Packages.props, custom targets, build/ and buildTransitive/ package assets) and diagnoses build failures and slow builds from binlogs. Use when editing any .csproj/.props/.targets/.slnx file, when an MSBuild property, condition, DefineConstants or item seems to be ignored or empty, adding a custom target or generated file, packaging an analyzer or build asset, reviewing build changes, or investigating MSB/NETSDK/CS build errors and incremental-build problems.
+description: Writes and reviews MSBuild evaluation, properties, items, imports, custom targets and build/buildTransitive package assets for SDK-style .NET repositories. Use for ignored or empty properties/items, generated files, analyzer/build-asset packaging, build-file reviews, binlog diagnosis and incremental-build problems. Focused MSTest project setup, runner configuration and test commands belong to mstest-extensions.
 license: Apache-2.0
 ---
 
 # MSBuild for SDK-style repositories
+
+For MSTest-specific project or runner work, use the
+[companion routing table](../audit/references/mstest-routing.md).
 
 ## 1. Evaluation order decides where things go
 
@@ -31,7 +34,7 @@ Directory.Build.props  ->  SDK props  ->  project file body  ->  SDK targets  ->
 - Restating an SDK default is noise. Delete `<OutputType>Library`, `<EnableDefaultItems>true`,
   `RootNamespace`/`AssemblyName` equal to the project name, and manual `<Compile Include="**/*.cs">`.
 - List-like properties keep their previous value: `$(NoWarn);X`, `$(DefineConstants);X`,
-  `$(TestingPlatformCommandLineArguments) --opt`.
+  `$(CompileDependsOn);CustomStep`.
 - Quote both sides of conditions: `'$(X)' == 'true'`.
 - Paths come from properties (`$(MSBuildThisFileDirectory)`, `$(MSBuildProjectDirectory)`,
   `$(IntermediateOutputPath)`, `$(ArtifactsPath)`). Never use absolute paths, `obj/` literals or

@@ -1,12 +1,18 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "ancplua-dotnet",
-  "version": "0.2.2",
-  "description": "MSBuild, NuGet version chains, Roslyn analyzer adoption, MSTest on Microsoft.Testing.Platform, and layered NuGet releases for SDK-style .NET repositories.",
+  "version": "0.3.0",
+  "description": "MSBuild, NuGet version chains, Roslyn analyzer adoption and layered NuGet releases for SDK-style .NET repositories. MSTest work routes to the mstest-extensions companion plugin.",
   "author": {
     "name": "ancplua"
   },
   "license": "Apache-2.0",
   "repository": "https://github.com/ANcpLua/ancplua-dotnet",
-  "keywords": ["dotnet", "msbuild", "nuget", "mstest", "roslyn-analyzers", "release"]
+  "keywords": [
+    "dotnet",
+    "msbuild",
+    "nuget",
+    "roslyn-analyzers",
+    "release"
+  ]
 }
