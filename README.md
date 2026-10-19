@@ -56,9 +56,23 @@ Then start a new session.
 plugin.json                  Agent Plugins manifest with the Codex interface (extensions.com.openai)
 skills/<name>/SKILL.md       shared by both tools; Agent Skills frontmatter only
 agents/<name>.md             Claude Code subagents
+fixtures/mstest-probe/       MSTest.Sdk 4.5.1 probe: every API the mstest skill names, --help snapshots per profile
+scripts/verify.sh            manifest/frontmatter checks plus the probe (CI runs it on push, PRs and weekly)
+evals/                       claude plugin eval cases: one per skill, a negative and a boundary case
 ```
 
 Both manifests carry the same `version`; raise it with every change.
+
+## Verify
+
+```bash
+scripts/verify.sh                       # facts still hold for the pinned packages
+scripts/verify.sh --update              # after a deliberate MSTest.Sdk bump: refresh the --help snapshots
+claude plugin eval . --runs 1 --ablation none   # quick behavior check (model calls on your account)
+claude plugin eval .                            # full: 3 runs, with and without the plugin
+```
+
+When `verify.sh` fails after a version bump, fix the skill text first, then refresh the snapshots.
 
 ## License
 

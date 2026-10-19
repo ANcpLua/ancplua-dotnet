@@ -23,10 +23,18 @@ https://learn.microsoft.com/dotnet/core/testing/unit-testing-mstest-migration-v3
 | Membership | `Assert.Contains(item, items)` / `Assert.DoesNotContain(...)` | `IsTrue(items.Contains(item))` |
 | Single element | `var only = Assert.ContainsSingle(items);` | `Count == 1` then `items[0]` |
 | Strings | `Assert.Contains("x", s)`, `Assert.StartsWith`, `Assert.EndsWith`, `Assert.MatchesRegex` | `StringAssert.*` (MSTEST0046) |
-| Ranges | `Assert.IsInRange(min, max, value)`, `Assert.IsGreaterThan(lowerBound, value)` | reversed bound arguments |
+| Ranges | `Assert.IsInRange(min, max, value)`, `Assert.IsGreaterThan(lowerBound, value)`, `Assert.IsLessThanOrEqualTo(upperBound, value)` | reversed bound arguments |
+| Sign | `Assert.IsPositive(value)`, `Assert.IsNegative(value)` | `IsTrue(value > 0)` |
+| Every expected item present (with multiplicity) | `Assert.ContainsAll(expectedItems, actual)` | a loop of `Contains` |
+| Same elements, order significant or not | `Assert.AreSequenceEqual(expected, actual)` or with `SequenceOrder` | `AreEqual` on collections (MSTEST0065), `CollectionAssert.*` (MSTEST0068) |
+| Deep structural equality of object graphs | `Assert.AreEquivalent(expected, actual)` (both of type `T`; a `bool` overload makes extra members on `actual` fail) | comparing serialized JSON |
+| Negative string checks | `Assert.DoesNotStartWith`, `Assert.DoesNotMatchRegex` | `IsFalse(s.StartsWith(...))` |
 
 v4 signature change: overloads that took `message` plus `object[] args` now take only `message`;
 use string interpolation. Assertion messages explain the business meaning, not "values differ".
+
+Newer analyzers worth knowing: MSTEST0064 (prefer the async assertion overloads in async tests),
+MSTEST0066 (`[Ignore]` needs a justification), MSTEST0067 (no sync-over-async blocking in tests).
 
 ## Attributes and lifecycle
 

@@ -1,6 +1,6 @@
 ---
 name: msbuild
-description: Writes and reviews MSBuild for SDK-style .NET repositories (csproj, Directory.Build.props/targets, Directory.Packages.props, custom targets, build/ and buildTransitive/ package assets) and diagnoses build failures and slow builds from binlogs. Use when editing any .csproj/.props/.targets/.slnx file, adding a custom target or generated file, packaging an analyzer or build asset, reviewing build changes, or investigating MSB/NETSDK/CS build errors and incremental-build problems.
+description: Writes and reviews MSBuild for SDK-style .NET repositories (csproj, Directory.Build.props/targets, Directory.Packages.props, custom targets, build/ and buildTransitive/ package assets) and diagnoses build failures and slow builds from binlogs. Use when editing any .csproj/.props/.targets/.slnx file, when an MSBuild property, condition, DefineConstants or item seems to be ignored or empty, adding a custom target or generated file, packaging an analyzer or build asset, reviewing build changes, or investigating MSB/NETSDK/CS build errors and incremental-build problems.
 license: Apache-2.0
 ---
 

@@ -35,7 +35,7 @@ surrounding file before reporting: several patterns have legitimate uses, listed
 | unlisted-output | a task writes a file not in `Outputs` | downstream reruns | list it |
 | missing-filewrites | generated file without `FileWrites` | `dotnet clean` leaves it | add `FileWrites` |
 | touching-writer | `WriteLinesToFile` without `WriteOnlyWhenDifferent="true"` | changes timestamps every build | add it |
-| outputs-on-query | `Target Name="Get.*" Outputs=` | skipped, returns stale data | `Returns=` |
+| outputs-on-query | `Target Name="Get.*" Outputs=` used to hand items to callers | once any target in the project uses `Returns` (SDK targets do), targets without `Returns` return nothing to `CallTarget`/`MSBuild` callers | `Returns=` |
 | copy-always | `CopyToOutputDirectory.*Always` | copies every build | `PreserveNewest` |
 | eval-file-io | `$([System.IO.File]::(Read\|Write)` in a PropertyGroup | runs on every evaluation, including IDE design-time builds | move into a target |
 | broad-glob | `Include="**/*` at the repository root, globs over `node_modules` | slow evaluation | scope globs, `DefaultItemExcludes` |

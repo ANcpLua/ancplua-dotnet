@@ -44,8 +44,9 @@ Facts that make configurations silently inert:
   global config, or with `NoWarn` and `WarningsAsErrors`.
 - Under `TreatWarningsAsErrors=true`, setting a rule to `warning` relaxes nothing. To relax for
   tests, use `suggestion` or `none` with a reason, or exclude the IDs with `WarningsNotAsErrors`.
-- `dotnet_analyzer_diagnostic.severity = error` escalates every diagnostic without an ID-specific
-  entry. ID-specific entries from any config still win.
+- `dotnet_analyzer_diagnostic.severity = error` escalates only rules that are enabled by default,
+  and it's ignored entirely when `AnalysisMode`/`AnalysisLevel` enables all rules. ID-specific
+  entries from any config still win.
 
 ## 3. Suppression rules
 
@@ -54,10 +55,10 @@ Facts that make configurations silently inert:
 - Prefer the narrowest scope: a pragma around one statement, `[SuppressMessage(Justification = ...)]`
   on one member, a section for one generated file, a project `NoWarn`, and only then a repository
   `NoWarn`.
-- A suppression for an ID that no package in the project defines is dead. After a renumbering
-  (ANcpLua.Analyzers 2.0 moved `AL0xxx` to `AL1xxx`; the map is in the package's
-  `docs/migration-catalog.md`), rewrite or delete every `NoWarn`, pragma, `SuppressMessage` and
-  editorconfig entry.
+- A suppression for an ID that no package in the project defines is dead. After a renumbering,
+  rewrite or delete every `NoWarn`, pragma, `SuppressMessage` and editorconfig entry. For
+  ANcpLua.Analyzers 2.0 (`AL0xxx` became `AL1xxx`), the complete old-to-new map ships with this skill
+  in `references/id-migration.md`; for example, AL0017 became AL1600 and AL0018 became AL1601.
 - A pragma or `NoWarn` that works around a false positive is temporary: fix the analyzer, add a
   regression test, then delete the suppression.
 - Two settings that cancel each other (a project `NoWarn` plus an editorconfig "warning" for the

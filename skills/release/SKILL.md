@@ -7,14 +7,20 @@ compatibility: Needs git, gh, curl and the .NET SDK. scripts/wait-nuget.sh is PO
 
 # Layered NuGet release
 
-A consumer can only restore a version nuget.org has indexed. Release order follows the
-dependency graph, lowest layer first, and each layer waits for the one below it.
+A consumer can only restore a version nuget.org has indexed. Pointing a version variable (SDK
+truth, `Version.props`, `global.json` `msbuild-sdks`) at a version that isn't published and indexed
+fails every restore with NU1102. Release order follows the dependency graph, lowest layer first,
+and each layer waits for the one below it.
 
 ANcpLua chain (lowest first):
 
 ```text
 ANcpLua.Roslyn.Utilities -> ANcpLua.Analyzers -> ANcpLua.NET.Sdk (injects the analyzers) -> consumers
 ```
+
+Two relations point in opposite directions, and both are true. For *publishing* the analyzers come
+before the SDK, as drawn above. For *building*, the analyzer repository uses the SDK, which is why
+its own agent contract draws `Roslyn.Utilities -> NET.Sdk -> Analyzers`.
 
 The SDK's `Version.props` names the analyzer version every consumer gets, so the analyzers publish
 before the SDK points at them. The analyzer repository itself builds with the last published SDK

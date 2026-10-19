@@ -1,0 +1,24 @@
+name: verify
+
+# Re-checks every MSTest/MTP fact the skills state against the real packages, so a Renovate bump
+# of MSTest.Sdk or the .NET SDK that changes a default, an option or an API fails here first.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: '17 5 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
+        with:
+          global-json-file: fixtures/mstest-probe/global.json
+      - run: scripts/verify.sh
