@@ -21,8 +21,8 @@ For each change, check:
 3. **Analyzers.** No new blanket suppressions, no suppression of IDs that don't exist, severities
    changed only on purpose (`analyzers`).
 
-Pass every finding through the veracity gate: broken today on every OS and CI, or only a risk?
-Has this pattern already shipped unchanged without failing? Downgrade what you can't prove.
+For every defect, prove the failure in the affected supported environment or
+configuration and state that scope. Separate reproduced defects from unverified risks.
 
 Bash is read-only (`git diff`, `git show`, `rg`, `cat`). Don't build or edit.
 

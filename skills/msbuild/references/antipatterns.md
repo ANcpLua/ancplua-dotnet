@@ -7,9 +7,8 @@ surrounding file before reporting: several patterns have legitimate uses, listed
 
 | Rule | Signal | Harm | Fix |
 |---|---|---|---|
-| tfm-property-in-props | `PropertyGroup Condition=".*TargetFramework` or property `Condition` on `$(TargetFramework)` in a `*.props` | never matches in single-TFM projects | move to `.targets` or the project; item/target conditions are fine |
-| sdk-value-in-props | `$(OutputPath)`, `$(TargetPath)`, `$(OutputType)` read in `.props` | not set yet | move to `.targets` |
-| target-in-props | `<Target` in `*.props` | hooks into targets that don't exist yet | move to `.targets` |
+| tfm-property-in-props | property condition on `$(TargetFramework)` in early props | can run before the project assigns its TFM | inspect global properties and outer/inner evaluation; condition where the value exists |
+| sdk-value-in-props | SDK-derived value read in early props | may precede its defining import | trace the assignment and move dependent logic after it |
 | overwrite-list | `<NoWarn>X</NoWarn>`, `<DefineConstants>X</DefineConstants>` without `$(...)` | drops inherited values | `$(NoWarn);X` |
 | overwrite-dependson | `<(Build\|Compile\|CoreBuild\|Clean)DependsOn>` without self-reference | removes SDK targets | `$(CompileDependsOn);Mine` or `BeforeTargets` |
 | redefine-sdk-target | `<Target Name="(Build\|CoreCompile\|Pack\|Publish)"` in repo files | replaces the SDK target | new name plus `BeforeTargets`/`AfterTargets` |
@@ -19,7 +18,7 @@ surrounding file before reporting: several patterns have legitimate uses, listed
 | test-builds-into-repo-output | a test or script runs `dotnet build/pack` on the repository's own projects without `-p:ArtifactsPath=<temp>/` (or `-o` only, which leaves bin/obj shared) | it silently replaces the build output a later `pack --no-build` ships (wrong AssemblyVersion, wrong configuration) | isolate with its own ArtifactsPath; pack before running tests |
 | multitfm-shared-output | `<TargetFrameworks>` with an `OutputPath` lacking `$(TargetFramework)` | TFMs overwrite each other | keep the SDK default |
 | unquoted-condition | `Condition="$(` or `== true` unquoted | empty values parse wrong | `'$(X)' == 'true'` |
-| dbp-casing | `Directory.build.props`, `directory.Build.targets` | ignored on Linux/macOS | exact casing |
+| dbp-casing | `Directory.build.props`, `directory.Build.targets` | discovery fails on case-sensitive filesystems | exact casing |
 | nested-dbp-unchained | an inner `Directory.Build.props` without `GetPathOfFileAbove` import | loses root settings | import the parent |
 | eval-time-generated-glob | `<Compile Include="$(IntermediateOutputPath)` outside a target | file missing at evaluation | add inside the generating target |
 | package-build-name | `build/*.props` whose name differs from the PackageId | NuGet never imports it | `build/<PackageId>.props` |
@@ -37,11 +36,11 @@ surrounding file before reporting: several patterns have legitimate uses, listed
 | missing-filewrites | generated file without `FileWrites` | `dotnet clean` leaves it | add `FileWrites` |
 | touching-writer | `WriteLinesToFile` without `WriteOnlyWhenDifferent="true"` | changes timestamps every build | add it |
 | outputs-on-query | `Target Name="Get.*" Outputs=` used to hand items to callers | once any target in the project uses `Returns` (SDK targets do), targets without `Returns` return nothing to `CallTarget`/`MSBuild` callers | `Returns=` |
-| copy-always | `CopyToOutputDirectory.*Always` | copies every build | `PreserveNewest` |
+| copy-always | `CopyToOutputDirectory.*Always` | repeated I/O when unconditional copying is unnecessary | choose PreserveNewest, IfDifferent or Always from the [copy contract](items-and-outputs.md) |
 | eval-file-io | `$([System.IO.File]::(Read\|Write)` in a PropertyGroup | runs on every evaluation, including IDE design-time builds | move into a target |
 | broad-glob | `Include="**/*` at the repository root, globs over `node_modules` | slow evaluation | scope globs, `DefaultItemExcludes` |
 | serial-msbuild-task | `<MSBuild Projects="@(` without `BuildInParallel="true"` | serial child builds | `BuildInParallel="true"` |
-| restore-every-step | several `dotnet build/test/pack` in CI without `--no-restore` | repeated restores | one restore, then `--no-restore` |
+| restore-every-step | repeated restore in build/pack/publish steps | repeated graph/network work | reuse restore only across a matching [restore boundary](performance.md#restore-boundary) |
 | bare-binlog | `-bl` without a file name, or binlogs deleted by `git clean -fdx` | evidence overwritten | `-bl:artifacts/logs/<step>.binlog` |
 | analyzers-off-as-fix | `RunAnalyzers=false` / `EnforceCodeStyleInBuild=false` committed to speed up builds | loses enforcement | measure analyzer time from the binlog; tune severities |
 
@@ -50,7 +49,7 @@ surrounding file before reporting: several patterns have legitimate uses, listed
 | Rule | Signal | Harm | Fix |
 |---|---|---|---|
 | restated-default | `<OutputType>Library`, `<EnableDefaultItems>true`, `<AppendTargetFrameworkToOutputPath>true` | noise | delete |
-| manual-compile | `<Compile Include="*.cs"` in an SDK C# project | duplicates the SDK glob | delete; `Compile Remove` to exclude |
+| manual-compile | explicit Compile items overlapping an enabled SDK glob | duplicate items | use Update/Remove; retain explicit items when default globs are disabled or ordering is required |
 | sdk-owned-property | `LangVersion`, `Nullable`, `TreatWarningsAsErrors`, `ImplicitUsings` in a csproj under an SDK that owns them | drift from the repo policy | delete |
 | langversion-latest | `<LangVersion>latest` | varies by installed SDK | omit; pin the SDK in global.json |
 | hintpath-package | `<HintPath>.*packages` | no dependency resolution | `PackageReference` |

@@ -76,8 +76,9 @@ Facts that make configurations silently inert:
 An analyzer reads `build_property.<Name>` from `AnalyzerConfigOptions`, which works only if a
 `<CompilerVisibleProperty Include="Name" />` item reaches the compilation.
 
-- Ship those items in `buildTransitive/<PackageId>.props`. When a package has `buildTransitive/`,
-  NuGet imports only that folder, and a `build/` copy is never seen.
+- Ship consumer configuration in `buildTransitive/<PackageId>.props` when it must
+  flow transitively. A `build/` copy alone does not establish that flow; verify
+  the consumer's generated imports rather than assuming which folder won.
 - Every key the analyzer source reads must have a matching item. Guard this with a test that scans
   the analyzer source for `"build_property.` keys and checks the props file.
 - Prove it from a consumer: build a throwaway project against the local package and look for the

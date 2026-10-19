@@ -5,7 +5,7 @@
 | Folder | Imported for | Notes |
 |---|---|---|
 | `build/<PackageId>.props/.targets` | direct references only | file name must equal the PackageId, or NuGet skips it |
-| `buildTransitive/<PackageId>.props/.targets` | direct and transitive references | use for consumer configuration such as analyzer profiles; forward to `build/` to avoid two copies |
+| `buildTransitive/<PackageId>.props/.targets` | direct and transitive references | use for consumer configuration; share a guarded implementation if supporting multiple folder layouts |
 | `buildMultiTargeting/` | the outer build of a multi-TFM project | rarely needed |
 | `analyzers/dotnet/cs/` | the C# compiler of every consumer | analyzer, code fix and dependency DLLs |
 | `lib/<tfm>/` | compile and runtime references | not for analyzers |
@@ -35,8 +35,9 @@ consumers at that point.
   DLL shows diagnostics but no fixes.
 - Release tracking: `AnalyzerReleases.Shipped.md` and `AnalyzerReleases.Unshipped.md` as
   `AdditionalFiles` (RS2000-RS2008). Moving rows from Unshipped to Shipped is part of a release.
-- `CompilerVisibleProperty` items in `build/<PackageId>.props` expose MSBuild properties to the
-  analyzer through `AnalyzerConfigOptions`. Only listed properties are visible.
+- `CompilerVisibleProperty` items must reach the consumer compilation. Put transitive
+  configuration in `buildTransitive/<PackageId>.props`; verify the actual imports in
+  `obj/*.nuget.g.props` and the emitted `build_property.*` keys in the generated analyzer config.
 - Severity profiles ship as `.editorconfig`/`.globalconfig` files under `buildTransitive/` and are
   selected by a property (ANcpLua: `<AlAnalysisMode>`), not by asking consumers to copy rules.
 

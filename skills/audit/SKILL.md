@@ -31,6 +31,7 @@ read-only instruction, then merge the ledgers. Otherwise run the passes in seque
 | Analyzers | `analyzers` | how analyzers arrive, analysis modes, every suppression, stale IDs |
 | MSTest, when in scope | [Companion skill routing](references/mstest-routing.md) | delegate project setup, execution, extensions and test-quality analysis to their focused owners |
 | Release | `release` | publish workflows, gates, credentials model, tag hygiene |
+| Runtime cost, when requested | [performance](../performance/SKILL.md) | existing measurements or source hypotheses; retain the audit's read-only scope |
 
 Useful searches (ripgrep; skip `bin/`, `obj/`, `artifacts/`, `node_modules/`, `TestResults/`):
 
@@ -50,8 +51,9 @@ rg -n --glob '*.{csproj,props,targets}' 'Version="[0-9]|VersionOverride|LangVers
   (raising a severity, deleting a blanket suppression that hides real diagnostics, changing
   an import contract). Give your recommended option and the reason, and don't apply it without
   agreement.
-- **Veracity gate** before any "broken" verdict: is it broken today on every OS and CI, and has it
-  shipped unchanged without failing? If not, call it a risk, not a defect.
+- **Veracity gate**: demonstrate the failure in an affected supported environment
+  or configuration. State that scope; a platform-specific defect is still a defect.
+  Treat an unverified failure mechanism as a risk rather than claiming reproduction.
 
 ## 4. Ledger format
 

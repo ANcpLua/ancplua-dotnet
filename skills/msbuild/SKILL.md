@@ -11,28 +11,29 @@ For MSTest-specific project or runner work, use the
 
 ## 1. Evaluation order decides where things go
 
-```text
-Directory.Build.props  ->  SDK props  ->  project file body  ->  SDK targets  ->  Directory.Build.targets
-     (early defaults)                    (project intent)                         (late logic)
-```
+SDK-style projects import SDK props before their body and SDK targets afterward.
+`Directory.Build.props` and `Directory.Build.targets` are imported *inside* that
+SDK/common chain; the latter is late, but later SDK imports can still replace
+its values or target definitions. Trace the actual order with `-preprocess`.
 
 - `.props` files run before the project body. Put overridable defaults there, conditioned on
   emptiness: `<Foo Condition="'$(Foo)' == ''">x</Foo>`.
-- `.targets` files run after the project and the SDK. Logic that reads values the project or SDK
-  sets (`$(TargetFramework)` in a single-TFM project, `$(OutputPath)`, `$(TargetPath)`,
-  `$(OutputType)`, `$(IsTestProject)` set by an SDK) goes there.
-- A property condition on `$(TargetFramework)` in a `.props` file silently never matches in a
-  single-TFM project, because the property is still empty at that point. Item, target and
-  `.targets` conditions are fine.
-- Targets never go in `.props`: the SDK targets they hook into don't exist yet.
+- Read project/SDK-derived values where they are available. A project-body
+  `TargetFramework` is usually unset in early props; global properties and inner
+  builds can already supply it. Check the actual evaluation before moving a condition.
+- Keep build logic in `.targets`. A target declared in `.props` is legal;
+  imported target definitions can replace it, rather than hooks requiring an
+  already-declared target. Command-line global properties normally resist local
+  reassignment; inspect `TreatAsLocalProperty` when that behavior differs.
 - An inner `Directory.Build.props` stops the upward search. Import the parent explicitly:
   `<Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />`.
-- File names are case-sensitive on Linux and macOS: `Directory.Build.props`, `Directory.Packages.props`.
+- Use exact discovery names (`Directory.Build.props`, `Directory.Packages.props`)
+  for portability to case-sensitive filesystems.
 
 ## 2. Rules for everyday edits
 
-- Restating an SDK default is noise. Delete `<OutputType>Library`, `<EnableDefaultItems>true`,
-  `RootNamespace`/`AssemblyName` equal to the project name, and manual `<Compile Include="**/*.cs">`.
+- Omit restated defaults after checking the effective SDK settings. Preserve
+  deliberate overrides and explicit source ordering when the project requires them.
 - List-like properties keep their previous value: `$(NoWarn);X`, `$(DefineConstants);X`,
   `$(CompileDependsOn);CustomStep`.
 - Quote both sides of conditions: `'$(X)' == 'true'`.
@@ -48,7 +49,8 @@ Directory.Build.props  ->  SDK props  ->  project file body  ->  SDK targets  ->
   `TreatWarningsAsErrors`, `ImplicitUsings` and the analyzer set) is never restated in a project.
 - Analyzer and build-tool packages (`*.Analyzers`, SourceLink, MinVer, Nerdbank.GitVersioning) are
   `PrivateAssets="all"`, or a `GlobalPackageReference` from the SDK or `Directory.Packages.props`.
-- `CopyToOutputDirectory="PreserveNewest"`, not `Always`.
+- Use [items and outputs](references/items-and-outputs.md) for Include/Update/Remove,
+  metadata batching and the copy contract, including outputs mutated by the app.
 
 ## 3. Custom targets
 
@@ -91,15 +93,15 @@ Read `references/packaging.md` before changing a package's `build/`, `buildTrans
 3. Inspect with the binlog tools available in the session (a binlog MCP server: call its tool list
    first) or `dotnet msbuild -preprocess:pp.xml` for the fully evaluated project.
 4. For "why is this property X?", use `dotnet msbuild -getProperty:X -getItem:Y` on the project.
-5. For slow builds, take at least three samples, compare medians, and attribute time from the
-   binlog's target and task summary before changing anything.
+5. For slow builds, use [performance evidence](references/performance.md): controlled
+   cold/incremental/no-op samples, evaluation versus execution, task time and dependency waits.
 6. Duplicate outputs: two projects or two global-property sets writing the same `bin`/`obj` (shared
    `BaseIntermediateOutputPath`, `SetTargetFramework` to the project's own single TFM, the same
    project in two solutions built in one script).
 
 ## 6. Review
 
-Check changes against `references/antipatterns.md`. Before calling a finding "breaks the build",
-pass a veracity gate: would CI on every OS be broken by this today, and has this exact pattern
-already shipped unchanged without failing? If not, downgrade it to a warning or a suggestion.
+Check changes against `references/antipatterns.md`. A build-defect finding identifies
+the affected supported environment/configuration and evidence of failure. A Linux-only
+or conditional-build failure is still a defect; distinguish it from an unverified risk.
 Report findings as `file:line | rule | evidence | fix`, most severe first.

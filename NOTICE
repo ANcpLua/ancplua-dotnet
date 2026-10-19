@@ -3,8 +3,11 @@ Copyright 2026 ancplua
 
 Licensed under the Apache License, Version 2.0 (see LICENSE).
 
-Research input: the MSBuild, NuGet and test plugins of dotnet/skills
+Research input: the MSBuild, NuGet, advanced, diagnostics and test plugins of dotnet/skills
 (https://github.com/dotnet/skills, MIT License, Copyright (c) .NET Foundation and Contributors)
 were read as a catalogue of known antipatterns. The skills in this repository are written
 independently. MSTest-specific guidance and verification now belong to the
 MSTest Extensions companion (https://github.com/ANcpLua/mstest-extensions-plugin).
+
+Skill organization was informed by mattpocock/skills' writing-for-agents reference
+(https://github.com/mattpocock/skills, MIT License). The instructions here are original.

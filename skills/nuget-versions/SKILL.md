@@ -1,6 +1,6 @@
 ---
 name: nuget-versions
-description: Keeps .NET package and SDK versions correct across Central Package Management, Version.props truth chains, global.json (sdk pin, rollForward, msbuild-sdks) and Renovate. Use when adding or bumping a package, converting to CPM, fixing NU1008/NU1010/NU1102/NU1109/NU1605/NU190x, reviewing a Renovate PR that touched only part of a version, or deciding whether a local version override is still needed. MSTest runner/profile setup belongs to mstest-extensions.
+description: Manage .NET package and SDK versions, CPM migrations, Version.props ownership, global.json pins, isolated SDK installations and Renovate updates. Use for package bumps, conflicting or missing versions, NuGet restore errors and SDK selection. MSTest runner/profile semantics belong to mstest-extensions.
 license: Apache-2.0
 ---
 
@@ -54,9 +54,10 @@ get deleted. Audit by diffing against
   the version to bump, which is how a PR ends up moving `global.json` while the restored version
   stays put. Check before keeping an entry: the package must contain `Sdk/Sdk.props`, and a
   project must reference it as an SDK.
-- A pinned SDK that isn't installed fails every command with "A compatible .NET SDK was not
-  found". Install the exact version the way the machine's tooling installs SDKs; never edit the
-  pin down to what happens to be installed.
+- If no installed SDK satisfies the pin's resolution policy, use the machine's
+  normal installation channel rather than lowering the pin to fit the host.
+- For a requested project-local SDK or `sdk.paths` setup, read
+  [SDK selection](references/sdk-selection.md); verify host and SDK separately.
 - When the SDK pin moves, keep the CI `setup-dotnet` (`global-json-file: global.json`), the
   template-stamped `DotNetSdkVersion`, and documentation that names the version in line with it.
 
@@ -67,8 +68,9 @@ get deleted. Audit by diffing against
 - `CentralPackageTransitivePinningEnabled=true` makes a `PackageVersion` also pin the package
   when it arrives transitively. Use it for security floors, and delete a floor once a direct
   dependency already brings that version or higher.
-- Packages injected by an MSBuild SDK (`GlobalPackageReference`, implicit references) get `Update=`,
-  never a second `Include=`: NU1009 forbids a `PackageVersion` for implicit references.
+- Use `PackageVersion Update` only when that central item already exists.
+  `GlobalPackageReference` owns its own version; SDK references marked
+  `IsImplicitlyDefined` use the SDK's version mechanism rather than a new central entry.
 - `VersionOverride=` is a decision, not a habit. More than a couple means the central version
   is wrong.
 - Conditional versions go on the `PackageVersion` (`Condition="'$(TargetFramework)' == 'net8.0'"`),
@@ -82,7 +84,7 @@ get deleted. Audit by diffing against
 |---|---|---|
 | NU1008 | `Version=` on a `PackageReference` under CPM | delete it, or `VersionOverride` by decision |
 | NU1010 | `PackageReference` without a `PackageVersion` | add the central entry |
-| NU1009 | `PackageVersion` for an implicitly referenced package | use `Update=` or delete |
+| NU1009 | `PackageVersion` for an implicitly defined reference | remove the central item; use the SDK's documented version property if needed |
 | NU1102 | the requested version doesn't exist on the feed | a truth variable points at an unpublished version; publish first or point back to the last published one |
 | NU1109 / NU1605 | a downgrade: something requires a higher version than CPM pins | read the full dependency path in the message; raise the central version, never suppress |
 | NU1507 | several package sources without `packageSourceMapping` | add source mapping |
@@ -116,10 +118,7 @@ Listing commands: `dotnet package list --include-transitive` and `--vulnerable` 
 
 ## 6. Converting a repository to CPM
 
-1. Stop if any `packages.config` exists; migrate those projects to `PackageReference` first.
-2. Capture a baseline: `dotnet package list --include-transitive > before.txt` and a binlog.
-3. Create `Directory.Packages.props`, move each version into one `PackageVersion`, and pick the
-   highest version currently in use per package (no upgrades during conversion).
-4. Remove `Version=` from references, keeping conditions on the central entries.
-5. Restore, build and diff the package list against the baseline; the only allowed differences
-   are the deliberate unifications listed in the commit message.
+`packages.config` projects need a separate PackageReference migration first.
+For a requested CPM conversion, read [conditional migration](references/cpm-migration.md):
+preserve evaluated versions and conditions, respect central-file boundaries, and
+explain every intentional difference in the resolved before/after package graph.
