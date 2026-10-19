@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "ancplua-dotnet",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "C# refactoring, MSBuild, NuGet version management, Roslyn analyzers, runtime performance and layered releases for SDK-style .NET. Native MSTest work routes to mstest-extensions.",
   "author": {
     "name": "ancplua"

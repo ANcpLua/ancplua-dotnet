@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Checks the plugin manifests and skill frontmatter.
+# Checks the plugin manifests and skill frontmatter, then runs the script tests.
 #   scripts/verify.sh            verify (exit 1 on any mismatch)
 set -euo pipefail
 root="$(cd "$(dirname "$0")/.." && pwd)"
@@ -24,5 +24,8 @@ if command -v claude >/dev/null; then
   claude plugin validate --strict "$root" >/dev/null || fail "claude plugin validate --strict"
   echo "  claude plugin validate --strict passed"
 fi
+
+echo "== scripts"
+"$root/scripts/test-candidate-wave.sh" | sed 's/^/  /'
 
 echo "verify: all checks passed"

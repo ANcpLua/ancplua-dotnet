@@ -18,7 +18,7 @@ for mixed build/test requests. The antipattern examples come from fixing real re
 | `analyzers` | how analyzers arrive, severity precedence, suppression hygiene, `CompilerVisibleProperty`, ANcpLua.Analyzers specifics |
 | `csharp-refactoring` | binding-aware structural changes, generated/partial code and runtime/API contracts |
 | `performance` | BenchmarkDotNet comparisons, CPU/GC/allocation evidence, hot-path reviews and crash/hang collection |
-| `release` | layered releases, tag-driven vs push-driven publishing, trusted publishing, waiting for the NuGet index (`scripts/wait-nuget.sh`), moving consumers |
+| `release` | layered releases, tag-driven vs push-driven publishing, trusted publishing, candidate waves in consumers before publishing (`scripts/candidate-wave.sh`), waiting for the NuGet index (`scripts/wait-nuget.sh`), moving consumers |
 | `audit` | read-only fleet audits that separate certain fixes from judgment calls |
 
 ## Agents (Claude Code)
@@ -58,7 +58,7 @@ Then start a new session.
 plugin.json                  Agent Plugins manifest with the Codex interface (extensions.com.openai)
 skills/<name>/SKILL.md       shared by both tools; Agent Skills frontmatter only
 agents/<name>.md             Claude Code subagents
-scripts/verify.sh            manifest/frontmatter checks (CI runs it on push, PRs and weekly)
+scripts/verify.sh            manifest/frontmatter checks and script tests (CI runs it on push, PRs and weekly)
 evals/                       existing Claude behavior evaluations and an unrelated-request check
 ```
 
@@ -73,6 +73,13 @@ claude plugin eval .                            # full: 3 runs, with and without
 ```
 
 MSTest APIs and runner verification live in the companion repository.
+
+## 0.5.0
+
+Add candidate waves to the `release` skill: `scripts/candidate-wave.sh` restores a consumer
+against locally packed packages through one reused candidate cache, evicts only the candidate
+ids, proves the restored bytes by SHA-512 and keeps evidence instead of build output.
+`scripts/verify.sh` runs its offline test.
 
 ## 0.4.0
 
