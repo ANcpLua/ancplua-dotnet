@@ -59,6 +59,14 @@ its own last published version, never the one being built. Consumers move last, 
 A tag that points at a broken commit is never moved or deleted on the remote. Release the next
 patch instead.
 
+Pack before tests in CI. `dotnet pack --no-build` ships whatever sits in the build output when it
+runs, and a test that builds or packs the repository's own projects (package-consumption tests,
+MSBuild integration tests) writes into that same output unless it gets its own
+`-p:ArtifactsPath=<temp>/`. ANcpLua.Roslyn.Utilities 3.0.0 and 3.0.1 shipped AssemblyVersion
+0.0.0.0 that way: a test packed `src/` with `VersionPrefix=0.0.0` between build and pack. After
+packing, check one assembly per package: the version inside must be the release version. A green
+build plus correct `.nupkg` file names doesn't prove it.
+
 ## 3. NuGet client caching
 
 The NuGet client caches HTTP responses for 30 minutes (`~/.local/share/NuGet/http-cache`). A

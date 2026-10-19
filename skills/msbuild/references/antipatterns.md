@@ -16,6 +16,7 @@ surrounding file before reporting: several patterns have legitimate uses, listed
 | self-msbuild-fork | `<MSBuild Projects="$(MSBuildProjectFullPath)"` | second build into the same bin/obj races | `DependsOnTargets` |
 | same-tfm-settargetframework | `SetTargetFramework="TargetFramework=X"` on a single-TFM reference whose TFM is X | duplicate build to one path | remove |
 | shared-intermediate | the same `BaseIntermediateOutputPath`/`OutputPath` across projects | `project.assets.json` collisions | per-project defaults or `UseArtifactsOutput` |
+| test-builds-into-repo-output | a test or script runs `dotnet build/pack` on the repository's own projects without `-p:ArtifactsPath=<temp>/` (or `-o` only, which leaves bin/obj shared) | it silently replaces the build output a later `pack --no-build` ships (wrong AssemblyVersion, wrong configuration) | isolate with its own ArtifactsPath; pack before running tests |
 | multitfm-shared-output | `<TargetFrameworks>` with an `OutputPath` lacking `$(TargetFramework)` | TFMs overwrite each other | keep the SDK default |
 | unquoted-condition | `Condition="$(` or `== true` unquoted | empty values parse wrong | `'$(X)' == 'true'` |
 | dbp-casing | `Directory.build.props`, `directory.Build.targets` | ignored on Linux/macOS | exact casing |
