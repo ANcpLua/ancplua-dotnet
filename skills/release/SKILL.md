@@ -1,8 +1,8 @@
 ---
 name: release
-description: Releases .NET NuGet packages through a layered chain (library, MSBuild SDK, analyzers, consumers) without breaking restore. Use when publishing a package, bumping a lower-layer dependency in its consumers, moving a .NET SDK pin across repositories, choosing tag-driven versus push-driven publishing, setting up NuGet trusted publishing, verifying packed candidates in consumer repositories before publishing, or waiting for nuget.org to index a version before consumers restore it.
+description: Releases .NET NuGet packages through a layered chain (library, MSBuild SDK, analyzers, consumers) without breaking restore. Use when publishing a package, bumping a lower-layer dependency in its consumers, moving a .NET SDK pin across repositories, choosing tag-driven versus push-driven publishing, setting up NuGet trusted publishing, or waiting for nuget.org to index a version before consumers restore it.
 license: Apache-2.0
-compatibility: Needs git, gh, curl and the .NET SDK. scripts/wait-nuget.sh is POSIX shell; scripts/candidate-wave.sh needs bash, openssl and unzip.
+compatibility: Needs git, gh, curl and the .NET SDK. scripts/wait-nuget.sh is POSIX shell.
 ---
 
 # Layered NuGet release
@@ -67,12 +67,6 @@ MSBuild integration tests) writes into that same output unless it gets its own
 0.0.0.0 that way: a test packed `src/` with `VersionPrefix=0.0.0` between build and pack. After
 packing, check one assembly per package: the version inside must be the release version. A green
 build plus correct `.nupkg` file names doesn't prove it.
-
-Verify consumers against the packed candidates before publishing, one wave per consumer and
-fix: `scripts/candidate-wave.sh <consumer> <wave> --feed <pack output> --ids '<Id.Prefix>*' --
-<gate>`. It restores only the feed's bytes for those ids, reuses the consumer's one candidate
-cache, and keeps evidence instead of build output. Read
-[candidate waves](references/candidate-waves.md) before the first wave of a release.
 
 ## 3. NuGet client caching
 
