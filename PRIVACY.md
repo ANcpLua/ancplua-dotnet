@@ -19,10 +19,9 @@ storage, retention and training choices. For ChatGPT and Codex, see
 [OpenAI's privacy policy](https://openai.com/policies/privacy-policy/).
 
 Requested workflows can run local commands, read project/package files, restore
-dependencies and write reports or temporary build artifacts. Release helpers
-can use a local candidate-package cache, compare package bytes and query NuGet
-indexing. Commands may contact configured feeds, GitHub or other services needed
-for the requested task. Those services receive the information required by the
+dependencies and write reports or temporary build artifacts. The release helper
+queries NuGet indexing. Commands may contact configured feeds, GitHub or other
+services needed for the requested task. Those services receive the information required by the
 request, such as package identifiers and versions, under their own policies.
 The plugin does not automatically send workspace contents to its maintainer.
 

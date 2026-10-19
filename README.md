@@ -74,6 +74,11 @@ claude plugin eval .                            # full: 3 runs, with and without
 
 MSTest APIs and runner verification live in the companion repository.
 
+## 0.7.1
+
+Correct the [privacy policy](PRIVACY.md): the only release helper, `scripts/wait-nuget.sh`,
+queries NuGet indexing. Skills are unchanged.
+
 ## 0.7.0
 
 Remove candidate waves from the `release` skill, with their script, reference and offline
