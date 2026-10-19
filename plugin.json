@@ -1,10 +1,10 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "ancplua-dotnet",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "C# refactoring, MSBuild, NuGet version management, Roslyn analyzers, runtime performance and layered releases for SDK-style .NET. Native MSTest work routes to mstest-extensions.",
   "author": {
-    "name": "ancplua"
+    "name": "Alexander Nachtmann"
   },
   "license": "Apache-2.0",
   "repository": "https://github.com/ANcpLua/ancplua-dotnet",
@@ -24,7 +24,7 @@
         "displayName": "ANcpLua .NET",
         "shortDescription": "Build, refactor, measure",
         "longDescription": "Focused C# refactoring, MSBuild diagnosis, package and SDK version ownership, analyzer adoption, runtime performance and layered NuGet releases. Short entrypoints disclose build measurement, BenchmarkDotNet, runtime diagnostics, conditional CPM and local SDK details only when needed. MSTest work uses the mstest-extensions companion plugin.",
-        "developerName": "ANcpLua",
+        "developerName": "Alexander Nachtmann",
         "category": "Developer Tools",
         "capabilities": [],
         "defaultPrompt": [
@@ -33,7 +33,10 @@
           "Release this package and move its consumers to the new version.",
           "Refactor this C# code while preserving its observed contracts.",
           "Investigate this .NET runtime performance problem and choose useful evidence."
-        ]
+        ],
+        "websiteURL": "https://github.com/ANcpLua/ancplua-dotnet",
+        "privacyPolicyURL": "https://github.com/ANcpLua/ancplua-dotnet/blob/main/PRIVACY.md",
+        "termsOfServiceURL": "https://github.com/ANcpLua/ancplua-dotnet/blob/main/TERMS.md"
       }
     }
   }

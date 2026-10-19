@@ -74,6 +74,12 @@ claude plugin eval .                            # full: 3 runs, with and without
 
 MSTest APIs and runner verification live in the companion repository.
 
+## 0.5.1
+
+Display Alexander Nachtmann as the developer and add the website,
+[privacy policy](PRIVACY.md) and [terms of use](TERMS.md) to the plugin listing.
+All seven skills and release helpers are unchanged.
+
 ## 0.5.0
 
 Add candidate waves to the `release` skill: `scripts/candidate-wave.sh` restores a consumer

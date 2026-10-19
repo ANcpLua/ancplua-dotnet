@@ -1,10 +1,10 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "ancplua-dotnet",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "C# refactoring, MSBuild, NuGet version management, Roslyn analyzers, runtime performance and layered releases for SDK-style .NET. Native MSTest work routes to mstest-extensions.",
   "author": {
-    "name": "ancplua"
+    "name": "Alexander Nachtmann"
   },
   "license": "Apache-2.0",
   "repository": "https://github.com/ANcpLua/ancplua-dotnet",
