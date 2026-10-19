@@ -1,0 +1,102 @@
+---
+name: msbuild
+description: Writes and reviews MSBuild for SDK-style .NET repositories (csproj, Directory.Build.props/targets, Directory.Packages.props, custom targets, build/ and buildTransitive/ package assets) and diagnoses build failures and slow builds from binlogs. Use when editing any .csproj/.props/.targets/.slnx file, adding a custom target or generated file, packaging an analyzer or build asset, reviewing build changes, or investigating MSB/NETSDK/CS build errors and incremental-build problems.
+license: Apache-2.0
+---
+
+# MSBuild for SDK-style repositories
+
+## 1. Evaluation order decides where things go
+
+```text
+Directory.Build.props  ->  SDK props  ->  project file body  ->  SDK targets  ->  Directory.Build.targets
+     (early defaults)                    (project intent)                         (late logic)
+```
+
+- `.props` files run before the project body. Put overridable defaults there, conditioned on
+  emptiness: `<Foo Condition="'$(Foo)' == ''">x</Foo>`.
+- `.targets` files run after the project and the SDK. Logic that reads values the project or SDK
+  sets (`$(TargetFramework)` in a single-TFM project, `$(OutputPath)`, `$(TargetPath)`,
+  `$(OutputType)`, `$(IsTestProject)` set by an SDK) goes there.
+- A property condition on `$(TargetFramework)` in a `.props` file silently never matches in a
+  single-TFM project, because the property is still empty at that point. Item, target and
+  `.targets` conditions are fine.
+- Targets never go in `.props`: the SDK targets they hook into don't exist yet.
+- An inner `Directory.Build.props` stops the upward search. Import the parent explicitly:
+  `<Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />`.
+- File names are case-sensitive on Linux and macOS: `Directory.Build.props`, `Directory.Packages.props`.
+
+## 2. Rules for everyday edits
+
+- Restating an SDK default is noise. Delete `<OutputType>Library`, `<EnableDefaultItems>true`,
+  `RootNamespace`/`AssemblyName` equal to the project name, and manual `<Compile Include="**/*.cs">`.
+- List-like properties keep their previous value: `$(NoWarn);X`, `$(DefineConstants);X`,
+  `$(TestingPlatformCommandLineArguments) --opt`.
+- Quote both sides of conditions: `'$(X)' == 'true'`.
+- Paths come from properties (`$(MSBuildThisFileDirectory)`, `$(MSBuildProjectDirectory)`,
+  `$(IntermediateOutputPath)`, `$(ArtifactsPath)`). Never use absolute paths, `obj/` literals or
+  backslashes inside `Exec`.
+- Use MSBuild tasks for file work: `MakeDir`, `Copy`, `Delete`, `WriteLinesToFile`, `Touch`. Use
+  property functions for string work (`$([System.IO.Path]::Combine(...))`, `$(X.Replace(...))`).
+  `Exec` is for real external tools, and an OS-specific one is guarded with
+  `$([MSBuild]::IsOSPlatform('Windows'))`.
+- A value shared by three or more projects moves to `Directory.Build.props`. A value the SDK of
+  the repository already owns (for ANcpLua.NET.Sdk: `LangVersion`, `Nullable`,
+  `TreatWarningsAsErrors`, `ImplicitUsings` and the analyzer set) is never restated in a project.
+- Analyzer and build-tool packages (`*.Analyzers`, SourceLink, MinVer, Nerdbank.GitVersioning) are
+  `PrivateAssets="all"`, or a `GlobalPackageReference` from the SDK or `Directory.Packages.props`.
+- `CopyToOutputDirectory="PreserveNewest"`, not `Always`.
+
+## 3. Custom targets
+
+```xml
+<Target Name="GenerateBuildInfo"
+        BeforeTargets="CoreCompile"
+        Inputs="$(MSBuildProjectFile);@(BuildInfoSource)"
+        Outputs="$(IntermediateOutputPath)BuildInfo.g.cs">
+  <WriteLinesToFile File="$(IntermediateOutputPath)BuildInfo.g.cs" Lines="@(_BuildInfoLines)"
+                    Overwrite="true" WriteOnlyWhenDifferent="true" />
+  <ItemGroup>
+    <Compile Include="$(IntermediateOutputPath)BuildInfo.g.cs" />
+    <FileWrites Include="$(IntermediateOutputPath)BuildInfo.g.cs" />
+  </ItemGroup>
+</Target>
+```
+
+- `Inputs` and `Outputs` on every target that produces files, or it runs on every build.
+  `Outputs` must not contain times or GUIDs.
+- Generated code goes under `$(IntermediateOutputPath)`, is added to `Compile` inside the target
+  (it doesn't exist at evaluation time), and is registered in `FileWrites` so `dotnet clean` removes
+  it.
+- Hook with `BeforeTargets`/`AfterTargets` or by appending to `$(XDependsOn)`. Never redefine an SDK
+  target name (`Build`, `CoreCompile`) and never overwrite a `DependsOn` list without
+  self-reference.
+- Query targets return data with `Returns=`, not `Outputs=`.
+- Calling `<MSBuild Projects="$(MSBuildProjectFullPath)" Targets="Publish">` on the same project
+  starts a second build into the same bin/obj and races. Use `DependsOnTargets` instead.
+
+## 4. Packaging build assets and analyzers
+
+Read `references/packaging.md` before changing a package's `build/`, `buildTransitive/` or
+`analyzers/` content. In brief: file names equal the PackageId, analyzers go to
+`analyzers/dotnet/cs`, and their dependencies ship next to them.
+
+## 5. Diagnosing
+
+1. Reproduce with a binary log: `dotnet build -bl:artifacts/logs/build.binlog` (one name per run).
+2. Read the first error, not the last. For restore errors, see the `nuget-versions` skill.
+3. Inspect with the binlog tools available in the session (a binlog MCP server: call its tool list
+   first) or `dotnet msbuild -preprocess:pp.xml` for the fully evaluated project.
+4. For "why is this property X?", use `dotnet msbuild -getProperty:X -getItem:Y` on the project.
+5. For slow builds, take at least three samples, compare medians, and attribute time from the
+   binlog's target and task summary before changing anything.
+6. Duplicate outputs: two projects or two global-property sets writing the same `bin`/`obj` (shared
+   `BaseIntermediateOutputPath`, `SetTargetFramework` to the project's own single TFM, the same
+   project in two solutions built in one script).
+
+## 6. Review
+
+Check changes against `references/antipatterns.md`. Before calling a finding "breaks the build",
+pass a veracity gate: would CI on every OS be broken by this today, and has this exact pattern
+already shipped unchanged without failing? If not, downgrade it to a warning or a suggestion.
+Report findings as `file:line | rule | evidence | fix`, most severe first.

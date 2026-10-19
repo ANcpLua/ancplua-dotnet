@@ -1,0 +1,29 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "ancplua-dotnet",
+  "version": "0.1.0",
+  "description": "MSBuild, NuGet version chains, Roslyn analyzer adoption, MSTest on Microsoft.Testing.Platform, and layered NuGet releases for SDK-style .NET repositories.",
+  "author": {
+    "name": "ancplua"
+  },
+  "license": "Apache-2.0",
+  "repository": "https://github.com/ANcpLua/ancplua-dotnet",
+  "keywords": ["dotnet", "msbuild", "nuget", "mstest", "roslyn-analyzers", "release"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "ANcpLua .NET",
+        "shortDescription": "Build, test, version, release",
+        "longDescription": "Rules and workflows for SDK-style .NET repositories: MSBuild authoring and review, Central Package Management and Version.props truth chains, global.json SDK pins, Roslyn analyzer adoption and suppression hygiene, MSTest.Sdk 4.5 on Microsoft.Testing.Platform 2.5 with native dotnet test, and layered NuGet releases with index waits. Read-only audits separate certain fixes from judgment calls.",
+        "developerName": "ANcpLua",
+        "category": "Developer Tools",
+        "capabilities": [],
+        "defaultPrompt": [
+          "Audit this repository's build, package versions, analyzers and tests.",
+          "Convert this test project to MSTest.Sdk on Microsoft.Testing.Platform.",
+          "Release this package and move its consumers to the new version."
+        ]
+      }
+    }
+  }
+}
