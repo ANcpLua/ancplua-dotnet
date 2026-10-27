@@ -12,7 +12,7 @@ verify-nami:
 	$(MAKE) -C packages/nami verify
 verify-mstest:
 	cd packages/mstest-extensions && python3 -B scripts/verify_versions.py 4.5.1
-	cd packages/mstest-extensions && python3 -B skills/mstest-extensions/scripts/verify_capabilities.py --mstest-sdk 4.5.1 --hosting --native-aot
+	cd packages/mstest-extensions && python3 -B skills/mstest-extensions/scripts/verify_capabilities.py --mstest-sdk 4.5.1 --dotnet-sdk "$$(dotnet --version)" --hosting --native-aot
 
 verify-submission:
 	cd packages/prepare-plugin-submission && python3 -B -m unittest discover -s tests -v
