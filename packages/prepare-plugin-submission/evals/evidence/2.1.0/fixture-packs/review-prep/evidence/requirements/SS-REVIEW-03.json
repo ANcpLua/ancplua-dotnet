@@ -1,0 +1,26 @@
+{
+  "requirement_id": "SS-REVIEW-03",
+  "platform": "openai",
+  "domain": "Review",
+  "classification": "official_requirement",
+  "applicability": "remote_mcp",
+  "summary": "Prepare five positive and three negative cases and a real accessible recording.",
+  "source_url": "https://developers.openai.com/plugins/deploy/submission",
+  "source_checked_at": "2026-10-16",
+  "source_revision": null,
+  "implementation_revision": "content-sha256:f0219fed7b1315ce685368c237f5aa8c8073067c838b46733dc984fa0392cb2c",
+  "protocol_version": null,
+  "transport": "http",
+  "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+  "status": "Not run",
+  "observed_result": "Requires target-specific human review or product-host observation; not established by static inspection.",
+  "evidence": [
+    "evidence/requirements/SS-REVIEW-03.json"
+  ],
+  "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+  "implementation": [
+    "skills/prepare-plugin-submission/SKILL.md",
+    "skills/prepare-plugin-submission/scripts/audit_target.py"
+  ],
+  "validation_fixture": "tests/fixtures/review-prep"
+}

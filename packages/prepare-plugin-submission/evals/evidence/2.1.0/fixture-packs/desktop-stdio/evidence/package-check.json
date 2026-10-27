@@ -1,0 +1,53 @@
+{
+  "target": "openai",
+  "profile": "submission",
+  "submission_route": "desktop-only",
+  "synthetic": true,
+  "desktop_allowlist": {
+    "record_accepted": true,
+    "verification": "Synthetic fixture"
+  },
+  "human_handoffs": [
+    "Portal upload",
+    "Allowlist/identity confirmation",
+    "Review submission",
+    "Publication"
+  ],
+  "status": "local_checks_passed",
+  "ready_to_submit": false,
+  "format": "portable",
+  "classification": {
+    "kind": "mcp",
+    "server_count": 1,
+    "settings_source": "plugin.json:extensions.com.openai",
+    "mcp_sources": [
+      "mcp.json"
+    ]
+  },
+  "content_sha256": "eaeb85f9cda524ca8f210b8c9dd493ce063d1520365d41583f2d49956f0bfb3a",
+  "file_count": 4,
+  "checked": [
+    "Effective manifest, settings precedence, skill paths, and MCP declarations",
+    "Desktop-only route selected; allowlist confirmation record inspected, not independently verified with OpenAI",
+    "Manifest identity and version",
+    "Applicable listing fields, limits, prompts, and asset references",
+    "Skill entrypoints and local Markdown references",
+    "Resolved MCP declarations; no endpoint or tool was executed"
+  ],
+  "issues": [],
+  "issue_counts": {
+    "error": 0,
+    "hold": 0,
+    "warning": 0,
+    "unverified": 0
+  },
+  "unverified": [
+    "Official schema/policy coverage and current portal checks",
+    "Complete dependency/command analysis, userConfig references, and secret-content scanning",
+    "Real host behavior, source revision, and package-hash evidence",
+    "Publisher identity, legal declarations, and review/publication state",
+    "Live MCP schemas/annotations/permissions, authentication, and reviewer access",
+    "Submitted review cases on every supported surface; recording playback and URL contents"
+  ],
+  "not_applicable": []
+}

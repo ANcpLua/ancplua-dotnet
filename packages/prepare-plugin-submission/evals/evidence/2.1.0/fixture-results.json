@@ -1,0 +1,142 @@
+[
+  {
+    "target": "broken-plugin",
+    "command": [
+      "python3",
+      "/workspace/scratch/401e3bbb802b/submission-studio-2.1.0/skills/prepare-plugin-submission/scripts/prepare_workflow.py",
+      "audit",
+      "--source",
+      "/workspace/scratch/401e3bbb802b/submission-studio-2.1.0/tests/fixtures/broken-plugin.zip",
+      "--output",
+      "/workspace/scratch/401e3bbb802b/fixture-release-evidence/broken-plugin",
+      "--profile",
+      "submission",
+      "--synthetic"
+    ],
+    "exit_code": 1,
+    "expected_exit_code": 1,
+    "status": "local_checks_failed",
+    "findings": [
+      {
+        "code": "invalid_version",
+        "path": "plugin.json",
+        "severity": "error",
+        "fix": "Use a strict semantic version such as 1.1.0.",
+        "source": "https://developers.openai.com/plugins/deploy/submission",
+        "retrieved": "2026-10-13",
+        "scope": "directory"
+      },
+      {
+        "code": "reference_missing",
+        "path": "interface.logo",
+        "severity": "error",
+        "fix": "Include the referenced file.",
+        "source": "https://developers.openai.com/plugins/deploy/submission",
+        "retrieved": "2026-10-13",
+        "scope": "directory"
+      },
+      {
+        "code": "unsafe_reference",
+        "path": "interface.composerIcon",
+        "severity": "error",
+        "fix": "Use a contained relative path.",
+        "source": "https://developers.openai.com/plugins/deploy/submission",
+        "retrieved": "2026-10-13",
+        "scope": "directory"
+      },
+      {
+        "code": "skill_frontmatter",
+        "path": "skills/broken/SKILL.md",
+        "severity": "error",
+        "fix": "Include name and description in YAML frontmatter.",
+        "source": "https://developers.openai.com/plugins/deploy/submission",
+        "retrieved": "2026-10-13",
+        "scope": "directory"
+      }
+    ],
+    "integrity": {
+      "status": "Artifact integrity passed",
+      "findings": [],
+      "live_verification": "Not implied",
+      "binding": {
+        "integration_id": "fixture-plugin",
+        "source_revision": "content-sha256:3880e1215cfeb2064d7e9207c1842f8b02b58fe43bc2215809958eaa06d58795",
+        "input_sha256": "65dc45a3a33b8864a85056fef16c191aa0e74b58596b7b605b3e39b05389c17b",
+        "inventory_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      }
+    },
+    "integration_endpoints_contacted": false,
+    "target_source_executed": false,
+    "portal_actions_performed": false
+  },
+  {
+    "target": "desktop-stdio",
+    "command": [
+      "python3",
+      "/workspace/scratch/401e3bbb802b/submission-studio-2.1.0/skills/prepare-plugin-submission/scripts/prepare_workflow.py",
+      "audit",
+      "--source",
+      "/workspace/scratch/401e3bbb802b/submission-studio-2.1.0/tests/fixtures/desktop-stdio",
+      "--output",
+      "/workspace/scratch/401e3bbb802b/fixture-release-evidence/desktop-stdio",
+      "--profile",
+      "submission",
+      "--synthetic",
+      "--submission-route",
+      "desktop-only",
+      "--desktop-allowlist",
+      "/workspace/scratch/401e3bbb802b/submission-studio-2.1.0/tests/fixtures/desktop-allowlist.json"
+    ],
+    "exit_code": 0,
+    "expected_exit_code": 0,
+    "status": "local_checks_passed",
+    "findings": [],
+    "integrity": {
+      "status": "Artifact integrity passed",
+      "findings": [],
+      "live_verification": "Not implied",
+      "binding": {
+        "integration_id": "fixture-plugin",
+        "source_revision": "content-sha256:eaeb85f9cda524ca8f210b8c9dd493ce063d1520365d41583f2d49956f0bfb3a",
+        "input_sha256": "2ee5d5885c40c7a332adebe33fe74db20060bfcc6f127e08b7f72c22f258db95",
+        "inventory_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      }
+    },
+    "integration_endpoints_contacted": false,
+    "target_source_executed": false,
+    "portal_actions_performed": false
+  },
+  {
+    "target": "review-prep",
+    "command": [
+      "python3",
+      "/workspace/scratch/401e3bbb802b/submission-studio-2.1.0/skills/prepare-plugin-submission/scripts/prepare_workflow.py",
+      "audit",
+      "--source",
+      "/workspace/scratch/401e3bbb802b/submission-studio-2.1.0/tests/fixtures/review-prep",
+      "--output",
+      "/workspace/scratch/401e3bbb802b/fixture-release-evidence/review-prep",
+      "--profile",
+      "submission",
+      "--synthetic"
+    ],
+    "exit_code": 0,
+    "expected_exit_code": 0,
+    "status": "local_checks_passed",
+    "findings": [],
+    "integrity": {
+      "status": "Artifact integrity passed",
+      "findings": [],
+      "live_verification": "Not implied",
+      "binding": {
+        "integration_id": "review-prep-fixture",
+        "source_revision": "content-sha256:f0219fed7b1315ce685368c237f5aa8c8073067c838b46733dc984fa0392cb2c",
+        "input_sha256": "aa1e0425f3791509e44542882ef78c1d7315f3455e7516d9fed943bb96463497",
+        "inventory_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      }
+    },
+    "integration_endpoints_contacted": false,
+    "target_source_executed": false,
+    "portal_actions_performed": false
+  }
+]

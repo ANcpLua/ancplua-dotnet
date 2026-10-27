@@ -1,0 +1,58 @@
+Usage: mcpdo [options] [command]
+
+MCP Inspector connection CLI — connect once, run many commands against a named
+connection.
+
+Agent skill for mcpdo: install with `npx skills add
+modelcontextprotocol/inspector --skill mcpdo`, or see `agent-help` below.
+
+Options:
+  --version                                                  output the version number
+  --format <format>                                          Output format: text (default; human-readable) or json (pretty-printed)
+  --plain                                                    Disable ANSI styling (color, bold/dim, hyperlinks) in human text output
+  --connection <name>                                        Connection name (without required @). Overrides MRU / positional @name. `--conn` is a supported shorthand.
+  --catalog <path>                                           Writable catalog file (default: ~/.mcp-inspector/mcp.json or MCP_CATALOG_PATH)
+  --config <path>                                            Read-only connection config file (never written or seeded)
+  --stored-auth-only                                         Never start interactive OAuth; use the shared store if present, otherwise fail.
+  -h, --help                                                 Display help for command
+
+Commands:
+  servers/list                                               List catalog/config server entries (marks live connections when the daemon is running; no MCP connection)
+  servers/show [name]                                        Show one catalog/config entry in detail (no MCP connection; secrets redacted)
+  connect [options] [target...]                              Connect a catalog entry or ad-hoc target as a named connection
+  disconnect [options] [connection]                          Disconnect a connection (MRU when omitted on a TTY)
+  connections/list                                           List open connections (marks MRU); does not start the daemon
+  connections/use <connection>                               Set the MRU connection without an MCP RPC
+  connections/show [connection]                              Show connection + connection details: server info, capabilities, negotiated protocol era (defaults to MRU)
+  auth/list                                                  List servers in the shared OAuth store, annotated with catalog/connection names
+  auth/clear [options] [key]                                 Clear stored OAuth state for one server (URL or catalog/connection name from auth/list) or all entries
+  auth/ema-status                                            Show enterprise-managed auth (EMA) configuration and IdP login state
+  auth/ema-login [options]                                   Sign in to the enterprise IdP (EMA); subsequent connects to EMA servers mint tokens silently from this connection
+  auth/ema-logout                                            Sign out of the enterprise IdP locally and clear EMA-minted server tokens (prints the IdP end-session URL when available)
+  tools/list [options]                                       MCP tools/list against the current connection
+  tools/call [options] [toolName] [toolArgs...]              MCP tools/call against the current connection
+  resources/list [options]                                   MCP resources/list against the current connection
+  resources/read [options] [uri]                             MCP resources/read against the current connection
+  resources/templates/list [options]                         MCP resources/templates/list against the current connection
+  resources/directory/read [options]                         MCP resources/directory/read against the current connection
+  resources/subscribe [options] [uri]                        MCP resources/subscribe against the current connection
+  resources/unsubscribe [options] [uri]                      MCP resources/unsubscribe against the current connection
+  prompts/list [options]                                     MCP prompts/list against the current connection
+  prompts/get [options] [promptName]                         MCP prompts/get against the current connection
+  prompts/complete [options]                                 MCP prompts/complete against the current connection
+  logging/setLevel [options] [level]                         MCP logging/setLevel against the current connection
+  logging/tail [options]                                     MCP logging/tail against the current connection
+  tasks/list [options]                                       MCP tasks/list against the current connection
+  tasks/get [options] [taskId]                               MCP tasks/get against the current connection
+  tasks/cancel [options] [taskId]                            MCP tasks/cancel against the current connection
+  tasks/result [options] [taskId]                            MCP tasks/result against the current connection
+  tasks/update [options] [taskId]                            MCP tasks/update against the current connection
+  roots/list [options]                                       MCP roots/list against the current connection
+  roots/set [options]                                        MCP roots/set against the current connection
+  skills/list [options]                                      MCP skills/list against the current connection
+  skills/get [options] [uri]                                 MCP skills/get against the current connection
+  elicitation/respond [options] <elicitationId> [fields...]  Answer a pending server elicitation (from elicitationPending output): form answers as key:=value pairs / JSON, --done for URL mode, or --decline / --cancel
+  daemon                                                     Daemon control
+  private                                                    Print shell exports for a private daemon (eval "$(mcpdo private)"). Later mcpdo commands in that shell use an isolated, token-gated daemon.
+  agent-help [options]                                       Print an agent-oriented usage guide, comparable to the mcpdo SKILL. Agents should read this before using other mcpdo commands.
+  help [command]                                             Display help for command

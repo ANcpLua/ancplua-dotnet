@@ -1,0 +1,20 @@
+repo: microsoft/testfx
+target_files:
+  - src/TestFramework/TestFramework/PublicAPI/PublicAPI.Shipped.txt
+  - src/TestFramework/TestFramework/PublicAPI/PublicAPI.Unshipped.txt
+  - src/TestFramework/TestFramework/PublicAPI/net/PublicAPI.Shipped.txt
+  - src/TestFramework/TestFramework/PublicAPI/net/PublicAPI.Unshipped.txt
+  - src/TestFramework/TestFramework.Extensions/PublicAPI/PublicAPI.Shipped.txt
+  - src/TestFramework/TestFramework.Extensions/PublicAPI/PublicAPI.Unshipped.txt
+  # Upstream MSTest asset consumed by net11.0; this does not select the consumer SDK/TFM.
+  - src/TestFramework/TestFramework.Extensions/PublicAPI/net9.0/PublicAPI.Shipped.txt
+  - src/TestFramework/TestFramework.Extensions/PublicAPI/net9.0/PublicAPI.Unshipped.txt
+  - src/Adapter/MSTest.Extensions.Hosting/PublicAPI/PublicAPI.Shipped.txt
+  - src/Adapter/MSTest.Extensions.Hosting/PublicAPI/PublicAPI.Unshipped.txt
+versions:
+  - version: "4.3.0"
+    tag: v4.3.0   # 79f26ff
+  - version: "4.4.1"
+    tag: v4.4.1   # 9a14d19
+  - version: "4.5.1"
+    tag: v4.5.1   # 0bf77e3

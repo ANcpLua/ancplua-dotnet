@@ -1,0 +1,107 @@
+[
+  {
+    "check": "python-acceptance",
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-v"
+    ],
+    "cwd": "/workspace/scratch/401e3bbb802b/submission-studio-2.3.0",
+    "exit_code": 0,
+    "log": "python-acceptance.log",
+    "log_sha256": "d64a046321dc50e6e9005dcf9aba1da01fb647b0680c35cf1f87a1a2c72937b7",
+    "checked_at": "2026-10-16T15:58:40.639902+00:00"
+  },
+  {
+    "check": "python-workflows",
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "evals/runtime",
+      "-v"
+    ],
+    "cwd": "/workspace/scratch/401e3bbb802b/submission-studio-2.3.0",
+    "exit_code": 0,
+    "log": "python-workflows.log",
+    "log_sha256": "e730398d0d51a22585dd11d295838048d579c010399c6912d1a00fa03bd9605b",
+    "checked_at": "2026-10-16T15:58:04.911888+00:00"
+  },
+  {
+    "check": "python-compile",
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "-m",
+      "compileall",
+      "-q",
+      "skills/prepare-plugin-submission/scripts",
+      "tests",
+      "evals/runtime"
+    ],
+    "cwd": "/workspace/scratch/401e3bbb802b/submission-studio-2.3.0",
+    "exit_code": 0,
+    "log": "python-compile.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "checked_at": "2026-10-16T15:58:04.507132+00:00"
+  },
+  {
+    "check": "skill-validate",
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "/workspace/scratch/401e3bbb802b/validation-tools/quick_validate.py",
+      "skills/prepare-plugin-submission"
+    ],
+    "cwd": "/workspace/scratch/401e3bbb802b/submission-studio-2.3.0",
+    "exit_code": 0,
+    "log": "skill-validate.log",
+    "log_sha256": "db349825903d66adffea3ecf1bd8e1803043e8a71cf1a051235dabc5371f5bb0",
+    "checked_at": "2026-10-16T15:58:04.277276+00:00"
+  },
+  {
+    "check": "typescript-runner-syntax",
+    "command": [
+      "node",
+      "--experimental-strip-types",
+      "--check",
+      "skills/prepare-plugin-submission/assets/connector-kit/src/run.ts"
+    ],
+    "cwd": "/workspace/scratch/401e3bbb802b/submission-studio-2.3.0",
+    "exit_code": 0,
+    "log": "typescript-runner-syntax.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "checked_at": "2026-10-16T15:58:04.359518+00:00"
+  },
+  {
+    "check": "typescript-server-syntax",
+    "command": [
+      "node",
+      "--experimental-strip-types",
+      "--check",
+      "skills/prepare-plugin-submission/assets/connector-kit/src/server.ts"
+    ],
+    "cwd": "/workspace/scratch/401e3bbb802b/submission-studio-2.3.0",
+    "exit_code": 0,
+    "log": "typescript-server-syntax.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "checked_at": "2026-10-16T15:58:04.438489+00:00"
+  },
+  {
+    "check": "typescript-build",
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "cwd": "/workspace/scratch/401e3bbb802b/typescript-validation",
+    "exit_code": 0,
+    "log": "typescript-build.log",
+    "log_sha256": "874d07323e77a31944fa09998ab2c0982b5973ad72c1e84dc1d2922e87f5cd63",
+    "checked_at": "2026-10-16T15:58:07.505337+00:00"
+  }
+]

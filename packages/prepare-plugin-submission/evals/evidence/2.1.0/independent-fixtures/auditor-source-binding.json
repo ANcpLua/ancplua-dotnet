@@ -1,0 +1,38 @@
+[
+  {
+    "path": "/workspace/scratch/401e3bbb802b/submission-studio-2.1.0/skills/prepare-plugin-submission/scripts/audit_target.py",
+    "sha256": "1eedd783992925ef36fe7f6024902171d3dce38f13d1a99d4a6a188a24a54ce4"
+  },
+  {
+    "path": "/workspace/scratch/401e3bbb802b/submission-studio-2.1.0/skills/prepare-plugin-submission/scripts/check_health.py",
+    "sha256": "039be032dce3d68413e5ef114c4a78f1a83eda45376f87b01d3d00c7433eb30c"
+  },
+  {
+    "path": "/workspace/scratch/401e3bbb802b/submission-studio-2.1.0/skills/prepare-plugin-submission/scripts/check_package.py",
+    "sha256": "1065ef2e6cfe074ec965e52d0c7d49e40b55395343bb738aed1c03388b3c0479"
+  },
+  {
+    "path": "/workspace/scratch/401e3bbb802b/submission-studio-2.1.0/skills/prepare-plugin-submission/scripts/host_reports.py",
+    "sha256": "b3777a000b965b4ed68f0ba2cf498d05ab1ed8ad9852a8fae4d818ddfc8c3def"
+  },
+  {
+    "path": "/workspace/scratch/401e3bbb802b/submission-studio-2.1.0/skills/prepare-plugin-submission/scripts/inspect_tools.py",
+    "sha256": "6cc989559159fe1627d624231cb99005f96fd033ab701bd2507e3de1d448d905"
+  },
+  {
+    "path": "/workspace/scratch/401e3bbb802b/submission-studio-2.1.0/skills/prepare-plugin-submission/scripts/openai_core.py",
+    "sha256": "e530a86ebd151ca74e4d6b97b0d43cfea6497c5565a4dbd29295762bfee4cd38"
+  },
+  {
+    "path": "/workspace/scratch/401e3bbb802b/submission-studio-2.1.0/skills/prepare-plugin-submission/scripts/package_core.py",
+    "sha256": "fc84bad2cd7446e462f12ac803809550d823bf7c0d8c331e12bb342063ceac02"
+  },
+  {
+    "path": "/workspace/scratch/401e3bbb802b/submission-studio-2.1.0/skills/prepare-plugin-submission/scripts/prepare_workflow.py",
+    "sha256": "1feca3d297b45e8827410d1781b44c0d2ce6b14ff992b3739db3bfe1678c61d2"
+  },
+  {
+    "path": "/workspace/scratch/401e3bbb802b/submission-studio-2.1.0/skills/prepare-plugin-submission/scripts/workflow_core.py",
+    "sha256": "b64eaae8fb6c58ee3ed30e9feae8c14c92816dd4c94b53035675a0b0d34dd124"
+  }
+]

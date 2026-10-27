@@ -1,0 +1,790 @@
+{
+  "schema_version": 1,
+  "purpose": "Preflight requirement coverage, not exhaustive directory certification",
+  "requirements": [
+    {
+      "id": "SS-ARCH-01",
+      "domain": "Architecture",
+      "source_url": "https://developers.openai.com/plugins/concepts/plugins",
+      "source_checked_at": "2026-10-16",
+      "classification": "recommended_engineering_practice",
+      "scope": "any",
+      "summary": "Select the smallest useful combination of skills, MCP and optional UI.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-ARCH-02",
+      "domain": "Architecture",
+      "source_url": "https://developers.openai.com/plugins/concepts/mcp-server",
+      "source_checked_at": "2026-10-16",
+      "classification": "recommended_engineering_practice",
+      "scope": "mcp",
+      "summary": "Keep live operations and authorization in the MCP service.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-ARCH-03",
+      "domain": "Architecture",
+      "source_url": "https://developers.openai.com/plugins/concepts/skills",
+      "source_checked_at": "2026-10-16",
+      "classification": "recommended_engineering_practice",
+      "scope": "skills",
+      "summary": "Keep reusable workflow instructions and resources in skills.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-PLAN-01",
+      "domain": "Planning",
+      "source_url": "https://developers.openai.com/plugins/plan/use-case",
+      "source_checked_at": "2026-10-16",
+      "classification": "recommended_engineering_practice",
+      "scope": "any",
+      "summary": "Record user goals, example requests, context, outcomes and boundaries.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-PLAN-02",
+      "domain": "Planning",
+      "source_url": "https://developers.openai.com/plugins/plan/tools",
+      "source_checked_at": "2026-10-16",
+      "classification": "recommended_engineering_practice",
+      "scope": "mcp",
+      "summary": "Define focused tool contracts, permissions, effects and failures.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-START-01",
+      "domain": "Getting started",
+      "source_url": "https://developers.openai.com/plugins/quickstart",
+      "source_checked_at": "2026-10-16",
+      "classification": "recommended_engineering_practice",
+      "scope": "mcp",
+      "summary": "Connect and test representative tool calls in the intended host.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-START-02",
+      "domain": "Getting started",
+      "source_url": "https://developers.openai.com/plugins/build/app-quickstart",
+      "source_checked_at": "2026-10-16",
+      "classification": "recommended_engineering_practice",
+      "scope": "ui",
+      "summary": "Add UI only when it improves the selected workflow.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-SERVER-01",
+      "domain": "Server implementation",
+      "source_url": "https://developers.openai.com/plugins/build/mcp-server",
+      "source_checked_at": "2026-10-16",
+      "classification": "recommended_engineering_practice",
+      "scope": "mcp",
+      "summary": "Build and independently invoke the actual server before claiming compatibility.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-SERVER-02",
+      "domain": "Server implementation",
+      "source_url": "https://developers.openai.com/plugins/build/examples",
+      "source_checked_at": "2026-10-16",
+      "classification": "recommended_engineering_practice",
+      "scope": "ui",
+      "summary": "Use official examples as implementation references rather than execution evidence.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-SKILL-01",
+      "domain": "Skills",
+      "source_url": "https://developers.openai.com/plugins/build/skills",
+      "source_checked_at": "2026-10-16",
+      "classification": "official_requirement",
+      "scope": "skills",
+      "summary": "Include a named SKILL.md with trigger description and workflow instructions.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-SKILL-02",
+      "domain": "Skills",
+      "source_url": "https://developers.openai.com/plugins/build/skills",
+      "source_checked_at": "2026-10-16",
+      "classification": "recommended_engineering_practice",
+      "scope": "skills",
+      "summary": "Keep supporting resources linked and make workflow boundaries explicit.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-SKILL-03",
+      "domain": "Skills",
+      "source_url": "https://developers.openai.com/plugins/build/skills",
+      "source_checked_at": "2026-10-16",
+      "classification": "recommended_engineering_practice",
+      "scope": "skills",
+      "summary": "Review instruction conflicts and prioritize explicit user instructions.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-AUTH-01",
+      "domain": "Authentication",
+      "source_url": "https://developers.openai.com/plugins/build/auth",
+      "source_checked_at": "2026-10-16",
+      "classification": "official_requirement",
+      "scope": "remote_mcp",
+      "summary": "Expose protected-resource and authorization-server discovery for protected operations.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": "tests/fixtures/review-prep.zip"
+    },
+    {
+      "id": "SS-AUTH-02",
+      "domain": "Authentication",
+      "source_url": "https://developers.openai.com/plugins/build/auth",
+      "source_checked_at": "2026-10-16",
+      "classification": "official_requirement",
+      "scope": "remote_mcp",
+      "summary": "Advertise S256 PKCE and use the applicable supported client-registration flow.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": "tests/fixtures/review-prep.zip"
+    },
+    {
+      "id": "SS-AUTH-03",
+      "domain": "Authentication",
+      "source_url": "https://developers.openai.com/plugins/build/auth",
+      "source_checked_at": "2026-10-16",
+      "classification": "recommended_engineering_practice",
+      "scope": "remote_mcp",
+      "summary": "Test scopes, audience, token expiry, consent denial and user isolation.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": "tests/fixtures/review-prep.zip"
+    },
+    {
+      "id": "SS-UI-01",
+      "domain": "UI",
+      "source_url": "https://developers.openai.com/plugins/build/chatgpt-ui",
+      "source_checked_at": "2026-10-16",
+      "classification": "recommended_engineering_practice",
+      "scope": "ui",
+      "summary": "Use MCP Apps resourceUri and the standard UI bridge for new UI.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-UI-02",
+      "domain": "UI",
+      "source_url": "https://developers.openai.com/plugins/concepts/ui-guidelines",
+      "source_checked_at": "2026-10-16",
+      "classification": "recommended_engineering_practice",
+      "scope": "ui",
+      "summary": "Verify appropriate display modes, accessibility and loading/error behavior.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-UI-03",
+      "domain": "UI",
+      "source_url": "https://developers.openai.com/plugins/reference",
+      "source_checked_at": "2026-10-16",
+      "classification": "official_requirement",
+      "scope": "ui",
+      "summary": "Declare structured output schemas and applicable UI resource metadata.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-EVENT-01",
+      "domain": "Additional capabilities",
+      "source_url": "https://developers.openai.com/plugins/build/mcp-events",
+      "source_checked_at": "2026-10-16",
+      "classification": "official_requirement",
+      "scope": "events",
+      "summary": "Use MCP 2.0 and the supported event subscription methods.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-EVENT-02",
+      "domain": "Additional capabilities",
+      "source_url": "https://developers.openai.com/plugins/build/mcp-events",
+      "source_checked_at": "2026-10-16",
+      "classification": "official_requirement",
+      "scope": "events",
+      "summary": "Validate callbacks, sign deliveries and retain authorized subscription state.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-EXT-01",
+      "domain": "Additional capabilities",
+      "source_url": "https://developers.openai.com/plugins/build/extensions",
+      "source_checked_at": "2026-10-16",
+      "classification": "recommended_engineering_practice",
+      "scope": "extensions",
+      "summary": "Verify extension support in the exact intended host surface.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-COMMERCE-01",
+      "domain": "Additional capabilities",
+      "source_url": "https://developers.openai.com/plugins/build/monetization",
+      "source_checked_at": "2026-10-16",
+      "classification": "recommended_engineering_practice",
+      "scope": "commerce",
+      "summary": "Choose an eligible checkout route and verify partner-only feature access.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-PKG-01",
+      "domain": "Packaging",
+      "source_url": "https://developers.openai.com/plugins/build/plugins",
+      "source_checked_at": "2026-10-16",
+      "classification": "official_requirement",
+      "scope": "any",
+      "summary": "Use the selected supported manifest and contained component paths.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": "tests/fixtures/broken-plugin.zip"
+    },
+    {
+      "id": "SS-PKG-02",
+      "domain": "Packaging",
+      "source_url": "https://developers.openai.com/plugins/build/plugins",
+      "source_checked_at": "2026-10-16",
+      "classification": "recommended_engineering_practice",
+      "scope": "any",
+      "summary": "Preserve identity and synchronize compatibility metadata during updates.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-META-01",
+      "domain": "Packaging",
+      "source_url": "https://developers.openai.com/plugins/guides/optimize-metadata",
+      "source_checked_at": "2026-10-16",
+      "classification": "recommended_engineering_practice",
+      "scope": "any",
+      "summary": "Test direct, indirect and negative prompts when tuning metadata.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-TEST-01",
+      "domain": "Testing",
+      "source_url": "https://developers.openai.com/plugins/deploy/connect-chatgpt",
+      "source_checked_at": "2026-10-16",
+      "classification": "recommended_engineering_practice",
+      "scope": "any",
+      "summary": "Test the complete installed plugin and retain observed behavior.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-TEST-02",
+      "domain": "Testing",
+      "source_url": "https://developers.openai.com/plugins/deploy/connect-chatgpt",
+      "source_checked_at": "2026-10-16",
+      "classification": "recommended_engineering_practice",
+      "scope": "mcp",
+      "summary": "Exercise tools with valid, edge, invalid and empty-result inputs.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-TEST-03",
+      "domain": "Testing",
+      "source_url": "https://developers.openai.com/plugins/deploy/troubleshooting",
+      "source_checked_at": "2026-10-16",
+      "classification": "recommended_engineering_practice",
+      "scope": "any",
+      "summary": "Isolate package, server, optional UI and host failures separately.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-POLICY-01",
+      "domain": "Security and policy",
+      "source_url": "https://developers.openai.com/plugins/plugin-guidelines",
+      "source_checked_at": "2026-10-16",
+      "classification": "official_requirement",
+      "scope": "any",
+      "summary": "Describe actual utility and avoid misleading capability or endorsement claims.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-POLICY-02",
+      "domain": "Security and policy",
+      "source_url": "https://developers.openai.com/plugins/plugin-guidelines",
+      "source_checked_at": "2026-10-16",
+      "classification": "official_requirement",
+      "scope": "mcp",
+      "summary": "Declare truthful explicit boolean tool annotations.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-SEC-01",
+      "domain": "Security and policy",
+      "source_url": "https://developers.openai.com/plugins/guides/security-privacy",
+      "source_checked_at": "2026-10-16",
+      "classification": "recommended_engineering_practice",
+      "scope": "any",
+      "summary": "Apply least privilege and treat external package content as untrusted.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-SEC-02",
+      "domain": "Security and policy",
+      "source_url": "https://developers.openai.com/plugins/guides/security-privacy",
+      "source_checked_at": "2026-10-16",
+      "classification": "recommended_engineering_practice",
+      "scope": "remote_mcp",
+      "summary": "Confirm actual retention, data minimization, logging and deletion practices.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": "tests/fixtures/review-prep.zip"
+    },
+    {
+      "id": "SS-REVIEW-01",
+      "domain": "Review",
+      "source_url": "https://developers.openai.com/plugins/deploy/app-review",
+      "source_checked_at": "2026-10-16",
+      "classification": "official_requirement",
+      "scope": "remote_mcp",
+      "summary": "Provide a production endpoint and working isolated reviewer access.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": "tests/fixtures/review-prep.zip"
+    },
+    {
+      "id": "SS-REVIEW-02",
+      "domain": "Review",
+      "source_url": "https://developers.openai.com/plugins/deploy/submission-errors",
+      "source_checked_at": "2026-10-16",
+      "classification": "official_requirement",
+      "scope": "any",
+      "summary": "Distinguish package checks from final listing and submission checks.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-REVIEW-03",
+      "domain": "Review",
+      "source_url": "https://developers.openai.com/plugins/deploy/submission",
+      "source_checked_at": "2026-10-16",
+      "classification": "official_requirement",
+      "scope": "remote_mcp",
+      "summary": "Prepare five positive and three negative cases and a real accessible recording.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": "tests/fixtures/review-prep.zip"
+    },
+    {
+      "id": "SS-PUB-01",
+      "domain": "Publication",
+      "source_url": "https://developers.openai.com/plugins/deploy/submission",
+      "source_checked_at": "2026-10-16",
+      "classification": "official_requirement",
+      "scope": "human",
+      "summary": "Use verified publisher identity and authorized portal roles.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-PUB-02",
+      "domain": "Publication",
+      "source_url": "https://developers.openai.com/plugins/deploy/submission",
+      "source_checked_at": "2026-10-16",
+      "classification": "recommended_engineering_practice",
+      "scope": "human",
+      "summary": "Track preparation, upload, review, approval and publication separately.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-MIG-01",
+      "domain": "Migration",
+      "source_url": "https://developers.openai.com/plugins/guides/submit-claude-plugin",
+      "source_checked_at": "2026-10-16",
+      "classification": "recommended_engineering_practice",
+      "scope": "migration",
+      "summary": "Select a component-appropriate migration and keep vendor-specific instructions conditional.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-MIG-02",
+      "domain": "Migration",
+      "source_url": "https://developers.openai.com/plugins/guides/submit-claude-plugin",
+      "source_checked_at": "2026-10-16",
+      "classification": "official_requirement",
+      "scope": "migration",
+      "summary": "Do not carry another directory approval or undeclared runtime dependencies into OpenAI claims.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-API-01",
+      "domain": "API compatibility",
+      "source_url": "https://developers.openai.com/api/docs/guides/tools-connectors-mcp",
+      "source_checked_at": "2026-10-16",
+      "classification": "recommended_engineering_practice",
+      "scope": "api",
+      "summary": "Use server_url for custom remote services and distinguish legacy connector_id.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-API-02",
+      "domain": "API compatibility",
+      "source_url": "https://developers.openai.com/api/docs/guides/tools-connectors-mcp",
+      "source_checked_at": "2026-10-16",
+      "classification": "recommended_engineering_practice",
+      "scope": "api",
+      "summary": "Verify the actual API caller, model, authorization and approval behavior.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-EVAL-01",
+      "domain": "Evaluation design",
+      "source_url": "https://developers.openai.com/api/docs/guides/evaluation-best-practices",
+      "source_checked_at": "2026-10-16",
+      "classification": "recommended_engineering_practice",
+      "scope": "any",
+      "summary": "Use task-specific objectives, expected results and realistic adversarial cases.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-EVAL-02",
+      "domain": "Evaluation design",
+      "source_url": "https://developers.openai.com/api/docs/guides/evaluation-best-practices",
+      "source_checked_at": "2026-10-16",
+      "classification": "recommended_engineering_practice",
+      "scope": "any",
+      "summary": "Keep synthetic, deterministic and actual product-host observations distinct.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-QUOTE-01",
+      "domain": "Specialized workflows",
+      "source_url": "https://developers.openai.com/plugins/guides/local-services-request-quote-conversion-spec",
+      "source_checked_at": "2026-10-16",
+      "classification": "official_requirement",
+      "scope": "quote",
+      "summary": "Apply the approved-partner request_service and widget contract only to quote workflows.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-CHECKOUT-01",
+      "domain": "Specialized workflows",
+      "source_url": "https://developers.openai.com/plugins/guides/product-checkout-conversion-spec",
+      "source_checked_at": "2026-10-16",
+      "classification": "official_requirement",
+      "scope": "checkout",
+      "summary": "Apply the approved-partner checkout_session contract only to checkout workflows.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-RESERVE-01",
+      "domain": "Specialized workflows",
+      "source_url": "https://developers.openai.com/plugins/guides/restaurant-reservation-conversion-spec",
+      "source_checked_at": "2026-10-16",
+      "classification": "official_requirement",
+      "scope": "reservation",
+      "summary": "Apply the approved-partner reservation tool and resource contract only to reservation workflows.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": null
+    },
+    {
+      "id": "SS-DESKTOP-01",
+      "domain": "Packaging",
+      "source_url": "https://developers.openai.com/plugins/deploy/desktop-only",
+      "source_checked_at": "2026-10-16",
+      "classification": "official_requirement",
+      "scope": "desktop",
+      "summary": "Confirm organization allowlisting before local MCP public submission.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": "tests/fixtures/desktop-stdio"
+    },
+    {
+      "id": "SS-DESKTOP-02",
+      "domain": "Packaging",
+      "source_url": "https://developers.openai.com/plugins/deploy/desktop-only",
+      "source_checked_at": "2026-10-16",
+      "classification": "official_requirement",
+      "scope": "desktop",
+      "summary": "Package the stdio command and runtime dependencies for local execution.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": "tests/fixtures/desktop-stdio"
+    },
+    {
+      "id": "SS-DESKTOP-03",
+      "domain": "Testing",
+      "source_url": "https://developers.openai.com/plugins/deploy/desktop-only",
+      "source_checked_at": "2026-10-16",
+      "classification": "recommended_engineering_practice",
+      "scope": "desktop",
+      "summary": "Test a clean desktop installation and retain a human portal handoff.",
+      "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+      "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+      "implementation": [
+        "skills/prepare-plugin-submission/SKILL.md",
+        "skills/prepare-plugin-submission/scripts/audit_target.py"
+      ],
+      "validation_fixture": "tests/fixtures/desktop-stdio"
+    }
+  ]
+}

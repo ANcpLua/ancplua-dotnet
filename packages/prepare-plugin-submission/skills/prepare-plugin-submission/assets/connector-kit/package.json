@@ -1,0 +1,18 @@
+{
+  "name": "submission-connector-kit",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.19.0" },
+  "scripts": { "build": "tsc", "test": "node build/run.js", "start": "node build/server.js" },
+  "dependencies": {
+    "@modelcontextprotocol/client": "2.3.1",
+    "@modelcontextprotocol/server": "2.3.1",
+    "@modelcontextprotocol/node": "2.1.1",
+    "@modelcontextprotocol/express": "2.0.2",
+    "express": "5.2.1",
+    "zod": "4.6.5"
+  },
+  "devDependencies": { "@types/node": "24.12.4", "@types/express": "5.0.6", "typescript": "5.9.3" }
+}
+

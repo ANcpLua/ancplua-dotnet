@@ -1,0 +1,21 @@
+{
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/workspace/scratch/401e3bbb802b/submission-studio-2.3.0/skills/prepare-plugin-submission/scripts/wizard.py",
+    "restore",
+    "--session",
+    "/workspace/scratch/401e3bbb802b/ss230-forward-final-runtime/session.json",
+    "--bundle",
+    "/workspace/scratch/401e3bbb802b/ss230-forward/checkpoint.zip"
+  ],
+  "exit_code": 0,
+  "next_step": "requirement-review",
+  "findings": 6,
+  "official_failed": 4,
+  "host_rows": 0,
+  "host_cases": 13,
+  "independent_review_verified": true,
+  "raw_hash_matches": true,
+  "published": false,
+  "ready_for_human_portal": false
+}

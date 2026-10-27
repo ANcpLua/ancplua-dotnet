@@ -1,0 +1,23 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "fixture-plugin",
+  "version": "0.1.0",
+  "description": "Synthetic preflight target; never deployed",
+  "author": {
+    "name": "Synthetic Fixture"
+  },
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Fixture Plugin",
+        "shortDescription": "Synthetic audit fixture",
+        "longDescription": "Deterministic synthetic fixture for preflight validation.",
+        "developerName": "Synthetic Fixture",
+        "category": "Developer Tools",
+        "capabilities": [],
+        "logo": "./assets/icon.png",
+        "composerIcon": "./assets/icon.png"
+      }
+    }
+  }
+}

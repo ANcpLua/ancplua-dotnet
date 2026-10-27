@@ -1,0 +1,21 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "nami",
+  "version": "0.1.2",
+  "description": "C# unions, MSTest 4.5.1 APIs and assertion semantics, and explicit fixture ownership.",
+  "author": {
+    "name": "ANcpLua"
+  },
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "nami",
+        "shortDescription": ".NET tests and union types",
+        "developerName": "ANcpLua",
+        "category": "Developer Tools",
+        "capabilities": []
+      }
+    }
+  },
+  "repository": "https://github.com/ANcpLua/ancplua-dotnet"
+}

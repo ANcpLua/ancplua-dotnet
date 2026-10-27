@@ -1,0 +1,26 @@
+{
+  "requirement_id": "SS-SEC-02",
+  "platform": "openai",
+  "domain": "Security and policy",
+  "classification": "recommended_engineering_practice",
+  "applicability": "remote_mcp",
+  "summary": "Confirm actual retention, data minimization, logging and deletion practices.",
+  "source_url": "https://developers.openai.com/plugins/guides/security-privacy",
+  "source_checked_at": "2026-10-16",
+  "source_revision": null,
+  "implementation_revision": "content-sha256:eaeb85f9cda524ca8f210b8c9dd493ce063d1520365d41583f2d49956f0bfb3a",
+  "protocol_version": null,
+  "transport": "stdio",
+  "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+  "status": "Not applicable",
+  "observed_result": "The loaded target declares no applicable remote_mcp integration. This is not an unsupported meta-tool claim.",
+  "evidence": [
+    "evidence/requirements/SS-SEC-02.json"
+  ],
+  "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+  "implementation": [
+    "skills/prepare-plugin-submission/SKILL.md",
+    "skills/prepare-plugin-submission/scripts/audit_target.py"
+  ],
+  "validation_fixture": "tests/fixtures/review-prep"
+}

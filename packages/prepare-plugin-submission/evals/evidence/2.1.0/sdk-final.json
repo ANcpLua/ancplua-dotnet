@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "binding": {
+    "integration_id": "local-sdk-fixture",
+    "source_revision": "f2341636fe20cd6cd5745e7f731b312e9b6dd521963952f6fb451f6c593e9b95",
+    "input_sha256": "e24bc272a5591ec299941062926b99c0a288fd84a85952e3e809b6bc97be2eb8",
+    "inventory_sha256": "a01c85d6f20fb03eaef368aa55ea11d13998b7fbe827c66448b55bb07ebcc06a"
+  },
+  "engine": "sdk",
+  "requested_era": "modern",
+  "surface": "direct-protocol",
+  "started_at": "2026-10-16T11:49:28.816Z",
+  "cases": [
+    {
+      "id": "sum-valid",
+      "tool": "add_numbers",
+      "kind": "valid",
+      "status": "Passed",
+      "server_confirmation": "Not run",
+      "elapsed_ms": 17,
+      "assertions": [
+        {
+          "check": "kind",
+          "expected": "success",
+          "observed": "success",
+          "passed": true
+        },
+        {
+          "check": "structured",
+          "passed": true
+        }
+      ],
+      "text_characters": 9,
+      "evidence": {
+        "file": "sdk-final.json.evidence/0000.json",
+        "sha256": "8195d07fbedb8aa61e6806ca1ade7b5f40277fafef587e55e495f855db612f60"
+      }
+    },
+    {
+      "id": "sum-invalid",
+      "tool": "add_numbers",
+      "kind": "invalid",
+      "status": "Passed",
+      "server_confirmation": "Not run",
+      "elapsed_ms": 3,
+      "assertions": [
+        {
+          "check": "kind",
+          "expected": "tool_error",
+          "observed": "tool_error",
+          "passed": true
+        }
+      ],
+      "text_characters": 114,
+      "evidence": {
+        "file": "sdk-final.json.evidence/0001.json",
+        "sha256": "b763f9a7c0269805b44f419a264ed97912fed2e3bcd194e273609d028aa3b640"
+      }
+    }
+  ],
+  "inventory": {
+    "status": "Passed",
+    "expected": [
+      "add_numbers"
+    ],
+    "observed": [
+      "add_numbers"
+    ],
+    "source": "live"
+  },
+  "negotiated_era": "modern",
+  "continuous_monitoring": false,
+  "negotiation_status": "Observed",
+  "finished_at": "2026-10-16T11:49:29.319Z",
+  "status": "Passed",
+  "summary": {
+    "Passed": 2,
+    "Failed": 0,
+    "Blocked": 0,
+    "Not run": 0
+  },
+  "dependencies": {
+    "client": "2.3.1",
+    "server": "2.3.1"
+  }
+}

@@ -1,0 +1,33 @@
+[
+  {
+    "args": [
+      "--config",
+      "/workspace/scratch/401e3bbb802b/mcpdo-debug-9NLGrb/config.json",
+      "connect",
+      "submission_test",
+      "--era",
+      "modern"
+    ],
+    "status": 4,
+    "stdout": "",
+    "stderr": "{\"error\":{\"code\":\"daemon_start_timeout\",\"message\":\"Timed out waiting for connection daemon at /workspace/scratch/401e3bbb802b/mcpdo-debug-9NLGrb/mcpdod.sock\\nDaemon log (/workspace/scratch/401e3bbb802b/mcpdo-debug-9NLGrb/mcpdod.log):\\nmcpdo daemon: listen EPERM: operation not permitted /workspace/scratch/401e3bbb802b/mcpdo-debug-9NLGrb/mcpdod.sock\"}}\n"
+  },
+  {
+    "args": [
+      "disconnect",
+      "submission_test"
+    ],
+    "status": 4,
+    "stdout": "",
+    "stderr": "{\"error\":{\"code\":\"daemon_start_timeout\",\"message\":\"Timed out waiting for connection daemon at /workspace/scratch/401e3bbb802b/mcpdo-debug-9NLGrb/mcpdod.sock\\nDaemon log (/workspace/scratch/401e3bbb802b/mcpdo-debug-9NLGrb/mcpdod.log):\\nmcpdo daemon: listen EPERM: operation not permitted /workspace/scratch/401e3bbb802b/mcpdo-debug-9NLGrb/mcpdod.sock\"}}\n"
+  },
+  {
+    "args": [
+      "daemon",
+      "stop"
+    ],
+    "status": 0,
+    "stdout": "{\n  \"stopping\": false,\n  \"message\": \"Daemon was not running.\"\n}\n",
+    "stderr": ""
+  }
+]

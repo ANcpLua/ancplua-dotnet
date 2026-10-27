@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "binding": {
+    "integration_id": "local-sdk-fixture",
+    "source_revision": "f2341636fe20cd6cd5745e7f731b312e9b6dd521963952f6fb451f6c593e9b95",
+    "input_sha256": "e24bc272a5591ec299941062926b99c0a288fd84a85952e3e809b6bc97be2eb8",
+    "inventory_sha256": "a01c85d6f20fb03eaef368aa55ea11d13998b7fbe827c66448b55bb07ebcc06a"
+  },
+  "engine": "mcpdo",
+  "requested_era": "modern",
+  "surface": "direct-protocol",
+  "started_at": "2026-10-16T11:41:47.539Z",
+  "cases": [
+    {
+      "id": "sum-valid",
+      "tool": "add_numbers",
+      "kind": "valid",
+      "status": "Blocked",
+      "server_confirmation": "Not run",
+      "reason": "mcpdo connection unavailable or pending authentication"
+    },
+    {
+      "id": "sum-invalid",
+      "tool": "add_numbers",
+      "kind": "invalid",
+      "status": "Blocked",
+      "server_confirmation": "Not run",
+      "reason": "mcpdo connection unavailable or pending authentication"
+    }
+  ],
+  "inventory": {
+    "status": "Blocked",
+    "expected": [
+      "add_numbers"
+    ],
+    "observed": [
+      "add_numbers"
+    ],
+    "source": "live"
+  },
+  "negotiated_era": null,
+  "continuous_monitoring": false,
+  "negotiation_status": "Not run",
+  "finished_at": "2026-10-16T11:42:38.447Z",
+  "status": "Incomplete",
+  "summary": {
+    "Passed": 0,
+    "Failed": 0,
+    "Blocked": 2,
+    "Not run": 0
+  },
+  "dependencies": {
+    "client": "2.3.1",
+    "server": "2.3.1"
+  }
+}

@@ -1,0 +1,74 @@
+[
+  {
+    "target": "broken-plugin",
+    "checks": {
+      "submission_profile": true,
+      "synthetic_flag": true,
+      "target_version_and_name_in_architecture": true,
+      "states_not_promoted": true,
+      "no_source_or_endpoint_execution": true,
+      "no_joined_demo_sentences": true,
+      "expected_package_failure": true,
+      "four_errors_retained": true,
+      "no_mcp_review_requirement": true,
+      "delivery_requires_error_repair": true,
+      "delivery_does_not_claim_validated_archive": true
+    },
+    "all_selected_checks_passed": true,
+    "requirement_status_counts": {
+      "Passed": 3,
+      "Not applicable": 33,
+      "Not run": 10,
+      "Failed": 3
+    }
+  },
+  {
+    "target": "desktop-stdio",
+    "checks": {
+      "submission_profile": true,
+      "synthetic_flag": true,
+      "target_version_and_name_in_architecture": true,
+      "states_not_promoted": true,
+      "no_source_or_endpoint_execution": true,
+      "no_joined_demo_sentences": true,
+      "exact_stdio_declaration_retained": true,
+      "no_false_missing_connection": true,
+      "no_skill_false_pass": true,
+      "remote_review_not_applicable": true,
+      "desktop_route_retained": true,
+      "synthetic_confirmation_only": true,
+      "demo_exempts_remote_requirements": true,
+      "clean_install_not_claimed": true
+    },
+    "all_selected_checks_passed": true,
+    "requirement_status_counts": {
+      "Passed": 4,
+      "Not run": 26,
+      "Not applicable": 19
+    }
+  },
+  {
+    "target": "review-prep",
+    "checks": {
+      "submission_profile": true,
+      "synthetic_flag": true,
+      "target_version_and_name_in_architecture": true,
+      "states_not_promoted": true,
+      "no_source_or_endpoint_execution": true,
+      "no_joined_demo_sentences": true,
+      "review_definitions_match_source": true,
+      "review_execution_unclaimed": true,
+      "demo_reference_retained": true,
+      "playback_explicitly_unchecked": true,
+      "anonymous_auth_retained": true,
+      "remote_url_retained": true,
+      "desktop_requirement_not_applicable": true
+    },
+    "all_selected_checks_passed": true,
+    "requirement_status_counts": {
+      "Passed": 6,
+      "Not run": 28,
+      "Not applicable": 15
+    }
+  }
+]

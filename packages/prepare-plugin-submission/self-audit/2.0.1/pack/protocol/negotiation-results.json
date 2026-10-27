@@ -1,0 +1,13 @@
+{
+  "protocol_version": "2026-07-28",
+  "requested_era": "modern",
+  "observed_era": null,
+  "implementation_revision": "content-sha256:138cb12bca1eef736ea697f97e8b0865a4a5ff17cd613bfc64a6487f77fb808c",
+  "status": "Not applicable",
+  "evidence": [
+    "evidence/source-inspection.json",
+    "evidence/package-check.json"
+  ],
+  "observed_result": "No MCP component declared; wire protocol is inapplicable.",
+  "observations": []
+}

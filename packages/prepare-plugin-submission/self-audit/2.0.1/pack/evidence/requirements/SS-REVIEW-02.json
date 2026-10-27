@@ -1,0 +1,26 @@
+{
+  "requirement_id": "SS-REVIEW-02",
+  "platform": "openai",
+  "domain": "Review",
+  "classification": "official_requirement",
+  "applicability": "any",
+  "summary": "Distinguish package checks from final listing and submission checks.",
+  "source_url": "https://developers.openai.com/plugins/deploy/submission-errors",
+  "source_checked_at": "2026-10-16",
+  "source_revision": null,
+  "implementation_revision": "content-sha256:138cb12bca1eef736ea697f97e8b0865a4a5ff17cd613bfc64a6487f77fb808c",
+  "protocol_version": null,
+  "transport": null,
+  "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+  "status": "Passed",
+  "observed_result": "Executed the package profile against the loaded target; final directory and human attestation gates are explicitly separate.",
+  "evidence": [
+    "evidence/requirements/SS-REVIEW-02.json"
+  ],
+  "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+  "implementation": [
+    "skills/prepare-plugin-submission/SKILL.md",
+    "skills/prepare-plugin-submission/scripts/audit_target.py"
+  ],
+  "validation_fixture": null
+}

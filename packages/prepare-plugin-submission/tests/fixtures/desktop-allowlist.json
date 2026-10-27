@@ -1,0 +1,8 @@
+{
+  "status": "allowlisted",
+  "organization_id": "org_synthetic_fixture",
+  "confirmed_by": "Fixture author",
+  "confirmed_at": "2026-10-16T11:00:00Z",
+  "evidence_reference": "Synthetic fixture record; not OpenAI approval",
+  "synthetic": true
+}

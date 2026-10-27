@@ -1,0 +1,13 @@
+{
+  "protocol_version": "2026-07-28",
+  "requested_era": "modern",
+  "observed_era": null,
+  "implementation_revision": "content-sha256:eaeb85f9cda524ca8f210b8c9dd493ce063d1520365d41583f2d49956f0bfb3a",
+  "status": "Not run",
+  "evidence": [
+    "evidence/source-inspection.json",
+    "evidence/package-check.json"
+  ],
+  "observed_result": "Protocol negotiation not executed.",
+  "observations": []
+}

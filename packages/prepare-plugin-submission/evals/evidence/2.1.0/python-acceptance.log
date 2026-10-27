@@ -1,0 +1,20 @@
+test_audit_submission_route_does_not_bypass_confirmation (test_preflight.Preflight.test_audit_submission_route_does_not_bypass_confirmation) ... ok
+test_broken_zip_finds_actual_errors (test_preflight.Preflight.test_broken_zip_finds_actual_errors) ... ok
+test_capture_requires_explicit_calls_effects_and_unique_fields (test_preflight.Preflight.test_capture_requires_explicit_calls_effects_and_unique_fields) ... ok
+test_catalog_covers_every_inventory_topic_and_native_cases_match (test_preflight.Preflight.test_catalog_covers_every_inventory_topic_and_native_cases_match) ... ok
+test_desktop_fixture_is_permitted_without_remote_review (test_preflight.Preflight.test_desktop_fixture_is_permitted_without_remote_review) ... ok
+test_host_contract_rejects_stale_unknown_and_tampered_data (test_preflight.Preflight.test_host_contract_rejects_stale_unknown_and_tampered_data) ... ok
+test_incomplete_allowlist_record_is_rejected (test_preflight.Preflight.test_incomplete_allowlist_record_is_rejected) ... ok
+test_loaded_audit_populates_documents_but_not_host_claims (test_preflight.Preflight.test_loaded_audit_populates_documents_but_not_host_claims) ... ok
+test_loaded_broken_zip_retains_findings_and_nonzero_exit (test_preflight.Preflight.test_loaded_broken_zip_retains_findings_and_nonzero_exit) ... ok
+test_loaded_desktop_and_review_records_keep_target_facts (test_preflight.Preflight.test_loaded_desktop_and_review_records_keep_target_facts) ... ok
+test_local_default_and_missing_confirmation_fail (test_preflight.Preflight.test_local_default_and_missing_confirmation_fail) ... ok
+test_product_host_contract_accepts_both_surfaces (test_preflight.Preflight.test_product_host_contract_accepts_both_surfaces) ... ok
+test_review_prep_is_static_and_conditional (test_preflight.Preflight.test_review_prep_is_static_and_conditional) ... ok
+test_synthetic_confirmation_is_rejected_in_normal_runs (test_preflight.Preflight.test_synthetic_confirmation_is_rejected_in_normal_runs) ... ok
+test_synthetic_ingestion_cannot_verify_a_host (test_preflight.Preflight.test_synthetic_ingestion_cannot_verify_a_host) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.539s
+
+OK

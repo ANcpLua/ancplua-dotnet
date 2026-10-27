@@ -1,0 +1,6 @@
+interface:
+  display_name: "Run native MSTest"
+  short_description: "Run, filter and report native MTP tests"
+  default_prompt: "Use $mstest-run-tests to run the requested native MSTest tests and report their results."
+policy:
+  allow_implicit_invocation: true

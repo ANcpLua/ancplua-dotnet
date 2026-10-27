@@ -1,0 +1,4 @@
+interface:
+  display_name: "MSTest Assertion Semantics"
+  short_description: "Version-checked equality and AOT assertions"
+  default_prompt: "Use $mstest-assertions to check these MSTest assertions against their exact equality contract and installed API version."

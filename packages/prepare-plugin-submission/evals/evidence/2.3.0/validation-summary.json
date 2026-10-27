@@ -1,0 +1,55 @@
+{
+  "version": "2.3.0",
+  "python_tests": {
+    "preflight": 15,
+    "wizard": 18,
+    "runtime_v2": 39,
+    "workflow": 5,
+    "total": 77,
+    "status": "Passed"
+  },
+  "python_compile": "Passed",
+  "skill_validation": "Passed",
+  "typescript": {
+    "syntax": "Both Passed",
+    "build": "Passed",
+    "source_and_dependency_bytes_preserved": true,
+    "new_installed_host_test": false
+  },
+  "live_document_records": 21,
+  "applicable_primaries": 19,
+  "specialized_conversion_primary_requests": 0,
+  "independent_exercise": {
+    "actual_separate_reviewer": true,
+    "native_choices": "Simulated only",
+    "host_cases": "13 Not run",
+    "creator_declarations": "Unconfirmed",
+    "portal_actions": false,
+    "final_runtime_restore": "Passed"
+  },
+  "unperformed": [
+    "Actual native Q&A rendering/selection",
+    "Actual private GitHub access",
+    "Target endpoint/tools and installed-host execution",
+    "Demo playback/reviewer-account access",
+    "Creator legal declarations",
+    "Portal upload/review/publication"
+  ],
+  "evidence_files": {
+    "acceptance.md": "7c5430148a2f6db36219cbaf1983e2eb057b1ccee812f8fd59bea5c0e59ced42",
+    "checks.json": "ba28b5019441e89096a145d775ead354068a34891926fd56a834c66ecd6435bc",
+    "final-runtime-restore.json": "d4fd002a311a3ef6dc597b7519f0f9a90213a1fe66d8b1f3ce97891651f13c23",
+    "github-transport.json": "b44c04ea0c29d3cda8d491c70a463dcc10f1afc2c7ee5b9a1aaea37bb05d1148",
+    "independent-exercise.zip": "2d619b028a12dea9dae73e70c3cfcf39cc9a44d585945c7d7d1b94686c9ce9fc",
+    "live-documents.json": "bb6378fa70153388408d68d07ea3923762f227380cbb314b79b6d2b5246f71e0",
+    "live-documents.zip": "e7d47c537510acb260c7094d023a22d31460726c12be5f6a5faf54d8a6bb8f8f",
+    "python-acceptance.log": "d64a046321dc50e6e9005dcf9aba1da01fb647b0680c35cf1f87a1a2c72937b7",
+    "python-compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "python-workflows.log": "e730398d0d51a22585dd11d295838048d579c010399c6912d1a00fa03bd9605b",
+    "skill-validate.log": "db349825903d66adffea3ecf1bd8e1803043e8a71cf1a051235dabc5371f5bb0",
+    "source-hashes.json": "14deffc2153da43ce46355b198150de76d6d4b01bce53e5242bb67bff76f8117",
+    "typescript-build.log": "874d07323e77a31944fa09998ab2c0982b5973ad72c1e84dc1d2922e87f5cd63",
+    "typescript-runner-syntax.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "typescript-server-syntax.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

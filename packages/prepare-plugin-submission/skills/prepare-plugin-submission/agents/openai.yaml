@@ -1,0 +1,4 @@
+interface:
+  display_name: "Submission Studio"
+  short_description: "Guided plugin preparation and submission"
+  default_prompt: "Use $prepare-plugin-submission to guide me through preparing this plugin for OpenAI submission."

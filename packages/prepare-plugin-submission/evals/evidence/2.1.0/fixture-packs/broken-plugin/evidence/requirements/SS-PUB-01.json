@@ -1,0 +1,26 @@
+{
+  "requirement_id": "SS-PUB-01",
+  "platform": "openai",
+  "domain": "Publication",
+  "classification": "official_requirement",
+  "applicability": "human",
+  "summary": "Use verified publisher identity and authorized portal roles.",
+  "source_url": "https://developers.openai.com/plugins/deploy/submission",
+  "source_checked_at": "2026-10-16",
+  "source_revision": null,
+  "implementation_revision": "content-sha256:3880e1215cfeb2064d7e9207c1842f8b02b58fe43bc2215809958eaa06d58795",
+  "protocol_version": null,
+  "transport": null,
+  "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+  "status": "Not applicable",
+  "observed_result": "Portal identity, upload, review and publication are explicit external human handoffs for this preflight audit.",
+  "evidence": [
+    "evidence/requirements/SS-PUB-01.json"
+  ],
+  "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+  "implementation": [
+    "skills/prepare-plugin-submission/SKILL.md",
+    "skills/prepare-plugin-submission/scripts/audit_target.py"
+  ],
+  "validation_fixture": null
+}

@@ -1,0 +1,38 @@
+{
+  "plugin_version": "3.0.1",
+  "source_commit": "d24f9d3d51c85481a7526569c504005700684c88",
+  "date": "2026-10-17",
+  "first_planning_attempt": "missed activation",
+  "retry_context": "same app-server confirmed installed 3.0.1 before creating fresh threads; unchanged prompts did not name the plugin",
+  "threads": {
+    "boundary": "01a149db-9a26-7590-8f8b-bf3546458da8",
+    "negative": "01a149dc-01cd-72f1-abd1-245d18d682fd",
+    "implementation": "01a149dc-3256-7b31-9c3d-7784fe78b2f8"
+  },
+  "observed": {
+    "planning_retry": "selected installed skill/execution reference; no files or restore",
+    "negative": "changed only Python greeting; no MSTest skill read",
+    "implementation_parent_passed": 8,
+    "child_passed": 3,
+    "child_expected_failed": 1,
+    "child_expected_exit": 2,
+    "standalone_builds": 0,
+    "rider_click_through": false
+  },
+  "corrected_failures": [
+    "dotnet test -- --help crashed with exit 134",
+    "Downloaded framework .cs entered default compile globs",
+    "Obsolete TestResult members were used before removal",
+    "MTP builder hook used an incompatible signature before correction"
+  ],
+  "claim_limit": "One discovery-confirmed retry is not an activation-rate estimate or clean first-attempt implementation. No new model evaluations were run for 3.2.0.",
+  "retained_trace_hashes": {
+    "boundary-events.jsonl": "480ab43f3f6563529df0edbc9a54d4e1955d568a4068ce1ec6dc3cc6e9052607",
+    "boundary-final.txt": "5dd6451c7ed602c3c4d31d1b97c7d19845c188fc9d945dbb4eda7a3ced0e220c",
+    "negative-events.jsonl": "6c3ef046247a99a7691dea686269fb5fd48f70a28d14a3acf5d9b2c3b7eba8e8",
+    "negative-final.txt": "9685fa876bb9259775bff15ccb894c122cabd9ab6214dba6eeda8043235bd813",
+    "implementation-events.jsonl": "1efb1a7cf6c2043362f330b0eb2e69116ecf8311cf4e6fea2718cbc16b19bcbc",
+    "implementation-history.json": "a9bddde3c27179ab4d8287b03d2e022ef9e60f893b73affdb15802a552e96a40",
+    "implementation-final.txt": "113980952da05a8e508f338a669d92cd762e1700cfc22e76f5bc700f64516a7f"
+  }
+}

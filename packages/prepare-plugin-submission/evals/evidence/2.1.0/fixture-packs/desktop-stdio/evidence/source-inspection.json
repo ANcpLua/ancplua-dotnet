@@ -1,0 +1,79 @@
+{
+  "binding": {
+    "integration_id": "fixture-plugin",
+    "source_revision": "content-sha256:eaeb85f9cda524ca8f210b8c9dd493ce063d1520365d41583f2d49956f0bfb3a",
+    "input_sha256": "2ee5d5885c40c7a332adebe33fe74db20060bfcc6f127e08b7f72c22f258db95",
+    "inventory_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "observed": {
+    "name": "fixture-plugin",
+    "version": "0.1.0",
+    "manifest_path": "plugin.json",
+    "package_format": "portable",
+    "component_kind": "mcp",
+    "skill_paths": [],
+    "server_names": [
+      "fixture"
+    ],
+    "components": {
+      "skills": false,
+      "mcp": true,
+      "remote_mcp": false,
+      "desktop": true,
+      "ui": false,
+      "events": false,
+      "extensions": false,
+      "commerce": false,
+      "migration": false,
+      "api": false,
+      "quote": false,
+      "checkout": false,
+      "reservation": false
+    },
+    "feature_discovery": {
+      "ui": "Not discoverable without actual tool/resource inventory",
+      "events": "Requires server discovery"
+    },
+    "file_count": 4,
+    "content_sha256": "eaeb85f9cda524ca8f210b8c9dd493ce063d1520365d41583f2d49956f0bfb3a",
+    "package_sha256": null,
+    "display_name": "Fixture Plugin",
+    "starter_prompts": [],
+    "publisher": {
+      "name": "Synthetic Fixture"
+    },
+    "declared_host_capabilities": [],
+    "native_eval_cases": 0,
+    "json_eval_cases": 0,
+    "integration_endpoints_contacted": false,
+    "source_executed": false,
+    "portal_actions_performed": false,
+    "monitoring_active": false,
+    "synthetic": true,
+    "check_profile": "submission",
+    "submission_route": "desktop-only",
+    "demo_recording_url": null
+  },
+  "files": [
+    {
+      "path": "assets/icon.png",
+      "sha256": "65d2706a7138186e0dd4b31a7cf806118c063edb1a221b28b7a47ee2bb29b113",
+      "bytes": 9842
+    },
+    {
+      "path": "mcp.json",
+      "sha256": "4304ca52a30cd1a734a9f645aa0ccdf9b031ed91ebc0d6f824e05e50a2bd3b62",
+      "bytes": 259
+    },
+    {
+      "path": "plugin.json",
+      "sha256": "d29141cbe6d31c7bf0e92424044d4e76dac8de93a16abe62400b738d9e3ab58f",
+      "bytes": 698
+    },
+    {
+      "path": "server.js",
+      "sha256": "5f1c3db0725d2c0866da0acd519d122075c328ddb6e04536f5d17880ef91ad5f",
+      "bytes": 81
+    }
+  ]
+}

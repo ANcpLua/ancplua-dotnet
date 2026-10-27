@@ -1,0 +1,116 @@
+{
+  "pairs": [
+    {
+      "skill": "analyzers",
+      "canonical": "/Users/alexandernachtmann/RiderProjects/stale/ancplua-dotnet/skills/analyzers/SKILL.md",
+      "canonical_sha256": "b52b9b8d130951c3ba1c1d39757781eb5d942ef8eba11363583a40cbdb9798a1",
+      "retired": "/Users/alexandernachtmann/RiderProjects/qyl/plugins/qyl/skills/analyzers",
+      "retired_sha256": "3a1845389349a53635543a828227ab877c8ce0c7bbd3755994ceb75cbb43d39b"
+    },
+    {
+      "skill": "audit",
+      "canonical": "/Users/alexandernachtmann/RiderProjects/stale/ancplua-dotnet/skills/audit/SKILL.md",
+      "canonical_sha256": "9b50f4a95fd0e5217fd4f08652cac2366926bf32ee3f4b55fea9d57dcfe6aa33",
+      "retired": "/Users/alexandernachtmann/RiderProjects/qyl/plugins/qyl/skills/audit",
+      "retired_sha256": "5afbd1d1e70e37ac352c20c10129224fbd5779b794855dfe19a50c71cf1d6bf4"
+    },
+    {
+      "skill": "csharp-refactoring",
+      "canonical": "/Users/alexandernachtmann/RiderProjects/stale/ancplua-dotnet/skills/csharp-refactoring/SKILL.md",
+      "canonical_sha256": "6c1c24456e38d10982768a2f41fa00665f961ee9f5fc901c6337bc82570b27a2",
+      "retired": "/Users/alexandernachtmann/RiderProjects/qyl/plugins/qyl/skills/csharp-refactoring",
+      "retired_sha256": "b4aab781e8dbdfef1d2be31f6315300b8e87644b45bbb3dbc1ab9c919d596d62"
+    },
+    {
+      "skill": "msbuild",
+      "canonical": "/Users/alexandernachtmann/RiderProjects/stale/ancplua-dotnet/skills/msbuild/SKILL.md",
+      "canonical_sha256": "60cf9cd09b2e668472e97803ccf8b22e7ece145b5cac36e0314ad3fb2a4d6b33",
+      "retired": "/Users/alexandernachtmann/RiderProjects/qyl/plugins/qyl/skills/msbuild",
+      "retired_sha256": "0a45e89e48a73b8d0a21ff43c21b6653d4ded9bfba64f010685043c42ddf8b60"
+    },
+    {
+      "skill": "nuget-versions",
+      "canonical": "/Users/alexandernachtmann/RiderProjects/stale/ancplua-dotnet/skills/nuget-versions/SKILL.md",
+      "canonical_sha256": "6203797b9307af64eb11d53be609588e9b934804c98cac06ce9847385b62724b",
+      "retired": "/Users/alexandernachtmann/RiderProjects/qyl/plugins/qyl/skills/nuget-versions",
+      "retired_sha256": "5aeb7e5b4b8cc01d45d43904318ab9b29b7a7fa135b6aafcd79f85649bce155d"
+    },
+    {
+      "skill": "performance",
+      "canonical": "/Users/alexandernachtmann/RiderProjects/stale/ancplua-dotnet/skills/performance/SKILL.md",
+      "canonical_sha256": "fc3aca8b262928c0ac1f68f9abad710864ba33d30b31e5e24723accbee76ee7e",
+      "retired": "/Users/alexandernachtmann/RiderProjects/qyl/plugins/qyl/skills/performance",
+      "retired_sha256": "68e82f15bc203e1ecebf63f9a179a7b1df63b30d455d16bcf62531f063690672"
+    },
+    {
+      "skill": "release",
+      "canonical": "/Users/alexandernachtmann/RiderProjects/stale/ancplua-dotnet/skills/release/SKILL.md",
+      "canonical_sha256": "17e0319a35f103e7dcd30820f18a56dd40093a8c0eabf53e191c2029e79a4918",
+      "retired": "/Users/alexandernachtmann/RiderProjects/qyl/plugins/qyl/skills/release",
+      "retired_sha256": "01c01432e2856491d4c6d9b9108d994b509b75576ce6cb9ca558c085853a55ac"
+    },
+    {
+      "skill": "mstest-assertion-review",
+      "canonical": "/Users/alexandernachtmann/RiderProjects/stale/mstest-extensions-plugin/skills/mstest-assertion-review/SKILL.md",
+      "canonical_sha256": "cb9624f4159c5fc54e284ee5106876b4256f85853a627d7545ae67cf11bfcf48",
+      "retired": "/Users/alexandernachtmann/RiderProjects/qyl/plugins/qyl/skills/mstest-assertion-review",
+      "retired_sha256": "864f8ec550f68e8c72e7586b5d81f642664619d54c40279fae82eeae94217283"
+    },
+    {
+      "skill": "mstest-extensions",
+      "canonical": "/Users/alexandernachtmann/RiderProjects/stale/mstest-extensions-plugin/skills/mstest-extensions/SKILL.md",
+      "canonical_sha256": "e576480660d7b900a6cb85240dac86bfe70261a66052b1656dc46e4a157ae77b",
+      "retired": "/Users/alexandernachtmann/RiderProjects/qyl/plugins/qyl/skills/mstest-extensions",
+      "retired_sha256": "1072bf54bce610a0e0de2106db8c5212f91ecf8d08591ef437566d9d4a3f172c"
+    },
+    {
+      "skill": "mstest-native-aot",
+      "canonical": "/Users/alexandernachtmann/RiderProjects/stale/mstest-extensions-plugin/skills/mstest-native-aot/SKILL.md",
+      "canonical_sha256": "35818753c6de2d3cd993ff0dae9bb024b175971e2665f502387387ec5ed9b8a3",
+      "retired": "/Users/alexandernachtmann/RiderProjects/qyl/plugins/qyl/skills/mstest-native-aot",
+      "retired_sha256": "55caecc8b037c6bfa017a9b8e597e291f6e14b90484daed9975007d2d48408e6"
+    },
+    {
+      "skill": "mstest-run-tests",
+      "canonical": "/Users/alexandernachtmann/RiderProjects/stale/mstest-extensions-plugin/skills/mstest-run-tests/SKILL.md",
+      "canonical_sha256": "1059c7a3550138492f662348397912d5a54084b18185806af7cf11f5c293d4d5",
+      "retired": "/Users/alexandernachtmann/RiderProjects/qyl/plugins/qyl/skills/mstest-run-tests",
+      "retired_sha256": "ce6f07e573acf32f1ddf6a49e2d58a9873b0464c933f6744e123367400f225f3"
+    },
+    {
+      "skill": "mstest-test-gaps",
+      "canonical": "/Users/alexandernachtmann/RiderProjects/stale/mstest-extensions-plugin/skills/mstest-test-gaps/SKILL.md",
+      "canonical_sha256": "66ce356bd1e247236ad649efc858e282ca7cea106ed5ec7c57dbef42a515a640",
+      "retired": "/Users/alexandernachtmann/RiderProjects/qyl/plugins/qyl/skills/mstest-test-gaps",
+      "retired_sha256": "1b30f4a7e28c322c50bb944ca6a3fce17c3c9bb266e2f1ab872e31606a0656fd"
+    },
+    {
+      "skill": "mstest-test-review",
+      "canonical": "/Users/alexandernachtmann/RiderProjects/stale/mstest-extensions-plugin/skills/mstest-test-review/SKILL.md",
+      "canonical_sha256": "f29b658113bfd02e37c2a540683de5fe63ebcaff9ccb0e3a4e6bb40f6c849ccb",
+      "retired": "/Users/alexandernachtmann/RiderProjects/qyl/plugins/qyl/skills/mstest-test-review",
+      "retired_sha256": "ae47cf9cfaff2155cd0fbe29fffee103d86203a732b6bd01d5133a073df60c22"
+    },
+    {
+      "skill": "mstest-test-smells",
+      "canonical": "/Users/alexandernachtmann/RiderProjects/stale/mstest-extensions-plugin/skills/mstest-test-smells/SKILL.md",
+      "canonical_sha256": "98cd28bf08494ec7af41b5a585918a09f8a127d449bdd3e7b1ca40817a672c96",
+      "retired": "/Users/alexandernachtmann/RiderProjects/qyl/plugins/qyl/skills/mstest-test-smells",
+      "retired_sha256": "4d6229a6b09c27f15f80df8f0578d0f4912ce1c6144f3d11a41bbff36cbf8f76"
+    },
+    {
+      "skill": "mstest-test-value",
+      "canonical": "/Users/alexandernachtmann/RiderProjects/stale/mstest-extensions-plugin/skills/mstest-test-value/SKILL.md",
+      "canonical_sha256": "ab9614a8233ad215c0c7a73c7dd4148585bd7d8069bee55d2c1a83661c828b42",
+      "retired": "/Users/alexandernachtmann/RiderProjects/qyl/plugins/qyl/skills/mstest-test-value",
+      "retired_sha256": "dfb1a99cb457a936f22a703f28f34e8ab3fd728d61dda8509eb46375ee8fbb61"
+    },
+    {
+      "skill": "mstest-writing-tests",
+      "canonical": "/Users/alexandernachtmann/RiderProjects/stale/mstest-extensions-plugin/skills/mstest-writing-tests/SKILL.md",
+      "canonical_sha256": "f6d2b1e3433c338fd369e49842aedc669ac7ad8c0f429558e18ebdfea12073cf",
+      "retired": "/Users/alexandernachtmann/RiderProjects/qyl/plugins/qyl/skills/mstest-writing-tests",
+      "retired_sha256": "da2bca4f9227995aab0e7df26e8a46892071f169a7a00b97a03484acf9fb0eb3"
+    }
+  ]
+}

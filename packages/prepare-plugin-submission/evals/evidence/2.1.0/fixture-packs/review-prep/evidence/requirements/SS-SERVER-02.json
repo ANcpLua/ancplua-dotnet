@@ -1,0 +1,26 @@
+{
+  "requirement_id": "SS-SERVER-02",
+  "platform": "openai",
+  "domain": "Server implementation",
+  "classification": "recommended_engineering_practice",
+  "applicability": "ui",
+  "summary": "Use official examples as implementation references rather than execution evidence.",
+  "source_url": "https://developers.openai.com/plugins/build/examples",
+  "source_checked_at": "2026-10-16",
+  "source_revision": null,
+  "implementation_revision": "content-sha256:f0219fed7b1315ce685368c237f5aa8c8073067c838b46733dc984fa0392cb2c",
+  "protocol_version": null,
+  "transport": "http",
+  "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+  "status": "Not run",
+  "observed_result": "The package does not establish this optional server feature; discover actual capabilities before applying its rules.",
+  "evidence": [
+    "evidence/requirements/SS-SERVER-02.json"
+  ],
+  "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+  "implementation": [
+    "skills/prepare-plugin-submission/SKILL.md",
+    "skills/prepare-plugin-submission/scripts/audit_target.py"
+  ],
+  "validation_fixture": null
+}

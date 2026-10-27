@@ -1,0 +1,45 @@
+{
+  "version": "2.1.0",
+  "date": "2026-10-16",
+  "python_tests": {
+    "passed": 20,
+    "acceptance": 15,
+    "workflow": 5
+  },
+  "python_compile": "Passed",
+  "skill_validation": "Passed",
+  "typescript": {
+    "syntax": "Passed for runner and server",
+    "build": "Passed",
+    "sdk_sample_cases_passed": 2,
+    "negotiated_era": "modern",
+    "mcpdo_connection": "Blocked",
+    "mcpdo_blocker": "Sandbox daemon socket listen EPERM",
+    "blocked_adapter_regression": "Passed with synthetic CLI"
+  },
+  "synthetic_target_audits": {
+    "broken_plugin_zip": "Expected rejection, 4 findings",
+    "desktop_stdio": "Passed with explicit route and synthetic confirmation",
+    "review_prep": "Passed; 5 positive + 3 negative definitions and demo reference preserved",
+    "pack_integrity": "All three passed"
+  },
+  "native_prompt_grader_folders": 10,
+  "native_llm_benchmark_execution": "Not run; definitions and independent fixture workflow test are distinct",
+  "actual_product_host_verification": "Not run",
+  "human_handoffs": [
+    "Organization eligibility",
+    "Portal upload",
+    "Review submission",
+    "Legal attestations",
+    "Publication"
+  ],
+  "self_audit_target_version": "2.0.1",
+  "self_audit_requirement_counts": {
+    "Passed": 6,
+    "Not applicable": 33,
+    "Not run": 10
+  },
+  "self_audit_populated_documents": 13,
+  "target_uploads_performed": false,
+  "publication_performed": false
+}

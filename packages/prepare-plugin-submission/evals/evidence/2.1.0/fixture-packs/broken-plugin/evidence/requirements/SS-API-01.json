@@ -1,0 +1,26 @@
+{
+  "requirement_id": "SS-API-01",
+  "platform": "openai",
+  "domain": "API compatibility",
+  "classification": "recommended_engineering_practice",
+  "applicability": "api",
+  "summary": "Use server_url for custom remote services and distinguish legacy connector_id.",
+  "source_url": "https://developers.openai.com/api/docs/guides/tools-connectors-mcp",
+  "source_checked_at": "2026-10-16",
+  "source_revision": null,
+  "implementation_revision": "content-sha256:3880e1215cfeb2064d7e9207c1842f8b02b58fe43bc2215809958eaa06d58795",
+  "protocol_version": null,
+  "transport": null,
+  "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+  "status": "Not applicable",
+  "observed_result": "The loaded target declares no applicable api integration. This is not an unsupported meta-tool claim.",
+  "evidence": [
+    "evidence/requirements/SS-API-01.json"
+  ],
+  "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+  "implementation": [
+    "skills/prepare-plugin-submission/SKILL.md",
+    "skills/prepare-plugin-submission/scripts/audit_target.py"
+  ],
+  "validation_fixture": null
+}

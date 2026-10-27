@@ -1,0 +1,26 @@
+{
+  "requirement_id": "SS-PKG-01",
+  "platform": "openai",
+  "domain": "Packaging",
+  "classification": "official_requirement",
+  "applicability": "any",
+  "summary": "Use the selected supported manifest and contained component paths.",
+  "source_url": "https://developers.openai.com/plugins/build/plugins",
+  "source_checked_at": "2026-10-16",
+  "source_revision": null,
+  "implementation_revision": "content-sha256:f0219fed7b1315ce685368c237f5aa8c8073067c838b46733dc984fa0392cb2c",
+  "protocol_version": null,
+  "transport": "http",
+  "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+  "status": "Passed",
+  "observed_result": "Executed the submission profile against the loaded target; final directory and human attestation gates are explicitly separate.",
+  "evidence": [
+    "evidence/requirements/SS-PKG-01.json"
+  ],
+  "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+  "implementation": [
+    "skills/prepare-plugin-submission/SKILL.md",
+    "skills/prepare-plugin-submission/scripts/audit_target.py"
+  ],
+  "validation_fixture": "tests/fixtures/broken-plugin.zip"
+}

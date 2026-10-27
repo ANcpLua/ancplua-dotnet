@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "binding": {
+    "integration_id": "prepare-plugin-submission",
+    "source_revision": "content-sha256:138cb12bca1eef736ea697f97e8b0865a4a5ff17cd613bfc64a6487f77fb808c",
+    "input_sha256": "6567ff1bfe5e97ef100e60b1c809b15e2c6fdef49a83848b47d4944feed96a4d",
+    "inventory_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "connection": {},
+  "hosts": [],
+  "tools": [],
+  "cases": [],
+  "source_files": [],
+  "account_setup": [],
+  "sample_data": "No target data executed or retrieved.",
+  "permissions": "Host file/terminal capabilities are supplied externally; no bundled MCP connection.",
+  "receipt_file": null,
+  "host_cases": [],
+  "package_sha256": "552cc8481f70b57171bec6b56d7991cdc0a31d1335945df45e618ebca490d360"
+}

@@ -1,0 +1,6 @@
+
+> submission-connector-kit@1.0.0 test
+> node build/run.js --engine sdk --era modern --report results/sdk-release.json
+
+{"report":"/workspace/scratch/401e3bbb802b/local-sdk-fixture/results/sdk-release.json","status":"Passed","summary":{"Passed":2,"Failed":0,"Blocked":0,"Not run":0}}
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.

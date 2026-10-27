@@ -1,0 +1,26 @@
+{
+  "requirement_id": "SS-EVENT-02",
+  "platform": "openai",
+  "domain": "Additional capabilities",
+  "classification": "official_requirement",
+  "applicability": "events",
+  "summary": "Validate callbacks, sign deliveries and retain authorized subscription state.",
+  "source_url": "https://developers.openai.com/plugins/build/mcp-events",
+  "source_checked_at": "2026-10-16",
+  "source_revision": null,
+  "implementation_revision": "content-sha256:138cb12bca1eef736ea697f97e8b0865a4a5ff17cd613bfc64a6487f77fb808c",
+  "protocol_version": "2026-07-28",
+  "transport": null,
+  "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+  "status": "Not applicable",
+  "observed_result": "The loaded target declares no applicable events integration. This is not an unsupported meta-tool claim.",
+  "evidence": [
+    "evidence/requirements/SS-EVENT-02.json"
+  ],
+  "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+  "implementation": [
+    "skills/prepare-plugin-submission/SKILL.md",
+    "skills/prepare-plugin-submission/scripts/audit_target.py"
+  ],
+  "validation_fixture": null
+}

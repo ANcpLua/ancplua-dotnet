@@ -1,0 +1,121 @@
+[
+  {
+    "check": "python-acceptance",
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-v"
+    ],
+    "cwd": "/workspace/scratch/401e3bbb802b/submission-studio-2.1.0",
+    "exit_code": 0,
+    "log": "python-acceptance.log"
+  },
+  {
+    "check": "python-workflows",
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "evals/runtime",
+      "-v"
+    ],
+    "cwd": "/workspace/scratch/401e3bbb802b/submission-studio-2.1.0",
+    "exit_code": 0,
+    "log": "python-workflows.log"
+  },
+  {
+    "check": "python-compile",
+    "command": [
+      "python3",
+      "-m",
+      "compileall",
+      "-q",
+      "skills/prepare-plugin-submission/scripts",
+      "tests",
+      "evals/runtime"
+    ],
+    "cwd": "/workspace/scratch/401e3bbb802b/submission-studio-2.1.0",
+    "exit_code": 0,
+    "log": "python-compile.log"
+  },
+  {
+    "check": "skill-validate",
+    "command": [
+      "python3",
+      "/workspace/scratch/401e3bbb802b/validation-tools/quick_validate.py",
+      "skills/prepare-plugin-submission"
+    ],
+    "cwd": "/workspace/scratch/401e3bbb802b/submission-studio-2.1.0",
+    "exit_code": 0,
+    "log": "skill-validate.log"
+  },
+  {
+    "check": "typescript-runner-syntax",
+    "command": [
+      "node",
+      "--experimental-strip-types",
+      "--check",
+      "skills/prepare-plugin-submission/assets/connector-kit/src/run.ts"
+    ],
+    "cwd": "/workspace/scratch/401e3bbb802b/submission-studio-2.1.0",
+    "exit_code": 0,
+    "log": "typescript-runner-syntax.log"
+  },
+  {
+    "check": "typescript-server-syntax",
+    "command": [
+      "node",
+      "--experimental-strip-types",
+      "--check",
+      "skills/prepare-plugin-submission/assets/connector-kit/src/server.ts"
+    ],
+    "cwd": "/workspace/scratch/401e3bbb802b/submission-studio-2.1.0",
+    "exit_code": 0,
+    "log": "typescript-server-syntax.log"
+  },
+  {
+    "check": "typescript-build",
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "cwd": "/workspace/scratch/401e3bbb802b/typescript-validation",
+    "exit_code": 0,
+    "log": "typescript-build.log"
+  },
+  {
+    "check": "starter-build",
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "cwd": "/workspace/scratch/401e3bbb802b/local-sdk-fixture",
+    "exit_code": 0,
+    "log": "starter-build.log"
+  },
+  {
+    "check": "sdk-fixture",
+    "command": [
+      "npm",
+      "test",
+      "--",
+      "--engine",
+      "sdk",
+      "--era",
+      "modern",
+      "--report",
+      "results/sdk-release.json"
+    ],
+    "cwd": "/workspace/scratch/401e3bbb802b/local-sdk-fixture",
+    "exit_code": 0,
+    "log": "sdk-fixture.log"
+  }
+]

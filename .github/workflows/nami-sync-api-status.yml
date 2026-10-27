@@ -1,0 +1,43 @@
+name: Sync MSTest API reference
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - packages/nami/plugins/nami/skills/mstest/scripts/versions.yaml
+      - packages/nami/plugins/nami/skills/mstest/scripts/generate_api.py
+      - packages/nami/plugins/nami/skills/mstest/scripts/api_table.md.j2
+      - packages/nami/pyproject.toml
+      - packages/nami/uv.lock
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: api-status-docs
+
+jobs:
+  generate-docs:
+    defaults:
+      run:
+        working-directory: packages/nami
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+      - run: make update-mstest-api check test
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit changes
+        run: |
+          git add plugins/nami/skills/mstest/references/public-api.md
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "docs(skills): sync MSTest public API reference"
+          git push

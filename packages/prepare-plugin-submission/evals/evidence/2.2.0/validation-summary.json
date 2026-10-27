@@ -1,0 +1,46 @@
+{
+  "version": "2.2.0",
+  "scope": "Conversational wizard and local synthetic validation; no portal or actual host actions",
+  "python_tests_passed": 38,
+  "wizard_tests": 18,
+  "existing_preflight_tests": 15,
+  "existing_workflow_tests": 5,
+  "python_compilation": "Passed",
+  "skill_validation": "Passed",
+  "typescript_syntax": "Passed",
+  "typescript_build": "Passed",
+  "independent_wizard_commands": 27,
+  "independent_wizard_runtime_errors": 0,
+  "portable_resume_assertions_passed": 16,
+  "source_snapshot": "Exact archive SHA-256 retained across export/restore",
+  "pending_behavior": "Nine host cases, recording and runtime requirements remain unverified in the independent fixture exercise",
+  "portal_actions_performed": false,
+  "real_host_tests_performed": false,
+  "discoverable_product_skills": [
+    "prepare-plugin-submission"
+  ],
+  "preserved": [
+    "Plugin identity",
+    "Author",
+    "Audience",
+    "Icon",
+    "Starter prompt text and order",
+    "TypeScript sources and pinned dependencies"
+  ],
+  "removed_exposed_fixture_skill": true,
+  "evidence": "independent-wizard-evidence.zip",
+  "requirement_evidence": "Structured file import or frozen-source digest; copied evidence is checked on resume. Plain references cannot finalize official rows.",
+  "structured_evidence_followup": {
+    "file_dispositions": 4,
+    "source_dispositions": 3,
+    "distinct_imported_artifacts": 1,
+    "restore_assertions_passed": 16,
+    "manual_staging_performed": false,
+    "official_gaps_remain_blocked": 7,
+    "logged_commands": 18,
+    "command_failures": 0,
+    "import_assertions_passed": 12,
+    "evidence_archive": "evidence-import-check-evidence.zip",
+    "evidence_sha256": "cf0454494110c8ae1b81fda621eea9e61459e39f9f2e4868855521b5794511b2"
+  }
+}

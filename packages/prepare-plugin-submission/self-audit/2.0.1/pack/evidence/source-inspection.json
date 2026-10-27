@@ -1,0 +1,301 @@
+{
+  "binding": {
+    "integration_id": "prepare-plugin-submission",
+    "source_revision": "content-sha256:138cb12bca1eef736ea697f97e8b0865a4a5ff17cd613bfc64a6487f77fb808c",
+    "input_sha256": "6567ff1bfe5e97ef100e60b1c809b15e2c6fdef49a83848b47d4944feed96a4d",
+    "inventory_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "observed": {
+    "name": "prepare-plugin-submission",
+    "version": "2.0.1",
+    "manifest_path": "plugin.json",
+    "package_format": "portable",
+    "component_kind": "skills-only",
+    "skill_paths": [
+      "skills/prepare-plugin-submission/SKILL.md"
+    ],
+    "server_names": [],
+    "components": {
+      "skills": true,
+      "mcp": false,
+      "remote_mcp": false,
+      "desktop": false,
+      "ui": false,
+      "events": false,
+      "extensions": false,
+      "commerce": false,
+      "migration": false,
+      "api": false,
+      "quote": false,
+      "checkout": false,
+      "reservation": false
+    },
+    "feature_discovery": {
+      "ui": "No MCP declaration",
+      "events": "No MCP declaration"
+    },
+    "file_count": 47,
+    "content_sha256": "138cb12bca1eef736ea697f97e8b0865a4a5ff17cd613bfc64a6487f77fb808c",
+    "package_sha256": "552cc8481f70b57171bec6b56d7991cdc0a31d1335945df45e618ebca490d360",
+    "display_name": "Submission Studio",
+    "starter_prompts": [
+      "Prepare this integration for OpenAI submission.",
+      "Audit this plugin ZIP and show the next specific fix.",
+      "Help me prepare review cases and a real demo recording."
+    ],
+    "publisher": {
+      "name": "ANcpLua"
+    },
+    "declared_host_capabilities": [
+      "Read",
+      "Write"
+    ],
+    "native_eval_cases": 6,
+    "json_eval_cases": 10,
+    "integration_endpoints_contacted": false,
+    "source_executed": false,
+    "portal_actions_performed": false,
+    "monitoring_active": false,
+    "synthetic": false,
+    "check_profile": "package",
+    "submission_route": "remote",
+    "demo_recording_url": null
+  },
+  "files": [
+    {
+      "path": ".codex-plugin/plugin.json",
+      "sha256": "52b58e6fdf54e916d8130f9e049e4cf2b94ad8a780d8e4f2c01a664524b7405c",
+      "bytes": 1442
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "2cf956b25c3eb5dd7c77618c662e03654bd41794ddcfb6fb7e2480ebb5d589bd",
+      "bytes": 1065
+    },
+    {
+      "path": "README.md",
+      "sha256": "d5000942a2dcb6982c43bcf038bb625636c674177e0398c058eb8054c6026983",
+      "bytes": 1853
+    },
+    {
+      "path": "assets/icon.png",
+      "sha256": "65d2706a7138186e0dd4b31a7cf806118c063edb1a221b28b7a47ee2bb29b113",
+      "bytes": 9842
+    },
+    {
+      "path": "evals/2.0.0.md",
+      "sha256": "13537863c851e8d9b23c12e5dcdbfb0046371c69dc373d4c843db879fef30187",
+      "bytes": 1707
+    },
+    {
+      "path": "evals/cases.json",
+      "sha256": "a9e3d1cd3b1f990b870042259cd2c06b90c5cb1fa19e3366fe1c0c2173d49232",
+      "bytes": 8075
+    },
+    {
+      "path": "evals/claude-testing/graders/criteria.md",
+      "sha256": "690f1b5dbd9d8c8d6622cba54ddbb8556d3080af91ecf17f6acefbccd1e99717",
+      "bytes": 852
+    },
+    {
+      "path": "evals/claude-testing/prompt.md",
+      "sha256": "0997c87b051b956983e997eee38aed96e6b8dceb0eebc4e41f81851c9f5fdb44",
+      "bytes": 481
+    },
+    {
+      "path": "evals/compatibility/graders/criteria.md",
+      "sha256": "3d97c6b9b185cc457f13455afbc226243bced472eff1a3b2191574f5fe868044",
+      "bytes": 724
+    },
+    {
+      "path": "evals/compatibility/prompt.md",
+      "sha256": "3886530b72671778d3dfa0a094cc0709515f282d81ad19e5cb9a25dd392ae0c7",
+      "bytes": 330
+    },
+    {
+      "path": "evals/demo-evidence/graders/criteria.md",
+      "sha256": "f279fef9029fa6e425814d6431d8161ab00e0e0100640797c6c082125588cf0d",
+      "bytes": 518
+    },
+    {
+      "path": "evals/demo-evidence/prompt.md",
+      "sha256": "b831f28c399b2dea9d56d317e75a03c62ffbe91bad4f4e3959ec158cc6d8963c",
+      "bytes": 339
+    },
+    {
+      "path": "evals/dual-platform/graders/criteria.md",
+      "sha256": "8e76b610ecafb8f04f49d58a60fcd8bb97530f8c83bc70cae9b415e50fab723a",
+      "bytes": 690
+    },
+    {
+      "path": "evals/dual-platform/prompt.md",
+      "sha256": "8d371dfe5953adb2ca11fd9f53a91b7b6715a4c30dd6b0e52eff586ba3d3bc7a",
+      "bytes": 397
+    },
+    {
+      "path": "evals/review-state/graders/criteria.md",
+      "sha256": "760958380c642337ffbf3e9e3a40c1d47705fead8ff4eb5630950b6f0bd71f81",
+      "bytes": 507
+    },
+    {
+      "path": "evals/review-state/prompt.md",
+      "sha256": "9cb723723311ce6812750f6dcb7e8f5a24e499fb51f8af90ef96aae3fa5b4eb8",
+      "bytes": 310
+    },
+    {
+      "path": "evals/runtime/test_workflows.py",
+      "sha256": "43004ab945c2e934ebcaa08a7447f371ae2ddf8157cc8c5a8c6fb6d06ef9bbe8",
+      "bytes": 4981
+    },
+    {
+      "path": "evals/skills-only/graders/criteria.md",
+      "sha256": "6b23b3752e824397209670b289cda648cf8a2c5b165c80ea0d0226ce563a5c1a",
+      "bytes": 530
+    },
+    {
+      "path": "evals/skills-only/prompt.md",
+      "sha256": "b317de2d286d261c5c5b58e9be21dc288fe8eb7dba6b7f6c8e65184d49038c22",
+      "bytes": 411
+    },
+    {
+      "path": "plugin.json",
+      "sha256": "029942648e6413c24b245e36b8c5efeaa6240b3ab79d7379d4801a3e5c456ac9",
+      "bytes": 1613
+    },
+    {
+      "path": "skills/prepare-plugin-submission/SKILL.md",
+      "sha256": "ff1456335c0db1ba1a65da02371be219530be9eafe30c89b63a4e94eb931d75c",
+      "bytes": 12957
+    },
+    {
+      "path": "skills/prepare-plugin-submission/assets/connector-kit/package-lock.json",
+      "sha256": "53b6ae7a27088185c510cfa4037ed85780716c62f3184af188e67d48802b45e4",
+      "bytes": 44591
+    },
+    {
+      "path": "skills/prepare-plugin-submission/assets/connector-kit/package.json",
+      "sha256": "f60da26483f3572c9fd4c9e77f002f51d9c665aaf087861941f9581afe377a2e",
+      "bytes": 584
+    },
+    {
+      "path": "skills/prepare-plugin-submission/assets/connector-kit/src/run.ts",
+      "sha256": "75b1daf56af7b21155d9dd69f21b075d8f911d2520682dbab07eaf4bf9a3ed01",
+      "bytes": 20706
+    },
+    {
+      "path": "skills/prepare-plugin-submission/assets/connector-kit/src/server.ts",
+      "sha256": "0369f8a0978de29cdd398c5c5ac58f1a53c6a7240f280853f2a3af5499af22d1",
+      "bytes": 2274
+    },
+    {
+      "path": "skills/prepare-plugin-submission/assets/connector-kit/tsconfig.json",
+      "sha256": "3c97a3c36753c8d92a1f86216d364018dd7d124edd0c960cc631e420cd8bb41d",
+      "bytes": 266
+    },
+    {
+      "path": "skills/prepare-plugin-submission/references/claude.md",
+      "sha256": "292de8e646c7feb62f0699da746e758155fe0733d6eb48a8277e148b26162f4c",
+      "bytes": 7510
+    },
+    {
+      "path": "skills/prepare-plugin-submission/references/compatibility.md",
+      "sha256": "24f98999234021e6bbf43c827c4fb627fcac5057f080b506cdc7d42e97592f95",
+      "bytes": 2808
+    },
+    {
+      "path": "skills/prepare-plugin-submission/references/evaluation.md",
+      "sha256": "89c0fe9d8f0ac9bfbafc5593f00a0a3e27d047f3a84daee6d638c0f78236a211",
+      "bytes": 6490
+    },
+    {
+      "path": "skills/prepare-plugin-submission/references/mcpdo.md",
+      "sha256": "d0023dc159eefa4b5206d05bebd6d71457ecbae728f344dfe3b34ee291332ff7",
+      "bytes": 8215
+    },
+    {
+      "path": "skills/prepare-plugin-submission/references/openai-lifecycle.md",
+      "sha256": "f251a632a53007ce0fe80647ed75a12fcd470bcb3d8f05b5704ed3d57db8a1ee",
+      "bytes": 17312
+    },
+    {
+      "path": "skills/prepare-plugin-submission/references/openai.md",
+      "sha256": "6f65619ded757a3e50d626904e9821a64917dafa0a74f99fb4d6734c9360fdff",
+      "bytes": 5847
+    },
+    {
+      "path": "skills/prepare-plugin-submission/references/review-evidence.md",
+      "sha256": "6640d49e83b5df4ed99847784fada24776ac817705155128ab794e605f8899b5",
+      "bytes": 3009
+    },
+    {
+      "path": "skills/prepare-plugin-submission/references/shared-mcp.md",
+      "sha256": "66ba78f4249f04c2fe0de73bf3112982ec9d5d6cbac420abe56322b23918e8c3",
+      "bytes": 18004
+    },
+    {
+      "path": "skills/prepare-plugin-submission/references/source-authority.md",
+      "sha256": "04cfc282563941bf4eaa8df414e036e74d624ebcbc69aa55200fea340febebf2",
+      "bytes": 3675
+    },
+    {
+      "path": "skills/prepare-plugin-submission/references/sources.md",
+      "sha256": "46cd55fc7be453b3e1830c6ac199d08014bb40f5bfe1e24c8bb2991098ae220a",
+      "bytes": 9527
+    },
+    {
+      "path": "skills/prepare-plugin-submission/references/typescript-sdk.md",
+      "sha256": "5ebc19e8053132114e6375a52762ec5726d79219c81c35c518248d0cd0d9b260",
+      "bytes": 9428
+    },
+    {
+      "path": "skills/prepare-plugin-submission/references/workflows.md",
+      "sha256": "42425de56bf7143bd152057fef8638bee412225dac575c1b947db9ea14e4fe53",
+      "bytes": 10422
+    },
+    {
+      "path": "skills/prepare-plugin-submission/scripts/check_health.py",
+      "sha256": "039be032dce3d68413e5ef114c4a78f1a83eda45376f87b01d3d00c7433eb30c",
+      "bytes": 913
+    },
+    {
+      "path": "skills/prepare-plugin-submission/scripts/check_package.py",
+      "sha256": "8fae2c3f6e6c30358f0155d3d70741be7cf53fa30c0b5b41702deb0941887c2a",
+      "bytes": 11124
+    },
+    {
+      "path": "skills/prepare-plugin-submission/scripts/inspect_tools.py",
+      "sha256": "6cc989559159fe1627d624231cb99005f96fd033ab701bd2507e3de1d448d905",
+      "bytes": 6248
+    },
+    {
+      "path": "skills/prepare-plugin-submission/scripts/openai_core.py",
+      "sha256": "e0cffa9caad6640feb26394823a7b33937887513b97097cf35e79fa63a8b5b8d",
+      "bytes": 9238
+    },
+    {
+      "path": "skills/prepare-plugin-submission/scripts/package_core.py",
+      "sha256": "d6a99ee8f288198bd2b9e0eefa3caa201853e2f0a9a3040622b8a776471398d7",
+      "bytes": 54817
+    },
+    {
+      "path": "skills/prepare-plugin-submission/scripts/prepare_workflow.py",
+      "sha256": "06f8d2be7d0509414bc5662ab7e8f045eaab7684fd52703a9de53e72741cb73c",
+      "bytes": 22353
+    },
+    {
+      "path": "skills/prepare-plugin-submission/scripts/workflow_core.py",
+      "sha256": "9975ed8a15b873d7809385ee8d3f50d165a34dc22babf29075d8d246a00f341b",
+      "bytes": 23294
+    },
+    {
+      "path": "skills/prepare-plugin-submission/templates/readiness.md",
+      "sha256": "830a4a5fa95ae9cb99f31f4a131d4c56775ee49bc9ef297829e14c0364440dc4",
+      "bytes": 3867
+    },
+    {
+      "path": "skills/prepare-plugin-submission/templates/tool-review.md",
+      "sha256": "eba6907222980ff18c6543da69ef8e2899eb013ac3aec90e55fed5741b59874a",
+      "bytes": 2044
+    }
+  ]
+}

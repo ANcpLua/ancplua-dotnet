@@ -1,0 +1,33 @@
+{
+  "binding": {
+    "integration_id": "prepare-plugin-submission",
+    "source_revision": "content-sha256:138cb12bca1eef736ea697f97e8b0865a4a5ff17cd613bfc64a6487f77fb808c",
+    "input_sha256": "6567ff1bfe5e97ef100e60b1c809b15e2c6fdef49a83848b47d4944feed96a4d",
+    "inventory_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "status": "Observed",
+  "evidence": [
+    "evidence/source-inspection.json",
+    "evidence/package-check.json"
+  ],
+  "observed_result": "Inspected target definitions; behavior and external actions were not executed.",
+  "source_revision": "content-sha256:138cb12bca1eef736ea697f97e8b0865a4a5ff17cd613bfc64a6487f77fb808c",
+  "supplied": {
+    "displayName": "Submission Studio",
+    "shortDescription": "Prepare. Verify. Submit.",
+    "longDescription": "Engineer OpenAI skills, modern MCP integrations, and optional UI from source to a verified handoff. Includes package validation, a v2 SDK starter, executable SDK/Inspector/mcpdo test kits, OpenAI lifecycle records, source authority tracking, security and review preparation, and maintenance plans. ChatGPT, Codex, and API evidence stay separate. Cross-platform migration is available when selected. Legal decisions, review submission, and publication remain separate actions.",
+    "developerName": "ANcpLua",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "logo": "./assets/icon.png",
+    "composerIcon": "./assets/icon.png",
+    "defaultPrompt": [
+      "Prepare this integration for OpenAI submission.",
+      "Audit this plugin ZIP and show the next specific fix.",
+      "Help me prepare review cases and a real demo recording."
+    ]
+  }
+}

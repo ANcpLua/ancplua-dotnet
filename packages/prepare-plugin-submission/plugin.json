@@ -1,0 +1,39 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "prepare-plugin-submission",
+  "version": "2.3.0",
+  "description": "Guide OpenAI plugin preparation with a persistent submission wizard, source-bound checks, repairs and evidence.",
+  "author": {
+    "name": "ANcpLua"
+  },
+  "license": "MIT",
+  "keywords": [
+    "submission",
+    "plugins",
+    "connectors",
+    "review",
+    "packaging"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Submission Studio",
+        "shortDescription": "Prepare. Verify. Submit.",
+        "longDescription": "Work through OpenAI plugin preparation as a guided conversation. Submission Studio tracks the current step, validates target-bound evidence, helps repair source and portal findings, prepares the ZIP and review materials, and guides the human through upload, review and publication. Save, resume or move a session without repeating completed inputs. Supports approved desktop stdio routes, modern MCP v2 test kits, ChatGPT/Codex report ingestion and applicability-aware audits. Blank unloaded templates are expected. Human portal observations, synthetic tests and verified local checks remain distinct.",
+        "developerName": "ANcpLua",
+        "category": "Productivity",
+        "capabilities": [
+          "Read",
+          "Write"
+        ],
+        "logo": "./assets/icon.png",
+        "composerIcon": "./assets/icon.png",
+        "defaultPrompt": [
+          "Prepare this integration for OpenAI submission.",
+          "Audit this plugin ZIP and show the next specific fix.",
+          "Help me prepare review cases and a real demo recording."
+        ]
+      }
+    }
+  }
+}

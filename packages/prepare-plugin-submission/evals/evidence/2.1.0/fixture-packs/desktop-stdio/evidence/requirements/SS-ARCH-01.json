@@ -1,0 +1,26 @@
+{
+  "requirement_id": "SS-ARCH-01",
+  "platform": "openai",
+  "domain": "Architecture",
+  "classification": "recommended_engineering_practice",
+  "applicability": "any",
+  "summary": "Select the smallest useful combination of skills, MCP and optional UI.",
+  "source_url": "https://developers.openai.com/plugins/concepts/plugins",
+  "source_checked_at": "2026-10-16",
+  "source_revision": null,
+  "implementation_revision": "content-sha256:eaeb85f9cda524ca8f210b8c9dd493ce063d1520365d41583f2d49956f0bfb3a",
+  "protocol_version": null,
+  "transport": "stdio",
+  "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+  "status": "Passed",
+  "observed_result": "The effective manifest and packaged skill inventory establish the selected component structure.",
+  "evidence": [
+    "evidence/requirements/SS-ARCH-01.json"
+  ],
+  "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+  "implementation": [
+    "skills/prepare-plugin-submission/SKILL.md",
+    "skills/prepare-plugin-submission/scripts/audit_target.py"
+  ],
+  "validation_fixture": null
+}

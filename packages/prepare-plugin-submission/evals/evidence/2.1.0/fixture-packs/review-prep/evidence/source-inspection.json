@@ -1,0 +1,81 @@
+{
+  "binding": {
+    "integration_id": "review-prep-fixture",
+    "source_revision": "content-sha256:f0219fed7b1315ce685368c237f5aa8c8073067c838b46733dc984fa0392cb2c",
+    "input_sha256": "aa1e0425f3791509e44542882ef78c1d7315f3455e7516d9fed943bb96463497",
+    "inventory_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "observed": {
+    "name": "review-prep-fixture",
+    "version": "0.1.0",
+    "manifest_path": "plugin.json",
+    "package_format": "portable",
+    "component_kind": "mcp",
+    "skill_paths": [
+      "skills/review-fixture/SKILL.md"
+    ],
+    "server_names": [
+      "fixture"
+    ],
+    "components": {
+      "skills": true,
+      "mcp": true,
+      "remote_mcp": true,
+      "desktop": false,
+      "ui": false,
+      "events": false,
+      "extensions": false,
+      "commerce": false,
+      "migration": false,
+      "api": false,
+      "quote": false,
+      "checkout": false,
+      "reservation": false
+    },
+    "feature_discovery": {
+      "ui": "Not discoverable without actual tool/resource inventory",
+      "events": "Requires server discovery"
+    },
+    "file_count": 4,
+    "content_sha256": "f0219fed7b1315ce685368c237f5aa8c8073067c838b46733dc984fa0392cb2c",
+    "package_sha256": null,
+    "display_name": "Fixture Plugin",
+    "starter_prompts": [],
+    "publisher": {
+      "name": "Synthetic Fixture"
+    },
+    "declared_host_capabilities": [],
+    "native_eval_cases": 0,
+    "json_eval_cases": 0,
+    "integration_endpoints_contacted": false,
+    "source_executed": false,
+    "portal_actions_performed": false,
+    "monitoring_active": false,
+    "synthetic": true,
+    "check_profile": "submission",
+    "submission_route": "remote",
+    "demo_recording_url": "https://fixture.invalid/demo"
+  },
+  "files": [
+    {
+      "path": "assets/icon.png",
+      "sha256": "65d2706a7138186e0dd4b31a7cf806118c063edb1a221b28b7a47ee2bb29b113",
+      "bytes": 9842
+    },
+    {
+      "path": "mcp.json",
+      "sha256": "7e65e30547660dbc5254069d3ed4b1c33335c77625d62981951257d8c51aba76",
+      "bytes": 321
+    },
+    {
+      "path": "plugin.json",
+      "sha256": "1ace77122adb2e345d10f5bea2d9b4e0f2db13ff8731f5245aad6ac5e8e2cd71",
+      "bytes": 3004
+    },
+    {
+      "path": "skills/review-fixture/SKILL.md",
+      "sha256": "adfa70f9d9c76f159728cc125100ceaac9d36158e0c33eb125897fa9430ded9b",
+      "bytes": 132
+    }
+  ]
+}

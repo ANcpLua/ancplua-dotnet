@@ -1,0 +1,23 @@
+name: verify
+
+# Check the package manifests and skill frontmatter.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: '17 5 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    defaults:
+      run:
+        working-directory: packages/ancplua-dotnet
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - run: scripts/verify.sh

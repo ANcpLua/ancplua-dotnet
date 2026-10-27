@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="examples/MSTestExtensionSamples/MSTestExtensionSamples.csproj" />
+  <Project Path="examples/MSTestExtensionProbes/MSTestExtensionProbes.csproj" />
+</Solution>

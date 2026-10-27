@@ -1,0 +1,6 @@
+interface:
+  display_name: "MSTest change evidence"
+  short_description: "Assess whether tests detect the changed behavior"
+  default_prompt: "Use $mstest-test-value for the requested MSTest testing task."
+policy:
+  allow_implicit_invocation: true

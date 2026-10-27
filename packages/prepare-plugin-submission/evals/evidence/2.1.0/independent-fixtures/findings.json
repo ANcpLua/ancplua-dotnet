@@ -1,0 +1,15 @@
+[
+  {
+    "id": "minor-scenario-wording",
+    "severity": "minor document wording mismatch",
+    "target": "broken-plugin.zip",
+    "output": "broken-plugin-audit/submission/reviewer-access.md",
+    "implementation": "skills/prepare-plugin-submission/scripts/audit_target.py::completed_documents",
+    "observed": "The text instructs the creator to run the packaged scenario set. The raw ZIP contains no scenario set.",
+    "raw_zip_files": [
+      "plugin.json",
+      "skills/broken/SKILL.md"
+    ],
+    "suggested_action": "Say to prepare/run representative supported-host cases, or mention a packaged scenario set only when one is observed."
+  }
+]

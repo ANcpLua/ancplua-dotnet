@@ -1,0 +1,29 @@
+{
+  "status": "Passed",
+  "scope": "Structured evidence import and checkpoint retention; target behavior is unverified",
+  "phase": "restored",
+  "session": "/workspace/scratch/401e3bbb802b/wizard-forward/evidence-import-check/fresh-location/submission.json",
+  "revision": 51,
+  "manual_staging_performed": false,
+  "file_evidence_rows": 4,
+  "distinct_imported_files": 1,
+  "frozen_source_rows": 3,
+  "checks": {
+    "manual_staging_not_used": true,
+    "file_evidence_copied_to_session_by_adapter": true,
+    "imported_file_hashes_match_supplied_observation": true,
+    "file_evidence_state_integrity_checked": true,
+    "source_evidence_paths_and_hashes_match_frozen_target": true,
+    "source_evidence_state_digest_checked": true,
+    "structured_evidence_bound_to_current_source_and_plan": true,
+    "plain_references_remain_unverified": true,
+    "row_statuses_preserved_without_new_behavioral_passes": true,
+    "all_seven_official_gaps_remain_blocked": true,
+    "no_host_capture_or_creator_portal_answers_created": true,
+    "same_nine_case_chatgpt_plan_and_archive": true,
+    "checkpoint_automatically_contains_imported_bytes": true,
+    "external_original_evidence_path_absent": true,
+    "fresh_restored_paths_rebased": true,
+    "resumed_at_creator_facts_with_deferrals_intact": true
+  }
+}

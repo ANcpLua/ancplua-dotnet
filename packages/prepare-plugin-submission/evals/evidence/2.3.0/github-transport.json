@@ -1,0 +1,16 @@
+{
+  "path": "/workspace/scratch/401e3bbb802b/ss230-github-smoke-final/sources/octocat-Hello-World-7fd1a60b01f91b314f59955a4e4d4e80d8edf11d.zip",
+  "origin": {
+    "kind": "github",
+    "locator": "https://github.com/octocat/Hello-World",
+    "ref": "master",
+    "commit": "7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
+    "visibility": "public",
+    "provider": "GitHub API",
+    "retrieved_at": "2026-10-16T15:52:10.907327+00:00",
+    "plugin_root": ""
+  },
+  "roots": [],
+  "archive_sha256": "1d00ca0c50603bfc454289be251e2f1d53437d3f2ac463ac3cf01a6a0db93ce2",
+  "scope": "Actual public source transport only; not a submission candidate or runtime test."
+}

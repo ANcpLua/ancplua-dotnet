@@ -1,117 +1,44 @@
 # ancplua-dotnet
 
-Rules and workflows for SDK-style .NET repositories, written for Claude Code and Codex from one tree.
-They cover C# refactoring, MSBuild authoring and review, NuGet version chains and CPM,
-Roslyn analyzer adoption, runtime performance and diagnostics, and layered
-NuGet releases that wait for nuget.org to index each layer before the next one moves.
+One repository for the ANcpLua .NET plugin marketplace, source packages and verification. The catalog is `.agents/plugins/marketplace.json`.
 
-MSTest work belongs to the [MSTest Extensions](https://github.com/ANcpLua/mstest-extensions-plugin)
-companion. This plugin keeps a compact [routing table](skills/audit/references/mstest-routing.md)
-for mixed build/test requests. The antipattern examples come from fixing real repositories.
+| Plugin | Source | Current package |
+| --- | --- | --- |
+| `ancplua-dotnet` | [General .NET workflows](packages/ancplua-dotnet/README.md) | 0.7.2; seven skills |
+| `nami` | [Unions, MSTest APIs/assertions, fixtures and Codex messaging](packages/nami/README.md) | 0.1.2; five skills |
+| `mstest-extensions` | [Native MSTest/MTP execution and specialized testing](packages/mstest-extensions/README.md) | 3.4.4; nine skills |
+| `prepare-plugin-submission` | [Submission Studio](packages/prepare-plugin-submission/README.md) | 2.3.0; one skill, identical to the verified Account release |
 
-## Skills
-
-| Skill | Use it for |
-|---|---|
-| `msbuild` | csproj/props/targets edits, custom targets, package build assets, analyzer packaging, binlog diagnosis, build reviews |
-| `nuget-versions` | where versions live, `Version.props` truth chains, `global.json` pins and rollForward, CPM, NU error codes, Renovate annotations |
-| `analyzers` | how analyzers arrive, severity precedence, suppression hygiene, `CompilerVisibleProperty`, ANcpLua.Analyzers specifics |
-| `csharp-refactoring` | binding-aware structural changes, complete constant/dead-code reconciliation, generated/partial code and runtime/API contracts |
-| `performance` | correlated logs/metrics/traces/spans/profiles, BenchmarkDotNet comparisons, hot-path reviews and crash/hang collection |
-| `release` | layered releases, tag-driven vs push-driven publishing, trusted publishing, waiting for the NuGet index (`scripts/wait-nuget.sh`), moving consumers |
-| `audit` | read-only fleet audits that separate certain fixes from judgment calls |
-
-## Agents (Claude Code)
-
-| Agent | Role |
-|---|---|
-| `dotnet-auditor` | Read-only audit of one repository; returns a ledger with file:line evidence. Fan out one per repository. |
-| `build-change-reviewer` | Reviews build/package diffs and routes MSTest concerns to the companion; reports only findings that pass a veracity gate. |
-
-Codex doesn't load agents from plugins; the `audit` skill tells Codex to spawn its own subagents per pass.
+The public plugins keep their existing names and responsibilities. Nami supplies the current MSTest API/assertion and union guidance; general build/package work belongs to `ancplua-dotnet`; specialized runner and extension workflows belong to `mstest-extensions`.
 
 ## Install
 
-Claude Code:
-
-```bash
-claude plugin marketplace add ANcpLua/ancplua-anthropic
-claude plugin install ancplua-dotnet@ancplua-anthropic
+```sh
+codex plugin marketplace add ANcpLua/ancplua-dotnet
+codex plugin add ancplua-dotnet@ancplua-dotnet
+codex plugin add nami@ancplua-dotnet
+codex plugin add mstest-extensions@ancplua-dotnet
+codex plugin add prepare-plugin-submission@ancplua-dotnet
 ```
 
-Then run `/reload-plugins` in an open session.
+These commands change installation and are separate from source verification. Existing registrations of the retired `ancplua-openai` catalog can still resolve its entries to this source after refreshing; switch registrations deliberately to avoid duplicate installed identities. Source migration does not automatically remove an installed plugin.
 
-Codex:
+Submission Studio 2.3.0 was imported from the Account release with the owner's explicit authorization to publish its source. The old 1.6.0 repository is retired. The separate Account installation remains private and has the same 2.3.0 package version; a source move does not uninstall either installation. The [migration record](migration/README.md) records provenance and version alignment.
 
-```bash
-codex plugin marketplace add ANcpLua/ancplua-openai
-codex plugin add ancplua-dotnet@ancplua-openai
-codex plugin add mstest-extensions@ancplua-openai
+## Verify and maintain
+
+```sh
+make check
+make verify-nami
+make verify-mstest
 ```
 
-Then start a new session.
+Each package retains its original tests, compiler pins and helpers. Root GitHub workflows run those checks with the appropriate package working directory. Package licenses remain in their respective directories.
 
-## Layout
+For local development, `scripts/local_marketplace.py` accepts explicit `--source NAME=PATH` values for every catalog entry and produces an ignored `.local/marketplace` view. It links sources without copying them. Do not edit installed caches.
 
-```text
-.claude-plugin/plugin.json   Claude Code manifest
-plugin.json                  Agent Plugins manifest with the Codex interface (extensions.com.openai)
-skills/<name>/SKILL.md       shared by both tools; Agent Skills frontmatter only
-agents/<name>.md             Claude Code subagents
-scripts/verify.sh            manifest/frontmatter checks (CI runs it on push, PRs and weekly)
-evals/                       existing Claude behavior evaluations and an unrelated-request check
-```
+The C# union skill remains an export of the Nami product repository. To compare or refresh it, use `make -C packages/nami check-union-sync UNION_SOURCE=/absolute/path/to/nami/.agents/skills/csharp-union-types` or the corresponding `sync-union` target.
 
-Both manifests carry the same `version`; raise it with every change.
+## Migration
 
-## Verify
-
-```bash
-scripts/verify.sh                       # package structure and skill frontmatter
-claude plugin eval . --runs 1 --ablation none   # quick behavior check (model calls on your account)
-claude plugin eval .                            # full: 3 runs, with and without the plugin
-```
-
-MSTest APIs and runner verification live in the companion repository.
-
-## 0.7.1
-
-Correct the [privacy policy](PRIVACY.md): the only release helper, `scripts/wait-nuget.sh`,
-queries NuGet indexing. Skills are unchanged.
-
-## 0.7.0
-
-Remove candidate waves from the `release` skill, with their script, reference and offline
-test. `scripts/verify.sh` checks manifests and skill frontmatter only. The other six skills
-are unchanged.
-
-## 0.6.0
-
-Three focused agent starter prompts: runtime evidence, repository audit and complete
-constant/dead-check reconciliation. Follow indirect production uses and account for
-every inventory entry; correlate existing production telemetry before collecting more.
-Keep the seven skills and MSTest companion boundary. Mark local execution requirements.
-
-## 0.5.1
-
-Display Alexander Nachtmann as the developer and add the website,
-[privacy policy](PRIVACY.md) and [terms of use](TERMS.md) to the plugin listing.
-All seven skills and release helpers are unchanged.
-
-## 0.4.0
-
-Add compact C# refactoring and runtime-performance skills. Extend existing build
-and package skills with measured build diagnosis, item/copy contracts, conditional
-CPM migration and isolated SDK selection. Correct import-order, analyzer-asset and
-implicit-package guidance. References load only for the relevant task; the seven
-skills preserve automatic invocation and route MSTest work to the companion.
-
-## 0.3.0
-
-Remove the duplicate `mstest` skill, its references, probe and three evaluation cases.
-Route MSTest work to the companion's nine focused skills. Keep MSBuild, NuGet,
-analyzer configuration and release artifact integrity here.
-
-## License
-
-Apache-2.0. See `NOTICE` for research sources.
+The [source inventory](migration/source-inventory.json) records original commits, tracked-file hashes and the pre-existing user deletion omitted from the Nami package. The original source repositories are archived only after this tree and its consumers have been verified.

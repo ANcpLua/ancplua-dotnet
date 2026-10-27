@@ -1,0 +1,15 @@
+<Project Sdk="MSTest.Sdk">
+  <PropertyGroup>
+    <RootNamespace>MSTestExtensionEvidence.Hosting</RootNamespace>
+    <!-- The SDK-generated MicrosoftTestingPlatformEntryPoint calls experimental hosting APIs.
+         A source pragma cannot reach that generated bootstrap; only this optional fixture opts in. -->
+    <NoWarn>$(NoWarn);TPEXP</NoWarn>
+    <TestingPlatformHostFactory>MSTestExtensionEvidence.Hosting.TestHost.CreateHost</TestingPlatformHostFactory>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Support/Support.csproj" />
+    <PackageReference Include="MSTest.Extensions.Hosting" Version="4.5.1-alpha.26507.8" />
+    <PackageReference Include="Microsoft.Testing.Extensions.Hosting" Version="1.0.0-alpha.26507.8" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.0" />
+  </ItemGroup>
+</Project>

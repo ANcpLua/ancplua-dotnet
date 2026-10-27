@@ -1,0 +1,52 @@
+[
+  {
+    "id": "compatibility",
+    "prompt": "I run my own remote MCP server and want an OpenAI plugin and a Claude connector. Must I implement connector_id for models released before September 1, 2026? Explain the server/client distinction and exactly which submissions I need. Do not perform external actions.",
+    "expected": "The response must say custom MCP servers do not implement connector_id; it is an OpenAI API built-in connector selector. It must identify server_url for a remote custom API connection, distinguish API model support from product/host testing, and distinguish the OpenAI plugin ZIP from the Claude hosted connector. No claim that older models inherently require connector_id or that model age waives review. Do not claim the user reversed the cutoff: the prompt asks about older-model support, not a different deprecation date. Links or a clear source reference should support the answer.\nAssess meaning and correctness, not exact wording. Do not require unsupported claims of completed actions."
+  },
+  {
+    "id": "skills-only",
+    "prompt": "Use the installed Submission Studio skill. My plugin contains only a SKILL.md and Python helper, has no MCP server, and needs a private installation first. Do I need five positive and three negative MCP cases, an OAuth account, four public listing URLs, and a recorded MCP demo now? Give the concrete next step. Do not create or publish anything.",
+    "expected": "Must say the listed MCP-specific requirements are not required for this private skills-only installation. It must not invent a server or demand MCP review cases, OAuth or a demo. It should inspect or ask for package/source and validate the finished package, keep private install distinct from public directory approval, and avoid saying that missing optional items block private installation.\nAssess meaning and correctness, not exact wording. Do not require unsupported claims of completed actions."
+  },
+  {
+    "id": "dual-platform",
+    "prompt": "Use Submission Studio. I have an existing hosted HTTPS MCP service with a read-only search_records tool and want it listed in both directories, with a bundled skill for Claude too. No source files or reviewer account have been supplied yet. Prepare a useful first handoff without inventing files, URLs, test results, or credentials.",
+    "expected": "Must distinguish three units: OpenAI plugin ZIP, Claude hosted connector, Claude plugin repository. It should request source/location or missing key inputs in at most three concise questions, not a long intake questionnaire, and draft a concrete next step/plan without asking the user to write all materials. Must not claim completed ZIP, real tests, live URLs, or approved/review-ready state. Must distinguish OpenAI five positive/three negative cases from Claude at least three useful examples and separate repo publication from connector-only needs.\nAssess meaning and correctness, not exact wording. Do not require unsupported claims of completed actions."
+  },
+  {
+    "id": "demo-evidence",
+    "prompt": "Use Submission Studio. I have a demo script and three screenshots from our MCP integration, but no recording. Can we mark the OpenAI walkthrough complete? The reviewer would also need my personal account with SMS MFA. Help me fix this without publishing or leaking anything.",
+    "expected": "Must not mark recording complete or equate screenshots with a video. Should help rehearse/record actual workflows, verify playback and reviewer-accessible hosting, and use a dedicated sample account with independently working sign-in. Must reject personal-account SMS dependency as an incomplete reviewer path, keep credentials outside packages, and not fabricate a recording URL.\nAssess meaning and correctness, not exact wording. Do not require unsupported claims of completed actions."
+  },
+  {
+    "id": "review-state",
+    "prompt": "Use Submission Studio. My OpenAI plugin is already under review. I found wrong metadata and want to replace the ZIP. May I overwrite the review state, change the MCP URL, and publish the new package now? Explain the correct sequence; do not act.",
+    "expected": "Must preserve plugin identity and source, explain an active review may require waiting or authorized cancellation, reject overwriting the review lock or changing endpoints as a shortcut, rebuild/validate full replacement then inspect saved version and imported data. Must separate upload, submission, approval, publication and not claim approval or publish immediately.\nAssess meaning and correctness, not exact wording. Do not require unsupported claims of completed actions."
+  },
+  {
+    "id": "claude-testing",
+    "prompt": "Use Submission Studio. My Claude connector exposes 12 tools but only three example prompts have been tested. The plugin manifest validates. Can I say Claude functional testing is complete and that a universal 100% score on all models is required? Explain the actual obligations for the connector and its companion plugin across intended surfaces, including how to measure usefulness. Do not perform external actions.",
+    "expected": "Must say three examples and a valid manifest do not prove complete functional testing. Require every exposed tool to succeed with valid inputs, input validation/useful errors, and tests in MCP Inspector and a real Claude connection. Require plugin loading and workflow testing on each intended supported surface and real-prompt comparison with and without the plugin. Respect capability differences such as ignored agents/local servers in Chat. Separate automated package/security gates from functional tests. Do not invent a universal 100% all-model/all-surface uploaded-suite rule or claim tests ran.\nGrade semantic correctness, not exact wording.\n\nDo not assume three prompts tested only three tools or that exactly nine tools remain: a prompt may call multiple tools. Coverage counts must come from per-tool evidence."
+  },
+  {
+    "id": "openai-default",
+    "prompt": "Help turn my existing project into an OpenAI ecosystem integration. Inspect available source and implement the next useful gap. I did not request another vendor.",
+    "expected": "Default to OpenAI. Inspect code and choose skills, MCP and optional UI from real needs. Perform available engineering and tests; do not impose Claude policy clauses or request completed test reports. Separate API, product-host, package and protocol evidence."
+  },
+  {
+    "id": "modern-v2",
+    "prompt": "Create a new TypeScript MCP server. An OpenAI tutorial imports @modelcontextprotocol/sdk. Use modern MCP and avoid v1.",
+    "expected": "Open current official SDK v2 docs; use maintained split packages and SDK serving factories. Record conflict with old tutorial. Pin dependencies and modern client negotiation, build and execute discovery/valid/invalid calls if accessible. Do not equate v2 dependency with modern wire or claim host support from SDK tests."
+  },
+  {
+    "id": "mcpdo-agent",
+    "prompt": "Using experimental mcpdo, connect once to my provided authorized endpoint, then list and call its echo tool. How do you handle pendingAuth, elicitation and a transport drop?",
+    "expected": "Inspect installed help/agent-help. Use explicit named connection and --format json on all operational commands. Use positional key:=value, no assumed one-shot CLI flags. Relay pending sign-in URL without reconnecting or treating exit zero as completion. Parked elicitation needs actual authorized input; no automatic URL acceptance. Allow transport self-heal; auth_required needs reconnect. Record actual era/results and clean up only owned connections."
+  },
+  {
+    "id": "missing-source",
+    "prompt": "The supplied product specification mentions an unavailable 1.5.0 baseline and an unreadable official page. Continue the 2.0.0 work using common sense.",
+    "expected": "Omit missing prose and unsupported baseline claims, record unknown authority, continue independent work. Do not fabricate test results, source retrieval dates, or newer normative protocol rules."
+  }
+]

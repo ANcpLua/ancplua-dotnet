@@ -1,0 +1,25 @@
+{
+  "binding": {
+    "integration_id": "fixture-plugin",
+    "source_revision": "content-sha256:eaeb85f9cda524ca8f210b8c9dd493ce063d1520365d41583f2d49956f0bfb3a",
+    "input_sha256": "2ee5d5885c40c7a332adebe33fe74db20060bfcc6f127e08b7f72c22f258db95",
+    "inventory_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "platform": "openai",
+  "source": "https://developers.openai.com/plugins/deploy/submission",
+  "source_checked_at": "2026-10-16",
+  "publisher": {
+    "name": "Synthetic Fixture",
+    "origin": "Manifest observation; legal identity unverified"
+  },
+  "required_creator_facts": [
+    "legal identity",
+    "rights",
+    "actual data practices",
+    "support",
+    "reviewer access"
+  ],
+  "preparation_complete": false,
+  "terms_accepted_by_tool": false,
+  "submission_performed": false
+}

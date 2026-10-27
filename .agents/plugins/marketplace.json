@@ -1,0 +1,64 @@
+{
+  "name": "ancplua-dotnet",
+  "interface": {
+    "displayName": "ANcpLua .NET"
+  },
+  "plugins": [
+    {
+      "name": "ancplua-dotnet",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/ANcpLua/ancplua-dotnet.git",
+        "path": "./packages/ancplua-dotnet",
+        "ref": "main"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "mstest-extensions",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/ANcpLua/ancplua-dotnet.git",
+        "path": "./packages/mstest-extensions",
+        "ref": "main"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "nami",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/ANcpLua/ancplua-dotnet.git",
+        "path": "./packages/nami/plugins/nami",
+        "ref": "main"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "prepare-plugin-submission",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/ANcpLua/ancplua-dotnet.git",
+        "path": "./packages/prepare-plugin-submission",
+        "ref": "main"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}

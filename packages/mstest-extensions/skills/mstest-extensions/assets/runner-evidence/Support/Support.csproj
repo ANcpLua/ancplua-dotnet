@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>MSTestExtensionEvidence</RootNamespace><IsAotCompatible>true</IsAotCompatible></PropertyGroup>
+  <ItemGroup><PackageReference Include="MSTest.TestFramework" Version="$(EvidenceMSTestVersion)" /></ItemGroup>
+</Project>

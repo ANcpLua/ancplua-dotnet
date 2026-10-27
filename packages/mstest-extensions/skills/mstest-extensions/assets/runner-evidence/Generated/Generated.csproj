@@ -1,0 +1,9 @@
+<Project Sdk="MSTest.Sdk">
+  <PropertyGroup>
+    <RootNamespace>MSTestExtensionEvidence.Generated</RootNamespace>
+    <EnableMSTestSourceGeneration>true</EnableMSTestSourceGeneration>
+    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)generated</CompilerGeneratedFilesOutputPath>
+  </PropertyGroup>
+  <ItemGroup><ProjectReference Include="../Support/Support.csproj" /></ItemGroup>
+</Project>

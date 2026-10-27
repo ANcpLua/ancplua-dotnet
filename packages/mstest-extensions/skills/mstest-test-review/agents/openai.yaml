@@ -1,0 +1,6 @@
+interface:
+  display_name: "MSTest test review"
+  short_description: "Review reliability and maintainability of tests"
+  default_prompt: "Use $mstest-test-review for the requested MSTest testing task."
+policy:
+  allow_implicit_invocation: true

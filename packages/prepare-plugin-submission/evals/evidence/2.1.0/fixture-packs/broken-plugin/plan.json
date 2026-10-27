@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "binding": {
+    "integration_id": "fixture-plugin",
+    "source_revision": "content-sha256:3880e1215cfeb2064d7e9207c1842f8b02b58fe43bc2215809958eaa06d58795",
+    "input_sha256": "65dc45a3a33b8864a85056fef16c191aa0e74b58596b7b605b3e39b05389c17b",
+    "inventory_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "connection": {},
+  "hosts": [],
+  "tools": [],
+  "cases": [],
+  "source_files": [],
+  "account_setup": [],
+  "sample_data": "No target data executed or retrieved.",
+  "permissions": "Host file/terminal capabilities are supplied externally; no bundled MCP connection.",
+  "receipt_file": null,
+  "host_cases": [],
+  "package_sha256": "dddd8c5c103f96cf1986f5f79e4187e84df190d9aee3b908115f8a318325485b"
+}

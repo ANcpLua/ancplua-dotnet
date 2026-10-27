@@ -1,0 +1,175 @@
+[
+  {
+    "name": "broken-plugin-audit",
+    "command": [
+      "python3",
+      "/workspace/scratch/401e3bbb802b/submission-studio-2.1.0/skills/prepare-plugin-submission/scripts/prepare_workflow.py",
+      "audit",
+      "--source",
+      "/workspace/scratch/401e3bbb802b/submission-studio-2.1.0/tests/fixtures/broken-plugin.zip",
+      "--output",
+      "/workspace/scratch/401e3bbb802b/forward-2.1.0-verified/broken-plugin-audit",
+      "--synthetic",
+      "--profile",
+      "submission"
+    ],
+    "cwd": "/workspace/scratch/401e3bbb802b",
+    "environment_overrides": {
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "TMPDIR": "/workspace/scratch/401e3bbb802b/forward-2.1.0-verified/tmp"
+    },
+    "exit_code": 1,
+    "status": "local_checks_failed",
+    "findings": [
+      {
+        "code": "invalid_version",
+        "path": "plugin.json",
+        "severity": "error",
+        "fix": "Use a strict semantic version such as 1.1.0.",
+        "source": "https://developers.openai.com/plugins/deploy/submission",
+        "retrieved": "2026-10-13",
+        "scope": "directory"
+      },
+      {
+        "code": "reference_missing",
+        "path": "interface.logo",
+        "severity": "error",
+        "fix": "Include the referenced file.",
+        "source": "https://developers.openai.com/plugins/deploy/submission",
+        "retrieved": "2026-10-13",
+        "scope": "directory"
+      },
+      {
+        "code": "unsafe_reference",
+        "path": "interface.composerIcon",
+        "severity": "error",
+        "fix": "Use a contained relative path.",
+        "source": "https://developers.openai.com/plugins/deploy/submission",
+        "retrieved": "2026-10-13",
+        "scope": "directory"
+      },
+      {
+        "code": "skill_frontmatter",
+        "path": "skills/broken/SKILL.md",
+        "severity": "error",
+        "fix": "Include name and description in YAML frontmatter.",
+        "source": "https://developers.openai.com/plugins/deploy/submission",
+        "retrieved": "2026-10-13",
+        "scope": "directory"
+      }
+    ],
+    "stdout": "logs/broken-plugin-audit.stdout",
+    "stderr": "logs/broken-plugin-audit.stderr"
+  },
+  {
+    "name": "broken-plugin-integrity",
+    "command": [
+      "python3",
+      "/workspace/scratch/401e3bbb802b/submission-studio-2.1.0/skills/prepare-plugin-submission/scripts/prepare_workflow.py",
+      "check",
+      "/workspace/scratch/401e3bbb802b/forward-2.1.0-verified/broken-plugin-audit"
+    ],
+    "cwd": "/workspace/scratch/401e3bbb802b",
+    "environment_overrides": {
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "TMPDIR": "/workspace/scratch/401e3bbb802b/forward-2.1.0-verified/tmp"
+    },
+    "exit_code": 0,
+    "status": "Artifact integrity passed",
+    "findings": [],
+    "stdout": "logs/broken-plugin-integrity.stdout",
+    "stderr": "logs/broken-plugin-integrity.stderr"
+  },
+  {
+    "name": "desktop-stdio-audit",
+    "command": [
+      "python3",
+      "/workspace/scratch/401e3bbb802b/submission-studio-2.1.0/skills/prepare-plugin-submission/scripts/prepare_workflow.py",
+      "audit",
+      "--source",
+      "/workspace/scratch/401e3bbb802b/submission-studio-2.1.0/tests/fixtures/desktop-stdio",
+      "--output",
+      "/workspace/scratch/401e3bbb802b/forward-2.1.0-verified/desktop-stdio-audit",
+      "--synthetic",
+      "--profile",
+      "submission",
+      "--submission-route",
+      "desktop-only",
+      "--desktop-allowlist",
+      "/workspace/scratch/401e3bbb802b/submission-studio-2.1.0/tests/fixtures/desktop-allowlist.json"
+    ],
+    "cwd": "/workspace/scratch/401e3bbb802b",
+    "environment_overrides": {
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "TMPDIR": "/workspace/scratch/401e3bbb802b/forward-2.1.0-verified/tmp"
+    },
+    "exit_code": 0,
+    "status": "local_checks_passed",
+    "findings": [],
+    "stdout": "logs/desktop-stdio-audit.stdout",
+    "stderr": "logs/desktop-stdio-audit.stderr"
+  },
+  {
+    "name": "desktop-stdio-integrity",
+    "command": [
+      "python3",
+      "/workspace/scratch/401e3bbb802b/submission-studio-2.1.0/skills/prepare-plugin-submission/scripts/prepare_workflow.py",
+      "check",
+      "/workspace/scratch/401e3bbb802b/forward-2.1.0-verified/desktop-stdio-audit"
+    ],
+    "cwd": "/workspace/scratch/401e3bbb802b",
+    "environment_overrides": {
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "TMPDIR": "/workspace/scratch/401e3bbb802b/forward-2.1.0-verified/tmp"
+    },
+    "exit_code": 0,
+    "status": "Artifact integrity passed",
+    "findings": [],
+    "stdout": "logs/desktop-stdio-integrity.stdout",
+    "stderr": "logs/desktop-stdio-integrity.stderr"
+  },
+  {
+    "name": "review-prep-audit",
+    "command": [
+      "python3",
+      "/workspace/scratch/401e3bbb802b/submission-studio-2.1.0/skills/prepare-plugin-submission/scripts/prepare_workflow.py",
+      "audit",
+      "--source",
+      "/workspace/scratch/401e3bbb802b/submission-studio-2.1.0/tests/fixtures/review-prep",
+      "--output",
+      "/workspace/scratch/401e3bbb802b/forward-2.1.0-verified/review-prep-audit",
+      "--synthetic",
+      "--profile",
+      "submission"
+    ],
+    "cwd": "/workspace/scratch/401e3bbb802b",
+    "environment_overrides": {
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "TMPDIR": "/workspace/scratch/401e3bbb802b/forward-2.1.0-verified/tmp"
+    },
+    "exit_code": 0,
+    "status": "local_checks_passed",
+    "findings": [],
+    "stdout": "logs/review-prep-audit.stdout",
+    "stderr": "logs/review-prep-audit.stderr"
+  },
+  {
+    "name": "review-prep-integrity",
+    "command": [
+      "python3",
+      "/workspace/scratch/401e3bbb802b/submission-studio-2.1.0/skills/prepare-plugin-submission/scripts/prepare_workflow.py",
+      "check",
+      "/workspace/scratch/401e3bbb802b/forward-2.1.0-verified/review-prep-audit"
+    ],
+    "cwd": "/workspace/scratch/401e3bbb802b",
+    "environment_overrides": {
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "TMPDIR": "/workspace/scratch/401e3bbb802b/forward-2.1.0-verified/tmp"
+    },
+    "exit_code": 0,
+    "status": "Artifact integrity passed",
+    "findings": [],
+    "stdout": "logs/review-prep-integrity.stdout",
+    "stderr": "logs/review-prep-integrity.stderr"
+  }
+]

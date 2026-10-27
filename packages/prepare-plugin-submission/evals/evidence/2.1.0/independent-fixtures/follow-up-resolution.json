@@ -1,0 +1,6 @@
+{
+  "finding": "Reviewer-access prose referred to a scenario set absent from the broken fixture.",
+  "resolution": "The generator now requests declared skill workflows without asserting packaged scenario assets.",
+  "implementation": "skills/prepare-plugin-submission/scripts/audit_target.py",
+  "verification": "Final acceptance suite checks loaded target documents; final fixture packs regenerated after correction."
+}

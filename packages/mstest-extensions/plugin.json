@@ -1,0 +1,44 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "mstest-extensions",
+  "version": "3.4.4",
+  "description": "Opinionated native MSTest testing and extensions: MSTest.Sdk 4.5.1, Microsoft.Testing.Platform 2.5.1, AllMicrosoft extensions and native Microsoft code coverage. Use native context, lifecycle, data rows and composition without VSTest or legacy compatibility shims.",
+  "author": {
+    "name": "Alexander Nachtmann"
+  },
+  "repository": "https://github.com/ANcpLua/ancplua-dotnet",
+  "keywords": [
+    "mstest",
+    "dotnet",
+    "testing",
+    "extensions",
+    "discovery"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "MSTest Extensions",
+        "shortDescription": "Native MSTest / MTP extensions",
+        "longDescription": "Build and verify tests and reusable extensions with MSTest.Sdk 4.5.1 / MSTest 4.5.1, Microsoft.Testing.Platform 2.5.1, TestingExtensionsProfile=AllMicrosoft and native Microsoft code coverage. Prefer SDK-owned runner registration and lifecycle, native invocation context and data rows, typed selectors and named contract constants. No VSTest or older-version fallback. Native AOT is a separate published-artifact verification path.",
+        "developerName": "Alexander Nachtmann",
+        "category": "Developer Tools",
+        "capabilities": [],
+        "defaultPrompt": "Use the MSTest Extensions skill to implement and verify a testing capability in this project's installed MSTest version.",
+        "websiteURL": "https://github.com/ANcpLua/ancplua-dotnet/tree/main/packages/mstest-extensions",
+        "supportURL": "https://github.com/ANcpLua/ancplua-dotnet/issues",
+        "logo": "./assets/icon.png",
+        "composerIcon": "./assets/icon.png",
+        "privacyPolicyURL": "https://github.com/ANcpLua/ancplua-dotnet/blob/main/packages/mstest-extensions/PRIVACY.md",
+        "termsOfServiceURL": "https://github.com/ANcpLua/ancplua-dotnet/blob/main/packages/mstest-extensions/TERMS.md"
+      },
+      "review": {
+        "commerce": false
+      },
+      "publication": {
+        "countries": [],
+        "release_notes": "Move the maintained source into the unified ancplua-dotnet repository; preserve skill behavior and package identity."
+      }
+    }
+  },
+  "license": "MIT"
+}

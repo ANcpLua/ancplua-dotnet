@@ -1,0 +1,6 @@
+interface:
+  display_name: "Native MSTest tests"
+  short_description: "Write, explain and wire native MSTest tests"
+  default_prompt: "Use $mstest-writing-tests for the requested MSTest testing task."
+policy:
+  allow_implicit_invocation: true

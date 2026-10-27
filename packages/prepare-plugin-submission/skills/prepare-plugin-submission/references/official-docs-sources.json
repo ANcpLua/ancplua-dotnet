@@ -1,0 +1,381 @@
+{
+  "schema_version": 1,
+  "kind": "official-source-registry",
+  "runtime_implemented": true,
+  "target_runtime": "2.3.0",
+  "purpose": "Discovery and applicability hints; no static review constraints or automatic pass/fail authority",
+  "collection": "https://developers.openai.com/plugins",
+  "discovery_index": "https://developers.openai.com/plugins/llms.txt",
+  "combined_export": "https://developers.openai.com/plugins/llms-full.txt",
+  "primary_page_required_before_release_sensitive_enforcement": true,
+  "conditional_chapters_in_export": "Exclude from active retrieval/extraction until the corresponding activity is detected; do not request specialized primary URLs beforehand",
+  "sources": [
+    {
+      "id": "architecture.plugins",
+      "domain": "Architecture",
+      "primary_url": "https://developers.openai.com/plugins/concepts/plugins",
+      "when_any": [
+        "always"
+      ],
+      "requires_detected_activity": false,
+      "role": "primary-document-candidate",
+      "title": "Plugin architecture"
+    },
+    {
+      "id": "architecture.mcp",
+      "domain": "Architecture",
+      "primary_url": "https://developers.openai.com/plugins/concepts/mcp-server",
+      "when_any": [
+        "mcp"
+      ],
+      "requires_detected_activity": false,
+      "role": "primary-document-candidate",
+      "title": "MCP server"
+    },
+    {
+      "id": "architecture.skills",
+      "domain": "Architecture",
+      "primary_url": "https://developers.openai.com/plugins/concepts/skills",
+      "when_any": [
+        "skills"
+      ],
+      "requires_detected_activity": false,
+      "role": "primary-document-candidate",
+      "title": "Skills"
+    },
+    {
+      "id": "planning.use-case",
+      "domain": "Planning",
+      "primary_url": "https://developers.openai.com/plugins/plan/use-case",
+      "when_any": [
+        "always"
+      ],
+      "requires_detected_activity": false,
+      "role": "primary-document-candidate",
+      "title": "Brainstorm plugin use cases"
+    },
+    {
+      "id": "planning.tools",
+      "domain": "Planning",
+      "primary_url": "https://developers.openai.com/plugins/plan/tools",
+      "when_any": [
+        "mcp"
+      ],
+      "requires_detected_activity": false,
+      "role": "primary-document-candidate",
+      "title": "Define tools"
+    },
+    {
+      "id": "start.plugin",
+      "domain": "Getting started",
+      "primary_url": "https://developers.openai.com/plugins/quickstart",
+      "when_any": [
+        "mcp"
+      ],
+      "requires_detected_activity": false,
+      "role": "primary-document-candidate",
+      "title": "Quickstart"
+    },
+    {
+      "id": "start.app",
+      "domain": "Getting started",
+      "primary_url": "https://developers.openai.com/plugins/build/app-quickstart",
+      "when_any": [
+        "mcp",
+        "ui"
+      ],
+      "requires_detected_activity": false,
+      "role": "primary-document-candidate",
+      "title": "MCP server and UI quickstart"
+    },
+    {
+      "id": "build.mcp",
+      "domain": "Server implementation",
+      "primary_url": "https://developers.openai.com/plugins/build/mcp-server",
+      "when_any": [
+        "mcp"
+      ],
+      "requires_detected_activity": false,
+      "role": "primary-document-candidate",
+      "title": "Build an MCP server"
+    },
+    {
+      "id": "build.examples",
+      "domain": "Server implementation",
+      "primary_url": "https://developers.openai.com/plugins/build/examples",
+      "when_any": [
+        "mcp",
+        "ui"
+      ],
+      "requires_detected_activity": false,
+      "role": "primary-document-candidate",
+      "title": "Examples"
+    },
+    {
+      "id": "build.skills",
+      "domain": "Skills",
+      "primary_url": "https://developers.openai.com/plugins/build/skills",
+      "when_any": [
+        "skills"
+      ],
+      "requires_detected_activity": false,
+      "role": "primary-document-candidate",
+      "title": "Build skills"
+    },
+    {
+      "id": "build.auth",
+      "domain": "Authentication",
+      "primary_url": "https://developers.openai.com/plugins/build/auth",
+      "when_any": [
+        "auth"
+      ],
+      "requires_detected_activity": false,
+      "role": "primary-document-candidate",
+      "title": "Authentication"
+    },
+    {
+      "id": "ui.build",
+      "domain": "UI",
+      "primary_url": "https://developers.openai.com/plugins/build/chatgpt-ui",
+      "when_any": [
+        "ui"
+      ],
+      "requires_detected_activity": false,
+      "role": "primary-document-candidate",
+      "title": "Add UI to your MCP server"
+    },
+    {
+      "id": "ui.guidelines",
+      "domain": "UI",
+      "primary_url": "https://developers.openai.com/plugins/concepts/ui-guidelines",
+      "when_any": [
+        "ui"
+      ],
+      "requires_detected_activity": false,
+      "role": "primary-document-candidate",
+      "title": "UI guidelines"
+    },
+    {
+      "id": "ui.reference",
+      "domain": "UI",
+      "primary_url": "https://developers.openai.com/plugins/reference",
+      "when_any": [
+        "ui"
+      ],
+      "requires_detected_activity": false,
+      "role": "primary-document-candidate",
+      "title": "Reference"
+    },
+    {
+      "id": "capabilities.events",
+      "domain": "Additional capabilities",
+      "primary_url": "https://developers.openai.com/plugins/build/mcp-events",
+      "when_any": [
+        "events"
+      ],
+      "requires_detected_activity": false,
+      "role": "primary-document-candidate",
+      "title": "MCP Events"
+    },
+    {
+      "id": "capabilities.extensions",
+      "domain": "Additional capabilities",
+      "primary_url": "https://developers.openai.com/plugins/build/extensions",
+      "when_any": [
+        "extensions"
+      ],
+      "requires_detected_activity": false,
+      "role": "primary-document-candidate",
+      "title": "Plugin Extensions"
+    },
+    {
+      "id": "capabilities.monetization",
+      "domain": "Additional capabilities",
+      "primary_url": "https://developers.openai.com/plugins/build/monetization",
+      "when_any": [
+        "product_checkout"
+      ],
+      "requires_detected_activity": false,
+      "role": "primary-document-candidate",
+      "title": "Checkout API reference"
+    },
+    {
+      "id": "packaging.plugin",
+      "domain": "Packaging",
+      "primary_url": "https://developers.openai.com/plugins/build/plugins",
+      "when_any": [
+        "always"
+      ],
+      "requires_detected_activity": false,
+      "role": "primary-document-candidate",
+      "title": "Package your plugin"
+    },
+    {
+      "id": "packaging.metadata",
+      "domain": "Packaging",
+      "primary_url": "https://developers.openai.com/plugins/guides/optimize-metadata",
+      "when_any": [
+        "always"
+      ],
+      "requires_detected_activity": false,
+      "role": "primary-document-candidate",
+      "title": "Optimize Metadata"
+    },
+    {
+      "id": "testing.connect",
+      "domain": "Testing",
+      "primary_url": "https://developers.openai.com/plugins/deploy/connect-chatgpt",
+      "when_any": [
+        "always"
+      ],
+      "requires_detected_activity": false,
+      "role": "primary-document-candidate",
+      "title": "Connect and test your plugin"
+    },
+    {
+      "id": "testing.troubleshooting",
+      "domain": "Testing",
+      "primary_url": "https://developers.openai.com/plugins/deploy/troubleshooting",
+      "when_any": [
+        "mcp",
+        "ui",
+        "skills"
+      ],
+      "requires_detected_activity": false,
+      "role": "primary-document-candidate",
+      "title": "Troubleshooting"
+    },
+    {
+      "id": "policy.guidelines",
+      "domain": "Security and policy",
+      "primary_url": "https://developers.openai.com/plugins/plugin-guidelines",
+      "when_any": [
+        "always"
+      ],
+      "requires_detected_activity": false,
+      "role": "primary-document-candidate",
+      "title": "Plugin guidelines"
+    },
+    {
+      "id": "policy.privacy",
+      "domain": "Security and policy",
+      "primary_url": "https://developers.openai.com/plugins/guides/security-privacy",
+      "when_any": [
+        "always"
+      ],
+      "requires_detected_activity": false,
+      "role": "primary-document-candidate",
+      "title": "Security & Privacy"
+    },
+    {
+      "id": "review.remote",
+      "domain": "Review",
+      "primary_url": "https://developers.openai.com/plugins/deploy/app-review",
+      "when_any": [
+        "remote_mcp"
+      ],
+      "requires_detected_activity": false,
+      "role": "primary-document-candidate",
+      "title": "Remote MCP server review requirements"
+    },
+    {
+      "id": "review.errors",
+      "domain": "Review",
+      "primary_url": "https://developers.openai.com/plugins/deploy/submission-errors",
+      "when_any": [
+        "always"
+      ],
+      "requires_detected_activity": false,
+      "role": "primary-document-candidate",
+      "title": "Plugin submission errors"
+    },
+    {
+      "id": "publication.submission",
+      "domain": "Publication",
+      "primary_url": "https://developers.openai.com/plugins/deploy/submission",
+      "when_any": [
+        "always"
+      ],
+      "requires_detected_activity": false,
+      "role": "primary-document-candidate",
+      "title": "Upload and submit your plugin"
+    },
+    {
+      "id": "migration.claude",
+      "domain": "Migration",
+      "primary_url": "https://developers.openai.com/plugins/guides/submit-claude-plugin",
+      "when_any": [
+        "migration"
+      ],
+      "requires_detected_activity": false,
+      "role": "primary-document-candidate",
+      "title": "Submit your Claude Code plugin to OpenAI"
+    },
+    {
+      "id": "api.mcp",
+      "domain": "API compatibility",
+      "primary_url": "https://developers.openai.com/api/docs/guides/tools-connectors-mcp",
+      "when_any": [
+        "responses_api"
+      ],
+      "requires_detected_activity": false,
+      "role": "primary-document-candidate",
+      "title": "api mcp"
+    },
+    {
+      "id": "evaluation.best-practices",
+      "domain": "Evaluation design",
+      "primary_url": "https://developers.openai.com/api/docs/guides/evaluation-best-practices",
+      "when_any": [
+        "evaluations"
+      ],
+      "requires_detected_activity": false,
+      "role": "primary-document-candidate",
+      "title": "evaluation best-practices"
+    },
+    {
+      "id": "conversion.quote",
+      "domain": "Conditional workflows",
+      "primary_url": "https://developers.openai.com/plugins/guides/local-services-request-quote-conversion-spec",
+      "when_any": [
+        "local_services_quote"
+      ],
+      "requires_detected_activity": true,
+      "role": "primary-document-candidate",
+      "title": "Local services Get Quote conversion spec"
+    },
+    {
+      "id": "conversion.checkout",
+      "domain": "Conditional workflows",
+      "primary_url": "https://developers.openai.com/plugins/guides/product-checkout-conversion-spec",
+      "when_any": [
+        "product_checkout"
+      ],
+      "requires_detected_activity": true,
+      "role": "primary-document-candidate",
+      "title": "Product checkout conversion spec"
+    },
+    {
+      "id": "conversion.reservation",
+      "domain": "Conditional workflows",
+      "primary_url": "https://developers.openai.com/plugins/guides/restaurant-reservation-conversion-spec",
+      "when_any": [
+        "restaurant_reservation"
+      ],
+      "requires_detected_activity": true,
+      "role": "primary-document-candidate",
+      "title": "Restaurant reservation conversion spec"
+    },
+    {
+      "id": "publication.desktop",
+      "domain": "Publication",
+      "primary_url": "https://developers.openai.com/plugins/deploy/desktop-only",
+      "when_any": [
+        "desktop"
+      ],
+      "requires_detected_activity": false,
+      "role": "primary-document-candidate",
+      "title": "Submit desktop-only plugins"
+    }
+  ]
+}

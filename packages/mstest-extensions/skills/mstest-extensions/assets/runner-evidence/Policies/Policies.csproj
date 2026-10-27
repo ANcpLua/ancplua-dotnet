@@ -1,0 +1,4 @@
+<Project Sdk="MSTest.Sdk">
+  <PropertyGroup><RootNamespace>MSTestExtensionEvidence.Policies</RootNamespace></PropertyGroup>
+  <ItemGroup><ProjectReference Include="../Support/Support.csproj" /></ItemGroup>
+</Project>

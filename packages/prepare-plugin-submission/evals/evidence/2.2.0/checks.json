@@ -1,0 +1,107 @@
+[
+  {
+    "check": "python-acceptance",
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-v"
+    ],
+    "cwd": "/workspace/scratch/401e3bbb802b/submission-studio-2.2.0",
+    "exit_code": 0,
+    "log": "python-acceptance.log",
+    "log_sha256": "dcf5f147902cb2353ac5e10a30ca3389825e03a942f80df68636f4e4a1ba894f",
+    "checked_at": "2026-10-16"
+  },
+  {
+    "check": "python-workflows",
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "evals/runtime",
+      "-v"
+    ],
+    "cwd": "/workspace/scratch/401e3bbb802b/submission-studio-2.2.0",
+    "exit_code": 0,
+    "log": "python-workflows.log",
+    "log_sha256": "c5047efbc2dc094e07ec57ec68ad958b8914d23af539aec21a77dc885106766c",
+    "checked_at": "2026-10-16"
+  },
+  {
+    "check": "python-compile",
+    "command": [
+      "python3",
+      "-m",
+      "compileall",
+      "-q",
+      "skills/prepare-plugin-submission/scripts",
+      "tests",
+      "evals/runtime"
+    ],
+    "cwd": "/workspace/scratch/401e3bbb802b/submission-studio-2.2.0",
+    "exit_code": 0,
+    "log": "python-compile.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "checked_at": "2026-10-16"
+  },
+  {
+    "check": "skill-validate",
+    "command": [
+      "python3",
+      "/workspace/scratch/401e3bbb802b/validation-tools/quick_validate.py",
+      "skills/prepare-plugin-submission"
+    ],
+    "cwd": "/workspace/scratch/401e3bbb802b/submission-studio-2.2.0",
+    "exit_code": 0,
+    "log": "skill-validate.log",
+    "log_sha256": "db349825903d66adffea3ecf1bd8e1803043e8a71cf1a051235dabc5371f5bb0",
+    "checked_at": "2026-10-16"
+  },
+  {
+    "check": "typescript-runner-syntax",
+    "command": [
+      "node",
+      "--experimental-strip-types",
+      "--check",
+      "skills/prepare-plugin-submission/assets/connector-kit/src/run.ts"
+    ],
+    "cwd": "/workspace/scratch/401e3bbb802b/submission-studio-2.2.0",
+    "exit_code": 0,
+    "log": "typescript-runner-syntax.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "checked_at": "2026-10-16"
+  },
+  {
+    "check": "typescript-server-syntax",
+    "command": [
+      "node",
+      "--experimental-strip-types",
+      "--check",
+      "skills/prepare-plugin-submission/assets/connector-kit/src/server.ts"
+    ],
+    "cwd": "/workspace/scratch/401e3bbb802b/submission-studio-2.2.0",
+    "exit_code": 0,
+    "log": "typescript-server-syntax.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "checked_at": "2026-10-16"
+  },
+  {
+    "check": "typescript-build",
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "cwd": "/workspace/scratch/401e3bbb802b/typescript-validation",
+    "exit_code": 0,
+    "log": "typescript-build.log",
+    "log_sha256": "3a0d3d69fb1ebada08f84473cecf2fb6ebcba8d0a591ee1fe78f6b558dadad8c",
+    "checked_at": "2026-10-16"
+  }
+]

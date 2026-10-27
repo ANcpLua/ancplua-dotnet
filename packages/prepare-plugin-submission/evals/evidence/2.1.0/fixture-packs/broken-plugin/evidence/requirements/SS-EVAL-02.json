@@ -1,0 +1,26 @@
+{
+  "requirement_id": "SS-EVAL-02",
+  "platform": "openai",
+  "domain": "Evaluation design",
+  "classification": "recommended_engineering_practice",
+  "applicability": "any",
+  "summary": "Keep synthetic, deterministic and actual product-host observations distinct.",
+  "source_url": "https://developers.openai.com/api/docs/guides/evaluation-best-practices",
+  "source_checked_at": "2026-10-16",
+  "source_revision": null,
+  "implementation_revision": "content-sha256:3880e1215cfeb2064d7e9207c1842f8b02b58fe43bc2215809958eaa06d58795",
+  "protocol_version": null,
+  "transport": null,
+  "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+  "status": "Not run",
+  "observed_result": "Requires target-specific human review or product-host observation; not established by static inspection.",
+  "evidence": [
+    "evidence/requirements/SS-EVAL-02.json"
+  ],
+  "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+  "implementation": [
+    "skills/prepare-plugin-submission/SKILL.md",
+    "skills/prepare-plugin-submission/scripts/audit_target.py"
+  ],
+  "validation_fixture": null
+}

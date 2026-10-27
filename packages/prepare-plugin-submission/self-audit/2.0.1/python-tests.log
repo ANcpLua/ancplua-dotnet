@@ -1,0 +1,10 @@
+test_cross_platform_must_be_selected (test_workflows.Workflows.test_cross_platform_must_be_selected) ... ok
+test_defaults_starter_and_explicit_claude (test_workflows.Workflows.test_defaults_starter_and_explicit_claude) ... ok
+test_missing_fixtures_block_execution (test_workflows.Workflows.test_missing_fixtures_block_execution) ... ok
+test_openai_skills_only_is_not_remote_server (test_workflows.Workflows.test_openai_skills_only_is_not_remote_server) ... ok
+test_pack_integrity_and_unknown_authority (test_workflows.Workflows.test_pack_integrity_and_unknown_authority) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.388s
+
+OK

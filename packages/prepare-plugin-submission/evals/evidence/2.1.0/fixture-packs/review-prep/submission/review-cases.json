@@ -1,0 +1,76 @@
+{
+  "binding": {
+    "integration_id": "review-prep-fixture",
+    "source_revision": "content-sha256:f0219fed7b1315ce685368c237f5aa8c8073067c838b46733dc984fa0392cb2c",
+    "input_sha256": "aa1e0425f3791509e44542882ef78c1d7315f3455e7516d9fed943bb96463497",
+    "inventory_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "status": "Not run",
+  "evidence": [
+    "evidence/source-inspection.json",
+    "evidence/package-check.json"
+  ],
+  "observed_result": "Inspected target definitions; behavior and external actions were not executed.",
+  "source_revision": "content-sha256:f0219fed7b1315ce685368c237f5aa8c8073067c838b46733dc984fa0392cb2c",
+  "cases": [
+    {
+      "kind": "positive",
+      "origin": "Observed package definition; execution not established",
+      "description": "Synthetic lookup 1",
+      "prompt": "Read synthetic record 1",
+      "tools_triggered": "lookup",
+      "expected_behavior": "Return the fixture record without changing state."
+    },
+    {
+      "kind": "positive",
+      "origin": "Observed package definition; execution not established",
+      "description": "Synthetic lookup 2",
+      "prompt": "Read synthetic record 2",
+      "tools_triggered": "lookup",
+      "expected_behavior": "Return the fixture record without changing state."
+    },
+    {
+      "kind": "positive",
+      "origin": "Observed package definition; execution not established",
+      "description": "Synthetic lookup 3",
+      "prompt": "Read synthetic record 3",
+      "tools_triggered": "lookup",
+      "expected_behavior": "Return the fixture record without changing state."
+    },
+    {
+      "kind": "positive",
+      "origin": "Observed package definition; execution not established",
+      "description": "Synthetic lookup 4",
+      "prompt": "Read synthetic record 4",
+      "tools_triggered": "lookup",
+      "expected_behavior": "Return the fixture record without changing state."
+    },
+    {
+      "kind": "positive",
+      "origin": "Observed package definition; execution not established",
+      "description": "Synthetic lookup 5",
+      "prompt": "Read synthetic record 5",
+      "tools_triggered": "lookup",
+      "expected_behavior": "Return the fixture record without changing state."
+    },
+    {
+      "kind": "negative",
+      "origin": "Observed package definition; execution not established",
+      "description": "Unsupported synthetic action 1",
+      "prompt": "Delete synthetic record 1"
+    },
+    {
+      "kind": "negative",
+      "origin": "Observed package definition; execution not established",
+      "description": "Unsupported synthetic action 2",
+      "prompt": "Delete synthetic record 2"
+    },
+    {
+      "kind": "negative",
+      "origin": "Observed package definition; execution not established",
+      "description": "Unsupported synthetic action 3",
+      "prompt": "Delete synthetic record 3"
+    }
+  ],
+  "note": "Remote MCP review cases apply only to a declared remote target; retained cases are definitions, not execution evidence."
+}

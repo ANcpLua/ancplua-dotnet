@@ -1,0 +1,51 @@
+name: Verify skill and MSTest APIs
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      mstest_version:
+        description: Exact additional MSTest.Sdk version to verify
+        required: false
+        type: string
+permissions:
+  contents: read
+jobs:
+  verify:
+    defaults:
+      run:
+        working-directory: packages/mstest-extensions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: packages/mstest-extensions/global.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate helpers and links
+        run: |
+          python3 scripts/test_inspect.py
+          python3 scripts/test_install.py
+          python3 scripts/check_links.py
+          python3 scripts/package_plugin.py --output "$RUNNER_TEMP/mstest-extensions.zip"
+          git diff --check
+      - name: Verify native MSTest baseline
+        run: python3 scripts/verify_versions.py 4.5.1
+      - name: Install the Native AOT toolchain
+        run: sudo apt-get update && sudo apt-get install -y clang zlib1g-dev
+      - name: Verify runner, hosting and published consumers
+        run: python3 skills/mstest-extensions/scripts/verify_capabilities.py --mstest-sdk 4.5.1 --hosting --native-aot
+      - name: Verify requested version
+        if: inputs.mstest_version != ''
+        env:
+          MSTEST_REQUESTED_VERSION: ${{ inputs.mstest_version }}
+        run: python3 scripts/verify_versions.py "$MSTEST_REQUESTED_VERSION"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mstest-verification
+          path: |
+            packages/mstest-extensions/artifacts/compatibility/
+            packages/mstest-extensions/artifacts/mstest-capabilities/

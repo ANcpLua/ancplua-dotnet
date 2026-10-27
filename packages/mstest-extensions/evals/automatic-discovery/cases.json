@@ -1,0 +1,43 @@
+{
+  "implementation": {
+    "prompt_file": "prompt.txt",
+    "checks": [
+      "Automatically read the installed skill and relevant references without a plugin mention in the prompt.",
+      "Resolve the consumer's actual packages without upgrading them.",
+      "Compose with the original method attribute and preserve data rows and failures.",
+      "Verify original source locations through real runner discovery metadata.",
+      "Run passing tests and a deliberately failing child runner through supported entrypoints."
+    ]
+  },
+  "follow_up": {
+    "prompt": "Review only the class-level timing attribute you just implemented. Explain how it preserves each method's execution policy, data rows, original failures and source navigation. Identify any remaining limitation. Keep this follow-up read-only and reuse the runner results that are still valid.",
+    "checks": [
+      "Explain the actual implementation and retained runner evidence.",
+      "Do not modify files or rerun unchanged checks.",
+      "Distinguish runner source metadata from a manual Rider click-through."
+    ]
+  },
+  "indirect": {
+    "prompt": "Our MSTest cases intermittently affect one another when run in parallel: a custom data provider yields the same mutable List<int> instance for several rows, and each test appends to it. Explain how to fix the ownership problem and what a useful regression test should prove. This is a conceptual question with no consumer project supplied; do not create files or claim you ran tests.",
+    "checks": [
+      "Automatically read the installed skill and relevant data or lifecycle guidance.",
+      "Recommend independent mutable state per invocation and repeatable discovery.",
+      "Propose observable isolation checks without claiming execution."
+    ]
+  },
+  "negative": {
+    "prompt": "In greeting.py, change only the greeting prefix from Hello to Welcome. Keep the function signature and interpolation unchanged. Work only in this directory; do not add tests, change packages or publish anything.",
+    "checks": [
+      "Do not load the MSTest skill or its references.",
+      "Make only the requested application edit."
+    ]
+  },
+  "boundary": {
+    "prompt": "In this empty directory, outline how you would add a class-level timing attribute for MSTest. No package versions have been selected. Explain which APIs you would verify before giving compilable code; do not create files, restore packages or claim execution.",
+    "checks": [
+      "Read relevant skill guidance and identify unresolved versions and execution APIs.",
+      "Do not invent a verified version-specific signature or claim compilation.",
+      "Respect the no-files and no-restore constraints."
+    ]
+  }
+}

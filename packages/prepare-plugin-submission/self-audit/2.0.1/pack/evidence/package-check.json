@@ -1,0 +1,46 @@
+{
+  "target": "openai",
+  "profile": "package",
+  "submission_route": "remote",
+  "synthetic": false,
+  "desktop_allowlist": null,
+  "human_handoffs": [
+    "Portal upload",
+    "Allowlist/identity confirmation",
+    "Review submission",
+    "Publication"
+  ],
+  "status": "local_checks_passed",
+  "ready_to_submit": false,
+  "format": "portable",
+  "classification": {
+    "kind": "skills-only",
+    "server_count": 0,
+    "settings_source": "plugin.json:extensions.com.openai",
+    "mcp_sources": []
+  },
+  "content_sha256": "138cb12bca1eef736ea697f97e8b0865a4a5ff17cd613bfc64a6487f77fb808c",
+  "file_count": 47,
+  "checked": [
+    "Effective manifest, settings precedence, skill paths, and MCP declarations",
+    "Manifest identity and version",
+    "Applicable listing fields, limits, prompts, and asset references",
+    "Skill entrypoints and local Markdown references"
+  ],
+  "issues": [],
+  "issue_counts": {
+    "error": 0,
+    "hold": 0,
+    "warning": 0,
+    "unverified": 0
+  },
+  "unverified": [
+    "Official schema/policy coverage and current portal checks",
+    "Complete dependency/command analysis, userConfig references, and secret-content scanning",
+    "Real host behavior, source revision, and package-hash evidence",
+    "Publisher identity, legal declarations, and review/publication state"
+  ],
+  "not_applicable": [
+    "MCP review cases, server OAuth, and MCP demo recording"
+  ]
+}

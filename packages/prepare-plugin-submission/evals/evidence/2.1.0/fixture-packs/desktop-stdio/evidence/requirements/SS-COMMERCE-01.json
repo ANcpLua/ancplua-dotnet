@@ -1,0 +1,26 @@
+{
+  "requirement_id": "SS-COMMERCE-01",
+  "platform": "openai",
+  "domain": "Additional capabilities",
+  "classification": "recommended_engineering_practice",
+  "applicability": "commerce",
+  "summary": "Choose an eligible checkout route and verify partner-only feature access.",
+  "source_url": "https://developers.openai.com/plugins/build/monetization",
+  "source_checked_at": "2026-10-16",
+  "source_revision": null,
+  "implementation_revision": "content-sha256:eaeb85f9cda524ca8f210b8c9dd493ce063d1520365d41583f2d49956f0bfb3a",
+  "protocol_version": null,
+  "transport": "stdio",
+  "verification": "Inspect target evidence; local static checks do not prove host or portal results",
+  "status": "Not run",
+  "observed_result": "The package does not establish this optional server feature; discover actual capabilities before applying its rules.",
+  "evidence": [
+    "evidence/requirements/SS-COMMERCE-01.json"
+  ],
+  "meta_tool_support": "Guidance plus applicability-aware preflight; external actions require a human",
+  "implementation": [
+    "skills/prepare-plugin-submission/SKILL.md",
+    "skills/prepare-plugin-submission/scripts/audit_target.py"
+  ],
+  "validation_fixture": null
+}

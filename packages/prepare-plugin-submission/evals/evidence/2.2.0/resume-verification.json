@@ -1,0 +1,28 @@
+{
+  "status": "Passed",
+  "scope": "Wizard export/restore and local state integrity only; no plugin host or server behavior was tested",
+  "source_session": "/workspace/scratch/401e3bbb802b/wizard-forward/original/submission.json",
+  "resumed_session": "/workspace/scratch/401e3bbb802b/wizard-forward/relocated/submission.json",
+  "session_id": "afb8669fea934f4d82e7d76f28158541",
+  "resumed_revision": 29,
+  "next_human_step": "creator-facts",
+  "package_sha256": "1c16c6f92ef979d542d7def9cda6e1c73bcc45d9fba1bf69a90a959328fc4118",
+  "checks": {
+    "session_identity_preserved": true,
+    "archive_hash_preserved": true,
+    "frozen_archive_bytes_preserved": true,
+    "content_hash_preserved": true,
+    "test_plan_preserved": true,
+    "host_intent_preserved": true,
+    "deferrals_preserved": true,
+    "resumed_at_same_human_step": true,
+    "source_is_relocated_frozen_archive": true,
+    "artifacts_rebased_inside_relocated_workspace": true,
+    "requirement_evidence_rebased_and_present": true,
+    "plan_bytes_preserved": true,
+    "no_host_evidence_fabricated": true,
+    "all_host_cases_still_not_run": true,
+    "no_creator_or_portal_confirmations": true,
+    "real_readiness_submission_publication_false": true
+  }
+}
