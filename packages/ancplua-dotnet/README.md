@@ -41,7 +41,8 @@ claude plugin install ancplua-dotnet@ancplua-anthropic
 
 Then run `/reload-plugins` in an open session.
 
-Codex:
+Codex public Git distribution (the maintainer account uses the
+[fixed cloud entries](../../docs/cloud-plugins.md) instead):
 
 ```bash
 codex plugin marketplace add ANcpLua/ancplua-dotnet
@@ -72,11 +73,17 @@ claude plugin eval . --runs 1 --ablation none   # quick behavior check (model ca
 claude plugin eval .                            # full: 3 runs, with and without the plugin
 ```
 
-MSTest APIs and runner verification live in the companion repository.
+MSTest APIs and runner verification live in the companion package.
 
 ## 0.7.2
 
 Move the source and marketplace into one repository. Skill behavior is unchanged.
+
+## 0.7.6
+
+Generate the personal cloud package from this source for web and desktop. Skills
+no longer require a local executor merely to load; build execution still needs
+repository access and the relevant toolchain.
 
 ## 0.7.5
 

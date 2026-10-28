@@ -4,14 +4,18 @@ One repository for the ANcpLua .NET plugin marketplace, source packages and veri
 
 | Plugin | Source | Current package |
 | --- | --- | --- |
-| `ancplua-dotnet` | [General .NET workflows](packages/ancplua-dotnet/README.md) | 0.7.5; seven skills |
+| `ancplua-dotnet` | [General .NET workflows](packages/ancplua-dotnet/README.md) | 0.7.6; seven skills |
 | `nami` | [Unions, fixtures and Codex messaging](packages/nami/README.md) | 0.1.4; three skills |
 | `mstest-extensions` | [Native MSTest/MTP execution and specialized testing](packages/mstest-extensions/README.md) | 4.0.1; two self-contained skills |
-| `prepare-plugin-submission` | [Submission Studio](packages/prepare-plugin-submission/README.md) | 2.3.1; one skill, based on the verified Account release 2.3.0 |
+| `prepare-plugin-submission` | [Submission Studio](packages/prepare-plugin-submission/README.md) | 2.3.2; one skill |
 
 The public plugins keep their existing names and responsibilities. Nami supplies union, fixture-ownership and Codex messaging guidance. General build/package work belongs to `ancplua-dotnet`; MSTest APIs, assertions, runner and extension workflows belong to `mstest-extensions`.
 
 ## Install
+
+For the maintainer account, use the four [fixed cloud plugins](docs/cloud-plugins.md) in both ChatGPT web and Codex desktop. Their archives are generated from this repository; the duplicate Git installations have been removed. Updates replace releases on the same cloud IDs. A Git push alone does not upload a personal cloud release.
+
+Other users can install the public Git marketplace in Codex:
 
 ```sh
 codex plugin marketplace add ANcpLua/ancplua-dotnet
@@ -21,9 +25,9 @@ codex plugin add mstest-extensions@ancplua-dotnet
 codex plugin add prepare-plugin-submission@ancplua-dotnet
 ```
 
-These commands change installation and are separate from source verification. Existing registrations of the retired `ancplua-openai` catalog can still resolve its entries to this source after refreshing; switch registrations deliberately to avoid duplicate installed identities. Source migration does not automatically remove an installed plugin.
+These commands change installation and are separate from source verification. Choose one distribution per plugin: installing both Git and cloud creates two identities. Source migration does not automatically remove an installed plugin.
 
-Submission Studio 2.3.0 was imported from the Account release with the owner's explicit authorization to publish its source. The old 1.6.0 repository is retired. The Account source retains its 2.3.0 release identity; the public Git distribution now versions its maintained guidance separately. The [migration record](migration/README.md) records provenance and version alignment.
+Submission Studio 2.3.0 was imported from the Account release with the owner's explicit authorization to publish its source. The old 1.6.0 repository is retired. The old private 2.3.0 entry has been deleted. Maintained source now generates the fixed cloud entry and the Git distribution from the same version. The [migration record](migration/README.md) records provenance and version alignment.
 
 ## Verify and maintain
 
@@ -31,6 +35,7 @@ Submission Studio 2.3.0 was imported from the Account release with the owner's e
 make check
 npm ci --ignore-scripts
 make check-docs
+make check-cloud
 make verify-nami
 make verify-mstest
 ```

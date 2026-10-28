@@ -18,7 +18,7 @@
     ]
   },
   "name": "prepare-plugin-submission",
-  "version": "2.3.0",
+  "version": "2.3.2",
   "description": "Guide OpenAI plugin preparation with a persistent submission wizard, source-bound checks, repairs and evidence.",
   "author": {
     "name": "ANcpLua"

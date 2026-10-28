@@ -1,0 +1,24 @@
+{
+  "receipts": {
+    "ancplua-dotnet": {
+      "release_id": "pluginrel_6ae1523edabc8191a7a79149733399e2",
+      "version": "0.7.6",
+      "sha256": "a43b40af10c73f2b0757e805d33de987c98cc25abd6c1dff9c31fd8f1c2c30b8"
+    },
+    "mstest-extensions": {
+      "release_id": "pluginrel_6ae1524eb3f88191801ebd2a5e54ecd3",
+      "version": "4.0.1",
+      "sha256": "ad362a079422b5f878c16e5639b09849ff4abe04e3208088b62220ce783a76fd"
+    },
+    "nami": {
+      "release_id": "pluginrel_6ae1525b51d88191ba72182fefb95d7b",
+      "version": "0.1.4",
+      "sha256": "30596bd44bb655516f83dd1d2e74163bdfe188d1a9b12cc61d1581c5b1869c6c"
+    },
+    "prepare-plugin-submission": {
+      "release_id": "pluginrel_6ae15268d6a881918c027fd64b9ed368",
+      "version": "2.3.2",
+      "sha256": "308eacd2d0e37102d9021efe658d1c0a95642116b3fa07d12584e8a41b04ba2c"
+    }
+  }
+}

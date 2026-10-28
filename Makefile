@@ -27,3 +27,10 @@ check-docs:
 check-skills:
 	python3 -B scripts/test_check_skills.py
 	python3 -B scripts/check_skills.py
+
+.PHONY: package-cloud check-cloud
+package-cloud:
+	python3 -B scripts/cloud_plugins.py build
+check-cloud:
+	python3 -B scripts/test_cloud_plugins.py
+	$(MAKE) package-cloud

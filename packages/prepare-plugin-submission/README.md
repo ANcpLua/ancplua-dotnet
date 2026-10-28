@@ -1,8 +1,10 @@
-# Submission Studio 2.3.1
+# Submission Studio 2.3.2
 
-Version 2.3.1 clarifies the existing wizard startup sequence. Runtime, templates
-and prior evidence remain unchanged from the imported Account release 2.3.0;
-this Git marketplace distribution has its own version.
+Version 2.3.2 aligns the canonical and compatibility manifest versions and ships
+the same source to the [fixed cloud entry](../../docs/cloud-plugins.md) and Git
+marketplace. Version 2.3.1 clarified the wizard startup sequence. Runtime and
+templates retain their imported 2.3.0 behavior; historical evidence keeps its
+original version.
 
 A guided preparation tool for OpenAI plugins. Point the agent at a GitHub
 repository, ZIP or source folder; it inspects the implementation, retrieves

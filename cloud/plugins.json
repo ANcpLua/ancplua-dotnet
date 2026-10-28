@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "scope": "USER",
+  "discoverability": "PRIVATE",
+  "plugins": {
+    "ancplua-dotnet": {
+      "plugin_id": "plugins_6ae1523d4d2c8191b12ff1429d449f99",
+      "plugin_url": "https://chatgpt.com/plugins/plugins_6ae1523d4d2c8191b12ff1429d449f99"
+    },
+    "mstest-extensions": {
+      "plugin_id": "plugins_6ae1524d41f08191b0368fe424070dee",
+      "plugin_url": "https://chatgpt.com/plugins/plugins_6ae1524d41f08191b0368fe424070dee"
+    },
+    "nami": {
+      "plugin_id": "plugins_6ae15259f09c819182dda95ef7d5bada",
+      "plugin_url": "https://chatgpt.com/plugins/plugins_6ae15259f09c819182dda95ef7d5bada"
+    },
+    "prepare-plugin-submission": {
+      "plugin_id": "plugins_6ae152677c68819185bec45f04492a9c",
+      "plugin_url": "https://chatgpt.com/plugins/plugins_6ae152677c68819185bec45f04492a9c"
+    }
+  }
+}
