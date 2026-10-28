@@ -1,43 +1,71 @@
 ---
 name: mstest
-description: Explain MSTest 4.5.1 API availability and semantics using a generated public-symbol catalog and verified examples. Use for API lookup, release comparisons, experimental attributes, hosting and configuration questions. Test implementation belongs to mstest-writing-tests; assertion corrections belong to mstest-assertions.
+description: Write, run, review and troubleshoot native MSTest tests and reusable extensions. Use for test projects, MTP commands, API/version lookup, data and lifecycle, quality or gap reviews, and generated/Native AOT execution. Focused built-in assertion replacements belong to mstest-assertions.
 ---
 
-# Resolve MSTest API questions
+# Native MSTest testing
 
-Start with the requested symbol or behavior. For a consumer project, resolve its
-MSTest package and target asset before applying version-specific guidance. The
-checked baseline here is 4.5.1; a question alone needs no restore or project edits.
-Use [version resolution](../mstest-extensions/references/version-resolution.md)
-when the installed version or assembly differs from that baseline.
+Handle the requested testing task using the consumer's resolved MSTest and
+Microsoft.Testing.Platform APIs. This skill owns its references, API catalog,
+inspection scripts and executable fixtures; they work without another skill.
 
-1. Search [public-api.md](references/public-api.md) for the type or member when
-   its availability or signature is uncertain. Do not load the entire catalog.
-2. For combinatorial data, dependencies, resource locks, conditions, hosting or
-   configuration, read the relevant section of
-   [modern-apis.md](references/modern-apis.md). These are version-checked examples.
-3. Distinguish a declaration from runtime behavior. Use the matching source or
-   packaged probe when an answer depends on execution, serialization or AOT.
-4. Explain the resolved API and its limits. Run a focused probe only when the
-   requested answer needs evidence not already available.
+The checked [native stack](references/native-stack.md) is MSTest.Sdk/MSTest
+4.5.1, MTP 2.5.1, `AllMicrosoft` and Microsoft.CodeCoverage. Preserve the
+consumer's pins and runner unless a migration is requested. A conceptual
+question needs no project creation or restore; a review stays read-only.
 
-## Boundaries and gotchas
+## Select the requested workflow
 
-- Catalog versions mean first appearance among the configured compared releases,
-  not necessarily the API's original release. Source `main` is research material,
-  not proof of the consumer's package contract.
-- Experimental acknowledgments belong to the affected API use, not a blanket
-  project suppression. Use the diagnostic emitted by the actual package.
-- Host-injected tests and a NativeAOT test host have different compatibility
-  limits. A managed test can still launch a NativeAOT application under test.
-- An API lookup does not authorize rewriting tests or creating a custom runner.
+1. Identify the requested outcome and its boundary. Read the consumer's project
+   instructions, SDK/package pins and test entrypoint when implementation or
+   execution is requested. Use [version resolution](references/version-resolution.md)
+   and [the inspector](scripts/inspect_mstest.py) when its API evidence is unclear.
+2. Read the matching workflow below and only the topic references it needs.
+   A command-only answer does not authorize execution; a review does not authorize
+   edits, mutation trials or a suite-wide audit.
+3. For changes, verify the observable outcome through the normal repository
+   entrypoint. Preserve required failures, cleanup and data-row identity.
+   Report static findings, executed results and unresolved limits separately.
 
-For implementation use [mstest-writing-tests](../mstest-writing-tests/SKILL.md).
-For a precise assertion choice or replacement use
-[mstest-assertions](../mstest-assertions/SKILL.md); for a report-only strength
-assessment use [mstest-assertion-review](../mstest-assertion-review/SKILL.md).
-Do not load all three for an ordinary API question.
+| Requested task | Read |
+| --- | --- |
+| API signature, availability, release difference or configuration | [API lookup](references/workflow-api.md) |
+| Write or fix tests, create a test project, repair solution/CI inclusion | [Test implementation](references/workflow-writing-tests.md) |
+| Run or discover tests, choose filters, collect TRX/coverage, diagnose zero tests | [Native MTP execution](references/workflow-run-tests.md) |
+| Reusable data, domain assertions, execution attributes, policies or fixtures | [Extension design](references/workflow-extensions.md) |
+| Practical correctness, ownership, flakiness or maintainability review | [Test review](references/workflow-test-review.md) |
+| Focused report on assertion strength and accepted wrong results | [Assertion review](references/workflow-assertion-review.md) |
+| Explicitly requested formal test-smell taxonomy | [Test smells](references/workflow-test-smells.md) |
+| Outcomes the current suite would miss | [Test gaps](references/workflow-test-gaps.md) |
+| Evidence for an identified change and revision | [Change evidence](references/workflow-test-value.md) |
+| Generated invocation, trimming or published Native AOT tests | [Native verification](references/workflow-native-aot.md) |
 
-For catalog maintenance only, follow
-[public-api-maintenance.md](references/public-api-maintenance.md). The configured
-release tags and template are maintained with the generator under `scripts/`.
+## Evidence and API boundaries
+
+Search [the public API catalog](references/public-api.md) by symbol; do not load
+it wholesale. Its introduction labels cover the compared releases, not necessarily
+the API's first release. [Modern examples](references/modern-apis.md) and
+[anti-patterns](references/antipatterns.md) provide dated behavior and analyzer
+notes. Installed packages and matching sources control consumer-specific claims.
+
+Built-in assertion API selection must preserve the intended equality, identity,
+ordering and exception contract. [Assertion guidance](references/assertions.md)
+covers API resolution and reusable domain assertions; the separately installable
+`mstest-assertions` skill provides detailed built-in corrections when that is the
+requested task. Neither skill requires the other to complete its own workflow.
+
+Do not copy another framework's fixture or parallelism rules. Required observation
+and cleanup failures remain failures. Preserve absent results, cancellation and
+resource ownership rather than weakening checks until a run succeeds.
+
+For an isolated API inventory, from this skill directory:
+
+```sh
+python3 scripts/inspect_mstest.py --project /path/to/Tests.csproj
+```
+
+The inspector does not upgrade or edit the consumer. For runner, host-disposal
+or published AOT proof, use [the capability verifier](references/executable-evidence.md)
+with explicit versions. A managed pass does not establish Native AOT support.
+For catalog maintenance only, read
+[public API maintenance](references/public-api-maintenance.md).

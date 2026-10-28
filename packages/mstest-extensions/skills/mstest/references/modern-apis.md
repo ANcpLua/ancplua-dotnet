@@ -8,7 +8,7 @@ Before using an API not shown here, search [`references/public-api.md`](public-a
 
 Use the same lifecycle APIs for unit, integration and end-to-end tests. Choose the cleanup scope from the resource's owner: `await using` within a test, `IAsyncDisposable` or `[TestCleanup]` for a test instance, `[ClassCleanup]` for a shared class fixture, and `[AssemblyCleanup]` for an assembly fixture. A consuming test must not dispose a resource owned by its class or assembly.
 
-Read [Lifecycle and cleanup](../../mstest-extensions/references/lifecycle.md) when adding or changing fixtures. It covers failure during setup, cleanup order, shared assembly providers, temporary files and the distinction between an AOT test host and an AOT application under test. Preserve the repository's existing fixture owners and file-retention policy. Do not introduce a separate diagnostics collection or retention system as part of a cleanup change.
+Read [Lifecycle and cleanup](lifecycle.md) when adding or changing fixtures. It covers failure during setup, cleanup order, shared assembly providers, temporary files and the distinction between an AOT test host and an AOT application under test. Preserve the repository's existing fixture owners and file-retention policy. Do not introduce a separate diagnostics collection or retention system as part of a cleanup change.
 
 ## Test classes
 
@@ -81,9 +81,9 @@ These restrictions apply to the test host. A managed E2E test host can launch a 
 
 ## Assertions
 
-For assertion selection or corrections, read the focused
-[MSTest assertion skill](../../mstest-assertions/SKILL.md). It owns the equality,
-collection, exception and AOT semantics and executable positive/negative examples.
+For an assertion API needed by an implementation or review, resolve its equality,
+collection, exception and AOT semantics from the
+[version-matched framework sources](sources.md).
 The API catalog describes signatures; it does not establish their behavior.
 
 ## Combinatorial data (4.4)
@@ -169,6 +169,6 @@ A programmatic assembly-wide filter is registered with `[assembly: TestFilterPro
 
 - `output.captureTrace` takes `None`, `Result` or `Live` (4.4); `Live` streams console and trace output while the test runs. `true` and `false` still work and mean `Result` and `None`.
 - `execution.captureAssertionFailureDiagnostics` (4.5, default `false`) writes up to three JSON snapshots per failed attempt (`mstest-assertion-failure-state-attempt-*-invocation-*-capture-*.json`) and attaches them to the failed result. It does nothing under Native AOT, on browser/WASI or on UWP/WinUI.
-- Check JSON keys against the pinned schema, not a copied `.runsettings` table. `captureOutput`, `execution.considerFixturesAsSpecialTests` and `execution.treatClassAndAssemblyCleanupWarningsAsErrors` are not properties in that 4.5.1 schema. See the [configuration notes](../../mstest-extensions/references/version-resolution.md).
+- Check JSON keys against the pinned schema, not a copied `.runsettings` table. `captureOutput`, `execution.considerFixturesAsSpecialTests` and `execution.treatClassAndAssemblyCleanupWarningsAsErrors` are not properties in that 4.5.1 schema. See the [configuration notes](version-resolution.md).
 
-For suite reviews, use the local [anti-pattern reference](antipatterns.md). For resource ownership, use the [lifecycle reference](../../mstest-extensions/references/lifecycle.md).
+For suite reviews, use the local [anti-pattern reference](antipatterns.md). For resource ownership, use the [lifecycle reference](lifecycle.md).

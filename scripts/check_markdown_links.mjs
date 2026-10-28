@@ -29,6 +29,8 @@ function anchors(file) {
 }
 export function checkLinks(root, document) {
   const failures = [];
+  const skill = /^(packages\/mstest-extensions\/skills\/[^/]+)\//.exec(relative(root, document));
+  const skillRoot = skill ? resolve(root, skill[1]) : undefined;
   for (const block of tokens(document)) {
     for (const token of block.children ?? []) {
       if (!["link_open", "image"].includes(token.type)) continue;
@@ -40,6 +42,9 @@ export function checkLinks(root, document) {
       const [pathAndQuery, fragment] = target.split("#", 2);
       const path = decodeURIComponent(pathAndQuery.split("?", 1)[0]);
       const destination = path ? resolve(path.startsWith("/") ? root : dirname(document), path.replace(/^\//, "")) : document;
+      if (skillRoot && (relative(skillRoot, destination) === ".." || relative(skillRoot, destination).startsWith("../"))) {
+        failures.push(`${link}: leaves self-contained skill ${relative(root, skillRoot)}`);
+      }
       if (!existsSync(destination)) failures.push(`${link}: missing destination ${relative(root, destination)}`);
       else if (fragment && destination.endsWith(".md") && statSync(destination).isFile()
                && !anchors(destination).has(decodeURIComponent(fragment))) failures.push(`${link}: missing heading anchor`);

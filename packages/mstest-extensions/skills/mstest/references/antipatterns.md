@@ -5,11 +5,11 @@ Checked against `microsoft/testfx` at `v4.5.1` and the published NuGet packages.
 To check whether an API exists, is experimental, or which version introduced it, search [`public-api.md`](public-api.md) for the type or member name.
 
 Assertion choices target **MSTest 4.5.1**. Use the most specific assertion for the
-complete contract, as defined by the standalone
-[assertion skill](../../mstest-assertions/SKILL.md). Versions in the tables are
+complete contract, checked against the
+[resolved framework API](sources.md). Versions in the tables are
 historical evidence, not a reason to recommend weaker or legacy assertions.
 
-For fixture ownership, cleanup order and setup failures, use [Lifecycle and cleanup](../../mstest-extensions/references/lifecycle.md). Review existing cleanup before adding another hook or helper.
+For fixture ownership, cleanup order and setup failures, use [Lifecycle and cleanup](lifecycle.md). Review existing cleanup before adding another hook or helper.
 
 ## Platform and MSBuild
 

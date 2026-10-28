@@ -1,33 +1,28 @@
----
-name: mstest-writing-tests
-description: "Write or correct native MSTest tests, attributes and lifecycle. Create test projects or repair solution/CI inclusion. Reusable extension design belongs to mstest-extensions; execution-only requests and report-only reviews have focused skills."
----
-
 # Write native MSTest tests
 
-The [opinionated native stack](../mstest-extensions/references/native-stack.md)
+The [opinionated native stack](native-stack.md)
 is MSTest.Sdk 4.5.1 / MTP 2.5.1 with `AllMicrosoft` and Microsoft.CodeCoverage.
 
 Use MSTest 4.5.1 / Microsoft.Testing.Platform 2.5.1 as the checked baseline.
 For an existing consumer, its resolved packages and normal runner determine the
-available APIs. [Version resolution](../mstest-extensions/references/version-resolution.md)
+available APIs. [Version resolution](version-resolution.md)
 provides lookup when those inputs differ; conceptual questions need no restore.
 
 Identify whether the behavior is pure logic, interacting components, a whole
 application or a packaged consumer. The boundary determines the fixture and
-observable outcome. [Scope guidance](../mstest-extensions/references/test-scopes.md)
+observable outcome. [Scope guidance](test-scopes.md)
 also covers shared helpers, native base/derived lifecycle and child runners.
 Unit-generation advice to isolate external dependencies applies to units.
 Integration and end-to-end cases retain the real boundary they claim to verify.
 Before adding a new case/project, establish its normal repository discovery and
 CI entrypoint; a standalone green run does not prove that entrypoint finds it.
 For project creation or missing solution/CI inclusion, read
-[project discovery](../mstest-extensions/references/test-projects.md).
+[project discovery](test-projects.md).
 
-For API availability or configuration questions, use [mstest](../mstest/SKILL.md).
-For a targeted assertion correction, use [mstest-assertions](../mstest-assertions/SKILL.md).
+For API availability or configuration questions, use [mstest](workflow-api.md).
+For a targeted assertion correction, use [resolved assertion APIs](assertions.md).
 Load those details only when the current implementation needs them.
-Execution-only requests belong to [mstest-run-tests](../mstest-run-tests/SKILL.md).
+Execution-only requests belong to [native execution](workflow-run-tests.md).
 
 Use `[TestMethod]` with native `[DataRow]` for independently selectable constant
 cases; typed `[DynamicData]` fits computed data. Framework expansion preserves
@@ -54,12 +49,12 @@ remain sequential even in async code; concurrency applies to independent work.
 Use the focused test entrypoint for compilation and execution, retaining native
 failures and diagnostics. A real child runner is useful when runner outcomes or
 process isolation are the contract; it is not a substitute for an ordinary unit
-test. [Built-in assertion semantics](../mstest-assertions/SKILL.md),
-[data](../mstest-extensions/references/data.md) and
-[lifecycle](../mstest-extensions/references/lifecycle.md) contain the relevant API details.
+test. [Assertion API resolution](assertions.md),
+[data](data.md) and
+[lifecycle](lifecycle.md) contain the relevant API details.
 Read lifecycle's process-global state guidance before changing environment
 variables, console streams or parallel resource locks; analyzer silence alone
 does not establish isolation.
 For conversion, capture or privacy changes, use the relevant
-[failure-prevention lesson](../mstest-extensions/references/failure-prevention.md)
+[failure-prevention lesson](failure-prevention.md)
 to choose a distinguishing case rather than copying an entire scenario suite.

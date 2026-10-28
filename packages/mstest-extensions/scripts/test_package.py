@@ -15,7 +15,11 @@ class PackageTests(unittest.TestCase):
             subprocess.run([sys.executable, "-B", str(ROOT / "scripts/package_plugin.py"),
                             "--output", str(output)], check=True, capture_output=True, text=True)
             with zipfile.ZipFile(output) as archive:
-                for resource in ["mstest/scripts/api_table.md.j2", "mstest/scripts/versions.yaml",
+                self.assertEqual({"skills/mstest/SKILL.md", "skills/mstest-assertions/SKILL.md"},
+                                 {name for name in archive.namelist() if name.endswith("/SKILL.md")})
+                for resource in ["mstest/scripts/inspect_mstest.py", "mstest/scripts/verify_capabilities.py",
+                                 "mstest/assets/runner-evidence/Generated/GeneratedTests.cs",
+                                 "mstest/scripts/api_table.md.j2", "mstest/scripts/versions.yaml",
                                  "mstest/scripts/generate_api.py", "mstest/references/public-api.md",
                                  "mstest-assertions/examples/EqualityExamples.cs",
                                  "mstest-assertions/examples/TypedAssertions.cs",

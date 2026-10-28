@@ -1,49 +1,39 @@
 # MSTest Extensions plugin
 
-A portable plugin with eleven focused skills for native MSTest testing. Choose the
-workflow matching the request; references load only when that task needs them.
-The opinionated stack is **MSTest.Sdk 4.5.1 / MSTest 4.5.1**, native
-**Microsoft.Testing.Platform 2.5.1**, **AllMicrosoft** and
-**Microsoft.CodeCoverage**, with the target framework's default C# version.
-MTP 2.5.1 is the platform version, not the MSTest.Sdk version.
+A portable plugin with two independently usable skills for native MSTest testing.
+Each owns its local references and executable resources. Choose the requested
+workflow inside `mstest`; only that workflow's references need to be loaded.
 
 | Skill | Use it for |
 | --- | --- |
-| [mstest](skills/mstest/SKILL.md) | Version-checked API lookup, release differences and generated symbol catalog. |
+| [mstest](skills/mstest/SKILL.md) | API lookup, test implementation, native MTP execution, extensions, scoped reviews and Native AOT verification. |
 | [mstest-assertions](skills/mstest-assertions/SKILL.md) | Precise built-in assertion selection and corrections, equality and AOT semantics. |
-| [mstest-extensions](skills/mstest-extensions/SKILL.md) | Reusable data, assertions, execution composition, policies and fixtures. |
-| [mstest-writing-tests](skills/mstest-writing-tests/SKILL.md) | Test edits, project creation and CI inclusion. |
-| [mstest-run-tests](skills/mstest-run-tests/SKILL.md) | Native MTP commands, discovery, filters, TRX and coverage. |
-| [mstest-test-review](skills/mstest-test-review/SKILL.md) | Practical report-only correctness and maintainability review. |
-| [mstest-test-smells](skills/mstest-test-smells/SKILL.md) | A requested formal test-smell taxonomy audit. |
-| [mstest-test-value](skills/mstest-test-value/SKILL.md) | Evidence for an identified change and revision. |
-| [mstest-assertion-review](skills/mstest-assertion-review/SKILL.md) | Focused report-only analysis of assertion meaning. |
-| [mstest-test-gaps](skills/mstest-test-gaps/SKILL.md) | Caller-visible outcomes the current tests would miss. |
-| [mstest-native-aot](skills/mstest-native-aot/SKILL.md) | Generated invocation, trimming and published Native AOT consumers. |
 
-The package includes task-specific references, scripts and executable assets.
-Skills have separate triggers and outputs; they do not load all siblings for
-every test request. This follows the official
-[skill and plugin guidance](https://learn.chatgpt.com/docs/skills-and-plugins?site_locale=en)
-and [focused skill guidance](https://learn.chatgpt.com/docs/build-skills?site_locale=en).
-
-The source lives in `ancplua-dotnet/packages/mstest-extensions`; the stable plugin identifier and
-skill name remain `mstest-extensions`. The display name is **MSTest Extensions**.
+The checked stack is **MSTest.Sdk/MSTest 4.5.1**, native **MTP 2.5.1**,
+**AllMicrosoft** and **Microsoft.CodeCoverage**. Consumer pins control actual API
+availability. The plugin identifier remains `mstest-extensions`; invoke `$mstest`
+or `$mstest-assertions`. The display name remains **MSTest Extensions**.
 See [CHANGELOG.md](CHANGELOG.md) for releases.
+
+The former nine additional skill entrypoints are now task references inside
+`mstest`. Their writing, execution, extension, review and AOT instructions remain
+available locally. The API catalog and runner fixtures have one owner; there are
+no sibling-skill links or copied reference trees. The unchanged upstream validator
+and reference-closure checks enforce this structure in CI.
 
 ## Staying current
 
 The skill resolves the **consumer's installed version on every task**. Its
-[inspector](skills/mstest-extensions/scripts/inspect_mstest.py) evaluates MSBuild,
+[inspector](skills/mstest/scripts/inspect_mstest.py) evaluates MSBuild,
 checks restored package requests, and records framework/adapter/MTP versions,
 SDK, target, source commits and assembly fingerprints. A changed version or
 fingerprint requires fresh API evidence before reusing guidance. This works for
 versions beyond those listed in the repository.
 
 ```sh
-python3 skills/mstest-extensions/scripts/inspect_mstest.py --project /path/to/tests.csproj
+python3 skills/mstest/scripts/inspect_mstest.py --project /path/to/tests.csproj
 # Refresh restore assets when appropriate for implementation:
-python3 skills/mstest-extensions/scripts/inspect_mstest.py --project /path/to/tests.csproj --restore
+python3 skills/mstest/scripts/inspect_mstest.py --project /path/to/tests.csproj --restore
 ```
 
 Use repeated `--property NAME=VALUE` for configuration/target/RID and `--previous`
@@ -53,8 +43,8 @@ instructions. An unchanged direct pin does not establish fresh transitive or
 floating resolution; restore when needed. XML documents help locate APIs;
 version-matched source and compilation establish their public contract.
 
-[Version resolution](skills/mstest-extensions/references/version-resolution.md)
-explains the workflow. [Known version notes](skills/mstest-extensions/references/version-notes.md)
+[Version resolution](skills/mstest/references/version-resolution.md)
+explains the workflow. [Known version notes](skills/mstest/references/version-notes.md)
 record the 4.4.1 → 4.5.1 delta, including argument display labels, optional
 hosting, built-in diagnostics and MTP changes. These are dated evidence, not a
 hardcoded support ceiling or guarantees for future releases.
@@ -69,13 +59,13 @@ The runner, hosting and native-consumer probes keep their independent .NET 10 ba
 
 The six adapted test workflows use native MSTest APIs rather than transferring
 another framework's execution or fixture assumptions. Their shared
-[quality reference](skills/mstest-extensions/references/test-quality.md) separates
+[quality reference](skills/mstest/references/test-quality.md) separates
 static findings, possible gaps and executed evidence without assertion quotas.
 
-[Failure-prevention lessons](skills/mstest-extensions/references/failure-prevention.md)
+[Failure-prevention lessons](skills/mstest/references/failure-prevention.md)
 turn capture/conversion/privacy findings into reusable examples of likely agent
 mistakes. They are independent of the original phase plan and project-specific
-scenario names. [Protocol examples](skills/mstest-extensions/references/telemetry-contracts.md)
+scenario names. [Protocol examples](skills/mstest/references/telemetry-contracts.md)
 remain available when that boundary is in scope.
 
 The AOT workflow distinguishes generated discovery, direct invocation, managed
@@ -152,7 +142,7 @@ codex plugin marketplace add ANcpLua/ancplua-dotnet
 codex plugin add mstest-extensions@ancplua-dotnet
 ```
 
-This installs the plugin's eleven native skills and their supporting files. Start a
+This installs the plugin's two native skills and their supporting files. Start a
 new session after installation. Use one active installation source for this plugin
 to avoid duplicate skill triggers. Marketplace distribution is separate from the
 OpenAI public directory review process.
@@ -172,7 +162,7 @@ Build an account-upload archive with:
 python3 scripts/package_plugin.py --output /tmp/mstest-extensions.zip
 ```
 
-The archive contains `plugin.json` and all eleven directories under `skills/`. Upload it
+The archive contains `plugin.json` and both directories under `skills/`. Upload it
 through Plugin Creator, then install the returned plugin in the intended account.
 After confirming installation, remove a duplicate standalone installation of
 the same skill from that host's discovery directory. Keep one active source.
@@ -189,11 +179,11 @@ python3 scripts/install.py
 python3 scripts/install.py --claude
 ```
 
-The default links all eleven skills under `~/.agents/skills` for Codex. `--claude`
+The default links both skills under `~/.agents/skills` for Codex. `--claude`
 also links them under `~/.claude/skills`. All destinations are checked before any
 link is created; existing unrelated destinations are preserved. Use `--agents-dir` / `--claude-dir` for custom discovery roots.
 
-Invoke `$mstest-extensions` with, for example: “Create a reusable MSTest data
+Invoke `$mstest` with, for example: “Create a reusable MSTest data
 attribute and custom assertion for these scenarios, including rejection tests.”
 
 ## Verification
@@ -258,7 +248,7 @@ or published with the skill.
 The plugin also packages an isolated capability verifier and its fixtures:
 
 ```sh
-python3 skills/mstest-extensions/scripts/verify_capabilities.py --mstest-sdk 4.5.1 --hosting --native-aot
+python3 skills/mstest/scripts/verify_capabilities.py --mstest-sdk 4.5.1 --hosting --native-aot
 ```
 
 It verifies seven discovered runner-policy cases across six real child runs:
@@ -270,7 +260,7 @@ The managed and osx-arm64 Native AOT published consumers each execute six cases:
 five pass and one deliberate typed-value rejection preserves its original
 failure. Generated invocation, original discovery locations, exact Int64 data
 arguments and async lifecycle ordering are checked independently. The full
-[evidence contract](skills/mstest-extensions/references/executable-evidence.md)
+[evidence contract](skills/mstest/references/executable-evidence.md)
 keeps versions, entrypoints and limits separate.
 
 These checks cover the stated fixtures. They do not establish optional hosting
@@ -287,7 +277,7 @@ suite (historical provenance; the current examples no longer target 4.4.1). The 
 guided the update; the sample suite on that branch still pins 4.4.1, so published
 4.5.1 packages were resolved and tested separately. Framework source is
 [microsoft/testfx](https://github.com/microsoft/testfx), with per-package commits
-recorded in the version notes. Portable [source routes](skills/mstest-extensions/references/sources.md)
+recorded in the version notes. Portable [source routes](skills/mstest/references/sources.md)
 always begin with the consumer's resolved API.
 
 ## License

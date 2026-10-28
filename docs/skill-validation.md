@@ -21,33 +21,50 @@ on pushes and pull requests; CI never applies automatic fixes.
 - `make verify-nami` and `make verify-mstest` run the package's executable evidence.
   `make -C packages/mstest-extensions check-mstest-api` verifies generated API docs.
 
-`mstest` owns API/version questions; `mstest-writing-tests` owns implementing tests;
-`mstest-assertions` owns precise assertion choices and corrections. Report-only
-assertion assessment stays in `mstest-assertion-review`. Read supporting references
-only for the current task; don't preload every sibling skill.
+`mstest` owns API lookup, implementation, execution, extension and review workflows.
+Each workflow remains a local reference loaded for its task. `mstest-assertions`
+owns precise built-in assertion choices and corrections. Both are usable without
+sibling skill files. The link checker enforces this boundary throughout their
+Markdown references, including repository URLs that would otherwise hide a dependency.
 
-## Upstream validator experiment — 2026-10-28
+## Upstream validator — 2026-10-28
 
 The official [dotnet/skills validator](https://github.com/dotnet/skills/blob/main/eng/skill-validator/src/README.md)
 provides a token-free static `check` and a separate model-based `evaluate` command.
 The latter compares baseline, individual skill and whole-plugin behavior; it is
 not implied by a passing linter or executable example suite.
 
-The official `skill-validator-nightly` macOS ARM64 archive published on 2026-10-27
-was checked against its published SHA-256:
+The initial check of eleven MSTest and three Nami skills returned **37 errors**,
+all from references that escaped their skill directories. Version 4.0.0 consolidates
+the overlapping MSTest entrypoints into two self-contained skills. Shared resources
+were moved to their single owner, and former entrypoints remain workflow references.
+No reference trees were copied and no validator rules were disabled.
+
+The same official macOS ARM64 binary published on 2026-10-27 now checks all **five
+current MSTest/Nami skills with zero errors**. Its archive SHA-256 is
 `c3deb61c0de0b98838cbf2c808a1f6cd683edd912fd1766d351226b6cd51674d`.
-
-Its static check of the eleven MSTest and three Nami skills returned **exit 1**:
-37 errors, all rejecting parent-directory links to sibling skills. The shared
-MSTest references deliberately ship together in one plugin. This validator's
-single-skill portability rule therefore does not accept the package's layout.
-The full local output is retained in `artifacts/skill-validator/upstream-check.json`.
-It is not reported as a passing check or installed as a silently weakened CI gate.
-The repository instead verifies those targets and package contents directly.
-
-The check also returned heuristic suggestions such as adding numbered steps or
-code blocks. Those are not evidence that a short review skill needs extra prose.
+Five heuristic warnings remain: assertion-skill length and suggestions for numbered
+steps or code blocks. These remain visible; short review guidance needs no filler.
 No fresh model-selection or baseline-versus-skill quality evaluation was run.
+
+Run `make check-skills` with Python 3.12+ and authenticated `gh`. The same command
+runs in CI and fetches the current official `skill-validator-nightly` release,
+selecting the platform asset by ID and verifying its published SHA-256. Archives
+are cached by digest; updated nightlies get a new cache entry. The release identity
+and full diagnostics are retained under `artifacts/skill-validator/` and uploaded
+by CI. An upstream error, download failure, checksum mismatch or missing skill
+fails the gate; there is no traversal exemption or ignored exit code.
+
+To reuse an already verified binary locally:
+
+```sh
+python3 scripts/check_skills.py --validator /path/to/skill-validator
+```
+
+The gate retains its original MSTest/Nami scope; the other packages retain their
+own validation. Consolidation changes the entrypoint count, not the covered
+workflows. Local link closure and archive checks cover the moved references and
+executable resources beyond the upstream entrypoint checks.
 
 ## Sources used for this setup
 

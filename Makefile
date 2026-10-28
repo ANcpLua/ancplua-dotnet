@@ -13,7 +13,7 @@ verify-nami:
 verify-mstest:
 	$(MAKE) -C packages/mstest-extensions verify-assertions
 	cd packages/mstest-extensions && python3 -B scripts/verify_versions.py 4.5.1
-	cd packages/mstest-extensions && python3 -B skills/mstest-extensions/scripts/verify_capabilities.py --mstest-sdk 4.5.1 --dotnet-sdk "$$(dotnet --version)" --hosting --native-aot
+	cd packages/mstest-extensions && python3 -B skills/mstest/scripts/verify_capabilities.py --mstest-sdk 4.5.1 --dotnet-sdk "$$(dotnet --version)" --hosting --native-aot
 
 verify-submission:
 	cd packages/prepare-plugin-submission && python3 -B -m unittest discover -s tests -v
@@ -22,3 +22,7 @@ verify-submission:
 .PHONY: check-docs
 check-docs:
 	npm run check:docs
+
+.PHONY: check-skills
+check-skills:
+	python3 -B scripts/check_skills.py

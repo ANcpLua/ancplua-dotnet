@@ -19,7 +19,7 @@ for entry in catalog['plugins']:
     manifest = json.loads((package / 'plugin.json').read_text())
     assert manifest['name'] == name, f'Wrong identity at {package}'
     skills = list((package / 'skills').glob('*/SKILL.md'))
-    assert len(skills) == {'ancplua-dotnet': 7, 'nami': 3, 'mstest-extensions': 11, 'prepare-plugin-submission': 1}[name]
+    assert len(skills) == {'ancplua-dotnet': 7, 'nami': 3, 'mstest-extensions': 2, 'prepare-plugin-submission': 1}[name]
     for skill in skills:
         text = skill.read_text()
         assert text.startswith('---\n'), f'Missing frontmatter: {skill}'

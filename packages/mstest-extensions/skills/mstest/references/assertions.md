@@ -1,7 +1,7 @@
 # Custom assertion extensions
 
 For built-in equality, collection, exception and AOT behavior, use the shared
-[assertion semantics](../../mstest-assertions/SKILL.md) when selecting an API.
+[version-matched framework sources](sources.md) when selecting an API.
 This reference covers implementing and testing reusable domain assertions.
 
 Use built-in `Assert` operations when they already express the expectation. A

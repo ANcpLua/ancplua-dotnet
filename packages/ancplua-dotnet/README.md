@@ -78,6 +78,12 @@ MSTest APIs and runner verification live in the companion repository.
 
 Move the source and marketplace into one repository. Skill behavior is unchanged.
 
+## 0.7.4
+
+Route native MSTest tasks to the consolidated `mstest` skill and focused built-in
+assertion corrections to `mstest-assertions`. General .NET responsibilities stay
+in this package; test instructions and references remain owned by the companion.
+
 ## 0.7.3
 
 Route API lookup and assertion corrections to the MSTest package and use the unified marketplace installation source.

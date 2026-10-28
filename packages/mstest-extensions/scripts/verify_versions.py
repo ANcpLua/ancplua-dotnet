@@ -57,7 +57,7 @@ def main():
             execute(command + ["--minimum-expected-tests", str(count)], workspace, evidence / "execution.log")
             execute([sys.executable, "scripts/verify_mstest_probes.py"], workspace, evidence / "probes.log")
             shutil.copytree(workspace / "artifacts/mstest-probes", evidence / "probes")
-            inspect_base = [sys.executable, "skills/mstest-extensions/scripts/inspect_mstest.py",
+            inspect_base = [sys.executable, "skills/mstest/scripts/inspect_mstest.py",
                             "--project", "examples/MSTestExtensionSamples/MSTestExtensionSamples.csproj",
                             "--property", "Configuration=Release"]
             inspect_command = inspect_base.copy()

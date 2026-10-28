@@ -1,5 +1,16 @@
 # Changelog
 
+## 4.0.0 — 2026-10-28
+
+- Consolidate the eleven entrypoints into `mstest` and `mstest-assertions`.
+  Former workflow entrypoints become local task references under `mstest`;
+  explicit callers should invoke `$mstest` with their requested task.
+- Move shared API/lifecycle/quality references, the inspector and executable runner
+  fixtures to their single owner. Preserve the independent assertion examples.
+- Require the unmodified upstream skill-validator, skill-local reference closure
+  and archive resource checks. No traversal exemptions or duplicated reference trees.
+
+
 ## 3.5.0 — 2026-10-28
 
 - Move `mstest` and `mstest-assertions` from Nami, including API generation, examples and verification.

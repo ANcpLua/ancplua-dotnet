@@ -18,8 +18,8 @@ def main():
         raise SystemExit("Plugin subtitle exceeds 30 characters")
     skills_root = root / "skills"
     skills = sorted(path.parent for path in skills_root.glob("*/SKILL.md"))
-    if skills_root / manifest["name"] not in skills:
-        raise SystemExit("The core plugin skill is missing")
+    if {skill.name for skill in skills} != {"mstest", "mstest-assertions"}:
+        raise SystemExit("Expected exactly the mstest and mstest-assertions skills")
     output = args.output.resolve()
     if output.is_relative_to(root):
         raise SystemExit("Write the archive outside the plugin directory")

@@ -28,5 +28,5 @@ Verify the affected project directly and through that entrypoint when they
 exercise different discovery paths. Require the intended test identities and
 executed counts; a successful build or a direct-project pass alone does not
 prove CI inclusion. Use the normal native MTP command syntax in
-[mstest-run-tests](../../mstest-run-tests/SKILL.md), retaining established
+[native execution](workflow-run-tests.md), retaining established
 repository commands. Do not add unrelated test cases to prove project wiring.

@@ -37,7 +37,7 @@ jobs:
       - name: Install the Native AOT toolchain
         run: sudo apt-get update && sudo apt-get install -y clang zlib1g-dev
       - name: Verify runner, hosting and published consumers
-        run: python3 skills/mstest-extensions/scripts/verify_capabilities.py --mstest-sdk 4.5.1 --dotnet-sdk "$(dotnet --version)" --hosting --native-aot
+        run: python3 skills/mstest/scripts/verify_capabilities.py --mstest-sdk 4.5.1 --dotnet-sdk "$(dotnet --version)" --hosting --native-aot
       - name: Verify requested version
         if: inputs.mstest_version != ''
         env:

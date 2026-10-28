@@ -40,7 +40,7 @@ See [execution](execution.md) and [lifecycle](lifecycle.md).
 Confirm native MTP from project/SDK imports, resolved packages, `global.json`
 and the repository's normal command. Preserve the native project shape and
 provider. Command selection, CLI filters and report options live in
-[mstest-run-tests](../../mstest-run-tests/SKILL.md); project and CI membership
+[native execution](workflow-run-tests.md); project and CI membership
 checks live in [test projects](test-projects.md). A non-native configuration is
 a mismatch to report, not a reason to add a VSTest bridge.
 

@@ -1,11 +1,6 @@
----
-name: mstest-assertion-review
-description: "Assess the strength and meaning of existing MSTest assertions without editing them. Use for tautological, shallow, conditional or incomplete oracles; concrete assertion fixes belong to mstest-assertions."
----
-
 # Assess assertion strength
 
-The [opinionated native stack](../mstest-extensions/references/native-stack.md)
+The [opinionated native stack](native-stack.md)
 is MSTest.Sdk 4.5.1 / MTP 2.5.1 with `AllMicrosoft` and Microsoft.CodeCoverage.
 
 Follow the executed check through helpers and child reports before deciding it
@@ -28,7 +23,7 @@ shape. Expected/actual order and specific typed assertions improve failure
 output, but no custom fluent API or new assertion framework is implied. Keep a
 source-proven weakness distinct from an unexecuted hypothetical fault.
 
-[Assertion semantics](../mstest-assertions/SKILL.md) supplies precise API behavior
+[Resolved assertion APIs](assertions.md) supplies precise API behavior
 when the review depends on equality, collection or exception semantics;
-[quality guidance](../mstest-extensions/references/test-quality.md) calibrates
+[quality guidance](test-quality.md) calibrates
 independent evidence and required preconditions.
