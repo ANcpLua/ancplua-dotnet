@@ -9,7 +9,7 @@ complete contract, as defined by the standalone
 [assertion skill](../../mstest-assertions/SKILL.md). Versions in the tables are
 historical evidence, not a reason to recommend weaker or legacy assertions.
 
-For fixture ownership, cleanup order and setup failures, use [Lifecycle and cleanup](../../fixture-scope/references/mstest-lifecycle.md). Review existing cleanup before adding another hook or helper.
+For fixture ownership, cleanup order and setup failures, use [Lifecycle and cleanup](../../mstest-extensions/references/lifecycle.md). Review existing cleanup before adding another hook or helper.
 
 ## Platform and MSBuild
 

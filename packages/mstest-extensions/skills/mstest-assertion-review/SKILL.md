@@ -1,6 +1,6 @@
 ---
 name: mstest-assertion-review
-description: "Assess the strength and meaning of existing MSTest assertions without editing them. Use for tautological, shallow, conditional or incomplete oracles; concrete assertion fixes belong to mstest-writing-tests."
+description: "Assess the strength and meaning of existing MSTest assertions without editing them. Use for tautological, shallow, conditional or incomplete oracles; concrete assertion fixes belong to mstest-assertions."
 ---
 
 # Assess assertion strength
@@ -28,6 +28,7 @@ shape. Expected/actual order and specific typed assertions improve failure
 output, but no custom fluent API or new assertion framework is implied. Keep a
 source-proven weakness distinct from an unexecuted hypothetical fault.
 
-[Assertions](../mstest-extensions/references/assertions.md) describes native APIs;
+[Assertion semantics](../mstest-assertions/SKILL.md) supplies precise API behavior
+when the review depends on equality, collection or exception semantics;
 [quality guidance](../mstest-extensions/references/test-quality.md) calibrates
 independent evidence and required preconditions.

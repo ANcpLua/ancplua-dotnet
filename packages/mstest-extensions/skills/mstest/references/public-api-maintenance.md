@@ -2,11 +2,11 @@
 
 ## Files
 
-- `plugins/nami/skills/mstest/scripts/versions.yaml`: versions and source files (below).
-- `plugins/nami/skills/mstest/scripts/generate_api.py`: run from the repo root with `python plugins/nami/skills/mstest/scripts/generate_api.py`. It resolves each tag to its commit itself and treats the highest version as current.
-- `plugins/nami/skills/mstest/scripts/api_table.md.j2`: template for the output.
-- `plugins/nami/skills/mstest/references/public-api.md`: the generated reference that the MSTest and fixture-scope skills link to.
-- `plugins/nami/skills/fixture-scope/references/mstest-lifecycle.md`: hand-maintained lifecycle and configuration guidance with upstream sources. Keep this separate from the generated symbol table; API declarations do not specify lifecycle or JSON behavior.
+- `skills/mstest/scripts/versions.yaml`: versions and source files (below).
+- `skills/mstest/scripts/generate_api.py`: run from the `packages/mstest-extensions` directory with `python skills/mstest/scripts/generate_api.py`. It resolves each tag to its commit itself and treats the highest version as current.
+- `skills/mstest/scripts/api_table.md.j2`: template for the output.
+- `skills/mstest/references/public-api.md`: the generated reference that the MSTest skills link to.
+- `skills/mstest-extensions/references/lifecycle.md`: hand-maintained lifecycle and configuration guidance with upstream sources. Keep this separate from the generated symbol table; API declarations do not specify lifecycle or JSON behavior.
 
 The workflow `.github/workflows/sync-api-status.yml` regenerates the reference when one of the first three files changes on `main`.
 
@@ -64,7 +64,7 @@ The published packages match the tags: the public types and members of `MSTest.T
 
 ## Reference
 
-The list for the configured files is `plugins/nami/skills/mstest/references/public-api.md`. It has 1279 symbols: 1016 first seen in 4.3.0, 257 in 4.4.1 and 6 in 4.5.1. Nothing was removed and no API changed its experimental status between these versions. The extension-file additions include `TestContext`, `AddResultFile` and `TestTempDirectory`; behavior is documented in `plugins/nami/skills/fixture-scope/references/mstest-lifecycle.md`.
+The list for the configured files is `skills/mstest/references/public-api.md`. It has 1279 symbols: 1016 first seen in 4.3.0, 257 in 4.4.1 and 6 in 4.5.1. Nothing was removed and no API changed its experimental status between these versions. The extension-file additions include `TestContext`, `AddResultFile` and `TestTempDirectory`; behavior is documented in `skills/mstest-extensions/references/lifecycle.md`.
 
 The 4.5.1 additions, as generated:
 

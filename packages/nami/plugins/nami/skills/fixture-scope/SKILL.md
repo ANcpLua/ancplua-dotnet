@@ -26,9 +26,10 @@ exercise shared class state, per-invocation isolation, distinct classes and clea
 Read [MSTest lifecycle](references/mstest-lifecycle.md) for API signatures,
 cleanup ordering, host injection restrictions and temporary-file behavior.
 Read [ownership boundaries](references/ownership.md) before changing retention.
-Use the sibling [MSTest assertion skill](../mstest-assertions/SKILL.md) to select
+For assertion-specific work, use `mstest-extensions:mstest-assertions`
+([source](https://github.com/ANcpLua/ancplua-dotnet/blob/main/packages/mstest-extensions/skills/mstest-assertions/SKILL.md)) to select
 the most precise 4.5.1 assertion for the intended contract, and the
-[MSTest skill](../mstest/SKILL.md) for general APIs.
+`mstest-extensions:mstest` ([source](https://github.com/ANcpLua/ancplua-dotnet/blob/main/packages/mstest-extensions/skills/mstest/SKILL.md)) for general APIs.
 
 Do not add a daemon, scheduler, unconditional archive or new retention policy.
 Respect the repository's existing policy. Scope disposal works during normal

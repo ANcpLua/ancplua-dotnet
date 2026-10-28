@@ -4,12 +4,12 @@ One repository for the ANcpLua .NET plugin marketplace, source packages and veri
 
 | Plugin | Source | Current package |
 | --- | --- | --- |
-| `ancplua-dotnet` | [General .NET workflows](packages/ancplua-dotnet/README.md) | 0.7.2; seven skills |
-| `nami` | [Unions, MSTest APIs/assertions, fixtures and Codex messaging](packages/nami/README.md) | 0.1.2; five skills |
-| `mstest-extensions` | [Native MSTest/MTP execution and specialized testing](packages/mstest-extensions/README.md) | 3.4.4; nine skills |
+| `ancplua-dotnet` | [General .NET workflows](packages/ancplua-dotnet/README.md) | 0.7.3; seven skills |
+| `nami` | [Unions, fixtures and Codex messaging](packages/nami/README.md) | 0.1.3; three skills |
+| `mstest-extensions` | [Native MSTest/MTP execution and specialized testing](packages/mstest-extensions/README.md) | 3.5.0; eleven skills |
 | `prepare-plugin-submission` | [Submission Studio](packages/prepare-plugin-submission/README.md) | 2.3.0; one skill, identical to the verified Account release |
 
-The public plugins keep their existing names and responsibilities. Nami supplies the current MSTest API/assertion and union guidance; general build/package work belongs to `ancplua-dotnet`; specialized runner and extension workflows belong to `mstest-extensions`.
+The public plugins keep their existing names and responsibilities. Nami supplies union, fixture-ownership and Codex messaging guidance. General build/package work belongs to `ancplua-dotnet`; MSTest APIs, assertions, runner and extension workflows belong to `mstest-extensions`.
 
 ## Install
 
@@ -29,9 +29,14 @@ Submission Studio 2.3.0 was imported from the Account release with the owner's e
 
 ```sh
 make check
+npm ci --ignore-scripts
+make check-docs
 make verify-nami
 make verify-mstest
 ```
+
+[Skill and documentation validation](docs/skill-validation.md) records the linter,
+link checks and the limits of the upstream skill-validator experiment.
 
 Each package retains its original tests, compiler pins and helpers. Root GitHub workflows run those checks with the appropriate package working directory. Package licenses remain in their respective directories.
 

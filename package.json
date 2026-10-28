@@ -1,0 +1,18 @@
+{
+  "name": "ancplua-plugin-maintenance",
+  "private": true,
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "lint:markdown": "markdownlint-cli2",
+    "check:links": "node scripts/check_markdown_links.mjs",
+    "test:links": "node --test scripts/check_markdown_links.test.mjs",
+    "check:docs": "npm run lint:markdown && npm run test:links && npm run check:links"
+  },
+  "devDependencies": {
+    "markdownlint-cli2": "0.24.0",
+    "markdown-it": "15.0.3",
+    "github-slugger": "2.0.0"
+  }
+}

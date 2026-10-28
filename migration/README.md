@@ -13,3 +13,7 @@ The Account installation remains private, version 2.3.0. This Git marketplace di
 ## Import diagnostics
 
 The unchanged Account archive contains 34 text files with an extra blank line at EOF. The initial staged `git diff --check` reports those inherited formatting diagnostics. They are retained to preserve the exact verified 2.3.0 source; this is not reported as a clean whitespace check. The 72 package tests, five workflow tests and connector-kit TypeScript build pass.
+
+On 2026-10-28, `mstest` and `mstest-assertions` moved from the Nami package to
+`packages/mstest-extensions/skills/`, including their maintenance and verification.
+The original source inventory remains an immutable import receipt, not the current layout.

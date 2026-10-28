@@ -1,6 +1,6 @@
 # MSTest Extensions plugin
 
-A portable plugin with nine focused skills for native MSTest testing. Choose the
+A portable plugin with eleven focused skills for native MSTest testing. Choose the
 workflow matching the request; references load only when that task needs them.
 The opinionated stack is **MSTest.Sdk 4.5.1 / MSTest 4.5.1**, native
 **Microsoft.Testing.Platform 2.5.1**, **AllMicrosoft** and
@@ -9,8 +9,10 @@ MTP 2.5.1 is the platform version, not the MSTest.Sdk version.
 
 | Skill | Use it for |
 | --- | --- |
+| [mstest](skills/mstest/SKILL.md) | Version-checked API lookup, release differences and generated symbol catalog. |
+| [mstest-assertions](skills/mstest-assertions/SKILL.md) | Precise built-in assertion selection and corrections, equality and AOT semantics. |
 | [mstest-extensions](skills/mstest-extensions/SKILL.md) | Reusable data, assertions, execution composition, policies and fixtures. |
-| [mstest-writing-tests](skills/mstest-writing-tests/SKILL.md) | Test edits, built-in API explanations, project creation and CI inclusion. |
+| [mstest-writing-tests](skills/mstest-writing-tests/SKILL.md) | Test edits, project creation and CI inclusion. |
 | [mstest-run-tests](skills/mstest-run-tests/SKILL.md) | Native MTP commands, discovery, filters, TRX and coverage. |
 | [mstest-test-review](skills/mstest-test-review/SKILL.md) | Practical report-only correctness and maintainability review. |
 | [mstest-test-smells](skills/mstest-test-smells/SKILL.md) | A requested formal test-smell taxonomy audit. |
@@ -19,13 +21,13 @@ MTP 2.5.1 is the platform version, not the MSTest.Sdk version.
 | [mstest-test-gaps](skills/mstest-test-gaps/SKILL.md) | Caller-visible outcomes the current tests would miss. |
 | [mstest-native-aot](skills/mstest-native-aot/SKILL.md) | Generated invocation, trimming and published Native AOT consumers. |
 
-The package includes 15 shared references, scripts and executable assets.
+The package includes task-specific references, scripts and executable assets.
 Skills have separate triggers and outputs; they do not load all siblings for
 every test request. This follows the official
 [skill and plugin guidance](https://learn.chatgpt.com/docs/skills-and-plugins?site_locale=en)
 and [focused skill guidance](https://learn.chatgpt.com/docs/build-skills?site_locale=en).
 
-The repository is `mstest-extensions-plugin`; the stable plugin identifier and
+The source lives in `ancplua-dotnet/packages/mstest-extensions`; the stable plugin identifier and
 skill name remain `mstest-extensions`. The display name is **MSTest Extensions**.
 See [CHANGELOG.md](CHANGELOG.md) for releases.
 
@@ -58,6 +60,12 @@ hosting, built-in diagnostics and MTP changes. These are dated evidence, not a
 hardcoded support ceiling or guarantees for future releases.
 
 ## Current maintenance
+
+`make update-mstest-api` regenerates the public API reference from the configured
+release tags; `make check-mstest-api` checks without writing. The Python dependencies
+are locked with uv. `make verify-assertions` runs the relocated 18-case assertion
+suite and positive/negative AOT analysis with its original pinned .NET 11 SDK.
+The runner, hosting and native-consumer probes keep their independent .NET 10 baseline.
 
 The six adapted test workflows use native MSTest APIs rather than transferring
 another framework's execution or fixture assumptions. Their shared
@@ -137,14 +145,14 @@ version-specific and do not establish fresh model behavior for later releases.
 
 ## Installation
 
-Install publicly from the [ANcpLua Codex marketplace](https://github.com/ANcpLua/ancplua-openai):
+Install publicly from the [ANcpLua Codex marketplace](https://github.com/ANcpLua/ancplua-dotnet):
 
 ```sh
-codex plugin marketplace add ANcpLua/ancplua-openai
-codex plugin add mstest-extensions@ancplua-openai
+codex plugin marketplace add ANcpLua/ancplua-dotnet
+codex plugin add mstest-extensions@ancplua-dotnet
 ```
 
-This installs the plugin's nine native skills and their supporting files. Start a
+This installs the plugin's eleven native skills and their supporting files. Start a
 new session after installation. Use one active installation source for this plugin
 to avoid duplicate skill triggers. Marketplace distribution is separate from the
 OpenAI public directory review process.
@@ -164,7 +172,7 @@ Build an account-upload archive with:
 python3 scripts/package_plugin.py --output /tmp/mstest-extensions.zip
 ```
 
-The archive contains `plugin.json` and all nine directories under `skills/`. Upload it
+The archive contains `plugin.json` and all eleven directories under `skills/`. Upload it
 through Plugin Creator, then install the returned plugin in the intended account.
 After confirming installation, remove a duplicate standalone installation of
 the same skill from that host's discovery directory. Keep one active source.
@@ -181,7 +189,7 @@ python3 scripts/install.py
 python3 scripts/install.py --claude
 ```
 
-The default links all nine skills under `~/.agents/skills` for Codex. `--claude`
+The default links all eleven skills under `~/.agents/skills` for Codex. `--claude`
 also links them under `~/.claude/skills`. All destinations are checked before any
 link is created; existing unrelated destinations are preserved. Use `--agents-dir` / `--claude-dir` for custom discovery roots.
 

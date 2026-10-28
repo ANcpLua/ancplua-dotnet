@@ -1,19 +1,14 @@
----
-name: mstest
-description: Write tests with MSTest 4.5.1 APIs on Microsoft.Testing.Platform, covering precise assertions, soft assertions, combinatorial data, dependencies, resource locks, execution conditions and host-owned dependency injection. Use when writing new tests or modernizing existing ones.
----
-
-# Writing modern MSTest tests
+# MSTest 4.5.1 API examples
 
 Checked against `microsoft/testfx` at `v4.5.1` and the published NuGet packages. Version notes give the release that introduced an API; "4.5" means 4.5.1, since no 4.5.0 package was published. APIs marked experimental need `#pragma warning disable MSTESTEXP`.
 
-Before using an API not shown here, search [`references/public-api.md`](references/public-api.md) for its type or member name. It lists the public symbols from the configured framework, framework extensions and hosting API files. "Introduced" means first seen among the compared releases, not necessarily the API's original release.
+Before using an API not shown here, search [`references/public-api.md`](public-api.md) for its type or member name. It lists the public symbols from the configured framework, framework extensions and hosting API files. "Introduced" means first seen among the compared releases, not necessarily the API's original release.
 
 ## Integration and end-to-end resource ownership
 
 Use the same lifecycle APIs for unit, integration and end-to-end tests. Choose the cleanup scope from the resource's owner: `await using` within a test, `IAsyncDisposable` or `[TestCleanup]` for a test instance, `[ClassCleanup]` for a shared class fixture, and `[AssemblyCleanup]` for an assembly fixture. A consuming test must not dispose a resource owned by its class or assembly.
 
-Read [Lifecycle and cleanup](../fixture-scope/references/mstest-lifecycle.md) when adding or changing fixtures. It covers failure during setup, cleanup order, shared assembly providers, temporary files and the distinction between an AOT test host and an AOT application under test. Preserve the repository's existing fixture owners and file-retention policy. Do not introduce a separate diagnostics collection or retention system as part of a cleanup change.
+Read [Lifecycle and cleanup](../../mstest-extensions/references/lifecycle.md) when adding or changing fixtures. It covers failure during setup, cleanup order, shared assembly providers, temporary files and the distinction between an AOT test host and an AOT application under test. Preserve the repository's existing fixture owners and file-retention policy. Do not introduce a separate diagnostics collection or retention system as part of a cleanup change.
 
 ## Test classes
 
@@ -86,65 +81,10 @@ These restrictions apply to the test host. A managed E2E test host can launch a 
 
 ## Assertions
 
-The highest priority is the most specific **MSTest 4.5.1** assertion that proves
-the entire intended contract and gives useful failure evidence. Read
-[MSTest assertion semantics](../mstest-assertions/SKILL.md) before replacing or
-selecting an assertion. Its executable examples cover identity, equality,
-ordering, multiplicity, strict graph comparison and NativeAOT restrictions.
-Improve a weaker assertion directly, but do not add new requirements merely
-because the current implementation satisfies them. Preserving an owner value
-does not by itself promise the same object instance. Validate the affected change
-and finish; an ordinary assertion edit does not require a new full-suite audit.
-
-Use `Assert.*` instead of `CollectionAssert` (`MSTEST0068`) and `StringAssert`
-(`MSTEST0046`). Do not offer those legacy APIs, generic Boolean expressions or
-count-only checks when a 4.5.1 assertion describes the required behavior more
-precisely. A real Boolean result still belongs in `IsTrue`/`IsFalse`; operator
-contracts must retain their operator semantics. Check the actual package asset
-rather than copying an older-version fallback.
-
-```csharp
-// Order matters by default; on modern .NET there are Span overloads.
-Assert.AreSequenceEqual(expected, actual);
-Assert.AreSequenceEqual(expected, actual, SequenceOrder.InAnyOrder); // replaces CollectionAssert.AreEquivalent
-
-// A graph contract: strict rejects extra actual members/keys.
-// An eligible IEquatable<T> on the static type still stops recursive traversal.
-Assert.AreEquivalent(expectedOrder, actualOrder, strict: true);
-
-// Predicate first, collection second; returns the matching item.
-Customer vip = Assert.ContainsSingle(static c => c.IsVip, customers);
-
-Assert.ContainsAll(expectedSubset, actual);
-Assert.AreAllNotNull(actual);
-Assert.AreAllDistinct(actual);
-Assert.AreAllOfType<ProcessedEvent>(events);
-
-Assert.IsInRange(minValue: 1, maxValue: 100, score);
-Assert.IsPositive(balanceDelta);
-await Assert.ThrowsExactlyAsync<InvalidOperationException>(() => sut.CommitAsync(context.CancellationToken));
-```
-
-For independent status and content requirements, use their specific assertions:
-
-```csharp
-Assert.AreEqual(200, response.StatusCode);
-Assert.IsNotEmpty(response.Items);
-```
-
-Reserve `Assert.That(() => ...)` expression diagnostics for a compound contract
-better expressed as a whole. It is a C# 14 extension member; the static spelling
-is `AssertExtensions.That(...)`. In 4.5.1 that expression API requires dynamic
-code. It is different from the `Assert.That` singleton for custom extensions.
-`AreEquivalent`/`AreNotEquivalent` also have trimming and dynamic-code requirements;
-use the assertion skill's typed alternatives when the test host must support AOT.
-Do not weaken the behavioral contract to avoid a diagnostic.
-
-To control how a type appears in failure messages, register a formatter (experimental). It returns an `IDisposable` that removes it again:
-
-```csharp
-using IDisposable _ = Assert.AddValueFormatter<Money>(static m => $"{m.Amount} {m.Currency}");
-```
+For assertion selection or corrections, read the focused
+[MSTest assertion skill](../../mstest-assertions/SKILL.md). It owns the equality,
+collection, exception and AOT semantics and executable positive/negative examples.
+The API catalog describes signatures; it does not establish their behavior.
 
 ## Combinatorial data (4.4)
 
@@ -229,6 +169,6 @@ A programmatic assembly-wide filter is registered with `[assembly: TestFilterPro
 
 - `output.captureTrace` takes `None`, `Result` or `Live` (4.4); `Live` streams console and trace output while the test runs. `true` and `false` still work and mean `Result` and `None`.
 - `execution.captureAssertionFailureDiagnostics` (4.5, default `false`) writes up to three JSON snapshots per failed attempt (`mstest-assertion-failure-state-attempt-*-invocation-*-capture-*.json`) and attaches them to the failed result. It does nothing under Native AOT, on browser/WASI or on UWP/WinUI.
-- Check JSON keys against the pinned schema, not a copied `.runsettings` table. `captureOutput`, `execution.considerFixturesAsSpecialTests` and `execution.treatClassAndAssemblyCleanupWarningsAsErrors` are not properties in that 4.5.1 schema. See the [configuration notes](../fixture-scope/references/mstest-lifecycle.md#configuration-and-version-checks).
+- Check JSON keys against the pinned schema, not a copied `.runsettings` table. `captureOutput`, `execution.considerFixturesAsSpecialTests` and `execution.treatClassAndAssemblyCleanupWarningsAsErrors` are not properties in that 4.5.1 schema. See the [configuration notes](../../mstest-extensions/references/version-resolution.md).
 
-For suite reviews, use the local [anti-pattern reference](references/antipatterns.md). For resource ownership, use the [fixture-scope skill](../fixture-scope/SKILL.md).
+For suite reviews, use the local [anti-pattern reference](antipatterns.md). For resource ownership, use the [lifecycle reference](../../mstest-extensions/references/lifecycle.md).

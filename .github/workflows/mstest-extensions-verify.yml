@@ -28,6 +28,7 @@ jobs:
         run: |
           python3 scripts/test_inspect.py
           python3 scripts/test_install.py
+          python3 scripts/test_package.py
           python3 scripts/check_links.py
           python3 scripts/package_plugin.py --output "$RUNNER_TEMP/mstest-extensions.zip"
           git diff --check
@@ -49,3 +50,17 @@ jobs:
           path: |
             packages/mstest-extensions/artifacts/compatibility/
             packages/mstest-extensions/artifacts/mstest-capabilities/
+  api-and-assertions:
+    defaults:
+      run:
+        working-directory: packages/mstest-extensions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
+        with:
+          global-json-file: packages/mstest-extensions/skills/mstest-assertions/examples/global.json
+      - run: make check-mstest-api verify-assertions
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

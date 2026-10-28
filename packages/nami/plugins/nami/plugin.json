@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "nami",
-  "version": "0.1.2",
-  "description": "C# unions, MSTest 4.5.1 APIs and assertion semantics, and explicit fixture ownership.",
+  "version": "0.1.3",
+  "description": "C# unions, explicit MSTest fixture ownership, and native Codex messaging.",
   "author": {
     "name": "ANcpLua"
   },
@@ -10,7 +10,7 @@
     "com.openai": {
       "interface": {
         "displayName": "nami",
-        "shortDescription": ".NET tests and union types",
+        "shortDescription": "Unions, fixtures and messaging",
         "developerName": "ANcpLua",
         "category": "Developer Tools",
         "capabilities": []

@@ -1,6 +1,6 @@
 ---
 name: mstest-writing-tests
-description: "Write, correct or explain native MSTest tests, built-in assertions, attributes and lifecycle. Create test projects or repair solution/CI inclusion. Reusable extension design belongs to mstest-extensions; execution-only requests and report-only reviews have focused skills."
+description: "Write or correct native MSTest tests, attributes and lifecycle. Create test projects or repair solution/CI inclusion. Reusable extension design belongs to mstest-extensions; execution-only requests and report-only reviews have focused skills."
 ---
 
 # Write native MSTest tests
@@ -24,8 +24,9 @@ CI entrypoint; a standalone green run does not prove that entrypoint finds it.
 For project creation or missing solution/CI inclusion, read
 [project discovery](../mstest-extensions/references/test-projects.md).
 
-For a built-in API or configuration question, read only the relevant reference
-and explain the native behavior; advice alone needs no edits or test run.
+For API availability or configuration questions, use [mstest](../mstest/SKILL.md).
+For a targeted assertion correction, use [mstest-assertions](../mstest-assertions/SKILL.md).
+Load those details only when the current implementation needs them.
 Execution-only requests belong to [mstest-run-tests](../mstest-run-tests/SKILL.md).
 
 Use `[TestMethod]` with native `[DataRow]` for independently selectable constant
@@ -53,7 +54,7 @@ remain sequential even in async code; concurrency applies to independent work.
 Use the focused test entrypoint for compilation and execution, retaining native
 failures and diagnostics. A real child runner is useful when runner outcomes or
 process isolation are the contract; it is not a substitute for an ordinary unit
-test. [Assertions](../mstest-extensions/references/assertions.md),
+test. [Built-in assertion semantics](../mstest-assertions/SKILL.md),
 [data](../mstest-extensions/references/data.md) and
 [lifecycle](../mstest-extensions/references/lifecycle.md) contain the relevant API details.
 Read lifecycle's process-global state guidance before changing environment

@@ -12,4 +12,4 @@ Sources: [OpenAI packaging](https://developers.openai.com/plugins/build/plugins)
 [OpenAI skills](https://learn.chatgpt.com/docs/build-skills),
 [Claude Code skills](https://code.claude.com/docs/en/skills).
 
-The package is distributed through `ancplua-openai`. Its former standalone `nami` marketplace has been retired; package validation does not require a local catalog.
+The package is distributed through `ancplua-dotnet`. Its former standalone `nami` marketplace has been retired; package validation does not require a local catalog.

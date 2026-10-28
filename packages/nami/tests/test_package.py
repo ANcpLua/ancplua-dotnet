@@ -18,21 +18,21 @@ class PackageTests(unittest.TestCase):
     def tearDown(self):
         self.temporary.cleanup()
 
-    def test_package_has_five_self_contained_skills(self):
+    def test_package_has_three_self_contained_skills(self):
         self.assertEqual([], validate(self.root))
 
-    def test_missing_assertion_example_is_rejected(self):
-        (self.root / 'plugins/nami/skills/mstest-assertions/examples/EqualityExamples.cs').unlink()
+    def test_missing_fixture_example_is_rejected(self):
+        (self.root / 'plugins/nami/skills/fixture-scope/examples/FixtureLifecycleTests.cs').unlink()
         self.assertTrue(any('missing destination' in error for error in validate(self.root)))
 
-    def test_unexpected_sixth_skill_is_rejected(self):
+    def test_unexpected_fourth_skill_is_rejected(self):
         extra = self.root / 'plugins/nami/skills/extra'
         extra.mkdir()
         (extra / 'SKILL.md').write_text('---\nname: extra\ndescription: Unexpected skill\n---\n')
-        self.assertTrue(any('Expected exactly five skills' in error for error in validate(self.root)))
+        self.assertTrue(any('Expected exactly three skills' in error for error in validate(self.root)))
 
     def test_missing_skill_is_rejected(self):
-        (self.root / 'plugins/nami/skills/mstest/SKILL.md').unlink()
+        (self.root / 'plugins/nami/skills/fixture-scope/SKILL.md').unlink()
         with self.assertRaises(FileNotFoundError):
             validate(self.root)
 

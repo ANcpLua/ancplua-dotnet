@@ -7,7 +7,9 @@ scope: a read-only audit remains read-only after delegation.
 
 | Task | Companion skill |
 | --- | --- |
-| Test/project edits, built-in APIs, lifecycle, solution or CI inclusion | `mstest-extensions:mstest-writing-tests` |
+| Test/project edits, lifecycle, solution or CI inclusion | `mstest-extensions:mstest-writing-tests` |
+| API availability, version comparisons and built-in behavior | `mstest-extensions:mstest` |
+| Precise assertion selection or correction | `mstest-extensions:mstest-assertions` |
 | Commands, runner identification, discovery, filtering, TRX, coverage, zero tests | `mstest-extensions:mstest-run-tests` |
 | Reusable data/assertions, execution attributes, policies, fixtures, custom filters | `mstest-extensions:mstest-extensions` |
 | Practical report-only quality, flakiness and maintainability review | `mstest-extensions:mstest-test-review` |
@@ -20,10 +22,10 @@ scope: a read-only audit remains read-only after delegation.
 Keep general MSBuild evaluation/imports, NuGet version chains, analyzer loading
 and severities, and release artifact integrity in this plugin. For mixed tasks,
 use those skills for their part and the companion for MSTest semantics. Do not
-copy test instructions back here or preload all nine skills for every audit.
+copy test instructions back here or preload all skills for every audit.
 
 If the companion is unavailable, report the missing plugin and use the host's
-supported installation flow. For Codex, install `mstest-extensions@ancplua-openai`
-from [ANcpLua/ancplua-openai](https://github.com/ANcpLua/ancplua-openai). Follow the
-[companion installation guide](https://github.com/ANcpLua/mstest-extensions-plugin#installation)
+supported installation flow. For Codex, install `mstest-extensions@ancplua-dotnet`
+from [ANcpLua/ancplua-dotnet](https://github.com/ANcpLua/ancplua-dotnet). Follow the
+[companion installation guide](https://github.com/ANcpLua/ancplua-dotnet/tree/main/packages/mstest-extensions#installation)
 for other hosts. Do not claim an unavailable skill was invoked.

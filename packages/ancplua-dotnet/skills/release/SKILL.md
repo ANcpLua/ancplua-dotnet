@@ -35,7 +35,7 @@ its own last published version, never the one being built. Consumers move last, 
   - **Push-driven:** `on: push: branches: [main]`. CI bumps the patch from the latest `v*` tag
     and creates the tag itself. Don't tag by hand.
   - **Manual:** a `release.sh` with an API key read from a file. Run it from a clean tree.
-- Look for a publish gate ("no publishable changes since <tag> — skipping"). A commit that changes
+- Look for a publish gate ("no publishable changes since `<tag>` — skipping"). A commit that changes
   only `global.json`, docs or CI is often skipped on purpose. Don't force an identical package
   through it.
 - The new version string must not exist yet:
@@ -129,4 +129,4 @@ For each consumer repository in the chain:
 
 For every layer, give the repository, commit, tag or version, publish run conclusion and index
 status, and for consumers the files changed. A layer whose gate skipped publishing is reported
-as "committed, publish skipped by gate (<reason>)", not as released.
+as "committed, publish skipped by gate (`<reason>`)", not as released.

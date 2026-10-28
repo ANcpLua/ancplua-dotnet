@@ -35,7 +35,7 @@ def main():
     for path in sorted(skills_root.rglob("*")):
         if path.is_symlink():
             raise SystemExit(f"Symlinks cannot be packaged: {path}")
-        if path.is_file() and not {"__pycache__", "bin", "obj", "artifacts"}.intersection(path.parts) and path.suffix in {".md", ".yaml", ".py", ".cs", ".csproj", ".props", ".json"}:
+        if path.is_file() and not {"__pycache__", "bin", "obj", "artifacts"}.intersection(path.parts) and path.suffix in {".md", ".yaml", ".py", ".cs", ".csproj", ".props", ".json", ".j2"}:
             files.append(path)
     output.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(output, "w", zipfile.ZIP_DEFLATED) as archive:

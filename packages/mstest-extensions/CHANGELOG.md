@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.5.0 — 2026-10-28
+
+- Move `mstest` and `mstest-assertions` from Nami, including API generation, examples and verification.
+- Distinguish API lookup, test implementation, assertion correction and report-only review.
+- Keep package-local references and include the API generator template in upload archives.
+
 ## 3.4.3 — 2026-10-19
 
 - Display Alexander Nachtmann consistently as the developer and maintainer.

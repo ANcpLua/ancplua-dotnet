@@ -78,6 +78,10 @@ MSTest APIs and runner verification live in the companion repository.
 
 Move the source and marketplace into one repository. Skill behavior is unchanged.
 
+## 0.7.3
+
+Route API lookup and assertion corrections to the MSTest package and use the unified marketplace installation source.
+
 ## 0.7.1
 
 Correct the [privacy policy](PRIVACY.md): the only release helper, `scripts/wait-nuget.sh`,

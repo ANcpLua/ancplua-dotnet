@@ -4,8 +4,8 @@ description: >-
   Design, explain, implement or troubleshoot reusable native MSTest extensions:
   custom data and assertions, execution attributes, policies, fixtures and
   programmatic filters. Includes extension API questions and planning without
-  a consumer project. Ordinary tests, built-in API questions and project setup
-  belong to mstest-writing-tests; test commands belong to mstest-run-tests.
+  a consumer project. Ordinary tests and project setup belong to mstest-writing-tests;
+  built-in API questions belong to mstest; test commands belong to mstest-run-tests.
   Report-only test-quality reviews and Native AOT have focused sibling skills.
 ---
 

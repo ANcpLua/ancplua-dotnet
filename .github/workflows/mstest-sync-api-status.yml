@@ -4,11 +4,11 @@ on:
   push:
     branches: [main]
     paths:
-      - packages/nami/plugins/nami/skills/mstest/scripts/versions.yaml
-      - packages/nami/plugins/nami/skills/mstest/scripts/generate_api.py
-      - packages/nami/plugins/nami/skills/mstest/scripts/api_table.md.j2
-      - packages/nami/pyproject.toml
-      - packages/nami/uv.lock
+      - packages/mstest-extensions/skills/mstest/scripts/versions.yaml
+      - packages/mstest-extensions/skills/mstest/scripts/generate_api.py
+      - packages/mstest-extensions/skills/mstest/scripts/api_table.md.j2
+      - packages/mstest-extensions/pyproject.toml
+      - packages/mstest-extensions/uv.lock
   workflow_dispatch:
 
 permissions:
@@ -21,7 +21,7 @@ jobs:
   generate-docs:
     defaults:
       run:
-        working-directory: packages/nami
+        working-directory: packages/mstest-extensions
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -32,7 +32,7 @@ jobs:
 
       - name: Commit changes
         run: |
-          git add plugins/nami/skills/mstest/references/public-api.md
+          git add skills/mstest/references/public-api.md
           if git diff --cached --quiet; then
             echo "Keine Änderungen."
             exit 0

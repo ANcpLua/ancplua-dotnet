@@ -98,4 +98,3 @@ Removed with no successor: `AL0010`, `AL0140`. A suppression of either is dead; 
 | `AL0128` | `AL1800` | Destructive Loom tool must require approval |
 | `AL0129` | `AL1801` | Loom tool should declare its side effect |
 | `AL0130` | `AL1802` | Loom tool should declare required capabilities |
-

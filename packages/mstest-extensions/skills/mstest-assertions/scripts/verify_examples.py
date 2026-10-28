@@ -19,7 +19,7 @@ def run(args, cwd, expected_success=True):
 
 with tempfile.TemporaryDirectory(prefix="mstest-assertions-") as scratch:
     root = Path(scratch)
-    (root / "global.json").write_text('{"test":{"runner":"Microsoft.Testing.Platform"}}\n')
+    shutil.copy2(skill / "examples/global.json", root / "global.json")
     managed = root / "managed"
     managed.mkdir()
     shutil.copy2(skill / "examples/EqualityExamples.cs", managed)

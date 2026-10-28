@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "mstest-extensions",
-  "version": "3.4.4",
+  "version": "3.5.0",
   "description": "Opinionated native MSTest testing and extensions: MSTest.Sdk 4.5.1, Microsoft.Testing.Platform 2.5.1, AllMicrosoft extensions and native Microsoft code coverage. Use native context, lifecycle, data rows and composition without VSTest or legacy compatibility shims.",
   "author": {
     "name": "Alexander Nachtmann"
@@ -36,7 +36,7 @@
       },
       "publication": {
         "countries": [],
-        "release_notes": "Move the maintained source into the unified ancplua-dotnet repository; preserve skill behavior and package identity."
+        "release_notes": "Own the MSTest API and assertion skills, including their generated catalog, examples and verification; distinguish API lookup, test implementation and assertion review."
       }
     }
   },

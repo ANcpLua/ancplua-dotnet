@@ -1,6 +1,6 @@
 ---
 name: mstest-assertions
-description: Select the most precise MSTest 4.5.1 assertion for each test contract. Use for assertion authoring, reviews, replacements, equality and collection semantics, or NativeAOT constraints; never weaken the contract or recommend legacy fallbacks.
+description: Select the most precise MSTest 4.5.1 assertion for each test contract. Use for assertion authoring, targeted replacements, equality and collection semantics, or NativeAOT constraints. Report-only strength assessments belong to mstest-assertion-review; preserve the intended contract.
 ---
 
 # MSTest 4.5.1: the best assertion for the contract

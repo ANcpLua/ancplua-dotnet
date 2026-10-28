@@ -8,7 +8,7 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 PLUGIN = ROOT / 'plugins/nami'
-SKILLS = {'csharp-union-types', 'mstest', 'mstest-assertions', 'fixture-scope', 'codex-native-messaging'}
+SKILLS = {'csharp-union-types', 'fixture-scope', 'codex-native-messaging'}
 
 
 def validate(root=ROOT):
@@ -32,7 +32,7 @@ def validate(root=ROOT):
             errors.append(f'Unexpected compatibility tree: {name}')
     actual = {p.parent.name for p in (plugin / 'skills').glob('*/SKILL.md')}
     if actual != SKILLS or len(list((plugin / 'skills').rglob('SKILL.md'))) != len(SKILLS):
-        errors.append(f'Expected exactly five skills, found {sorted(actual)}')
+        errors.append(f'Expected exactly three skills, found {sorted(actual)}')
     for path in plugin.rglob('*'):
         if path.is_symlink():
             errors.append(f'Package contains a symlink: {path.relative_to(root)}')
