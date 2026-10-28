@@ -29,10 +29,19 @@ function anchors(file) {
 }
 export function checkLinks(root, document) {
   const failures = [];
-  const skill = /^(packages\/mstest-extensions\/skills\/[^/]+)\//.exec(relative(root, document));
+  const skill = /^(packages\/(?:ancplua-dotnet|mstest-extensions|prepare-plugin-submission)\/skills\/[^/]+)\//.exec(relative(root, document));
   const skillRoot = skill ? resolve(root, skill[1]) : undefined;
+  const catalogFile = resolve(root, ".agents/plugins/marketplace.json");
+  const packages = new Map(existsSync(catalogFile)
+    ? JSON.parse(readFileSync(catalogFile, "utf8")).plugins.map(p => [p.name, p.source.path]) : []);
   for (const block of tokens(document)) {
     for (const token of block.children ?? []) {
+      if (token.type === "code_inline") {
+        const route = /^([a-z0-9-]+):([a-z0-9-]+)$/.exec(token.content);
+        if (route && packages.has(route[1]) && !existsSync(resolve(root, packages.get(route[1]), "skills", route[2], "SKILL.md"))) {
+          failures.push(`${token.content}: missing marketplace skill handoff`);
+        }
+      }
       if (!["link_open", "image"].includes(token.type)) continue;
       const link = token.attrGet(token.type === "image" ? "src" : "href");
       let target = link;
@@ -61,7 +70,10 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
     f.startsWith("packages/ancplua-dotnet/") ||
     /^packages\/mstest-extensions\/(?:README.md|AGENTS.md|skills\/)/.test(f) ||
     /^packages\/nami\/[^/]+\.md$/.test(f) ||
-    f.startsWith("packages/nami/plugins/nami/skills/fixture-scope/")
+    f.startsWith("packages/nami/plugins/nami/skills/fixture-scope/") ||
+    f.startsWith("packages/nami/plugins/nami/skills/codex-native-messaging/") ||
+    f.startsWith("packages/prepare-plugin-submission/skills/") ||
+    f === "packages/prepare-plugin-submission/README.md"
   ));
   let count = 0;
   for (const file of selected) {

@@ -44,3 +44,20 @@ test("skill references cannot depend on an existing sibling resource", t => {
   assert.equal(errors.length, 2);
   for (const error of errors) assert.match(error, /leaves self-contained skill/);
 });
+
+test("qualified handoffs resolve through the marketplace, not sibling files", t => {
+  const root = mkdtempSync(join(tmpdir(), "ancplua-handoffs-"));
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  const catalog = join(root, ".agents/plugins");
+  mkdirSync(catalog, { recursive: true });
+  mkdirSync(join(root, "packages/dotnet/skills/performance"), { recursive: true });
+  writeFileSync(join(root, "packages/dotnet/skills/performance/SKILL.md"), "# Performance\n");
+  writeFileSync(join(catalog, "marketplace.json"), JSON.stringify({ plugins: [
+    { name: "ancplua-dotnet", source: { path: "packages/dotnet" } }
+  ] }));
+  const document = join(root, "source.md");
+  writeFileSync(document, "Invoke `ancplua-dotnet:performance`.\n");
+  assert.deepEqual(checkLinks(root, document), []);
+  writeFileSync(document, "Invoke `ancplua-dotnet:retired-performance`.\n");
+  assert.match(checkLinks(root, document)[0], /missing marketplace skill handoff/);
+});

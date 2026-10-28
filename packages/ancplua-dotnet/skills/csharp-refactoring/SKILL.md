@@ -32,13 +32,23 @@ license: Apache-2.0
 | Generated/partial code, friends, conditional builds | Follow generator ownership, `InternalsVisibleTo`, all declarations and each affected compilation. |
 | Wrapper removal or type merge | Retain compatibility adapters only for a real consumer boundary. Remove internal dead indirection once its callers are migrated. |
 
+A CLR rename can preserve an existing JSON field through explicit metadata:
+
+```csharp
+[JsonPropertyName("request_id")]
+public required string RequestId { get; init; }
+```
+
+Keep `request_id` when only the CLR name changes; verify the wire contract through
+its actual serializer or generated metadata.
+
 ## Constants and abandoned code
 
 For exhaustive cleanup, use [constant reconciliation](references/constant-reconciliation.md).
 Account for every declaration in scope, including retained and unresolved items;
-do not stop at an easy deletion shortlist. Use [performance](../performance/SKILL.md)
-for production telemetry and profiles when deciding which checks are expensive.
-
-For MSTest validation or changes to test code, select the focused skill through
-[companion routing](../audit/references/mstest-routing.md). Package/framework
-upgrades use [nuget-versions](../nuget-versions/SKILL.md).
+do not stop at an easy deletion shortlist. When runtime cost is in scope, invoke
+`ancplua-dotnet:performance` for measurements. MSTest implementation/verification
+uses `mstest-extensions:mstest`; targeted assertion fixes use
+`mstest-extensions:mstest-assertions`. Package/framework upgrades use
+`ancplua-dotnet:nuget-versions`. Invoke only an available skill for the requested
+part; report a missing specialist and preserve the remaining refactoring scope.

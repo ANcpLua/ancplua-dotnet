@@ -78,6 +78,13 @@ MSTest APIs and runner verification live in the companion repository.
 
 Move the source and marketplace into one repository. Skill behavior is unchanged.
 
+## 0.7.5
+
+Use qualified installed-skill handoffs for work owned by another specialist,
+without sibling-file dependencies or copied references. The marketplace checks
+handoff targets as well as local links. Existing workflows gain ordered steps
+and concrete analyzer, serialization and bounded-collection examples.
+
 ## 0.7.4
 
 Route native MSTest tasks to the consolidated `mstest` skill and focused built-in

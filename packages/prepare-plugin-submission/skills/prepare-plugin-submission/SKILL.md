@@ -13,14 +13,20 @@ Honor explicit private, audit-only or ZIP-only requests.
 
 ## Start the implemented wizard
 
-Read [wizard workflow](references/wizard.md) and `scripts/wizard.py` before
-executing it. Store sessions outside the target and installed plugin. Use:
+1. Read [wizard workflow](references/wizard.md) and `scripts/wizard.py` before
+   executing it. Store sessions outside the target and installed plugin.
+2. Start from the selected source:
 
-```sh
-python3 <skill>/scripts/wizard.py start --session <work>/submission.json \
-  --source <github-url-or-local-folder-or-zip> --host chatgpt --actor-id <this-agent-id>
-python3 <skill>/scripts/wizard.py next --session <work>/submission.json
-```
+   ```sh
+   python3 <skill>/scripts/wizard.py start --session <work>/submission.json \
+     --source <github-url-or-local-folder-or-zip> --host chatgpt --actor-id <this-agent-id>
+   ```
+
+3. Read the saved next action and follow its owner:
+
+   ```sh
+   python3 <skill>/scripts/wizard.py next --session <work>/submission.json
+   ```
 
 Use `--goal audit` for a bounded audit or `--goal private-preparation` when that
 scope was selected. Unspecified preparation defaults to the suggested public

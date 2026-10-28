@@ -5,7 +5,11 @@
     "packages/ancplua-dotnet/*.md", "packages/ancplua-dotnet/skills/**/*.md",
     "packages/mstest-extensions/AGENTS.md", "packages/mstest-extensions/README.md",
     "packages/mstest-extensions/skills/**/*.md",
-    "packages/nami/*.md", "packages/nami/plugins/nami/skills/fixture-scope/**/*.md"
+    "packages/nami/*.md", "packages/nami/plugins/nami/skills/fixture-scope/**/*.md",
+    "packages/nami/plugins/nami/skills/codex-native-messaging/**/*.md",
+    "packages/prepare-plugin-submission/README.md",
+    "packages/prepare-plugin-submission/skills/*/SKILL.md",
+    "packages/prepare-plugin-submission/skills/*/references/evaluation.md"
   ],
   "ignores": ["**/node_modules/**", "**/artifacts/**", "**/bin/**", "**/obj/**", "**/.venv/**", "**/references/public-api.md"],
   "config": {

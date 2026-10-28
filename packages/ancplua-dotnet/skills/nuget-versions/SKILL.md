@@ -9,8 +9,9 @@ license: Apache-2.0
 Every package version lives in exactly one place. A change that moves a version moves every
 place that has to agree with it in the same commit, or it is half a change.
 
-Keep version-chain work here; route MSTest runner, profile and project semantics
-through the [companion routing table](../audit/references/mstest-routing.md).
+Keep version-chain work here. For MSTest runner, profile and project semantics,
+invoke the installed `mstest-extensions:mstest` skill. If unavailable, report the
+missing companion rather than guessing its runner contract.
 
 ## 1. Where versions live
 
@@ -109,12 +110,17 @@ Listing commands: `dotnet package list --include-transitive` and `--vulnerable` 
   above the property line.
 - First-party `ANcpLua.*` packages are grouped as `ancplua-sdk`. Minor and patch bumps automerge;
   majors need review and land on `renovate/major-ancplua-sdk`.
-- Reviewing a Renovate PR: list every place the package's version lives (section 1). If the PR
-  touched fewer places than that, it's incomplete. Finish it in one commit, or fix the
-  annotations so the next PR is complete, then close the PR as superseded.
-- A major bump of a library is a migration. Read the release notes for moved types and new
-  package splits, then search the consumer for each moved type before declaring it a version-only
-  change.
+
+To review a Renovate PR:
+
+1. List every place the package's version lives (section 1).
+2. Compare that inventory with the PR; fewer changed owners means it is incomplete.
+3. Complete it in one commit, or fix the annotations so the next PR is complete
+   and close the original as superseded.
+
+A major bump of a library is a migration. Read the release notes for moved types and new
+package splits, then search the consumer for each moved type before declaring it a version-only
+change.
 
 ## 6. Converting a repository to CPM
 

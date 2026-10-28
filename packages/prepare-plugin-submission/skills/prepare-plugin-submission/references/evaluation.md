@@ -42,11 +42,11 @@ For each representative prompt, evaluate these observations, not keyword hits:
 Exercise: a skills-only package; a dual-platform remote server; malformed review
 metadata; a ZIP with escaping paths; an OAuth-dependent demo; a legacy connector
 question; an update under review; and a host missing terminal/browser access.
-Use the bundled [scenario set](../../../evals/cases.json) and native case definitions
-in that same directory. They include prompts and expected outcomes; no
-developer checkout is needed. Run prompts
-through the installed skill when possible. Static checks of those expectations
-are not an LLM evaluation. If only one surface is tested, don't claim all hosts.
+For this skill's optional benchmark, use the
+[full-distribution evaluation](#run-the-bundled-scenario-suite). Its prompts and
+grading expectations stay outside loaded skills so the candidate cannot read the
+answers. Run prompts through the installed skill when possible. Static checks
+are not an LLM evaluation; one tested surface does not establish all hosts.
 
 Screenshots prove what the UI visibly displays, not server correctness. A report
 preview is separate from an installed-plugin screenshot. A model result without
@@ -69,7 +69,6 @@ native runner requires. A standalone skill installation still supports the
 preparation workflow; to run the benchmark, use the full versioned distribution
 from the source repository identified in its README. Evaluation definitions
 are hidden from the candidate by the native runner.
-
 
 The ten reusable scenarios exercise the skill's explanations through an actual
 agent. In Claude Code, first inspect `claude plugin eval --help` and record the
@@ -112,4 +111,3 @@ before functional verification is complete. For Claude, retain all-tool
 connector evidence and intended-surface loading/behavior checks. An offline
 fixture on Claude Code does not verify ChatGPT, Codex, claude.ai, Cowork, OAuth
 or a real remote server. Use the [readiness record](../templates/readiness.md).
-

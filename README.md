@@ -4,10 +4,10 @@ One repository for the ANcpLua .NET plugin marketplace, source packages and veri
 
 | Plugin | Source | Current package |
 | --- | --- | --- |
-| `ancplua-dotnet` | [General .NET workflows](packages/ancplua-dotnet/README.md) | 0.7.4; seven skills |
+| `ancplua-dotnet` | [General .NET workflows](packages/ancplua-dotnet/README.md) | 0.7.5; seven skills |
 | `nami` | [Unions, fixtures and Codex messaging](packages/nami/README.md) | 0.1.4; three skills |
 | `mstest-extensions` | [Native MSTest/MTP execution and specialized testing](packages/mstest-extensions/README.md) | 4.0.1; two self-contained skills |
-| `prepare-plugin-submission` | [Submission Studio](packages/prepare-plugin-submission/README.md) | 2.3.0; one skill, identical to the verified Account release |
+| `prepare-plugin-submission` | [Submission Studio](packages/prepare-plugin-submission/README.md) | 2.3.1; one skill, based on the verified Account release 2.3.0 |
 
 The public plugins keep their existing names and responsibilities. Nami supplies union, fixture-ownership and Codex messaging guidance. General build/package work belongs to `ancplua-dotnet`; MSTest APIs, assertions, runner and extension workflows belong to `mstest-extensions`.
 
@@ -23,7 +23,7 @@ codex plugin add prepare-plugin-submission@ancplua-dotnet
 
 These commands change installation and are separate from source verification. Existing registrations of the retired `ancplua-openai` catalog can still resolve its entries to this source after refreshing; switch registrations deliberately to avoid duplicate installed identities. Source migration does not automatically remove an installed plugin.
 
-Submission Studio 2.3.0 was imported from the Account release with the owner's explicit authorization to publish its source. The old 1.6.0 repository is retired. The separate Account installation remains private and has the same 2.3.0 package version; a source move does not uninstall either installation. The [migration record](migration/README.md) records provenance and version alignment.
+Submission Studio 2.3.0 was imported from the Account release with the owner's explicit authorization to publish its source. The old 1.6.0 repository is retired. The Account source retains its 2.3.0 release identity; the public Git distribution now versions its maintained guidance separately. The [migration record](migration/README.md) records provenance and version alignment.
 
 ## Verify and maintain
 

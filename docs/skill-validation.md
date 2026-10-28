@@ -8,10 +8,14 @@ on pushes and pull requests; CI never applies automatic fixes.
 
 - Markdownlint checks the maintained .NET skill/reference areas, package guidance
   and root documentation. Historical evaluation prompts, immutable union exports,
-  the imported Submission Studio snapshot and the generated API table are outside
-  this formatting pass. They retain their package-specific validation.
+  Submission Studio's historical evidence/templates and the generated API table are
+  outside this formatting pass. Its maintained entrypoint and evaluation guidance
+  are included. They retain their package-specific validation.
 - The link checker parses Markdown rather than matching link-like code examples.
-  It checks local files, reference-style links and GitHub heading anchors.
+  It checks local files, reference-style links and GitHub heading anchors, including
+  every Submission Studio reference. Qualified handoffs such as
+  `ancplua-dotnet:performance` resolve against the marketplace catalog; removed or
+  misspelled skill targets fail the check.
 - URLs into `ANcpLua/ancplua-dotnet/blob/main` and `tree/main` resolve against this
   checkout, so stale cross-package links fail before a push. Other web URLs are
   not fetched by this offline check.
@@ -40,8 +44,8 @@ the overlapping MSTest entrypoints into two self-contained skills. Shared resour
 were moved to their single owner, and former entrypoints remain workflow references.
 No reference trees were copied and no validator rules were disabled.
 
-The same official macOS ARM64 binary published on 2026-10-27 now checks all **five
-current MSTest/Nami skills with zero errors and zero warnings**. Its archive SHA-256 is
+The same official macOS ARM64 binary published on 2026-10-27 now checks all **13
+marketplace skills with zero errors and zero warnings**. Its archive SHA-256 is
 `c3deb61c0de0b98838cbf2c808a1f6cd683edd912fd1766d351226b6cd51674d`.
 The five initial profile warnings are resolved in MSTest Extensions 4.0.1 and Nami
 0.1.4. Graph-equality and AOT detail now loads from conditional local references,
@@ -65,10 +69,25 @@ To reuse an already verified binary locally:
 python3 scripts/check_skills.py --validator /path/to/skill-validator
 ```
 
-The gate retains its original MSTest/Nami scope; the other packages retain their
-own validation. Consolidation changes the entrypoint count, not the covered
-workflows. Local link closure and archive checks cover the moved references and
-executable resources beyond the upstream entrypoint checks.
+The gate discovers every package's skills from `.agents/plugins/marketplace.json`
+and verifies the exact reported source paths, not only the count. Missing packages,
+empty skill directories, duplicate coverage and substituted paths fail. Regression
+checks exercise these failures before running the unmodified upstream tool.
+
+Expanding beyond MSTest/Nami initially found 12 sibling-file errors and six profile
+warnings. The seven .NET specialists remain separate: cross-domain work uses
+qualified installed-skill handoffs with explicit availability and scope boundaries,
+instead of reading another skill's private files. The handoff checker resolves
+these identifiers against the catalog. Required topic references stay with their
+owning skill; no reference trees or routing tables were copied.
+
+Existing analyzer commands, serialization boundaries, bounded runtime collection,
+Renovate review and wizard startup now provide concrete examples or ordered steps.
+Submission Studio's optional benchmark still requires its full distribution;
+expected answers remain outside the loaded skill. This corrects a contradictory
+standalone-file claim without exposing the grading material to the candidate.
+Package tests, local reference closure and archive checks supplement the upstream
+entrypoint checks. No fresh model evaluation is claimed.
 
 ## Sources used for this setup
 

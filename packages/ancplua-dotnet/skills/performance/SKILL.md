@@ -28,6 +28,18 @@ license: Apache-2.0
 | Where does CPU, memory or waiting go; how do I capture a crash/hang? | [Diagnostics](references/diagnostics.md) |
 | Which source patterns warrant a measured change? | [Hot paths](references/hot-paths.md) |
 
-Build-time work uses [msbuild](../msbuild/SKILL.md). Native MSTest verification
-uses [companion routing](../audit/references/mstest-routing.md); this skill owns
-measurement, not another set of test instructions.
+## Bounded collection example
+
+When existing evidence leaves a trace-shaped gap, confirm the CoreCLR process,
+tool support and writable output location before this 20-second capture:
+
+```sh
+dotnet-trace collect --process-id PID --duration 00:00:00:20 --output /tmp/runtime.nettrace
+```
+
+Choose a fresh artifact path outside tracked source; a capture alone is not a
+root-cause finding. The diagnostics reference covers events and interpretation.
+
+For build-time work, invoke `ancplua-dotnet:msbuild`; native MSTest verification
+uses `mstest-extensions:mstest`. Check availability before the handoff and report
+a missing specialist. This skill retains ownership of runtime measurement.

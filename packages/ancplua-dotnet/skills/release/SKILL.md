@@ -46,7 +46,8 @@ its own last published version, never the one being built. Consumers move last, 
 1. Make the change, update `CHANGELOG.md` and anything else that names the old version: docs,
    templates, `global.json`, `Version.props`. Search for the old value across the repository.
 2. Run the repository's build, pack and test entrypoints the way CI does. For MSTest
-   execution, use the [companion routing table](../audit/references/mstest-routing.md).
+   execution, invoke the installed `mstest-extensions:mstest` skill; if unavailable,
+   report that gap and retain the repository's documented test entrypoint.
    A broken commit must never reach a publishing branch or tag.
 3. Commit, push, then tag if publishing is tag-driven:
    `git tag vX.Y.Z && git push origin vX.Y.Z`.
@@ -116,8 +117,9 @@ For each consumer repository in the chain:
 
 - Install a new SDK through the machine's own channel (a dotfiles target, a package manager, or
   `dotnet-install.sh --install-dir <the existing root>`). Keep normal machine selection
-  predictable. A deliberately isolated preview uses [project-local SDK selection](../nuget-versions/references/sdk-selection.md),
-  preserving machine PATH and the release repository's stable pin.
+  predictable. If an isolated preview is requested, invoke the available
+  `ancplua-dotnet:nuget-versions` skill for SDK selection. Without it, report the
+  missing guidance rather than changing machine PATH or the stable release pin.
 - macOS: if an installer overwrites the `dotnet` host binary in place while the old one is still
   mapped, the kernel kills every new `dotnet` process (exit 137, "Killed: 9") because the cached
   code signature no longer matches the file. Delete the host binary and re-run the installer so

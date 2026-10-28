@@ -26,6 +26,5 @@ copy test instructions back here or preload all skills for every audit.
 
 If the companion is unavailable, report the missing plugin and use the host's
 supported installation flow. For Codex, install `mstest-extensions@ancplua-dotnet`
-from [ANcpLua/ancplua-dotnet](https://github.com/ANcpLua/ancplua-dotnet). Follow the
-[companion installation guide](https://github.com/ANcpLua/ancplua-dotnet/tree/main/packages/mstest-extensions#installation)
-for other hosts. Do not claim an unavailable skill was invoked.
+from [ANcpLua/ancplua-dotnet](https://github.com/ANcpLua/ancplua-dotnet). Use the host's supported marketplace installer for other clients. Do not claim
+an unavailable skill was invoked.

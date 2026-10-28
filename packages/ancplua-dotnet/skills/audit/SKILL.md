@@ -11,28 +11,30 @@ someone opening the cited file.
 
 ## 1. Scope
 
-- Name the repositories and their default-branch state: `git -C <repo> status -sb`, and whether
-  the working tree has someone else's uncommitted work (never touch it).
-- For a fleet audit, start with an inventory table: repository, `global.json` (`sdk.version`,
-  `rollForward`, `msbuild-sdks`), SDK used by the projects, shared-package versions
-  and where each is set, release mechanism. Include test-platform observations when requested,
-  using the [MSTest routing table](references/mstest-routing.md).
+1. Name the repositories and their default-branch state: `git -C <repo> status -sb`, and whether
+   the working tree has someone else's uncommitted work (never touch it).
+2. For a fleet audit, start with an inventory table: repository, `global.json` (`sdk.version`,
+   `rollForward`, `msbuild-sdks`), SDK used by the projects, shared-package versions
+   and where each is set, release mechanism. Include test-platform observations when requested,
+   using the [MSTest routing table](references/mstest-routing.md).
 
 ## 2. Passes
 
-Run each pass with its skill as the rulebook. When the environment supports subagents, give each
+Invoke only installed skills for the requested passes; do not reach into sibling
+skill files. Mark a missing specialist as unverified and continue independent passes.
+When the environment supports subagents, give each
 pass (or each repository) to its own subagent with the rulebook named in the prompt and a
 read-only instruction, then merge the ledgers. Otherwise run the passes in sequence.
 
 | Pass | Rulebook | Looks at |
 |---|---|---|
-| Versions | `nuget-versions` | global.json, Version.props, Directory.Packages.props, csproj versions, Renovate annotations, stale overrides |
-| Build | `msbuild` (`references/antipatterns.md`) | csproj, props, targets, slnx, CI build steps |
-| Analyzers | `analyzers` | how analyzers arrive, analysis modes, every suppression, stale IDs |
+| Versions | `ancplua-dotnet:nuget-versions` | global.json, Version.props, Directory.Packages.props, csproj versions, Renovate annotations, stale overrides |
+| Build | `ancplua-dotnet:msbuild` | csproj, props, targets, slnx, CI build steps |
+| Analyzers | `ancplua-dotnet:analyzers` | how analyzers arrive, analysis modes, every suppression, stale IDs |
 | MSTest, when in scope | [Companion skill routing](references/mstest-routing.md) | delegate project setup, execution, extensions and test-quality analysis to their focused owners |
-| Release | `release` | publish workflows, gates, credentials model, tag hygiene |
-| Runtime cost, when requested | [performance](../performance/SKILL.md) | existing measurements or source hypotheses; retain the audit's read-only scope |
-| Constants/dead code, when requested | [constant reconciliation](../csharp-refactoring/references/constant-reconciliation.md) | complete declaration/caller inventory, indirect production uses, disposition and measured cost |
+| Release | `ancplua-dotnet:release` | publish workflows, gates, credentials model, tag hygiene |
+| Runtime cost, when requested | `ancplua-dotnet:performance` | existing measurements or source hypotheses; retain the audit's read-only scope |
+| Constants/dead code, when requested | `ancplua-dotnet:csharp-refactoring` | complete declaration/caller inventory, indirect production uses, disposition and measured cost |
 
 Useful searches (ripgrep; skip `bin/`, `obj/`, `artifacts/`, `node_modules/`, `TestResults/`):
 

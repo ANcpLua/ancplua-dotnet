@@ -5,7 +5,7 @@ This repository owns the marketplace in `.agents/plugins/marketplace.json` and t
 - `packages/ancplua-dotnet`: seven general .NET skills and Claude agents.
 - `packages/nami/plugins/nami`: three focused C# union, fixture and Codex messaging skills.
 - `packages/mstest-extensions`: two self-contained MSTest and assertion skills and executable probes.
-- `packages/prepare-plugin-submission`: Submission Studio 2.3.0, imported from the verified Account release with explicit public-publication authorization. Keep the account release identity separate from the Git marketplace distribution; never restore the retired 1.6.0 tree over this source.
+- `packages/prepare-plugin-submission`: Submission Studio 2.3.1, based on the verified Account release 2.3.0 with explicit public-publication authorization. Keep the account release identity separate from the Git marketplace distribution; never restore the retired 1.6.0 tree over this source.
 
 Edit the owning source, not installed caches or generated local catalogs. Nami's union source remains in the Nami product repository; use an explicit `UNION_SOURCE` for export. Run `make check`, `make check-docs` for Markdown changes, and each changed package's documented verification. Root workflows execute the package gates from their own working directories. Read package AGENTS.md files for their narrower instructions.
 

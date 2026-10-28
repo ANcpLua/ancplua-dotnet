@@ -7,8 +7,9 @@ license: Apache-2.0
 # Roslyn analyzer adoption and suppression hygiene
 
 Keep analyzer loading, packaging and severity configuration here. For an MSTest
-diagnostic's test-code correction, use the
-[companion routing table](../audit/references/mstest-routing.md).
+diagnostic's test-code correction, invoke the installed `mstest-extensions:mstest`
+skill for that part; preserve the requested scope. If unavailable, report the
+missing companion rather than claiming its guidance was applied.
 
 ## 1. How an analyzer reaches a project
 
@@ -21,8 +22,13 @@ Find the path first. Each path has its own way to opt out and to pin the version
 | Direct `PackageReference` | csproj or `Directory.Build.props` (often conditioned) | `PackageVersion` | condition on the item |
 | .NET SDK built-in | `EnableNETAnalyzers`, `AnalysisLevel`, `AnalysisMode` | the .NET SDK | `EnableNETAnalyzers=false` |
 
-Confirm with evidence, not by reading project files:
-`dotnet msbuild <proj> -getItem:Analyzer` lists the analyzer DLLs that actually load, and
+Inspect the evaluated analyzer items rather than inferring them from project text:
+
+```sh
+dotnet msbuild <proj> -getItem:Analyzer
+```
+
+These are the analyzer DLLs passed to compilation.
 `obj/<proj>.nuget.g.props` shows which package props files were imported.
 
 ## 2. Severity: who wins

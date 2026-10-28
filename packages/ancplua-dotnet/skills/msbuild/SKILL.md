@@ -6,8 +6,9 @@ license: Apache-2.0
 
 # MSBuild for SDK-style repositories
 
-For MSTest-specific project or runner work, use the
-[companion routing table](../audit/references/mstest-routing.md).
+For MSTest-specific project or runner work, invoke the installed
+`mstest-extensions:mstest` skill for that part. If unavailable, report the missing
+companion; continue the independently supported MSBuild work.
 
 ## 1. Evaluation order decides where things go
 

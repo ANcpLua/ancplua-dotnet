@@ -12,7 +12,40 @@ import tarfile
 import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
-SCOPES = ["packages/mstest-extensions/skills", "packages/nami/plugins/nami/skills"]
+
+
+def marketplace_scopes(root):
+    """Discover every published package, failing rather than silently skipping one."""
+    catalog = json.loads((root / ".agents/plugins/marketplace.json").read_text())
+    scopes = []
+    names = set()
+    for entry in catalog["plugins"]:
+        source = entry["source"]
+        name = entry["name"]
+        if name in names or source["source"] != "git-subdir":
+            raise ValueError(f"Duplicate or unsupported marketplace source: {name}")
+        names.add(name)
+        package = (root / source["path"]).resolve()
+        if not package.is_relative_to(root.resolve()):
+            raise ValueError(f"Package escapes repository: {name}")
+        manifest = json.loads((package / "plugin.json").read_text())
+        if manifest["name"] != name:
+            raise ValueError(f"Package identity mismatch: {name}")
+        scope = package / "skills"
+        if not list(scope.glob("*/SKILL.md")):
+            raise ValueError(f"Package has no discoverable skills: {name}")
+        scopes.append(scope.relative_to(root.resolve()).as_posix())
+    if not scopes or len(scopes) != len(set(scopes)):
+        raise ValueError("Marketplace must contain distinct skill sources")
+    return scopes
+
+
+def verify_coverage(root, scopes, report):
+    expected = {p.resolve() for scope in scopes for p in (root / scope).glob("*/SKILL.md")}
+    actual = [(root / skill["skillMdPath"]).resolve() for skill in report["skills"]]
+    if not expected or set(actual) != expected or len(actual) != len(expected) or report["counts"]["skillCount"] != len(expected):
+        raise ValueError("Validator did not inspect every marketplace skill exactly once")
+    return len(expected)
 
 
 def official_validator(output):
@@ -64,17 +97,16 @@ def main():
     args = parser.parse_args()
     output = ROOT / "artifacts/skill-validator"
     output.mkdir(parents=True, exist_ok=True)
+    scopes = marketplace_scopes(ROOT)
     validator = args.validator.resolve(strict=True) if args.validator else official_validator(output)
-    command = [str(validator), "check", "--skills", *SCOPES, "--json"]
+    command = [str(validator), "check", "--skills", *scopes, "--json"]
     with (output / "upstream-check.json").open("w") as report:
         result = subprocess.run(command, cwd=ROOT, stdout=report)
     if result.returncode:
         print((output / "upstream-check.json").read_text(), file=sys.stderr)
         raise SystemExit(result.returncode)
     report = json.loads((output / "upstream-check.json").read_text())
-    expected = sum(len(list((ROOT / scope).glob("*/SKILL.md"))) for scope in SCOPES)
-    if expected == 0 or report["counts"]["skillCount"] != expected:
-        raise SystemExit("Validator did not inspect every selected skill")
+    expected = verify_coverage(ROOT, scopes, report)
     errors = sum(len(skill["errors"]) for skill in report["skills"])
     if errors:
         raise SystemExit(f"Validator returned {errors} errors")

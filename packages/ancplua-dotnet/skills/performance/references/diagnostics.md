@@ -34,10 +34,10 @@ providers, profiles and duration syntax.
 
 ```sh
 dotnet-counters monitor --process-id PID --counters System.Runtime
-dotnet-trace collect --process-id PID --duration 00:00:00:20 --output artifacts/diagnostics/runtime.nettrace
 dotnet-dump collect --process-id PID --type Heap --output artifacts/diagnostics/heap.dmp
 ```
 
+For a bounded trace, use the [collection example](../SKILL.md#bounded-collection-example).
 Counter monitoring is interactive; stop after the agreed observation window.
 Managed thread sampling includes waits: it is not an on-CPU profile. Select
 allocation events when measuring allocations; choose an OS on-CPU profiler when

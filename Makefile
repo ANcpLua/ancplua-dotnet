@@ -25,4 +25,5 @@ check-docs:
 
 .PHONY: check-skills
 check-skills:
+	python3 -B scripts/test_check_skills.py
 	python3 -B scripts/check_skills.py
