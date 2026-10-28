@@ -22,21 +22,23 @@ the installed CLI/protocol before using version-specific fallbacks.
 
 ## Messages and fan-out
 
-Use explicit recipient UUIDs and the transport authorized by the user. With the
-CLI, pass literal arguments rather than interpolating a message into a shell:
+1. Resolve the explicit recipient UUID and the transport authorized by the user.
+   For a configured server, use the documented `--remote` option consistently
+   for discovery and sending.
+2. Send through the native tool. If the installed CLI is needed, pass literal
+   arguments rather than interpolating a message into a shell:
 
-```sh
-codex queue --thread <verified-thread-uuid> --message <literal-message>
-```
+   ```sh
+   codex queue --thread <verified-thread-uuid> --message <literal-message>
+   ```
 
-For a configured server, use the CLI's documented `--remote` option consistently
-for both discovery and sending. Do not silently switch to `--last`, create a
-replacement thread or change its model to work around a delivery failure.
-
-Queue acceptance, arrival in a model turn, and completion are separate facts.
-Record the native receipt when available; verify an actual response before
-claiming acknowledgement. A timeout after submission is uncertain delivery,
-not proof that retrying is safe. Fan-out needs an independent outcome per target.
+   Do not silently switch to `--last`, create a replacement thread or change its
+   model to work around a delivery failure.
+3. Record the native receipt when available and verify an actual response before
+   claiming acknowledgement. Queue acceptance, arrival in a model turn and
+   completion are separate facts. A timeout after submission is uncertain
+   delivery, not proof that retrying is safe. Track an independent outcome per
+   target for fan-out.
 
 Host forwarding can provide native sender provenance. A textual source reference
 or an ordinary CLI queue receipt does not manufacture that provenance.

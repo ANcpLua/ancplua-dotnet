@@ -56,22 +56,19 @@ exact instance is itself promised, such as preserving a failure object through
 
 ## Make the improvement and finish
 
-Read the affected test and enough implementation or API documentation to understand
-its contract, then make the justified change. Do not require a repository-wide
-audit, benchmark, extra agent, or new approval for an ordinary assertion edit.
-Use `ref` or the pinned sources when an API or overload is genuinely uncertain;
-do not repeat metadata research already established for the same resolved version.
-
-Reduce repeated arrangement when a small fixture or helper makes ownership and
-inputs clearer. Keep meaningful differences visible. Separate scenarios when a
-failure would otherwise hide independent outcomes; do not manufacture extra cases
-or abstractions just to increase the test count. Share expensive setup only when
-its mutable state and cleanup remain isolated. Per-test processes are a tradeoff,
-not a universal requirement.
-
-Run the affected checks, fix demonstrated failures, and stop once the change is
-validated. Report what changed and what passed. Do not keep broadening verification
-or turn a focused improvement into a speculative test redesign.
+1. Read the affected test and enough implementation or API documentation to
+   understand its contract. Use `ref` or the pinned sources when an overload is
+   uncertain; reuse metadata evidence for the same resolved version. An ordinary
+   assertion edit needs no repository-wide audit, benchmark or extra agent.
+2. Make the justified change. Reduce repeated arrangement when a small fixture
+   clarifies ownership and inputs, keeping meaningful differences visible.
+   Separate scenarios when a failure would hide independent outcomes; do not
+   manufacture cases or abstractions to increase the test count. Share expensive
+   setup only when mutable state and cleanup remain isolated. Per-test processes
+   are a tradeoff, not a universal requirement.
+3. Run the affected checks and fix demonstrated failures. Stop once the change is
+   validated; report what changed and what passed. Do not broaden a focused
+   improvement into a speculative test redesign.
 
 Do not recommend `CollectionAssert`, `StringAssert`, or `ThrowsException` as
 4.5.1 alternatives. Do not replace content checks with count, a precise type
@@ -128,64 +125,13 @@ var matching = Assert.ContainsSingle(item => item.IsPending, collection);
   `AreSequenceEqual(..., SequenceOrder.InAnyOrder)` only when that is the same
   intended element/comparer contract. It is not the new `Assert.AreEquivalent`.
 
-## Object graphs: what AreEquivalent really proves
+## Graph comparison and NativeAOT
 
-`AreEquivalent(expected, actual, strict: true)` recursively compares eligible
-public instance fields and readable, non-indexed public instance properties.
-Private state, static members, and indexers are outside that contract.
-
-Ordinary enumerables are order-sensitive. Dictionaries are compared by keys and
-recursive values, using their lookup semantics, rather than enumeration order.
-Without `strict: true`, extra actual members and dictionary keys are allowed.
-Strict mode rejects those extras, but does not itself require identical runtime
-types or add comparisons of private state. Enumerable length must match even in
-non-strict mode; non-strict is not an arbitrary collection-subset comparison.
-
-**An eligible `IEquatable<T>` on the declared/static type stops recursion.**
-Plain `object.Equals` overrides alone do not trigger that shortcut. Records
-normally implement `IEquatable<T>`: a record containing an array can therefore
-fail `AreEquivalent` despite equal array elements. Conversely, a type whose
-equality checks only an ID can pass despite different other members.
-`strict: true` does not disable this shortcut. Generic type inference, member
-declarations and element types matter; do not claim unconditional deep equality.
-`AreEquivalent<object>` may have different behavior, and remains reflection-based.
-
-If every field of a known contract must be verified, use explicit typed member
-assertions with sequence assertions for collection members. Add new member
-checks when that contract grows; do not replace a full-contract check with only
-an ID, count, `IsNotNull`, or a successful round trip.
-
-Read [EqualityExamples.cs](examples/EqualityExamples.cs) for executable positive
-and negative cases, including value-equal distinct instances, operator equality
-and the record/array trap.
-The expected failures in those examples verify assertion semantics; ordinary
-application tests should directly assert the production result.
-
-## NativeAOT and trimming
-
-In the resolved 4.5.1 modern-.NET assembly, all ten overloads each of
-`AreEquivalent` and `AreNotEquivalent` carry both `RequiresUnreferencedCode`
-and `RequiresDynamicCode`. Their runtime-type reflection and generic type
-construction are real constraints. Earlier source versions lacking these
-annotations are not proof of safety.
-
-The expression-tree assertion `Assert.That(() => condition)` is a different API
-from the singleton property used by `Assert.That.MyCustomAssertion(...)`.
-The expression API has `RequiresDynamicCode` on the modern-.NET 4.5.1 asset.
-The singleton property does not impose that requirement; assess each custom
-extension's implementation. Do not confuse it with NUnit's `Assert.That`.
-
-NativeAOT restrictions apply when the test host actually targets that mode;
-do not use a hypothetical AOT requirement to discard the best managed assertion.
-For a NativeAOT test host, use statically typed assertions that retain the full
-intended test semantics. See [TypedAssertions.cs](examples/TypedAssertions.cs).
-If deep reflection is actually needed, isolate it in a managed test host; that
-host can still test a separately published NativeAOT application.
-
-`IsAotCompatible=true` enables compatibility analysis; it does not certify every
-API, dependency, or execution path. Do not blanket-suppress IL2026/IL3050 or swap
-to weaker assertions just to make diagnostics disappear. A clean analyzer build
-is different evidence from an actual NativeAOT publish and run.
+Before choosing `AreEquivalent`, read [graph equality](references/graph-equality.md):
+its static-type equality shortcuts and strictness rules determine which members
+it actually checks. Use [NativeAOT guidance](references/native-aot.md) when the
+test host targets AOT/trimming or an assertion's dynamic-code requirements matter.
+Keep managed-host and published-native evidence distinct.
 
 ## Verify changes and new claims
 

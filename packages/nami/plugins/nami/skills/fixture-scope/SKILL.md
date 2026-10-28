@@ -5,23 +5,28 @@ description: "Choose and implement explicit test, class or assembly ownership fo
 
 # Fixture scope
 
-Inspect the repository's existing fixture owner, MSTest version and test runner.
-Reuse that owner before adding a helper. Choose scope from the behavior being
-tested: fresh mutable state per test; one resource per class when tests intentionally
-share it; assembly ownership only for a resource actually used across classes.
-Consumers do not dispose class- or assembly-owned resources.
+1. Inspect the existing fixture owner, MSTest version and runner. Reuse that
+   owner before adding a helper. Choose fresh mutable state per test, class scope
+   for intentional sharing, or assembly scope for a resource used across classes.
+2. Declare the scope and consume a non-nullable fixture. Central infrastructure
+   owns creation, partially failed setup, disposal and invalid lifecycle detection.
+   Consumers do not dispose class- or assembly-owned resources. Do not repeat
+   `null!`, null checks or lifecycle callbacks across tests to satisfy the compiler.
+3. Verify the chosen scope's isolation, sharing, setup failure and cleanup through
+   the normal test entrypoint. The [verification tests](examples/FixtureLifecycleTests.cs)
+   cover shared class state, per-invocation isolation, distinct classes and cleanup.
 
-The test author should declare the scope and consume a non-nullable fixture.
-Central infrastructure owns creation, partially failed setup, disposal and invalid
-lifecycle detection. Do not repeat `null!`, null checks, or lifecycle callbacks
-across consumer tests just to satisfy the compiler.
+The declaration in the [working example](examples/Example.cs) makes class ownership
+explicit:
 
-The [working example](examples/Example.cs) uses public MSTest extension points:
-`[UsesFixture(FixtureScope.Class)]` and `FixtureTests<InputFixture>`. Its inherited
-hooks live in [FixtureTests.cs](examples/FixtureTests.cs). The factory and deletion
-live in [InputFixture.cs](examples/InputFixture.cs). These are example helpers,
-not built-in MSTest APIs. The [verification tests](examples/FixtureLifecycleTests.cs)
-exercise shared class state, per-invocation isolation, distinct classes and cleanup.
+```csharp
+[UsesFixture(FixtureScope.Class)]
+public sealed class InputTests : FixtureTests<InputFixture>
+```
+
+These are example helpers built on public MSTest extension points, not built-in
+MSTest APIs. Inherited hooks live in [FixtureTests.cs](examples/FixtureTests.cs);
+creation and deletion live in [InputFixture.cs](examples/InputFixture.cs).
 
 Read [MSTest lifecycle](references/mstest-lifecycle.md) for API signatures,
 cleanup ordering, host injection restrictions and temporary-file behavior.

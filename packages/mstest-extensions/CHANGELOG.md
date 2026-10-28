@@ -1,5 +1,13 @@
 # Changelog
 
+## 4.0.1 — 2026-10-28
+
+- Keep the assertion entrypoint focused on choosing and correcting assertions;
+  move graph-equality and Native AOT details into local, conditionally read references.
+- Express the existing contract → edit → verify workflow as ordered steps.
+  Preserve the executable examples, API semantics and validation rules.
+
+
 ## 4.0.0 — 2026-10-28
 
 - Consolidate the eleven entrypoints into `mstest` and `mstest-assertions`.

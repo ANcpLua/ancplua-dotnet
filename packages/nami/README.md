@@ -8,6 +8,10 @@ One portable plugin with three skills:
 | [Fixture scope](plugins/nami/skills/fixture-scope/SKILL.md) | Explicit ownership, shared inputs and cleanup |
 | [Native Codex messaging](plugins/nami/skills/codex-native-messaging/SKILL.md) | Verified thread identity, queue/resume semantics and bounded fan-out |
 
+Version 0.1.4 clarifies the existing fixture and message-delivery workflows as
+ordered steps. The fixture declaration is excerpted from the verified example;
+its implementation and lifecycle guarantees are unchanged.
+
 The package is listed in the central `ancplua-dotnet` marketplace. This repository
 has no standalone marketplace. Install it with `codex plugin add nami@ancplua-dotnet`
 after registering the central catalog. The package uses portable `plugin.json` and

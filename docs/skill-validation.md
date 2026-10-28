@@ -41,10 +41,14 @@ were moved to their single owner, and former entrypoints remain workflow referen
 No reference trees were copied and no validator rules were disabled.
 
 The same official macOS ARM64 binary published on 2026-10-27 now checks all **five
-current MSTest/Nami skills with zero errors**. Its archive SHA-256 is
+current MSTest/Nami skills with zero errors and zero warnings**. Its archive SHA-256 is
 `c3deb61c0de0b98838cbf2c808a1f6cd683edd912fd1766d351226b6cd51674d`.
-Five heuristic warnings remain: assertion-skill length and suggestions for numbered
-steps or code blocks. These remain visible; short review guidance needs no filler.
+The five initial profile warnings are resolved in MSTest Extensions 4.0.1 and Nami
+0.1.4. Graph-equality and AOT detail now loads from conditional local references,
+reducing the assertion entrypoint from 2,777 to 2,149 BPE tokens. Existing edit,
+fixture and message-delivery workflows use ordered steps; the fixture declaration
+is excerpted from its executable example. No validator, lint rule or threshold
+changed, and the reference content is maintained only once.
 No fresh model-selection or baseline-versus-skill quality evaluation was run.
 
 Run `make check-skills` with Python 3.12+ and authenticated `gh`. The same command
