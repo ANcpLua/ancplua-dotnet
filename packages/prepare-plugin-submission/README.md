@@ -1,7 +1,7 @@
 # Submission Studio 2.3.2
 
 Version 2.3.2 aligns the canonical and compatibility manifest versions and ships
-the same source to the [fixed cloud entry](../../docs/cloud-plugins.md) and Git
+the same source to the [fixed cloud entry](https://github.com/ANcpLua/ancplua-dotnet/blob/main/docs/cloud-plugins.md) and Git
 marketplace. Version 2.3.1 clarified the wizard startup sequence. Runtime and
 templates retain their imported 2.3.0 behavior; historical evidence keeps its
 original version.

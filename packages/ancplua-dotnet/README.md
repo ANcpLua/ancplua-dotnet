@@ -42,7 +42,7 @@ claude plugin install ancplua-dotnet@ancplua-anthropic
 Then run `/reload-plugins` in an open session.
 
 Codex public Git distribution (the maintainer account uses the
-[fixed cloud entries](../../docs/cloud-plugins.md) instead):
+[fixed cloud entries](https://github.com/ANcpLua/ancplua-dotnet/blob/main/docs/cloud-plugins.md) instead):
 
 ```bash
 codex plugin marketplace add ANcpLua/ancplua-dotnet
