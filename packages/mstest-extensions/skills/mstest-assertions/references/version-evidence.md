@@ -84,3 +84,26 @@ must satisfy a value-preservation contract, while a reference-identity assertion
 must reject them. The verifier discovers all example methods from the current
 source; run it for the current count rather than treating the historical count as
 a gate. Agent-behavior evaluation is described separately in [evaluation.md](evaluation.md).
+
+## 4.5.2 recheck
+
+Checked 2026-11-10 against the restored packages:
+
+- `MSTest.Sdk/4.5.2/Sdk/Sdk.props` defaults `MSTestVersion` to 4.5.2 and
+  `MicrosoftTestingPlatformVersion` to 2.5.2.
+- Resolved asset `MSTest.TestFramework/4.5.2/lib/net9.0/MSTest.TestFramework.dll`,
+  identity `MSTest.TestFramework, Version=4.5.2.0`, informational version
+  `4.5.2+933377f07ac4bded77e820b0beef7d27e805cd89`, MVID
+  `d967d1be-0dac-4c06-8a5d-fc076432464d`.
+- `ilspycmd` 11.1 output for the `Assert` type is identical for the 4.5.1 and
+  4.5.2 assets, including the Span `AreEquivalent` overloads that call `ToArray()`.
+- `ref assembly` (0.9.0-preview.1) finds every `Assert` member that
+  SKILL.md recommends and `SequenceOrder.InAnyOrder`; `ThrowsException` is absent.
+  `ref aot inspect` reports the same annotations as for 4.5.1: 10 RUC and 10 RDC
+  for each of AreEquivalent and AreNotEquivalent, one RDC for AssertExtensions.That,
+  assessment `not-established`. `ref reflection` reports the same 8
+  expression-compilation, 19 reflection-discovery and 17 reflection-invocation call sites.
+- `scripts/verify_examples.py` with .NET SDK 11.0.100-rc.3.26522.148 and the 4.5.2
+  pins: 18 managed examples passed, none failed or skipped; the typed sample passed
+  AOT analysis; the negative probe produced exactly the expected IL2026 and IL3050
+  diagnostics. No NativeAOT binary was published or executed.

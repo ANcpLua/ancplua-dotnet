@@ -1,5 +1,15 @@
 # Changelog
 
+## 4.0.2 — 2026-11-10
+
+- Recheck `mstest-assertions` against MSTest 4.5.2, the version MSTest.Sdk 4.5.2
+  selects with Microsoft.Testing.Platform 2.5.2. The `Assert` API and its AOT
+  annotations are unchanged, so its examples and verifier now pin 4.5.2 and the
+  evidence records the recheck. The `mstest` skill keeps its 4.5.1 runner evidence.
+- Explain where the `ref` command used for verification comes from, with a
+  decompiler fallback when it is unavailable.
+
+
 ## 4.0.1 — 2026-10-28
 
 - Keep the assertion entrypoint focused on choosing and correcting assertions;

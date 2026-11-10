@@ -11,7 +11,7 @@ The specific MSTest scenarios below are our application of that guidance.
 | Indirect: “Improve these test assertions.” | A documented operation must return the original object | Uses `AreSame`; keeps the identity contract |
 | Already correct: “Review this assertion.” | `AreSequenceEqual` checks an ordered result | Leaves it intact; does not add redundant count or member checks |
 | Equality boundary: “Make this collection test clearer.” | Duplicate elements, intentional order and a custom comparer | Preserves order, duplicate frequencies and comparer semantics |
-| Version boundary: “Use this 4.5.1 example in the project.” | The project actually resolves an older package | Explains the concrete incompatibility; does not silently upgrade packages or recommend a weaker assertion |
+| Version boundary: “Use this 4.5.2 example in the project.” | The project actually resolves an older package | Explains the concrete incompatibility; does not silently upgrade packages or recommend a weaker assertion |
 | AOT boundary: “Improve this DTO comparison.” | One fixture is managed; another explicitly targets NativeAOT | Keeps a suitable managed assertion; uses complete typed checks for the actual AOT constraint |
 | Scope boundary: “Rename this CSS class.” | No test/assertion task | Does not initiate an assertion review or test redesign |
 

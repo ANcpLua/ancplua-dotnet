@@ -1,13 +1,16 @@
 ---
 name: mstest-assertions
-description: Select the most precise MSTest 4.5.1 assertion for each test contract. Use for assertion authoring, targeted replacements, equality and collection semantics, or NativeAOT constraints. Report-only suite/strength assessments belong to mstest; preserve the intended contract.
+description: Select the most precise MSTest 4.5 assertion for each test contract (checked against MSTest 4.5.2 with Microsoft.Testing.Platform 2.5.2). Use for assertion authoring, targeted replacements, equality and collection semantics, or NativeAOT constraints. Report-only suite/strength assessments belong to mstest; preserve the intended contract.
 ---
 
-# MSTest 4.5.1: the best assertion for the contract
+# MSTest 4.5: the best assertion for the contract
 
 Verified against the published MSTest.TestFramework **4.5.1** (`lib/net9.0`,
-consumed from .NET 11), its release sources, and the current TestFX sources.
-This skill targets the **4.5.1 API**. The highest priority is the most specific
+consumed from .NET 11), its release sources, and the current TestFX sources,
+then rechecked against **4.5.2**, the version MSTest.Sdk 4.5.2 selects together
+with Microsoft.Testing.Platform 2.5.2. Its decompiled `Assert` class is identical
+to 4.5.1; see [version evidence](references/version-evidence.md#452-recheck).
+This skill targets the **4.5.2 API**. The highest priority is the most specific
 assertion that proves the intended contract and produces useful failure evidence.
 Improve an inferior assertion directly; leave an already suitable assertion alone.
 Do not recommend weaker checks, legacy assertions, or historical fallbacks.
@@ -22,7 +25,7 @@ application repository, global skill installation, or other skills in the plugin
 
 ## Selection priority
 
-Select the dedicated 4.5.1 assertion for the behavior the test promises. The
+Select the dedicated 4.5.2 assertion for the behavior the test promises. The
 contract comes from the requested behavior and public API, not merely from what
 the current implementation happens to do. Preserve required aspects without
 inventing additional ones. More restrictive is not automatically more correct.
@@ -71,7 +74,7 @@ exact instance is itself promised, such as preserving a failure object through
    improvement into a speculative test redesign.
 
 Do not recommend `CollectionAssert`, `StringAssert`, or `ThrowsException` as
-4.5.1 alternatives. Do not replace content checks with count, a precise type
+4.5.2 alternatives. Do not replace content checks with count, a precise type
 check with a hard cast, or typed exception assertions with manual try/catch.
 `IsInstanceOfType<T>` allows derived types; if the contract requires the exact
 runtime type, assert equality with `typeof(T)` instead. A genuine presence-only
@@ -109,8 +112,8 @@ var matching = Assert.ContainsSingle(item => item.IsPending, collection);
   `SequenceOrder.InAnyOrder` ignores order but retains duplicate frequencies.
   A supplied `IEqualityComparer<T>` deliberately changes element equality.
   Prefer supported Span/Memory overloads over conversions at the call site;
-  this is not a blanket allocation-free guarantee. In 4.5.1 the graph-comparison
-  Span overloads themselves use `ToArray()` internally.
+  this is not a blanket allocation-free guarantee. In 4.5.1 and 4.5.2 the
+  graph-comparison Span overloads themselves use `ToArray()` internally.
 - `HasCount` proves only count; `IsEmpty`/`IsNotEmpty` prove emptiness/non-emptiness.
   These collection assertions are not a replacement for an explicit null contract.
 - `ContainsSingle(collection)` proves exactly one total item and returns it.
@@ -135,7 +138,22 @@ Keep managed-host and published-native evidence distinct.
 
 ## Verify changes and new claims
 
-Use `ref help` to select supported commands, then inspect the resolved asset:
+### Getting `ref`
+
+`ref` is a .NET command-line tool that is not published on nuget.org, so a plain
+`dotnet tool install` cannot fetch it. Check `dotnet tool list --global` and the
+repository's tool manifest first.
+
+- In a repository whose tool manifest pins it, run `dotnet tool restore`, then
+  `dotnet tool run ref <command>`. Such a repository supplies the package through
+  its own NuGet source, for example a feed folder listed in its `nuget.config`.
+- Without it, read signatures and the `RequiresUnreferencedCode` and
+  `RequiresDynamicCode` attributes with a decompiler such as `ilspycmd`, and
+  report that `ref` evidence was not collected.
+
+The commands below use the global `ref`; prefix them with `dotnet tool run` when
+the tool comes from a manifest. Use `ref help` to select supported commands, then
+inspect the resolved asset:
 
 ```sh
 ref packages path/to/obj/project.assets.json --json

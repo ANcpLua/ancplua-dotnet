@@ -23,7 +23,7 @@ with tempfile.TemporaryDirectory(prefix="mstest-assertions-") as scratch:
     managed = root / "managed"
     managed.mkdir()
     shutil.copy2(skill / "examples/EqualityExamples.cs", managed)
-    (managed / "Examples.csproj").write_text('''<Project Sdk="MSTest.Sdk/4.5.1">
+    (managed / "Examples.csproj").write_text('''<Project Sdk="MSTest.Sdk/4.5.2">
   <PropertyGroup>
     <TargetFramework>net11.0</TargetFramework>
     <LangVersion>15</LangVersion>
@@ -66,7 +66,7 @@ public static class UnsafeForAot {
     <IsAotCompatible>true</IsAotCompatible>
     <WarningsAsErrors>$(WarningsAsErrors);IL2026;IL3050</WarningsAsErrors>
   </PropertyGroup>
-  <ItemGroup><PackageReference Include="MSTest.TestFramework" Version="4.5.1" /></ItemGroup>
+  <ItemGroup><PackageReference Include="MSTest.TestFramework" Version="4.5.2" /></ItemGroup>
 </Project>
 ''')
         output = run(["dotnet", "build", str(folder / "Probe.csproj"), "--nologo"], root, success)
