@@ -79,6 +79,16 @@ MSTest APIs and runner verification live in the companion package.
 
 Move the source and marketplace into one repository. Skill behavior is unchanged.
 
+## 0.7.8
+
+Recheck the `analyzers` skill against .NET SDK 11.0.100 and ANcpLua.Analyzers 2.1.8. A new
+section lists the diagnostic IDs a build gate must name (CS0612 next to CS0618, NU1901-NU1904,
+SYSLIB1227 and SYSLIB1228) and what a project loses when it leaves ANcpLua.NET.Sdk, with a
+worked example of restoring the gates. A bare `-getItem:Analyzer` lists only the analyzers added
+at evaluation, so the skill now points to the compiler's `/analyzer:` arguments instead. `AL0xxx`
+is described as reserved, as the package states. `csharp-refactoring` names the classifier for
+tagged union payloads, as the nami union skill does.
+
 ## 0.7.7
 
 Recheck six skills against .NET SDK 11.0.100 (MSBuild 18.12, NuGet 8.0). `nuget-versions`

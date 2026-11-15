@@ -31,7 +31,7 @@ license: Apache-2.0
 | Type moved between assemblies | A same-name move may need `TypeForwardedTo` in the original assembly; a rename needs a different compatibility decision. |
 | Generated/partial code, friends, conditional builds | Follow generator ownership, `InternalsVisibleTo`, all declarations and each affected compilation. |
 | Wrapper removal or type merge | Retain compatibility adapters only for a real consumer boundary. Remove internal dead indirection once its callers are migrated. |
-| Hierarchy to C# 15 union | System.Text.Json (.NET 11) writes a union's active case without a wrapper or `$type`, and needs a type classifier, such as `[JsonUnion]` with the structural classifier, to read back cases that share a JSON token type. Treat the change as a wire-contract migration. |
+| Hierarchy to C# 15 union | System.Text.Json (.NET 11) writes a union's active case without a wrapper or `$type`, and needs a type classifier to read back cases that share a JSON token type: `[JsonUnion]` with the structural classifier for untagged objects, a classifier that reads the tag for tagged payloads (`nami:csharp-union-types`). A `closed` hierarchy with `[JsonPolymorphic]` keeps its `$type`. Treat the change as a wire-contract migration. |
 
 A CLR rename can preserve an existing JSON field through explicit metadata:
 

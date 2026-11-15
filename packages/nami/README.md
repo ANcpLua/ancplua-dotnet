@@ -8,7 +8,9 @@ One portable plugin with three skills:
 | [Fixture scope](plugins/nami/skills/fixture-scope/SKILL.md) | Explicit ownership, shared inputs and cleanup |
 | [Native Codex messaging](plugins/nami/skills/codex-native-messaging/SKILL.md) | Verified thread identity, queue/resume semantics and bounded fan-out |
 
-Version 0.1.4 clarifies the existing fixture and message-delivery workflows as
+Version 0.1.5 exports the union skill for the .NET 11 release (SDK 11.0.100) with
+its System.Text.Json union guidance, and the package checks run on that SDK.
+Version 0.1.4 clarified the existing fixture and message-delivery workflows as
 ordered steps. The fixture declaration is excerpted from the verified example;
 its implementation and lifecycle guarantees are unchanged.
 

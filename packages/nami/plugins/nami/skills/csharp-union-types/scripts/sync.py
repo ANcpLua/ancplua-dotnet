@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Explicit one-way export of the canonical Nami union skill. Never import target edits."""
+"""Explicit one-way export of the canonical union skill (ANcpLua/csharp-union-types). Never import target edits."""
 import argparse
 import hashlib
 import json

@@ -22,13 +22,16 @@ Find the path first. Each path has its own way to opt out and to pin the version
 | Direct `PackageReference` | csproj or `Directory.Build.props` (often conditioned) | `PackageVersion` | condition on the item |
 | .NET SDK built-in | `EnableNETAnalyzers`, `AnalysisLevel`, `AnalysisMode` | the .NET SDK | `EnableNETAnalyzers=false` |
 
-Inspect the evaluated analyzer items rather than inferring them from project text:
+Inspect what the compiler receives rather than inferring it from project text. The complete set is
+the `/analyzer:` arguments of `CoreCompile`: read them in a binlog (`dotnet build -bl`). A bare
+`dotnet msbuild <proj> -getItem:Analyzer` only evaluates the project and lists the .NET SDK's own
+analyzers. Package analyzers join the item when `ResolveLockFileAnalyzers` runs; the framework's
+source generators join later in the build and are missing from this list too:
 
 ```sh
-dotnet msbuild <proj> -getItem:Analyzer
+dotnet msbuild <proj> -t:ResolveLockFileAnalyzers -getItem:Analyzer
 ```
 
-These are the analyzer DLLs passed to compilation.
 `obj/<proj>.nuget.g.props` shows which package props files were imported.
 
 ## 2. Severity: who wins
@@ -58,7 +61,32 @@ Facts that make configurations silently inert:
   and it's ignored entirely when `AnalysisMode`/`AnalysisLevel` enables all rules. ID-specific
   entries from any config still win.
 
-## 3. Suppression rules
+## 3. Warnings that must fail the build
+
+`WarningsAsErrors` promotes only the IDs it lists. List every ID a problem can arrive as, and
+append to the inherited value (example 4):
+
+- Obsolete APIs: `[Obsolete("message")]` reports CS0618, a message-less `[Obsolete]` reports
+  CS0612, and `DiagnosticId = "..."` reports that ID instead. Blocking obsolete use needs CS0612 and
+  CS0618 plus any custom IDs; `[Obsolete(message, true)]` is already error CS0619.
+- NuGet audit: NU1901-NU1904 are known vulnerabilities from low to critical severity. NU1900 means
+  the vulnerability data could not be read or carried an invalid severity, usually a package source
+  problem. Projects that target .NET 10 or later audit transitive packages by default
+  (`NuGetAuditMode` `all`).
+- Source generators report through the same pipeline. System.Text.Json's SYSLIB1227 (union cases
+  it cannot tell apart) and SYSLIB1228 (a union shape it cannot use) stay warnings until listed;
+  invoke the installed `nami:csharp-union-types` skill for union JSON.
+
+Leaving an MSBuild SDK drops what it set. ANcpLua.NET.Sdk sets `TreatWarningsAsErrors`,
+`MSBuildTreatWarningsAsErrors`, `EnforceCodeStyleInBuild` and NU1900-NU1904 as errors for CI
+(detected from CI environment variables) and Release builds; it always sets `NuGetAudit` (mode
+`all`, level `low`), `AnalysisLevel` `latest-all` and `Features` `strict`, and injects
+ANcpLua.Analyzers and BannedApiAnalyzers with their global configs and banned-symbol lists. A
+project moved to plain `Microsoft.NET.Sdk` builds green without any of it. Restore the gates it
+still needs in its own `Directory.Build.props`, re-add the analyzer packages, and prove the result
+(example 9).
+
+## 4. Suppression rules
 
 - Every suppression names its reason on the same or the previous line. A suppression without a
   reason gets deleted or justified.
@@ -77,7 +105,7 @@ Facts that make configurations silently inert:
   `GeneratedCodeAnalysisFlags.None`. A blanket `dotnet_analyzer_diagnostic.severity = none` in a
   generated-file section is legitimate; the same line in a `[*.cs]` section isn't.
 
-## 4. MSBuild properties inside analyzers
+## 5. MSBuild properties inside analyzers
 
 An analyzer reads `build_property.<Name>` from `AnalyzerConfigOptions`, which works only if a
 `<CompilerVisibleProperty Include="Name" />` item reaches the compilation.
@@ -91,10 +119,10 @@ An analyzer reads `build_property.<Name>` from `AnalyzerConfigOptions`, which wo
   key in `obj/**/<proj>.GeneratedMSBuildEditorConfig.editorconfig`.
 - Tests that inject `build_property.*` through editorconfig prove the rule logic, not the wiring.
 
-## 5. ANcpLua.Analyzers specifics
+## 6. ANcpLua.Analyzers specifics
 
-- IDs `AL1000`-`AL1899` in nine domain bands; `AL0xxx` belongs to sibling packages
-  (AotReflection, ExtensibleEnumMirror, DiscriminatedUnion).
+- IDs `AL1000`-`AL1899` in nine domain bands (90 rules in 2.1.8); the package reserves `AL0xxx`
+  for sibling ANcpLua analyzer packages.
 - `<AlAnalysisMode>`: `Default` (descriptor severities), `AllAsErrors`, or `Disabled`. Unset means
   no profile, so the SDK's bundled per-rule config applies in SDK projects and descriptor
   severities apply elsewhere.
@@ -105,14 +133,15 @@ An analyzer reads `build_property.<Name>` from `AnalyzerConfigOptions`, which wo
   (`PublishAot`/`IsAotCompatible`).
 - AL1600-AL1602 report on props files (see section 2).
 
-## 6. Worked examples (found in real repositories)
+## 7. Worked examples (found in real repositories)
 
 Read `references/examples.md` for before and after cases: stale renumbered IDs in `NoWarn`, a
 package `build/` props that never reached consumers, editorconfig lines for props-file rules,
 `WarningsAsErrors` without self-reference wiping the SDK's NuGetAudit escalation, a pragma hiding
-a false positive, and test "relax" blocks that relax nothing.
+a false positive, test "relax" blocks that relax nothing, and the gates a project must restore
+after leaving the SDK.
 
-## 7. Audit output
+## 8. Audit output
 
 For each project: how the analyzer arrives (with evidence), which mode and severity sources apply, and
 every suppression as `file:line | ID | scope | reason present? | still defined? | verdict`. Then

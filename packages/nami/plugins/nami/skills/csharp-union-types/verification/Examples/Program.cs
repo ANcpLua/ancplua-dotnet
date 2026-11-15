@@ -6,6 +6,9 @@ FunctionalExamples.Verify();
 #if CLOSED_HIERARCHY_EXAMPLES
 ClosedHierarchyExamples.Verify();
 #endif
+#if JSON_EXAMPLES
+JsonExamples.Verify();
+#endif
 
 Outcome accepted = new Accepted("Stored");
 Outcome rejected = new Rejected("Invalid project");

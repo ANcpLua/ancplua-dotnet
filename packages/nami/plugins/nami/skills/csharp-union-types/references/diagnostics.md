@@ -1,6 +1,6 @@
 # Compiler diagnostics and repairs
 
-This file is the local reference for the skill. No website or external repository is needed to use it. The examples and observed diagnostic codes are pinned to SDK `11.0.100-rc.3.26522.148`; the verification report records the actual result.
+This file is the local reference for the skill. No website or external repository is needed to use it. The examples and observed diagnostic codes are pinned to SDK `11.0.100`; the verification report records the actual result. Moving from RC3 (`11.0.100-rc.3.26522.148`) to this release changed no diagnostic ID, severity or message in the verified set.
 
 ## Switches, patterns and null
 
@@ -44,7 +44,7 @@ Use an explicit null arm whenever default contents can reach a switch. It covers
 | CS9386 | The provider has no suitable Value contract. | Expose an instance object/object? Value property with a public getter on the provider contract. | `provider_requires_value` |
 | CS9387 | A keyword union uses a member provider interface. | Remove that provider or use a custom attributed class/struct when provider-based construction is required. | `declaration_rejects_provider` |
 
-### Precise RC3 examples matter
+### Precise examples matter
 
 ```csharp
 public union Empty; // CS9370
@@ -77,11 +77,21 @@ Closing a base restricts **direct** derivation across assemblies. It does not au
 
 A new case is only diagnosed in consumers that are recompiled. An old consumer assembly can throw when passed a newly added case even if the new library compiled successfully. A source-level completeness guarantee is not binary-compatibility protection.
 
+## System.Text.Json source generation
+
+| ID | Meaning | Repair | Local check |
+| --- | --- | --- | --- |
+| SYSLIB1227 | Several union cases use the same JSON value type, so reading cannot pick one (for example two object cases). | Configure a classifier: `[JsonUnion(TypeClassifier = ...)]` with the structural classifier or a tag classifier, or keep an existing `[JsonConverter]`. | `union_json_ambiguous_cases_rejected_when_promoted` |
+| SYSLIB1228 | The union shape is not one System.Text.Json can use; a member-provider union (`IUnionMembers` with static `Create` methods) reports it. | Expose public single-parameter case constructors and a public `Value`, or write a converter. | `union_json_unsupported_shape_rejected_when_promoted` |
+| CS0592 | `[JsonPolymorphic]` on a `union`; the attribute is valid only on classes and interfaces. | Use a union classifier, or a `closed` hierarchy with `JsonPolymorphic` when you own the contract. | `union_rejects_json_polymorphic` |
+
+SYSLIB1227 and SYSLIB1228 are warnings; promote them through `WarningsAsErrors`. Any `JsonSourceGenerationOptions.TypeClassifiers` entry silences SYSLIB1227 for every union in that context, even a union that no listed factory can classify (`union_json_promotion_misses_generation_time_classifiers`). The generator reports nothing for a structural classifier that can never select a case uniquely; that fails with `NotSupportedException` at first use. Read every union in tests.
+
 ## What these diagnostics do not prove
 
 There is no automatic boxing warning promised here. A generated union boxes value-type cases; presence of `TryGetValue` alone does not prove a whole operation allocation-free. Measure the operation or inspect its generated code.
 
-Successful compilation also does not prove JSON roundtrips or NativeAOT compatibility. Use the local runtime checks for their documented scope and the consuming application's own tests for additional behavior.
+Successful compilation also does not prove JSON roundtrips or NativeAOT compatibility, even with the SYSLIB diagnostics promoted. Use the local runtime checks for their documented scope and the consuming application's own tests for additional behavior.
 
 ## Evidence
 

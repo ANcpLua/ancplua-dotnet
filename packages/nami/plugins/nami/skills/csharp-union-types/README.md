@@ -2,9 +2,9 @@
 
 A C# 15 skill for AI coding agents, backed by local compiler diagnostics and executed probes. Use the bundled guidance to implement and review code; run only the checks relevant to the requested change.
 
-The baseline is **.NET SDK 11.0.100-rc.3.26522.148**. Findings are version-specific. `union` compiles with C# 15.0 on this SDK; earlier preview instructions requiring `LangVersion=preview` must not be applied universally.
+The baseline is **.NET SDK 11.0.100**, the [.NET 11.0.0 release](https://github.com/dotnet/core/blob/main/release-notes/11.0/11.0.0/11.0.0.md). Findings are version-specific. C# 15 is the default language version for `net11.0`, so `union` compiles without a `LangVersion` setting; earlier preview instructions requiring `LangVersion=preview` must not be applied universally.
 
-RC3 is an out-of-band security update. Its [release notes](https://github.com/dotnet/core/blob/main/release-notes/11.0/preview/rc3/11.0.0-rc.3.md) list no union-language changes. The existing examples, polyfills and diagnostic probes are revalidated against this SDK.
+Moving the pin from RC3 (`11.0.100-rc.3.26522.148`) to the release changed the compiler build from `5.12.0-1.26522.148` to `5.12.0-1.26529.118` and nothing else that the verifier observed: the 42 checks it had then produced the same diagnostic IDs, severities, messages and runtime output on both SDKs.
 
 ## Contents
 
@@ -14,6 +14,7 @@ RC3 is an out-of-band security update. Its [release notes](https://github.com/do
 - [Examples](examples/unions.cs): readonly unions with compiled and executed checks for cases, defaults and scalar matching.
 - [Functional composition](examples/functional.cs): pure `Map`/`Bind`/`Match` operators and a parsing/validation pipeline with errors as values.
 - [Closed hierarchies](examples/closed-hierarchies.cs): closed intermediate nodes, sealed leaves, exhaustive matching and null handling.
+- [Tagged JSON union](examples/json-tagged-union.cs): a System.Text.Json classifier that selects the case from a `kind` tag, with source generation; executed under JIT and, with `--native-aot`, as a NativeAOT executable.
 - [Polyfills](polyfills/README.md): source-only `UnionAttribute` and `IUnion` for targets before .NET 11.
 - [One-way export](references/verification.md#explicit-one-way-export): check or update standalone/plugin copies from the canonical source.
 - Bundled probes in `probes/`, with the required license notices. No external repository is required.
@@ -31,7 +32,7 @@ python3 scripts/verify.py
 
 An ordinary directory copy or ZIP also works. The verifier copies the supplied local inputs into a temporary directory, builds sequentially with at most two workers, checks expected diagnostic IDs, runs executable probes, and exits nonzero on missing or failed evidence. Normal skill use needs only the local Markdown references; no browsing or verifier run is required to read the guidance.
 
-Verification covers union and closed-hierarchy diagnostics, runtime matching/JSON behavior, and legacy/modern polyfill boundaries. The current verifier result is authoritative only for its recorded inputs; historical runs are not instruction sources.
+Verification covers union and closed-hierarchy diagnostics, runtime matching/JSON behavior, and legacy/modern polyfill boundaries. Add `--native-aot` to also publish the tagged JSON example with NativeAOT and run it; that needs the platform's [NativeAOT prerequisites](https://learn.microsoft.com/dotnet/core/deploying/native-aot/#prerequisites), such as `clang` on Ubuntu. The current verifier result is authoritative only for its recorded inputs; historical runs are not instruction sources.
 
 ## Important boundaries
 
@@ -53,10 +54,11 @@ operators do not hide their exceptions or make mutable payloads immutable.
 - Exhaustiveness is checked for **switch expressions**, not switch statements. Missing-case/null/guard warnings must be promoted if they must reject the build.
 - A union can contain null at runtime even when its case types are nonnullable. Handle `default(U)` deliberately; a successful compilation does not prove runtime safety.
 - A null arm preserves missing-case diagnostics. A catch-all arm masks future cases.
-- A compiler does not prove JSON roundtrips, allocation counts or NativeAOT compatibility. The selected runtime probes cover specific JSON/default behaviors; no whole-framework or NativeAOT claim is made.
+- A compiler does not prove JSON roundtrips, allocation counts or NativeAOT compatibility. The selected runtime probes cover specific JSON/default behaviors, and the NativeAOT check covers only the tagged JSON example; no whole-framework claim is made.
+- System.Text.Json writes a union's case value without a discriminator and reads by JSON token kind. Two object cases need a classifier; `SYSLIB1227` warns about the missing one only in a context without generation-time classifiers, so test reading every union.
 - Polyfills supply compiler-recognized types. They do not upgrade the compiler or backport .NET 11 serialization.
 
-CI executes the same script and uploads its report. It does not publish NuGet packages.
+CI executes the same script with `--native-aot` and tries to upload its report; a failed upload, such as one refused by the account's artifact storage quota, does not fail the run. It does not publish NuGet packages.
 
 ## Credits and license
 

@@ -1,10 +1,18 @@
 # Changelog
 
-## Unreleased
+## 2026-11-15 — .NET 11 release (SDK 11.0.100) and System.Text.Json unions
 
+- Moved every pin from `11.0.100-rc.3.26522.148` to `11.0.100` (`global.json`, the verifier and the documentation). On identical inputs, the 42 existing checks produced the same diagnostic IDs, severities, messages and runtime output on both SDKs; only the compiler build changed, from `5.12.0-1.26522.148` to `5.12.0-1.26529.118`.
+- Rechecked the version-specific guidance against the release: C# 15 is the default for `net11.0` and is supported only on .NET 11 and later (polyfill note added); `u is U` is `CS8121` by language rule, not an RC3 quirk; the Roslyn API table now records the NuGet 5.12.0 packages of 2026-11-13, which have every union and closed-type API without the experimental marking, while 5.9.0 still fails each use with RSEXPERIMENTAL006.
+- Added System.Text.Json union guidance: case values without a discriminator, token-kind reading, `SYSLIB1227` and `SYSLIB1228`, the structural classifier's limits, custom classifiers, classifier precedence, JSON null, converters, `CS0592` for `[JsonPolymorphic]`, and the closed-hierarchy alternative.
+- Added the `QUnionJson` probe, a tagged-union example with a custom classifier, and verifier support for required build warnings and promoted warning sets. A context with generation-time classifiers silences `SYSLIB1227` for all of its unions; the probe keeps that case visible.
+- Added the opt-in `--native-aot` check, which publishes the tagged-union example with NativeAOT, rejects IL2xxx and IL3xxx warnings and runs the executable; CI uses it. The report upload no longer fails CI when the artifact storage quota is exhausted.
+- Named this repository as the canonical source of the one-way export.
 - Verify old-consumer/new-library behavior by replacing only the library DLL and checking that the consumer hash stays unchanged.
 - Check local Markdown files and section anchors in CI.
 - Add an explicit, drift-checked one-way exporter from the canonical Nami skill to standalone/plugin copies.
+- Record which Roslyn union and closed-type APIs exist in the NuGet 5.9.0 packages (several only as RSEXPERIMENTAL006 experiments, no `UnionCaseTypes`) versus the RC3 SDK compiler 5.12.0, and that `GetClosedDerivedTypeInfo` returns direct derived types only.
+- Limit the skill description to the C# 15 `union` keyword and `closed` modifier, excluding union conventions built on attributes the compiler does not recognize.
 
 ## 2026-10-26 — multi-level closed hierarchies
 

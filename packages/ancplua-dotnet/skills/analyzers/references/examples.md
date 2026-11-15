@@ -1,7 +1,7 @@
 # Worked examples
 
-Each case was found and fixed in a real repository during the October 2026 ANcpLua rollout. The
-pattern matters, not the repository.
+Each case was found and fixed in a real repository during the October and November 2026 ANcpLua
+work. The pattern matters, not the repository.
 
 ## 1. Package props that never reached a consumer
 
@@ -111,3 +111,37 @@ Package-shipped configs must be global configs.
 The SDK target used the analyzer's ID for a different check. `NoWarn` can't silence an MSBuild
 `<Error>`, and searching for the ID finds two unrelated things. It was renamed to the SDK's own
 code family (`ANCPSDK002`, next to `ANCPSDK001`).
+
+## 9. Gates lost by leaving the SDK
+
+November 2026: three projects moved from `ANcpLua.NET.Sdk` 3.4.51 to `Microsoft.NET.Sdk`. They
+lost the SDK's editorconfig severity sets, ANcpLua.Analyzers, BannedApiAnalyzers with its symbol
+list, `Features=strict`, XML documentation, and the rule that a CI or Release build fails on any
+warning and on any NuGet audit finding. Nothing failed afterwards: Release builds and the CI gate
+passed with warnings, and a package with a known vulnerability failed nothing. NuGet audit itself
+kept running, because it is on by default and audits transitive packages for .NET 10 and later
+targets; only the failure was gone.
+
+After: the repository's `Directory.Build.props` sets the gates for every project.
+
+```xml
+<PropertyGroup>
+  <!-- [Obsolete] without a message reports CS0612, with a message CS0618. -->
+  <WarningsAsErrors>$(WarningsAsErrors);CS0612;CS0618</WarningsAsErrors>
+</PropertyGroup>
+<PropertyGroup Condition="'$(Configuration)' == 'Release' Or '$(CI)' == 'true'">
+  <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  <WarningsAsErrors>$(WarningsAsErrors);NU1901;NU1902;NU1903;NU1904</WarningsAsErrors>
+  <!-- NU1900: the vulnerability data could not be read. -->
+  <WarningsNotAsErrors>$(WarningsNotAsErrors);NU1900</WarningsNotAsErrors>
+</PropertyGroup>
+```
+
+`$(Configuration)` is empty in `Directory.Build.props` unless `-c` passes it, so `CI=true` covers CI
+builds without `-c`; GitHub Actions sets `CI=true`, and MSBuild reads environment variables as
+properties. ANcpLua.NET.Sdk instead makes NU1900 an error too and detects CI through
+`ContinuousIntegrationBuild`; either is a choice, but make it explicitly. A test evaluates
+`dotnet msbuild <proj> -getProperty:TreatWarningsAsErrors -getProperty:WarningsAsErrors` for a
+Release build, a CI build without `-c` and a local Debug build. A restore under `CI=true` with a
+package that has a known high-severity advisory must fail with `error NU1903`. Re-add analyzer
+packages as `GlobalPackageReference` items if the project still wants them.

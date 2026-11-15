@@ -20,6 +20,7 @@ foreach (var a in all)
 }
 
 Console.WriteLine($"Label: {Label(new PendingApproval())}");
+Console.WriteLine($"derived contract => {JsonSerializer.Serialize(new PartlyApproved(Guid.Empty))}");
 
 try { Console.WriteLine(JsonSerializer.Deserialize<Approval>("{}")); }
 catch (Exception e) { Console.WriteLine($"no discriminator => {e.GetType().Name}: {e.Message}"); }

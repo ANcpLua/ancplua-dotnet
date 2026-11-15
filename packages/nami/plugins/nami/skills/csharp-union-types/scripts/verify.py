@@ -15,8 +15,13 @@ import tempfile
 from check_links import check as check_links
 
 
-SDK = "11.0.100-rc.3.26522.148"
+SDK = "11.0.100"
 PACKAGE = Path(__file__).resolve().parents[1]
+
+# Printed by verification/Examples/JsonExamples.cs under JIT and NativeAOT.
+JSON_EXAMPLE_EVIDENCE = [
+    "json-tagged-union-writes-case-values-verified", "json-tagged-union-reads-by-tag-verified",
+    "json-tagged-union-rejects-invalid-tags-verified", "json-tagged-union-streaming-round-trip-verified"]
 
 # Stable names describe behavior; source output is data, never instructions.
 CHECKS = [
@@ -65,8 +70,36 @@ CHECKS = [
         'ser Plain("x") => "x"', 'ser Strict(7) => 7']},
     {"name": "closed_json_roundtrip", "project": "QClosedJson", "contains": [
         '"$type":"NotRequired"', '"$type":"PendingApproval"',
+        '{"$type":"PartlyApproved","Approver":', 'derived contract => {"Approver":',
         "no discriminator => NotSupportedException",
         "unknown discriminator => JsonException"], "counts": {"same: True": 5}},
+    {"name": "json_tagged_union_classifier", "project": "Examples", "define": "JSON_EXAMPLES",
+     "contains": JSON_EXAMPLE_EVIDENCE},
+    {"name": "union_json_runtime", "project": "QUnionJson", "warnings": ["SYSLIB1227", "SYSLIB1228"], "contains": [
+        "write int => 42", 'write string => "x"', 'write object => {"Radius":1}', "write default => null",
+        "read 42 => Int32", 'read "x" => String', "read null => empty", "read true => JsonException",
+        "ambiguous object cases => JsonException: JSON value type 'Object' is ambiguous",
+        "member-provider union => InvalidOperationException",
+        "member-provider union, reflection => kind Union, serialize InvalidOperationException",
+        "structural Radius => Circle", "structural Side => Square", "structural {} => JsonException",
+        "structural tag square with circle fields => TaggedCircle",
+        "structural never-unique case => NotSupportedException",
+        "attribute over options => Circle", "options only => Square", "contract over attribute => Square",
+        "generation-time options => Circle", "explicit context options => Square",
+        "silenced ambiguous union => JsonException",
+        "null with classifier => empty, classifier calls 0", "nullable case flags => Circle,Square?",
+        "null with nullable case => empty via [Square]", "null without nullable case => empty via []",
+        "required union property with null => empty",
+        "converter contract kind => None", 'converter write => {"tag":"circle"}', "converter read => Square"]},
+    {"name": "union_json_ambiguous_cases_rejected_when_promoted", "project": "QUnionJson",
+     "error": "SYSLIB1227", "promote": True},
+    {"name": "union_json_unsupported_shape_rejected_when_promoted", "project": "QUnionJson",
+     "error": "SYSLIB1228", "promote": True},
+    {"name": "union_json_promotion_misses_generation_time_classifiers", "project": "QUnionJson",
+     "define": "RESOLVED_ONLY", "warnings_as_errors": ["SYSLIB1227", "SYSLIB1228"], "contains": [
+        "silenced ambiguous union => JsonException", "converter read => Square"]},
+    {"name": "union_rejects_json_polymorphic", "project": "QUnionJson", "define": "POLYMORPHIC_UNION",
+     "error": "CS0592"},
     {"name": "self_type_rejected", "project": "QLang", "define": "RC1_IS_UNION_TYPE", "error": "CS8121"},
     {"name": "ambiguous_interfaces_rejected", "project": "QConv", "define": "AMBIG_SIBLINGS", "error": "CS0457"},
     {"name": "task_inference_rejected", "project": "QConv", "define": "INFER_TASK", "error": "CS0029"},
@@ -105,8 +138,8 @@ CHECKS.append({"name": "closed_rejects_external_derivation", "project": "QClosed
                "define": "DERIVE_CLOSED", "error": "CS9382"})
 
 
-def execute(command, cwd, env):
-    result = subprocess.run(command, cwd=cwd, env=env, capture_output=True, text=True, timeout=120)
+def execute(command, cwd, env, timeout=120):
+    result = subprocess.run(command, cwd=cwd, env=env, capture_output=True, text=True, timeout=timeout)
     return result.returncode, result.stdout + result.stderr
 
 
@@ -122,18 +155,24 @@ def check(case, workspace, env, binlogs):
         command.extend(["--framework", case["framework"]])
     if case.get("promote"):
         command.append("-p:WarningsAsErrors=" + case["error"])
+    if case.get("warnings_as_errors"):
+        command.append("-p:WarningsAsErrors=" + "%3B".join(case["warnings_as_errors"]))
     code, output = execute(command, workspace, env)
     errors = set(re.findall(r"\berror (CS\d+|[A-Z]+\d+)\b", output))
+    warnings = set(re.findall(r"\bwarning ([A-Z]+\d+)\b", output))
     diagnostics = []
     for line in output.splitlines():
-        match = re.search(r"\b(error|warning) (CS\d+): (.*?)(?: \[[^\]]+\])?$", line)
+        match = re.search(r"\b(error|warning) ([A-Z]+\d+): (.*?)(?: \[[^\]]+\])?$", line)
         if match:
             item = {"severity": match[1], "id": match[2], "message": match[3]}
             if item not in diagnostics:
                 diagnostics.append(item)
     failures = []
     result = {"name": case["name"], "build_exit": code, "error_codes": sorted(errors),
-              "diagnostics": diagnostics}
+              "warning_codes": sorted(warnings), "diagnostics": diagnostics}
+    for expected in case.get("warnings", []):
+        if expected not in warnings:
+            failures.append("Expected build warning " + expected)
     if "error" in case:
         if code == 0 or errors != {case["error"]}:
             failures.append("Expected a failed build with only " + case["error"])
@@ -196,10 +235,54 @@ def check_library_update(workspace, env, binlogs):
             'failures': failures, 'output': '\n'.join(logs).replace(str(workspace), '<temporary>')}
 
 
+def check_native_aot(workspace, env, binlogs):
+    """Publish the tagged-union JSON example with NativeAOT, then run the native executable."""
+    project = workspace / "probes" / "JsonAot"
+    project.mkdir(parents=True)
+    for source in ["examples/json-tagged-union.cs", "verification/Examples/JsonExamples.cs"]:
+        shutil.copyfile(PACKAGE / source, project / Path(source).name)
+    (project / "Program.cs").write_text("JsonExamples.Verify();\n")
+    (project / "JsonAot.csproj").write_text(
+        '<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup>'
+        '<OutputType>Exe</OutputType><TargetFramework>net11.0</TargetFramework><LangVersion>15.0</LangVersion>'
+        '<Nullable>enable</Nullable><PublishAot>true</PublishAot><InvariantGlobalization>true</InvariantGlobalization>'
+        '<JsonSerializerIsReflectionEnabledByDefault>false</JsonSerializerIsReflectionEnabledByDefault>'
+        '<TrimmerSingleWarn>false</TrimmerSingleWarn>'
+        '</PropertyGroup></Project>')
+    published = workspace / "native-aot"
+    code, output = execute(["dotnet", "publish", str(project / "JsonAot.csproj"), "--configuration", "Release",
+                            "--use-current-runtime", "--output", str(published), "--nologo", "--verbosity", "minimal",
+                            "-maxcpucount:2", "-nodeReuse:false", "-p:UseSharedCompilation=false",
+                            "-bl:" + str(binlogs / "native-aot-{}.binlog")], workspace, env, timeout=900)
+    trim_warnings = sorted(set(re.findall(r"\bwarning (IL[23]\d{3})\b", output)))
+    failures = []
+    result = {"name": "json_tagged_union_native_aot", "publish_exit": code, "trim_and_aot_warnings": trim_warnings}
+    executable = published / ("JsonAot.exe" if os.name == "nt" else "JsonAot")
+    if code:
+        failures.append("Expected a successful NativeAOT publish")
+    elif trim_warnings:
+        failures.append("Expected no IL2xxx or IL3xxx warning")
+    elif not executable.is_file():
+        failures.append("Missing native executable")
+    else:
+        run_code, run_output = execute([str(executable)], workspace, env)
+        result["run_exit"] = run_code
+        output += "\nRUNTIME:\n" + run_output
+        if run_code:
+            failures.append("Expected native exit 0")
+        for expected in JSON_EXAMPLE_EVIDENCE:
+            if expected not in run_output:
+                failures.append("Missing native runtime evidence: " + expected)
+    result.update(passed=not failures, failures=failures, output=output.replace(str(workspace), "<temporary>"))
+    return result
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--report", type=Path)
     parser.add_argument("--diagnostics-home", type=Path, help="External diagnostic state root")
+    parser.add_argument("--native-aot", action="store_true",
+                        help="Also publish and run the tagged-union JSON example with NativeAOT (needs its toolchain)")
     args = parser.parse_args()
     skill_root = Path(__file__).resolve().parents[1]
     repository = next((p for p in skill_root.parents if (p / "eng/scripts/diagnostics.py").is_file()), None)
@@ -216,7 +299,7 @@ def main():
         parser.error("Reports must be outside the source and instruction tree")
     binlogs = args.report.parent / "binlogs"
     binlogs.mkdir(parents=True, exist_ok=True)
-    report = {"sdk": SDK,
+    report = {"sdk": SDK, "native_aot": args.native_aot,
               "started_at_utc": datetime.now(timezone.utc).isoformat(), "checks": []}
     try:
         env = dict(os.environ, DOTNET_PROCESSOR_COUNT="2", DOTNET_CLI_TELEMETRY_OPTOUT="1",
@@ -251,6 +334,7 @@ def main():
                 '<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup>'
                 '<OutputType>Exe</OutputType><TargetFramework>net11.0</TargetFramework><LangVersion>15.0</LangVersion>'
                 '<Nullable>enable</Nullable><TreatWarningsAsErrors>true</TreatWarningsAsErrors>'
+                '<JsonSerializerIsReflectionEnabledByDefault>false</JsonSerializerIsReflectionEnabledByDefault>'
                 '</PropertyGroup></Project>')
             shutil.copytree(PACKAGE / "polyfills", workspace / "polyfills")
             for name in ["PolyfillConsumer", "Diagnostics"]:
@@ -271,13 +355,22 @@ def main():
                 result = {'name': 'old_consumer_new_library_added_case', 'passed': False, 'failures': [str(error)]}
             report['checks'].append(result)
             print(('PASS ' if result['passed'] else 'FAIL ') + result['name'], flush=True)
+            if args.native_aot:
+                try:
+                    result = check_native_aot(workspace, env, binlogs)
+                except (OSError, subprocess.TimeoutExpired) as error:
+                    result = {'name': 'json_tagged_union_native_aot', 'passed': False, 'failures': [str(error)]}
+                report['checks'].append(result)
+                print(('PASS ' if result['passed'] else 'FAIL ') + result['name'], flush=True)
+                if not result['passed']:
+                    print('; '.join(result['failures']), flush=True)
             link_failures = check_links(skill_root)
             report['checks'].append({'name': 'local_links_and_anchors', 'passed': not link_failures, 'failures': link_failures})
             print(('PASS ' if not link_failures else 'FAIL ') + 'local_links_and_anchors', flush=True)
     except (OSError, ValueError, subprocess.TimeoutExpired) as error:
         report["setup_error"] = str(error)
         print("FAIL setup: " + str(error), file=sys.stderr)
-    expected_checks = len(CHECKS) + 2
+    expected_checks = len(CHECKS) + 2 + (1 if args.native_aot else 0)
     report["passed"] = (len(report["checks"]) == expected_checks
                         and all(result["passed"] for result in report["checks"])
                         and "setup_error" not in report)
