@@ -5,7 +5,7 @@ fixture scope, and native Codex messaging.
 The only own marketplace is `ancplua-dotnet`; this repository owns the `nami` package, not another catalog.
 
 - Edit skill guidance in `plugins/nami/skills/<name>/SKILL.md` and its own `references/`.
-- The union skill is exported from the canonical Nami `.agents/skills/csharp-union-types` directory selected through `UNION_SOURCE`.
+- The union skill is exported from its canonical repository, `ANcpLua/csharp-union-types`, whose checkout `UNION_SOURCE` selects.
   Change the canonical source first, then use `make sync-union`; do not fork it here.
 - Fixture examples use the public MSTest lifecycle API. Do not add background
   cleanup, guessed lifetimes, hidden null suppression or extra dependency injection.

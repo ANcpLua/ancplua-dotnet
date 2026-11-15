@@ -22,9 +22,9 @@ verify-union:
 	uv run --frozen python -B scripts/verify.py union
 
 check-union-sync:
-	@test -n "$(UNION_SOURCE)" || { echo "Set UNION_SOURCE to Nami's canonical csharp-union-types directory"; exit 2; }
+	@test -n "$(UNION_SOURCE)" || { echo "Set UNION_SOURCE to a checkout of the canonical ANcpLua/csharp-union-types repository"; exit 2; }
 	python3 -B "$(UNION_SOURCE)/scripts/sync.py" --target "$(CURDIR)/$(UNION)" $(if $(strip $(UNION_CHECKOUT)),--target "$(abspath $(UNION_CHECKOUT))")
 
 sync-union:
-	@test -n "$(UNION_SOURCE)" || { echo "Set UNION_SOURCE to Nami's canonical csharp-union-types directory"; exit 2; }
+	@test -n "$(UNION_SOURCE)" || { echo "Set UNION_SOURCE to a checkout of the canonical ANcpLua/csharp-union-types repository"; exit 2; }
 	python3 -B "$(UNION_SOURCE)/scripts/sync.py" --target "$(CURDIR)/$(UNION)" $(if $(strip $(UNION_CHECKOUT)),--target "$(abspath $(UNION_CHECKOUT))") --apply

@@ -33,7 +33,7 @@ make verify-union
 only the library underneath an unchanged consumer. Its temporary reports are deleted
 when the command returns.
 
-The union source remains the canonical Nami `.agents/skills/csharp-union-types` directory selected through `UNION_SOURCE`. Use
+The union source is the canonical `ANcpLua/csharp-union-types` repository, whose checkout `UNION_SOURCE` selects. Use
 `make check-union-sync` to compare it and `make sync-union` to explicitly export it
 into this plugin package. It does not create another standalone checkout.
 Override `UNION_SOURCE` if the canonical source is elsewhere. Only when deliberately

@@ -47,7 +47,7 @@ Each package retains its original tests, compiler pins and helpers. Root GitHub 
 
 For local development, `scripts/local_marketplace.py` accepts explicit `--source NAME=PATH` values for every catalog entry and produces an ignored `.local/marketplace` view. It links sources without copying them. Do not edit installed caches.
 
-The C# union skill remains an export of the Nami product repository. To compare or refresh it, use `make -C packages/nami check-union-sync UNION_SOURCE=/absolute/path/to/nami/.agents/skills/csharp-union-types` or the corresponding `sync-union` target.
+The C# union skill is an export of its canonical repository, `ANcpLua/csharp-union-types`. To compare or refresh it, use `make -C packages/nami check-union-sync UNION_SOURCE=/absolute/path/to/csharp-union-types` (a checkout of that repository) or the corresponding `sync-union` target.
 
 ## Migration
 
