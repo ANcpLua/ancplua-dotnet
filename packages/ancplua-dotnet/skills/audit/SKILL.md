@@ -12,7 +12,9 @@ someone opening the cited file.
 ## 1. Scope
 
 1. Name the repositories and their default-branch state: `git -C <repo> status -sb`, and whether
-   the working tree has someone else's uncommitted work (never touch it).
+   the working tree has someone else's uncommitted work (never touch it). Without a checkout,
+   pin the audited commit (`git ls-remote <url> HEAD`) and read it with
+   `gh repo read-file <path> -R <owner/repo> --ref <sha>` or `gh repo read-dir` (gh 2.95+, preview).
 2. For a fleet audit, start with an inventory table: repository, `global.json` (`sdk.version`,
    `rollForward`, `msbuild-sdks`), SDK used by the projects, shared-package versions
    and where each is set, release mechanism. Include test-platform observations when requested,

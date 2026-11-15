@@ -38,6 +38,9 @@ dotnet-dump collect --process-id PID --type Heap --output artifacts/diagnostics/
 ```
 
 For a bounded trace, use the [collection example](../SKILL.md#bounded-collection-example).
+An overflowing buffer drops events and leaves the trace incomplete: enlarge `--buffersize`, or
+for a .NET 11 target use `--buffering-mode Block` (dotnet-trace 10.0.750501+), which pauses
+emitting threads instead of dropping events and so slows the application.
 Counter monitoring is interactive; stop after the agreed observation window.
 Managed thread sampling includes waits: it is not an on-CPU profile. Select
 allocation events when measuring allocations; choose an OS on-CPU profiler when

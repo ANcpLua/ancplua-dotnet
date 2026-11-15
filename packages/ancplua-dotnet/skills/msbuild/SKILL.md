@@ -89,7 +89,8 @@ Read `references/packaging.md` before changing a package's `build/`, `buildTrans
 
 ## 5. Diagnosing
 
-1. Reproduce with a binary log: `dotnet build -bl:artifacts/logs/build.binlog` (one name per run).
+1. Reproduce with a binary log: `dotnet build -bl:artifacts/logs/build.binlog` (one name per run;
+   `-bl:artifacts/logs/build-{}.binlog` lets MSBuild add a unique stamp).
 2. Read the first error, not the last. For restore errors, see the `nuget-versions` skill.
 3. Inspect with the binlog tools available in the session (a binlog MCP server: call its tool list
    first) or `dotnet msbuild -preprocess:pp.xml` for the fully evaluated project.

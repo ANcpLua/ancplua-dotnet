@@ -87,18 +87,21 @@ get past this.
 Order of preference:
 
 1. **Trusted publishing (OIDC).** The workflow has `permissions: id-token: write` and a
-   `NuGet/login` step that exchanges the GitHub token for a short-lived API key
-   (`steps.login.outputs.NUGET_API_KEY`), configured on nuget.org per package owner,
-   repository and workflow file. There's no long-lived secret to rotate. The workflow file name
-   is part of the policy, so renaming the workflow breaks publishing.
+   `NuGet/login` step that exchanges the GitHub token for an API key valid for one hour
+   (`steps.login.outputs.NUGET_API_KEY`), so request it right before the push. The policy is
+   configured on nuget.org per package owner, repository and workflow file. There's no long-lived
+   secret to rotate. The workflow file name is part of the policy, so renaming the workflow breaks
+   publishing.
 2. **A scoped API key in a CI secret.** Glob-scoped to the package prefix, push-only, with an
    expiry.
 3. **A manual key file for local `release.sh` runs.** Read from a file whose location the
    credential registry records (`vitals keys` on ANcpLua machines). Never paste a key into a
-   chat, a commit or a command line that ends up in shell history.
+   chat, a commit or a command line that ends up in shell history. Since SDK 10.0.300,
+   `dotnet nuget push` reads the key from `NUGET_API_KEY`; an explicit `--api-key` wins.
 
 When a publish fails with 403, check the key's glob and expiry, or the trusted-publishing policy's
-repository and workflow name, before retrying.
+repository, workflow name and status (a new policy, usually for a private repository, can be
+temporarily active and lapses if no publish completes within 7 days), before retrying.
 
 ## 5. Moving consumers
 
@@ -109,6 +112,9 @@ For each consumer repository in the chain:
    `nuget-versions` skill, section 1).
 3. Direct dependencies on lower layers (for example `ANcpLua.Roslyn.Utilities`) go to the new
    version in their single central place. Read the release notes for moved or split packages.
+   Write the version explicitly: with a source `minPublishAgeHours` (NuGet 8, SDK 11),
+   `dotnet package add` and `update` skip versions younger than that age, and floating
+   versions fail restore with NU1020.
 4. Build and test, commit, push, then release according to that repository's own mechanism.
 5. A repository with uncommitted work by someone else: work in a separate `git worktree` on
    `origin/main`, so the release commit contains only the version change.

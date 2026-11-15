@@ -3,6 +3,8 @@
 ## Baseline
 
 Keep SDK, configuration, TFM/RID, command and restore/server-cache policy fixed.
+SDK 11 keeps a warm MSBuild server between CLI invocations by default
+(`DOTNET_CLI_USE_MSBUILD_SERVER=false` opts out); record which mode each sample used.
 Repeat each measured setup and report median plus range; setup is untimed.
 
 | Scenario | Setup before each sample |

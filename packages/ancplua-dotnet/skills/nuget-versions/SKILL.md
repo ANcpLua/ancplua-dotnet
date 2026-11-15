@@ -49,7 +49,8 @@ get deleted. Audit by diffing against
   - `disable`: exact match only.
   - No `rollForward`: the default is `patch` when a version is given.
 - Picking `disable` forces every machine and CI image to install that exact patch. Use it only
-  when a repository needs byte-identical toolchains.
+  when a repository needs byte-identical toolchains or commits `packages.lock.json`: the SDK's
+  NuGet takes part in restore, so a newer SDK can change the locked graph.
 - `msbuild-sdks` resolves `<Project Sdk="Name">` and `<Sdk Name="Name"/>` only. A plain library
   package listed there does nothing for the build. All it does is give Renovate a second copy of
   the version to bump, which is how a PR ends up moving `global.json` while the restored version
@@ -89,11 +90,15 @@ get deleted. Audit by diffing against
 | NU1102 | the requested version doesn't exist on the feed | a truth variable points at an unpublished version; publish first or point back to the last published one |
 | NU1109 / NU1605 | a downgrade: something requires a higher version than CPM pins | read the full dependency path in the message; raise the central version, never suppress |
 | NU1507 | several package sources without `packageSourceMapping` | add source mapping |
-| NU1901–NU1904 | NuGetAudit low to critical advisories | upgrade the vulnerable package, or pin a fixed transitive version with transitive pinning |
+| NU1901–NU1904 | NuGetAudit low to critical advisories; projects targeting net10.0+ audit transitive packages by default | upgrade the vulnerable package, or pin a fixed transitive version with transitive pinning |
+| NU1510 | a direct reference to a package the target framework already provides (pruning, net10.0+) | remove it, or condition it to the frameworks that still need it |
+| NU1020 | a floating version from a source with `minPublishAgeHours` (NuGet 8, SDK 11) | pin an explicit version, or exempt the package by decision |
 | NU1603 | the exact version was missing, a higher one resolved | pin the version that exists |
 
-Listing commands: `dotnet package list --include-transitive` and `--vulnerable` on SDK 10;
-`dotnet list package` is the pre-10 spelling.
+Listing commands: `dotnet package list --include-transitive` and `--vulnerable` on SDK 10 and
+later; `dotnet list package` is the pre-10 spelling. `dotnet package update --vulnerable`
+writes a literal over `Version="$(X)"` in `Directory.Packages.props` and leaves `X` stale in
+`Version.props`, so raise the owning property instead.
 
 ## 5. Renovate
 

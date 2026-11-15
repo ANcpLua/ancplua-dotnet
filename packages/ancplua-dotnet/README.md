@@ -79,6 +79,18 @@ MSTest APIs and runner verification live in the companion package.
 
 Move the source and marketplace into one repository. Skill behavior is unchanged.
 
+## 0.7.7
+
+Recheck six skills against .NET SDK 11.0.100 (MSBuild 18.12, NuGet 8.0). `nuget-versions`
+adds pruning (NU1510) and minimum-publish-age (NU1020) restore codes, the net10.0+ audit
+default, lock-file SDK pinning and how `dotnet package update` bypasses a `Version.props`
+owner. `msbuild` corrects the static-graph diagnostic for target-time project references
+and covers SDK 11's default MSBuild server, `.slnf` editing and `{}` binlog names.
+`release` adds the one-hour trusted-publishing key, `NUGET_API_KEY` and minimum publish
+age; `audit` reads repositories without a checkout through `gh repo read-file`;
+`csharp-refactoring` adds the union JSON contract and obsolete forwarders; `performance`
+covers dotnet-trace's blocking buffer mode.
+
 ## 0.7.6
 
 Generate the personal cloud package from this source for web and desktop. Skills

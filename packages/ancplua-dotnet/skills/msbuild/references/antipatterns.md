@@ -24,7 +24,7 @@ surrounding file before reporting: several patterns have legitimate uses, listed
 | package-build-name | `build/*.props` whose name differs from the PackageId | NuGet never imports it | `build/<PackageId>.props` |
 | buildtransitive-tfm | `buildTransitive/<tfm>/` forwarders using `$(TargetFramework)` or importing a TFM-less path | `MSB4019` for transitive consumers | derive the folder from `$(MSBuildThisFileDirectory)` |
 | exclude-without-include | `Update=".*" Exclude=` or `Remove=".*" Exclude=` | Exclude only applies to Include | restructure |
-| dynamic-project-reference | `ProjectReference` added inside a `<Target>` | `/graph` fails (MSB4260) | static item |
+| dynamic-project-reference | `ProjectReference` added inside a `<Target>` | restore and the static graph never see it: a clean build fails with NETSDK1004 (the project was never restored), and `-graph -isolate` rejects the undeclared reference (MSB4252) | static item |
 
 ## Incrementality and performance
 
@@ -41,7 +41,7 @@ surrounding file before reporting: several patterns have legitimate uses, listed
 | broad-glob | `Include="**/*` at the repository root, globs over `node_modules` | slow evaluation | scope globs, `DefaultItemExcludes` |
 | serial-msbuild-task | `<MSBuild Projects="@(` without `BuildInParallel="true"` | serial child builds | `BuildInParallel="true"` |
 | restore-every-step | repeated restore in build/pack/publish steps | repeated graph/network work | reuse restore only across a matching [restore boundary](performance.md#restore-boundary) |
-| bare-binlog | `-bl` without a file name, or binlogs deleted by `git clean -fdx` | evidence overwritten | `-bl:artifacts/logs/<step>.binlog` |
+| bare-binlog | `-bl` without a file name, or binlogs deleted by `git clean -fdx` | evidence overwritten | `-bl:artifacts/logs/<step>.binlog`, or `<step>-{}.binlog` for a unique stamp |
 | analyzers-off-as-fix | `RunAnalyzers=false` / `EnforceCodeStyleInBuild=false` committed to speed up builds | loses enforcement | measure analyzer time from the binlog; tune severities |
 
 ## Hygiene and modernization
@@ -64,7 +64,7 @@ surrounding file before reporting: several patterns have legitimate uses, listed
 | assemblyinfo-duplicate | `Properties/AssemblyInfo.cs` with version attributes in an SDK project | CS0579 duplicates | properties, or `GenerateAssemblyInfo=false` |
 | legacy-project | `ToolsVersion=`, `xmlns=".*2003"`, `<ProjectGuid>`, `Microsoft.CSharp.targets` | no SDK features | SDK-style project |
 | redundant-transitive-reference | `ProjectReference` to Y when a referenced X already references Y and Y isn't used directly | graph noise | keep direct dependencies |
-| unregistered-project | a csproj missing from the `.slnx` | CI never builds or tests it | `dotnet sln add` |
+| unregistered-project | a csproj missing from the `.slnx` or the `.slnf` CI uses | CI never builds or tests it | `dotnet sln add` (SDK 11 also edits `.slnf` filters) |
 
 ## False positives to avoid
 

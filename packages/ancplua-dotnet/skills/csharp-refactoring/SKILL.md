@@ -27,10 +27,11 @@ license: Apache-2.0
 | Boundary | Check |
 | --- | --- |
 | Serialization, configuration, reflection, DI or `dynamic` | Names may be data. Preserve external names through existing metadata, or migrate their consumers when that change is authorized. |
-| Public API, nullable annotations, parameter names | Include source/binary compatibility and named arguments; check the repository's API record when present. |
+| Public API, nullable annotations, parameter names | Include source/binary compatibility and named arguments; check the repository's API record when present. A transitional `[Obsolete("Use X")]` forwarder gives callers CS0618 (CS0612 without a message). |
 | Type moved between assemblies | A same-name move may need `TypeForwardedTo` in the original assembly; a rename needs a different compatibility decision. |
 | Generated/partial code, friends, conditional builds | Follow generator ownership, `InternalsVisibleTo`, all declarations and each affected compilation. |
 | Wrapper removal or type merge | Retain compatibility adapters only for a real consumer boundary. Remove internal dead indirection once its callers are migrated. |
+| Hierarchy to C# 15 union | System.Text.Json (.NET 11) writes a union's active case without a wrapper or `$type`, and needs a type classifier, such as `[JsonUnion]` with the structural classifier, to read back cases that share a JSON token type. Treat the change as a wire-contract migration. |
 
 A CLR rename can preserve an existing JSON field through explicit metadata:
 

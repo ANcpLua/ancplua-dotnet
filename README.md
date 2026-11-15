@@ -4,7 +4,7 @@ One repository for the ANcpLua .NET plugin marketplace, source packages and veri
 
 | Plugin | Source | Current package |
 | --- | --- | --- |
-| `ancplua-dotnet` | [General .NET workflows](packages/ancplua-dotnet/README.md) | 0.7.6; seven skills |
+| `ancplua-dotnet` | [General .NET workflows](packages/ancplua-dotnet/README.md) | 0.7.7; seven skills |
 | `nami` | [Unions, fixtures and Codex messaging](packages/nami/README.md) | 0.1.4; three skills |
 | `mstest-extensions` | [Native MSTest/MTP execution and specialized testing](packages/mstest-extensions/README.md) | 4.1.0; two self-contained skills |
 | `prepare-plugin-submission` | [Submission Studio](packages/prepare-plugin-submission/README.md) | 2.3.2; one skill |
