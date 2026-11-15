@@ -1,5 +1,5 @@
 {
-  "sdk": { "version": "11.0.100-rc.3.26522.148", "rollForward": "disable", "allowPrerelease": true },
-  "msbuild-sdks": { "MSTest.Sdk": "4.5.2" },
+  "sdk": { "version": "11.0.100", "rollForward": "disable", "allowPrerelease": false },
+  "msbuild-sdks": { "MSTest.Sdk": "4.5.3" },
   "test": { "runner": "Microsoft.Testing.Platform" }
 }

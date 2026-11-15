@@ -8,8 +8,8 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../Support/Support.csproj" />
-    <PackageReference Include="MSTest.Extensions.Hosting" Version="4.5.1-alpha.26507.8" />
-    <PackageReference Include="Microsoft.Testing.Extensions.Hosting" Version="1.0.0-alpha.26507.8" />
+    <PackageReference Include="MSTest.Extensions.Hosting" Version="4.5.3-alpha.26561.10" />
+    <PackageReference Include="Microsoft.Testing.Extensions.Hosting" Version="1.0.0-alpha.26561.10" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.0" />
   </ItemGroup>
 </Project>

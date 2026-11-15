@@ -7,6 +7,6 @@
     <IsPackable>false</IsPackable>
     <MSTestAnalysisMode>Recommended</MSTestAnalysisMode>
     <TestingExtensionsProfile>AllMicrosoft</TestingExtensionsProfile>
-    <EvidenceMSTestVersion>4.5.1</EvidenceMSTestVersion>
+    <EvidenceMSTestVersion>4.5.3</EvidenceMSTestVersion>
   </PropertyGroup>
 </Project>

@@ -28,7 +28,7 @@ Exit 2 means missing evidence or mismatched evaluated/restore inputs. Unchanged
 direct requests alone do not prove fresh transitive/floating resolution; restore
 when that matters. Inspect each affected consumer, not just one project in a
 solution. An absent global runner setting is not proof of VSTest; inspect the
-SDK and actual entrypoint too.
+SDK, `DOTNET_TEST_RUNNER` (SDK 11) and actual entrypoint too.
 
 Save the JSON outside the installed skill to cache evidence. `--previous` takes
 that report. `requires_api_refresh` is true on first use, a changed fingerprint,

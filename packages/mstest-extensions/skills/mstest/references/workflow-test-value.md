@@ -1,10 +1,10 @@
 # Assess evidence for a change
 
 The [opinionated native stack](native-stack.md)
-is MSTest.Sdk 4.5.1 / MTP 2.5.1 with `AllMicrosoft` and Microsoft.CodeCoverage.
+is MSTest.Sdk 4.5.3 / MTP 2.5.3 with `AllMicrosoft` and Microsoft.CodeCoverage.
 
 Bind the requested behavior to a revision or reproducible patch and its related
-MSTest cases. The checked native baseline is 4.5.1 / MTP 2.5.1; use the actual
+MSTest cases. The checked native baseline is 4.5.3 / MTP 2.5.3; use the actual
 consumer's packages, runner and relevant artifacts. Existing unchanged tests may
 already establish the changed contract.
 

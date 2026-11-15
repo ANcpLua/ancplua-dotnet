@@ -57,7 +57,9 @@ installed adapter before choosing registration placement. Introduced in 4.3,
 it lets a shared library advertise fixture methods to consuming assemblies;
 the provider type does not need `[TestClass]`. Multiple provider types can
 compose assembly fixtures, so the local one-per-assembly rule is not a limit of
-one shared provider. Local assembly fixture declarations take precedence. From
+one shared provider. Local assembly fixture declarations take precedence; per the
+4.5.3 contract, declaring both local methods bypasses provider discovery, and an
+unused reference that the compiler omits from metadata contributes no fixtures. From
 4.4, provider discovery is skipped without dynamic-code support, including
 Native AOT; declare fixtures directly in an AOT test assembly. Verify actual
 initialization and cleanup in the consuming assembly instead of assuming that

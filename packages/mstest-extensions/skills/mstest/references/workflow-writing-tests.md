@@ -1,9 +1,9 @@
 # Write native MSTest tests
 
 The [opinionated native stack](native-stack.md)
-is MSTest.Sdk 4.5.1 / MTP 2.5.1 with `AllMicrosoft` and Microsoft.CodeCoverage.
+is MSTest.Sdk 4.5.3 / MTP 2.5.3 with `AllMicrosoft` and Microsoft.CodeCoverage.
 
-Use MSTest 4.5.1 / Microsoft.Testing.Platform 2.5.1 as the checked baseline.
+Use MSTest 4.5.3 / Microsoft.Testing.Platform 2.5.3 as the checked baseline.
 For an existing consumer, its resolved packages and normal runner determine the
 available APIs. [Version resolution](version-resolution.md)
 provides lookup when those inputs differ; conceptual questions need no restore.

@@ -1,10 +1,10 @@
 # MSTest anti-patterns
 
-Checked against `microsoft/testfx` at `v4.5.1` and the published NuGet packages. The "Since" column gives the MSTest version that ships the analyzer. "4.5" means 4.5.1; no 4.5.0 package was published.
+Checked against `microsoft/testfx` at `v4.5.1` and the published NuGet packages, and rechecked at `v4.5.3` (public API unchanged). The "Since" column gives the MSTest version that ships the analyzer. "4.5" means 4.5.1; no 4.5.0 package was published.
 
 To check whether an API exists, is experimental, or which version introduced it, search [`public-api.md`](public-api.md) for the type or member name.
 
-Assertion choices target **MSTest 4.5.1**. Use the most specific assertion for the
+Assertion choices target **MSTest 4.5.3**. Use the most specific assertion for the
 complete contract, checked against the
 [resolved framework API](sources.md). Versions in the tables are
 historical evidence, not a reason to recommend weaker or legacy assertions.
@@ -56,7 +56,7 @@ Do not set `TestingPlatformDotnetTestSupport` in new projects.
 - **Treating stricter as better without a contract.** Use `AreEqual` when an
   operation preserves a value; use `AreSame` only when it promises the exact
   instance. Current reference reuse alone does not establish that promise.
-- **Generic checks instead of precise 4.5.1 assertions.** Prefer `IsEmpty`/`IsNotEmpty`
+- **Generic checks instead of precise 4.5 assertions.** Prefer `IsEmpty`/`IsNotEmpty`
   for emptiness, `HasCount` for cardinality, `AreSequenceEqual` for ordered content,
   its `InAnyOrder` form for unordered content including multiplicities, and
   `ContainsSingle(predicate, collection)` for exactly one match. Preserve comparer,
@@ -78,5 +78,5 @@ Do not set `TestingPlatformDotnetTestSupport` in new projects.
 - **Swallowing cleanup failures or retrying until they disappear.** Keep failures visible and release the other independently owned resources even when one cleanup fails.
 - **Replacing repository retention with MSTest's temporary-directory behavior.** `TestTempDirectory` isolates test files; its default failure retention does not implement a repository's expiry or crashed-run cleanup policy.
 - **Applying Native AOT restrictions to the application under test.** The restrictions on hosting injection and assembly fixture providers concern the test host, not a native child executable launched by managed E2E tests.
-- **Copying unverified JSON settings.** In the pinned 4.5.1 schema, use `output.captureTrace`, not `captureOutput`. The schema does not define `execution.considerFixturesAsSpecialTests` or `execution.treatClassAndAssemblyCleanupWarningsAsErrors`; do not copy those from `.runsettings` documentation into JSON.
-- **Requiring stable `MSTest.Extensions.Hosting` 4.5.1.** The published package is prerelease; keep it optional and resolve its actual version separately from the stable framework pin.
+- **Copying unverified JSON settings.** In the pinned 4.5.3 schema (unchanged since 4.5.1), use `output.captureTrace`, not `captureOutput`. The schema does not define `execution.considerFixturesAsSpecialTests` or `execution.treatClassAndAssemblyCleanupWarningsAsErrors`; do not copy those from `.runsettings` documentation into JSON.
+- **Requiring a stable `MSTest.Extensions.Hosting`.** Every published version is a prerelease matched to one MSTest release (`4.5.3-alpha.26561.10` for 4.5.3); keep it optional and resolve its actual version separately from the stable framework pin.

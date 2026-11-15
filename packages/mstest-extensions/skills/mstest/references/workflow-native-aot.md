@@ -1,10 +1,10 @@
 # Verify native test execution
 
 The [opinionated native stack](native-stack.md)
-is MSTest.Sdk 4.5.1 / MTP 2.5.1 with `AllMicrosoft` and Microsoft.CodeCoverage.
+is MSTest.Sdk 4.5.3 / MTP 2.5.3 with `AllMicrosoft` and Microsoft.CodeCoverage.
 
 Establish the consumer's actual SDK, target framework, runtime identifier,
-MSTest packages and runner. The checked baseline is MSTest 4.5.1 with MTP 2.5.1;
+MSTest packages and runner. The checked baseline is MSTest 4.5.3 with MTP 2.5.3;
 these are different versioned components. Preserve the consumer's pins unless
 migration is requested. [Version resolution](version-resolution.md)
 provides the package and MSBuild evidence.

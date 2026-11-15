@@ -10,7 +10,7 @@ Microsoft.Testing.Platform APIs. This skill owns its references, API catalog,
 inspection scripts and executable fixtures; they work without another skill.
 
 The checked [native stack](references/native-stack.md) is MSTest.Sdk/MSTest
-4.5.1, MTP 2.5.1, `AllMicrosoft` and Microsoft.CodeCoverage. Preserve the
+4.5.3, MTP 2.5.3, `AllMicrosoft` and Microsoft.CodeCoverage. Preserve the
 consumer's pins and runner unless a migration is requested. A conceptual
 question needs no project creation or restore; a review stays read-only.
 

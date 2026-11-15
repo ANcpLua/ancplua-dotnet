@@ -8,6 +8,7 @@ version limits or guarantees for later releases. Use
 | --- | --- | --- |
 | 4.4.1 | 2.4.1 | `9a14d19cb8ef1ec6a2aae81d4223a09190f96593` |
 | 4.5.1 | 2.5.1 | `0bf77e3aedbf86f1fa16220bc951d3b52ba56763` |
+| 4.5.3 | 2.5.3 | `0b1d8b5f7b2186835e2cf26292f3478f7cca087e` |
 
 The supplied [API delta](https://github.com/ANcpLua/MSTest-4.4.1/blob/591f0cda03de14f908a337f97b114f764704dd68/delta/4.5.1/api.md)
 compares upstream v4.4.1 and v4.5.1. Its branch still pins the example SDK to
@@ -69,3 +70,24 @@ Native invocation context and lazy assembly ownership were checked on 17 October
 That consumer evidence includes real service processes, discovery and unit-only
 selection without a collector. It does not replace verification of another
 consumer's resolved runner or establish new capability-verifier/AOT evidence.
+
+## 4.5.2 and 4.5.3
+
+Checked on 15 November 2026. The configured public API files list the same
+1,279 symbols as 4.5.1. MSTest.Sdk 4.5.3 only moves its defaults (MSTest 4.5.3,
+MTP 2.5.3, `Microsoft.NET.Test.Sdk` 18.10.2 for `UseVSTest`) and drops the
+unpackaged-WinUI `UseVSTest` error. Fixes that affect guidance here:
+
+- Cancelled parallel or dependency-ordered runs await every scheduled worker, and
+  global test cleanup still runs after a cancelled or timed-out test cleanup.
+- `AddResultFile` copies stay readable after host shutdown in `MSTest-<id>` folders.
+- Fixture-provider discovery reads metadata before loading dependencies (4.5.3);
+  array `Type` data-row arguments work under Native AOT (4.5.2).
+- MTP 2.5.2 aligns terminal verdicts with minimums that exclude skipped tests;
+  2.5.3 moves the final `--retry-failed-tests` TRX to the results directory and
+  keeps earlier attempts under `Retries`.
+
+Sources: the upstream [framework](https://github.com/microsoft/testfx/blob/74be6a61c1324c7b4810841ba2716040b47230f4/docs/Changelog.md#4.5.3)
+and [platform](https://github.com/microsoft/testfx/blob/74be6a61c1324c7b4810841ba2716040b47230f4/docs/Changelog-Platform.md#2.5.3)
+changelogs (recorded on `main` after the release), the 4.5.3 tag diff and the
+restored MSTest.Sdk 4.5.3 package.

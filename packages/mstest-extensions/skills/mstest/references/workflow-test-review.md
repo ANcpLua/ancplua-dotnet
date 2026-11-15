@@ -1,11 +1,11 @@
 # Review MSTest tests
 
 The [opinionated native stack](native-stack.md)
-is MSTest.Sdk 4.5.1 / MTP 2.5.1 with `AllMicrosoft` and Microsoft.CodeCoverage.
+is MSTest.Sdk 4.5.3 / MTP 2.5.3 with `AllMicrosoft` and Microsoft.CodeCoverage.
 
 Read the named tests, their helpers and only the production context that changes
 the verdict. Determine the actual runner and dependency boundary. Native MSTest
-4.5.1 / MTP 2.5.1 is the checked baseline, with the consumer's resolved stack
+4.5.3 / MTP 2.5.3 is the checked baseline, with the consumer's resolved stack
 controlling version-specific claims.
 
 Trace each significant expectation to its executed assertion. Delegated checks,

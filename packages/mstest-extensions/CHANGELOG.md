@@ -1,5 +1,19 @@
 # Changelog
 
+## 4.1.0 — 2026-11-15
+
+- Move the checked stack to MSTest.Sdk/MSTest 4.5.3 with Microsoft.Testing.Platform
+  2.5.3. The configured public API is unchanged since 4.5.1; the catalog now lists
+  4.5.3 and the version notes record the 4.5.2 and 4.5.3 fixes. Runner fixtures,
+  hosting defaults (`4.5.3-alpha.26561.10`) and the CI baseline follow.
+- Pin the assertion examples to the .NET SDK 11.0.100 release instead of RC 3 and
+  recheck `mstest-assertions` against 4.5.3. C# 15 is the `net11.0` default, so the
+  generated projects no longer set `LangVersion`.
+- Describe .NET SDK 11 execution: `DOTNET_TEST_RUNNER`, whole-run and per-module
+  `--minimum-expected-tests` (only the whole-run count includes skipped tests), the
+  whole-run zero-test verdict, artifacts-layout results and `.slnf` editing.
+
+
 ## 4.0.2 — 2026-11-10
 
 - Recheck `mstest-assertions` against MSTest 4.5.2, the version MSTest.Sdk 4.5.2

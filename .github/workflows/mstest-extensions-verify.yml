@@ -33,11 +33,11 @@ jobs:
           python3 scripts/package_plugin.py --output "$RUNNER_TEMP/mstest-extensions.zip"
           git diff --check
       - name: Verify native MSTest baseline
-        run: python3 scripts/verify_versions.py 4.5.1
+        run: python3 scripts/verify_versions.py 4.5.3
       - name: Install the Native AOT toolchain
         run: sudo apt-get update && sudo apt-get install -y clang zlib1g-dev
       - name: Verify runner, hosting and published consumers
-        run: python3 skills/mstest/scripts/verify_capabilities.py --mstest-sdk 4.5.1 --dotnet-sdk "$(dotnet --version)" --hosting --native-aot
+        run: python3 skills/mstest/scripts/verify_capabilities.py --mstest-sdk 4.5.3 --dotnet-sdk "$(dotnet --version)" --hosting --native-aot
       - name: Verify requested version
         if: inputs.mstest_version != ''
         env:

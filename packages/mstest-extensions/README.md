@@ -9,7 +9,7 @@ workflow inside `mstest`; only that workflow's references need to be loaded.
 | [mstest](skills/mstest/SKILL.md) | API lookup, test implementation, native MTP execution, extensions, scoped reviews and Native AOT verification. |
 | [mstest-assertions](skills/mstest-assertions/SKILL.md) | Precise built-in assertion selection and corrections, equality and AOT semantics. |
 
-The checked stack is **MSTest.Sdk/MSTest 4.5.1**, native **MTP 2.5.1**,
+The checked stack is **MSTest.Sdk/MSTest 4.5.3**, native **MTP 2.5.3**,
 **AllMicrosoft** and **Microsoft.CodeCoverage**. Consumer pins control actual API
 availability. The plugin identifier remains `mstest-extensions`; invoke `$mstest`
 or `$mstest-assertions`. The display name remains **MSTest Extensions**.
@@ -46,15 +46,15 @@ version-matched source and compilation establish their public contract.
 [Version resolution](skills/mstest/references/version-resolution.md)
 explains the workflow. [Known version notes](skills/mstest/references/version-notes.md)
 record the 4.4.1 â†’ 4.5.1 delta, including argument display labels, optional
-hosting, built-in diagnostics and MTP changes. These are dated evidence, not a
-hardcoded support ceiling or guarantees for future releases.
+hosting, built-in diagnostics and MTP changes, and the 4.5.2/4.5.3 fixes. These
+are dated evidence, not a hardcoded support ceiling or guarantees for future releases.
 
 ## Current maintenance
 
 `make update-mstest-api` regenerates the public API reference from the configured
 release tags; `make check-mstest-api` checks without writing. The Python dependencies
 are locked with uv. `make verify-assertions` runs the relocated 18-case assertion
-suite and positive/negative AOT analysis with its original pinned .NET 11 SDK.
+suite and positive/negative AOT analysis with its pinned .NET SDK 11.0.100.
 The runner, hosting and native-consumer probes keep their independent .NET 10 baseline.
 
 The six adapted test workflows use native MSTest APIs rather than transferring
@@ -129,6 +129,14 @@ execution, project inclusion, extensions, reviews and an unrelated request.
 This is not a fresh-host automatic-selection benchmark. No regression tests
 were added; the existing helper checks and packaged-skill validation were used.
 
+Current-release checkpoint (4.1.0, 2026-11-15): on .NET SDK 11.0.100, the 31
+`net10.0` examples and five runner probes passed against MSTest.Sdk 4.5.3 with
+the host rolled forward to the 11.0 runtime (no .NET 10 runtime was installed).
+The capability verifier passed for `net11.0` with hosting 4.5.3-alpha.26561.10 and
+a `linux-x64` Native AOT consumer, and the assertion suite passed 18 examples with
+its AOT-analysis probes. CI repeats the runner checks on its .NET 10 SDK. The
+configured public API is identical from 4.5.1 to 4.5.3. No model evaluation was rerun.
+
 The repository-local facts live in [AGENTS.md](AGENTS.md). Validation commands and
 reviewed evidence remain below. Historical model-selection evaluations are
 version-specific and do not establish fresh model behavior for later releases.
@@ -188,26 +196,27 @@ attribute and custom assertion for these scenarios, including rejection tests.â€
 
 ## Verification
 
-The checked-in sample SDK is 4.5.1, with .NET SDK 10.0.401 and MTP 2.5.1.
+The checked-in sample SDK is 4.5.3, with .NET SDK 10.0.401 and MTP 2.5.3.
 The verifier copies the examples into temporary workspaces and selects an exact
 MSTest.Sdk version through each copy's global.json. It checks resolved versions,
 discovery, behavior, original failure reports, changed API fingerprints and
 reuse of unchanged evidence. Consumer projects are not modified.
 
 ```sh
-python3 scripts/verify_versions.py 4.5.1
+python3 scripts/verify_versions.py 4.5.3
 python3 scripts/test_inspect.py
 python3 scripts/test_install.py
 python3 scripts/check_links.py
 ```
 
 Pass another exact SDK version to the same verifier when updating. CI runs the
-native 4.5.1 baseline on pushes and supports a manually selected version. It does
+native 4.5.3 baseline on pushes and supports a manually selected version. It does
 not claim compatibility until that version's checks pass.
 
 | SDK / framework / adapter | MTP | Passing examples | Verified runner probes |
 | --- | --- | ---: | ---: |
 | 4.5.1 | 2.5.1 | 31 | 5 |
+| 4.5.3 | 2.5.3 | 31 | 5 |
 
 Two cases verify inline and dynamic `ArgumentsDisplayName` through discovered
 names and executed arguments. Their source uses native 4.5.1 APIs directly.
@@ -248,7 +257,7 @@ or published with the skill.
 The plugin also packages an isolated capability verifier and its fixtures:
 
 ```sh
-python3 skills/mstest/scripts/verify_capabilities.py --mstest-sdk 4.5.1 --hosting --native-aot
+python3 skills/mstest/scripts/verify_capabilities.py --mstest-sdk 4.5.3 --hosting --native-aot
 ```
 
 It verifies seven discovered runner-policy cases across six real child runs:
@@ -256,7 +265,7 @@ run/skip/drop, CLI selection before the provider, a throwing filter, retry
 recovery/exhaustion and cooperative cancellation joined before cleanup. Three
 hosted case identities use four distinct scopes across two data rows and a retry;
 async disposal follows cleanup, and every controller/worker host is disposed.
-The managed and osx-arm64 Native AOT published consumers each execute six cases:
+The managed and Native AOT (osx-arm64, linux-x64) published consumers each execute six cases:
 five pass and one deliberate typed-value rejection preserves its original
 failure. Generated invocation, original discovery locations, exact Int64 data
 arguments and async lifecycle ordering are checked independently. The full

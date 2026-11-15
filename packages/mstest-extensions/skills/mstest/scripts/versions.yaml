@@ -18,3 +18,5 @@ versions:
     tag: v4.4.1   # 9a14d19
   - version: "4.5.1"
     tag: v4.5.1   # 0bf77e3
+  - version: "4.5.3"
+    tag: v4.5.3   # 0b1d8b5

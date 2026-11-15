@@ -2,7 +2,7 @@
 
 Start with the requested symbol or behavior. For a consumer project, resolve its
 MSTest package and target asset before applying version-specific guidance. The
-checked baseline here is 4.5.1; a question alone needs no restore or project edits.
+checked baseline here is 4.5.3; a question alone needs no restore or project edits.
 Use [version resolution](version-resolution.md)
 when the installed version or assembly differs from that baseline.
 

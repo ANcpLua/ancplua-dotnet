@@ -85,9 +85,9 @@ must reject them. The verifier discovers all example methods from the current
 source; run it for the current count rather than treating the historical count as
 a gate. Agent-behavior evaluation is described separately in [evaluation.md](evaluation.md).
 
-## 4.5.2 recheck
+## 4.5.2 and 4.5.3 rechecks
 
-Checked 2026-11-10 against the restored packages:
+4.5.2 was checked 2026-11-10 against the restored packages:
 
 - `MSTest.Sdk/4.5.2/Sdk/Sdk.props` defaults `MSTestVersion` to 4.5.2 and
   `MicrosoftTestingPlatformVersion` to 2.5.2.
@@ -107,3 +107,21 @@ Checked 2026-11-10 against the restored packages:
   pins: 18 managed examples passed, none failed or skipped; the typed sample passed
   AOT analysis; the negative probe produced exactly the expected IL2026 and IL3050
   diagnostics. No NativeAOT binary was published or executed.
+
+4.5.3 was checked 2026-11-15 the same way, except where noted:
+
+- `MSTest.Sdk/4.5.3/Sdk/Sdk.props` defaults `MSTestVersion` to 4.5.3 and
+  `MicrosoftTestingPlatformVersion` to 2.5.3.
+- Resolved asset `MSTest.TestFramework/4.5.3/lib/net9.0/MSTest.TestFramework.dll`,
+  informational version `4.5.3+0b1d8b5f7b2186835e2cf26292f3478f7cca087e`, SHA-256
+  `6ebbd40c986306b4370eda333087fbae7b1b54c7d21b03fd721cc264d414d3ec`.
+- `ilspycmd` 11.2 output for the `Assert` and `AssertExtensions` types is identical
+  for the 4.5.2 and 4.5.3 assets; all ten `AreEquivalent` and ten `AreNotEquivalent`
+  overloads still carry both RUC and RDC. Between the tags, `src/TestFramework` changes
+  only `AssemblyFixtureProviderAttribute` documentation and .NET Framework failure
+  messages in `TestResult`. `ref` was not available for this recheck.
+- `scripts/verify_examples.py` with .NET SDK 11.0.100 and the 4.5.3 pins, without
+  `LangVersion` because C# 15 is the `net11.0` default: 18 managed examples passed, none
+  failed or skipped; the typed sample passed AOT analysis; the negative probe produced
+  exactly the expected IL2026 and IL3050 diagnostics. No NativeAOT binary was published
+  or executed.

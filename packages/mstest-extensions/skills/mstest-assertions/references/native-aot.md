@@ -1,6 +1,6 @@
 # NativeAOT and trimming
 
-In the resolved 4.5.1 modern-.NET assembly, all ten overloads each of
+In the resolved 4.5.1–4.5.3 modern-.NET assemblies, all ten overloads each of
 `AreEquivalent` and `AreNotEquivalent` carry both `RequiresUnreferencedCode`
 and `RequiresDynamicCode`. Their runtime-type reflection and generic type
 construction are real constraints. Earlier source versions lacking these
@@ -8,7 +8,7 @@ annotations are not proof of safety.
 
 The expression-tree assertion `Assert.That(() => condition)` is a different API
 from the singleton property used by `Assert.That.MyCustomAssertion(...)`.
-The expression API has `RequiresDynamicCode` on the modern-.NET 4.5.1 asset.
+The expression API has `RequiresDynamicCode` on the modern-.NET 4.5.1–4.5.3 assets.
 The singleton property does not impose that requirement; assess each custom
 extension's implementation. Do not confuse it with NUnit's `Assert.That`.
 

@@ -1,10 +1,10 @@
 # Find observable test gaps
 
 The [opinionated native stack](native-stack.md)
-is MSTest.Sdk 4.5.1 / MTP 2.5.1 with `AllMicrosoft` and Microsoft.CodeCoverage.
+is MSTest.Sdk 4.5.3 / MTP 2.5.3 with `AllMicrosoft` and Microsoft.CodeCoverage.
 
 Inventory the requested public outcomes and the tests that reach them. The
-checked native baseline is MSTest 4.5.1 / MTP 2.5.1; framework/package uncertainty
+checked native baseline is MSTest 4.5.3 / MTP 2.5.3; framework/package uncertainty
 is resolved only where it changes the analysis. A focused risk does not imply
 an audit of every behavior written by the same method.
 

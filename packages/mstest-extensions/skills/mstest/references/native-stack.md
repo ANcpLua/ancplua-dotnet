@@ -5,14 +5,14 @@ selects another configuration:
 
 | Component | Choice |
 | --- | --- |
-| MSBuild project SDK | `MSTest.Sdk` 4.5.1 |
-| Framework and adapter | SDK-managed MSTest 4.5.1 |
-| Runner | Native `Microsoft.Testing.Platform` 2.5.1 |
+| MSBuild project SDK | `MSTest.Sdk` 4.5.3 |
+| Framework and adapter | SDK-managed MSTest 4.5.3 |
+| Runner | Native `Microsoft.Testing.Platform` 2.5.3 |
 | Extension profile | `AllMicrosoft` |
 | Coverage | SDK-managed `Microsoft.Testing.Extensions.CodeCoverage`, enabled when requested |
 | C# version | Target-framework default; omit a speculative `latest` override |
 
-MTP 2.5.1 is the platform version, not the MSTest.Sdk package version. Native MTP
+MTP 2.5.3 is the platform version, not the MSTest.Sdk package version. Native MTP
 means the supported platform runner; it does not mean every test runs as Native
 AOT. AOT requires separate publication and execution evidence.
 
@@ -21,7 +21,7 @@ The root configuration for the checked .NET 10 baseline is:
 ```json
 {
   "sdk": { "version": "10.0.401", "rollForward": "latestFeature" },
-  "msbuild-sdks": { "MSTest.Sdk": "4.5.1" },
+  "msbuild-sdks": { "MSTest.Sdk": "4.5.3" },
   "test": { "runner": "Microsoft.Testing.Platform" }
 }
 ```

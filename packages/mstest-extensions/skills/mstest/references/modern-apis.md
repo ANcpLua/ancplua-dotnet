@@ -1,6 +1,6 @@
-# MSTest 4.5.1 API examples
+# MSTest 4.5 API examples
 
-Checked against `microsoft/testfx` at `v4.5.1` and the published NuGet packages. Version notes give the release that introduced an API; "4.5" means 4.5.1, since no 4.5.0 package was published. APIs marked experimental need `#pragma warning disable MSTESTEXP`.
+Checked against `microsoft/testfx` at `v4.5.1` and the published NuGet packages, and rechecked at `v4.5.3`, whose public API is unchanged. Version notes give the release that introduced an API; "4.5" means 4.5.1, since no 4.5.0 package was published. APIs marked experimental need `#pragma warning disable MSTESTEXP`.
 
 Before using an API not shown here, search [`references/public-api.md`](public-api.md) for its type or member name. It lists the public symbols from the configured framework, framework extensions and hosting API files. "Introduced" means first seen among the compared releases, not necessarily the API's original release.
 
@@ -41,7 +41,7 @@ public sealed class PaymentGatewayTests(TestContext context)
 
 ## Services from a host (`MSTest.Extensions.Hosting`, prerelease, experimental)
 
-The package is only published as `4.5.1-alpha.26507.8` and pulls in `Microsoft.Testing.Extensions.Hosting` 1.0.0-alpha. It builds test class instances from an `IServiceProvider`, with one service scope per test invocation (every data row and every retry gets its own). You supply a static host factory and point MSBuild at it; the generated entry point does the rest, so there is no `Main` to write.
+The package is only published as prereleases that match an MSTest release, such as `4.5.3-alpha.26561.10` for 4.5.3, and pulls in the matching `Microsoft.Testing.Extensions.Hosting` 1.0.0-alpha. It builds test class instances from an `IServiceProvider`, with one service scope per test invocation (every data row and every retry gets its own). You supply a static host factory and point MSBuild at it; the generated entry point does the rest, so there is no `Main` to write.
 
 ```xml
 <PropertyGroup>
@@ -155,7 +155,7 @@ A programmatic assembly-wide filter is registered with `[assembly: TestFilterPro
 
 ```json
 {
-  "$schema": "https://raw.githubusercontent.com/microsoft/testfx/v4.5.1/docs/testconfig.schema.json",
+  "$schema": "https://raw.githubusercontent.com/microsoft/testfx/v4.5.3/docs/testconfig.schema.json",
   "mstest": {
     "output": {
       "captureTrace": "Live"
@@ -169,6 +169,6 @@ A programmatic assembly-wide filter is registered with `[assembly: TestFilterPro
 
 - `output.captureTrace` takes `None`, `Result` or `Live` (4.4); `Live` streams console and trace output while the test runs. `true` and `false` still work and mean `Result` and `None`.
 - `execution.captureAssertionFailureDiagnostics` (4.5, default `false`) writes up to three JSON snapshots per failed attempt (`mstest-assertion-failure-state-attempt-*-invocation-*-capture-*.json`) and attaches them to the failed result. It does nothing under Native AOT, on browser/WASI or on UWP/WinUI.
-- Check JSON keys against the pinned schema, not a copied `.runsettings` table. `captureOutput`, `execution.considerFixturesAsSpecialTests` and `execution.treatClassAndAssemblyCleanupWarningsAsErrors` are not properties in that 4.5.1 schema. See the [configuration notes](version-resolution.md).
+- Check JSON keys against the pinned schema, not a copied `.runsettings` table. `captureOutput`, `execution.considerFixturesAsSpecialTests` and `execution.treatClassAndAssemblyCleanupWarningsAsErrors` are not properties in that schema, which is unchanged from 4.5.1 to 4.5.3. See the [configuration notes](version-resolution.md).
 
 For suite reviews, use the local [anti-pattern reference](antipatterns.md). For resource ownership, use the [lifecycle reference](lifecycle.md).

@@ -1,10 +1,10 @@
 # Assess assertion strength
 
 The [opinionated native stack](native-stack.md)
-is MSTest.Sdk 4.5.1 / MTP 2.5.1 with `AllMicrosoft` and Microsoft.CodeCoverage.
+is MSTest.Sdk 4.5.3 / MTP 2.5.3 with `AllMicrosoft` and Microsoft.CodeCoverage.
 
 Follow the executed check through helpers and child reports before deciding it
-verifies nothing. Use resolved MSTest semantics; native 4.5.1 / MTP 2.5.1 is the
+verifies nothing. Use resolved MSTest semantics; native 4.5.3 / MTP 2.5.3 is the
 checked baseline. This is a focused assertion review, not a coverage campaign.
 
 Ask which plausible wrong output would still pass. Presence and count checks can

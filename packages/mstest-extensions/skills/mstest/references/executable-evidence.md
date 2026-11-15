@@ -10,12 +10,12 @@ nuget.org, and retains discovery, TRX, event journals, resolved API fingerprints
 generated C# and published binary hashes. Run it from the skill directory:
 
 ```sh
-python3 scripts/verify_capabilities.py --mstest-sdk 4.5.1 --hosting --native-aot
+python3 scripts/verify_capabilities.py --mstest-sdk 4.5.3 --hosting --native-aot
 ```
 
 Choose the consumer's actual SDK version. Optional hosting has independent
 `--mstest-hosting-version` and `--platform-hosting-version` pins; their defaults
-are the recorded 4.5.1-family prereleases. `--dotnet-sdk`, `--target-framework`
+are the recorded 4.5.3-family prereleases. `--dotnet-sdk`, `--target-framework`
 and `--rid` select explicit build inputs. Native publication requires the target
 RID's native toolchain. Omit an optional capability when it is outside the task,
 not to represent an unsuccessful check as a pass.
@@ -30,11 +30,12 @@ not to represent an unsuccessful check as a pass.
 | Published generated consumers | Actual managed and Native AOT artifacts execute data rows, a shared assertion library, async lifecycle and generated invocation; source navigation is checked against the original declarations |
 | Negative assertion | Each published consumer deliberately fails one rounded-double-as-Int64 assertion; the verifier requires its exact failed result and original marker |
 
-Verified on 16 October 2026 with MSTest SDK/framework/adapter 4.5.1, MTP 2.5.1,
-.NET SDK 10.0.401 and Native AOT `osx-arm64`. Each published consumer has six
-results: five passes and one owned rejection. Optional hosting resolves
-`MSTest.Extensions.Hosting` 4.5.1-alpha.26507.8 and
-`Microsoft.Testing.Extensions.Hosting` 1.0.0-alpha.26507.8. The verifier checks the
+Verified on 15 November 2026 with MSTest SDK/framework/adapter 4.5.3, MTP 2.5.3,
+.NET SDK 11.0.100 (`--target-framework net11.0`) and Native AOT `linux-x64`; the
+16 October 2026 run covered 4.5.1, MTP 2.5.1, .NET SDK 10.0.401 and `osx-arm64`.
+Each published consumer has six results: five passes and one owned rejection.
+Optional hosting resolves `MSTest.Extensions.Hosting` 4.5.3-alpha.26561.10 and
+`Microsoft.Testing.Extensions.Hosting` 1.0.0-alpha.26561.10. The verifier checks the
 resolved versions rather than trusting these fixture defaults.
 
 The hosting bootstrap runs in the checked controller and worker, and can run

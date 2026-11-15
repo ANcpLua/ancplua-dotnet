@@ -1,12 +1,12 @@
 # Assess formal test smells
 
 The [opinionated native stack](native-stack.md)
-is MSTest.Sdk 4.5.1 / MTP 2.5.1 with `AllMicrosoft` and Microsoft.CodeCoverage.
+is MSTest.Sdk 4.5.3 / MTP 2.5.3 with `AllMicrosoft` and Microsoft.CodeCoverage.
 
 Use this workflow when the request calls for formal categories or taxonomy.
 Inspect the actual MSTest tests and relevant helpers; use the consumer's API
 semantics rather than another framework's idioms. The checked native baseline
-is MSTest 4.5.1 / MTP 2.5.1.
+is MSTest 4.5.3 / MTP 2.5.3.
 
 A category follows evidence, not a keyword. Conditional Test Logic requires
 assertion behavior that changes with a branch; native data rows are independent

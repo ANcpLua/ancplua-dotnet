@@ -126,8 +126,8 @@ def main():
     parser.add_argument("--dotnet-sdk", help="Exact installed .NET SDK; default is the fixture's recorded SDK")
     parser.add_argument("--target-framework", default="net10.0")
     parser.add_argument("--hosting", action="store_true", help="Also verify the independently versioned experimental hosting packages")
-    parser.add_argument("--mstest-hosting-version", default="4.5.1-alpha.26507.8")
-    parser.add_argument("--platform-hosting-version", default="1.0.0-alpha.26507.8")
+    parser.add_argument("--mstest-hosting-version", default="4.5.3-alpha.26561.10")
+    parser.add_argument("--platform-hosting-version", default="1.0.0-alpha.26561.10")
     parser.add_argument("--native-aot", action="store_true", help="Publish and execute the native consumer; requires the RID's native toolchain")
     parser.add_argument("--rid", help="Actual publication RID, defaulting to this host")
     parser.add_argument("--output", type=Path, default=Path.cwd() / "artifacts/mstest-capabilities")
@@ -144,12 +144,12 @@ def main():
     if args.dotnet_sdk: config["sdk"]["version"] = args.dotnet_sdk
     (workspace / "global.json").write_text(json.dumps(config, indent=2) + "\n")
     props = workspace / "Directory.Build.props"
-    props.write_text(props.read_text().replace("<EvidenceMSTestVersion>4.5.1</EvidenceMSTestVersion>",
+    props.write_text(props.read_text().replace("<EvidenceMSTestVersion>4.5.3</EvidenceMSTestVersion>",
         f"<EvidenceMSTestVersion>{args.mstest_sdk}</EvidenceMSTestVersion>").replace("<TargetFramework>net10.0</TargetFramework>",
         f"<TargetFramework>{args.target_framework}</TargetFramework>"))
     hosting = workspace / "Hosting/Hosting.csproj"
-    hosting.write_text(hosting.read_text().replace('Version="4.5.1-alpha.26507.8"', f'Version="{args.mstest_hosting_version}"')
-                       .replace('Version="1.0.0-alpha.26507.8"', f'Version="{args.platform_hosting_version}"'))
+    hosting.write_text(hosting.read_text().replace('Version="4.5.3-alpha.26561.10"', f'Version="{args.mstest_hosting_version}"')
+                       .replace('Version="1.0.0-alpha.26561.10"', f'Version="{args.platform_hosting_version}"'))
     (workspace / "NuGet.Config").write_text('<configuration><packageSources><clear/><add key="nuget.org" value="https://api.nuget.org/v3/index.json"/></packageSources></configuration>\n')
     environment = {**os.environ, "DOTNET_CLI_UI_LANGUAGE": "en", "DOTNET_NOLOGO": "1", "MSBUILDDISABLENODEREUSE": "1"}
     for key in list(environment):

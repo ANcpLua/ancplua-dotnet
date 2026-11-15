@@ -12,7 +12,7 @@ references or a second runner bootstrap.
 
 Inspect evaluated SDK markers before deleting project flags: `UsingMSTestSdk`
 identifies SDK use and `IsTestingPlatformApplication` identifies a native test
-application. MSTest.Sdk 4.5.1 does not itself set `IsTestProject`; an imported SDK
+application. MSTest.Sdk (checked through 4.5.3) does not set `IsTestProject`; an imported SDK
 may gate analyzers or other behavior on an explicit value. Check those imports
 before removing it. A helper library using MSTest.Sdk sets `IsTestApplication=false`
 to avoid becoming a test executable.
@@ -20,7 +20,8 @@ to avoid becoming a test executable.
 Trace membership through the artifact CI actually uses: `.sln`, `.slnx`,
 `.slnf`, an explicit project list or a repository wrapper. A `.slnf` lists
 project paths relative to its underlying solution, so adding only to that
-solution can still leave CI unaware of the tests. Preserve the existing format,
+solution can still leave CI unaware of the tests; SDK 11 edits a filter directly
+(`dotnet sln Tests.slnf add <project>`). Preserve the existing format,
 path conventions and unrelated entries. Check the wrapper's selection and
 working directory rather than replacing it with an easier direct command.
 

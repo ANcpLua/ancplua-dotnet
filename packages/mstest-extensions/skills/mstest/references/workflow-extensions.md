@@ -1,7 +1,7 @@
 # MSTest testing and extensions
 
-Use the [opinionated native stack](native-stack.md): MSTest.Sdk 4.5.1,
-MSTest 4.5.1, MTP 2.5.1, `AllMicrosoft` and Microsoft.CodeCoverage. Let the SDK
+Use the [opinionated native stack](native-stack.md): MSTest.Sdk 4.5.3,
+MSTest 4.5.3, MTP 2.5.3, `AllMicrosoft` and Microsoft.CodeCoverage. Let the SDK
 configure its runner and extensions. Use native context and lifecycle APIs rather
 than implementing copies or older-version fallback branches.
 

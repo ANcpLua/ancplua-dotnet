@@ -2,10 +2,11 @@
 
 Use the repository's test entrypoint and its resolved native MTP configuration.
 The [checked stack](native-stack.md) is
-MSTest.Sdk 4.5.1 / MTP 2.5.1 with `AllMicrosoft` and native Microsoft code coverage.
+MSTest.Sdk 4.5.3 / MTP 2.5.3 with `AllMicrosoft` and native Microsoft code coverage.
 Inspect the selected project's SDK, imported settings and restored packages,
 the effective `global.json`, and actual .NET SDK. Native `dotnet test` requires
-.NET 10+ and `test.runner` set to `Microsoft.Testing.Platform`.
+.NET 10+ and `test.runner` set to `Microsoft.Testing.Platform`; SDK 11 also reads
+`DOTNET_TEST_RUNNER`, which overrides `global.json`, so check the environment and CI.
 If the repository selects VSTest, report the mismatch; do not add a bridge,
 switch runners or upgrade packages to satisfy an execution request.
 
@@ -35,19 +36,22 @@ Use the selected application's help for extension options. `AllMicrosoft`
 includes TRX reporting and `Microsoft.Testing.Extensions.CodeCoverage`; an unrecognized option
 requires checking the actual registered profile/packages. Pass MTP options
 directly, without VSTest `--logger` or `--collect` recipes. Collect reports only
-when requested and confirm the resulting files exist. Before reporting coverage
-percentages, check that the report contains the intended production assemblies
-and classes; an empty report is not coverage evidence.
+when requested and confirm the resulting files exist; with the SDK artifacts layout,
+SDK 11 writes them under `<ArtifactsPath>/test/` unless a results directory or layout
+is passed. Before reporting coverage percentages, check that the report contains
+the intended production assemblies and classes; an empty report is not coverage evidence.
 
 Let the first changed-code run build and restore normally. Reuse `--no-build`
 only with matching binaries, assets, configuration and target framework;
 it also skips restore. `--no-restore` requires current restore state.
 
 Read the process result and test counts. Zero tests or all-skipped tests do not
-establish a passing requested behavior. Diagnose the selected project, filter,
+establish a passing requested behavior; on SDK 11 one empty module no longer fails
+a multi-module run, so read each module's count. Diagnose the selected project, filter,
 framework and [solution/CI inclusion](test-projects.md)
-before changing test code. A supported `--minimum-expected-tests` can enforce a
-known minimum but includes skipped cases; do not invent a count or suppress
+before changing test code. Before `--`, `--minimum-expected-tests` sets a whole-run
+minimum that counts skipped tests; after `--` it applies per module and excludes
+them. Either fails with exit code 9. Do not invent a count or suppress
 zero-test failures. Report the actual command, executed/passed/failed/skipped
 counts and requested artifact paths. Leave test corrections and published AOT
 verification to their focused skills.

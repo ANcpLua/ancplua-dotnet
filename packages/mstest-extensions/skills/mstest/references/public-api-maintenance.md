@@ -32,11 +32,13 @@ versions:
     tag: v4.4.1   # 9a14d19
   - version: "4.5.1"
     tag: v4.5.1   # 0bf77e3
+  - version: "4.5.3"
+    tag: v4.5.3   # 0b1d8b5
 ```
 
 The `Unshipped` files belong in the list. At a release tag they still hold APIs that shipped in that release. In `v4.3.0`, for example, 174 of the TestFramework entries are only there. Files that a version does not have yet, such as the Hosting package before 4.5, count as empty. Versions must be quoted, otherwise YAML reads `4.10` as `4.1`.
 
-Include the framework-extension files: they contain `TestContext`, `AddResultFile` and the .NET-specific `TestTempDirectory` property. The common and `net9.0` files cover the extension surface used here; the table does not claim exhaustive coverage of every platform-specific API. These are upstream library targets, not a request to retarget consumers. For example, Nami's `net11.0` tests on SDK `11.0.100-rc.3.26522.148` resolve MSTest 4.5.1's `net9.0` assets. MSTest 4.5.1 has no dedicated `net11.0` API directory.
+Include the framework-extension files: they contain `TestContext`, `AddResultFile` and the .NET-specific `TestTempDirectory` property. The common and `net9.0` files cover the extension surface used here; the table does not claim exhaustive coverage of every platform-specific API. These are upstream library targets, not a request to retarget consumers. For example, `net11.0` tests on SDK 11.0.100 resolve MSTest 4.5.3's `net9.0` assets. MSTest 4.5.3 has no dedicated `net11.0` API directory.
 
 To add a release, append its version and tag. The workflow regenerates the reference; never edit it by hand. Each symbol's "Introduced" value is the first listed version that has it, so a symbol shown as 4.3.0 may be older.
 
@@ -58,21 +60,21 @@ To add a release, append its version and tag. The workflow regenerates the refer
 
 Already in 4.3.0, so not new later: `Assert.That`, `Assert.Scope()`, `Assert.AddValueFormatter`, `AssertFailedException.ExpectedText`/`ActualText`, `[OSCondition]`, `[ArchitectureCondition]`, `[CICondition]`, `[ExecutableCondition]`.
 
-The published packages match the tags: the public types and members of `MSTest.TestFramework` 4.3.0, 4.4.1 and 4.5.1 give the same deltas, and MSTest 4.5.1 depends on Microsoft.Testing.Platform 2.5.1. No 4.5.0 package was published; `MSTest.Extensions.Hosting` exists only as `4.5.1-alpha.26507.8`.
+The published packages match the tags: the public types and members of `MSTest.TestFramework` 4.3.0, 4.4.1 and 4.5.1 give the same deltas, and MSTest 4.5.1 depends on Microsoft.Testing.Platform 2.5.1. No 4.5.0 package was published; `MSTest.Extensions.Hosting` exists only as prereleases (`4.5.1-alpha.26507.8` to `4.5.3-alpha.26561.10`). The configured files are identical between 4.5.1 and 4.5.3 (`0b1d8b5`); MSTest 4.5.3 depends on Microsoft.Testing.Platform 2.5.3.
 
 4.5.1 also adds the separate `MSTest.Windows.UIAutomation` package (`ApplicationTest`, `WindowTest`), which the file list above does not cover.
 
 ## Reference
 
-The list for the configured files is `skills/mstest/references/public-api.md`. It has 1279 symbols: 1016 first seen in 4.3.0, 257 in 4.4.1 and 6 in 4.5.1. Nothing was removed and no API changed its experimental status between these versions. The extension-file additions include `TestContext`, `AddResultFile` and `TestTempDirectory`; behavior is documented in `skills/mstest/references/lifecycle.md`.
+The list for the configured files is `skills/mstest/references/public-api.md`. It has 1279 symbols: 1016 first seen in 4.3.0, 257 in 4.4.1, 6 in 4.5.1 and none in 4.5.3. Nothing was removed and no API changed its experimental status between these versions. The extension-file additions include `TestContext`, `AddResultFile` and `TestTempDirectory`; behavior is documented in `skills/mstest/references/lifecycle.md`.
 
 The 4.5.1 additions, as generated:
 
 | Symbol | Status | Introduced | Last seen |
 |---|---|---|---|
-| `Microsoft.Extensions.DependencyInjection.MSTestHostingServiceCollectionExtensions` | experimental | 4.5.1 | 4.5.1 |
-| `Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute.ArgumentsDisplayName.get -> string?` | stable | 4.5.1 | 4.5.1 |
-| `Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute.ArgumentsDisplayName.set -> void` | stable | 4.5.1 | 4.5.1 |
-| `Microsoft.VisualStudio.TestTools.UnitTesting.TestDataRow<T>.ArgumentsDisplayName.get -> string?` | stable | 4.5.1 | 4.5.1 |
-| `Microsoft.VisualStudio.TestTools.UnitTesting.TestDataRow<T>.ArgumentsDisplayName.set -> void` | stable | 4.5.1 | 4.5.1 |
-| `static Microsoft.Extensions.DependencyInjection.MSTestHostingServiceCollectionExtensions.AddMSTestTestClassInjection(this Microsoft.Extensions.DependencyInjection.IServiceCollection! services) -> Microsoft.Extensions.DependencyInjection.IServiceCollection!` | experimental | 4.5.1 | 4.5.1 |
+| `Microsoft.Extensions.DependencyInjection.MSTestHostingServiceCollectionExtensions` | experimental | 4.5.1 | 4.5.3 |
+| `Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute.ArgumentsDisplayName.get -> string?` | stable | 4.5.1 | 4.5.3 |
+| `Microsoft.VisualStudio.TestTools.UnitTesting.DataRowAttribute.ArgumentsDisplayName.set -> void` | stable | 4.5.1 | 4.5.3 |
+| `Microsoft.VisualStudio.TestTools.UnitTesting.TestDataRow<T>.ArgumentsDisplayName.get -> string?` | stable | 4.5.1 | 4.5.3 |
+| `Microsoft.VisualStudio.TestTools.UnitTesting.TestDataRow<T>.ArgumentsDisplayName.set -> void` | stable | 4.5.1 | 4.5.3 |
+| `static Microsoft.Extensions.DependencyInjection.MSTestHostingServiceCollectionExtensions.AddMSTestTestClassInjection(this Microsoft.Extensions.DependencyInjection.IServiceCollection! services) -> Microsoft.Extensions.DependencyInjection.IServiceCollection!` | experimental | 4.5.1 | 4.5.3 |
