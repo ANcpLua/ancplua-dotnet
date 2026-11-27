@@ -66,6 +66,8 @@ python3 scripts/inspect_mstest.py --project /path/to/Tests.csproj
 
 For a runtime-specific investigation, pass `--property RuntimeIdentifier=<rid>`.
 Restore that framework/RID target if the inspector reports it missing with exit 2.
+If the inspector reports a missing selected DLL, restore the affected package into a
+complete cache before using its API evidence. XML documentation is optional.
 
 The inspector does not upgrade or edit the consumer. For runner, host-disposal
 or published AOT proof, use [the capability verifier](references/executable-evidence.md)

@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.1.2 — 2026-11-28
+
+- The package inspector exits with code 2 when a compile or runtime DLL selected
+  by restore is missing from the package cache. Its diagnostic identifies the
+  package, version and asset path. XML documentation remains optional.
+
 ## 4.1.1 — 2026-11-28
 
 - Inspect the exact restored framework/RID graph when a runtime identifier is
