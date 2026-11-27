@@ -19,7 +19,10 @@ python3 <skill-directory>/scripts/inspect_mstest.py --project <consumer.csproj>
 
 It records the SDK, framework, adapter, MTP/extensions, package source commits,
 selected DLL/XML paths, and a fingerprint. Pass repeated `--property NAME=VALUE`
-options for configuration/target/RID. Use `--restore` for implementation when a
+options for configuration/target/RID. An evaluated `RuntimeIdentifier` selects
+only the matching framework/RID graph and requires a restore when it is missing.
+Without a selected RID, the report includes each restored graph for the framework.
+Use `--restore` for implementation when a
 restore is appropriate; it refreshes assets using existing package requests.
 For read-only reviews, retain the default and report missing/stale resolution.
 MSBuild evaluation can download the selected SDK on first use.

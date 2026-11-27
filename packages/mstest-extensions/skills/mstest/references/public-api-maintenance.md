@@ -8,7 +8,7 @@
 - `skills/mstest/references/public-api.md`: the generated reference that the MSTest skills link to.
 - `skills/mstest/references/lifecycle.md`: hand-maintained lifecycle and configuration guidance with upstream sources. Keep this separate from the generated symbol table; API declarations do not specify lifecycle or JSON behavior.
 
-The workflow `.github/workflows/sync-api-status.yml` regenerates the reference when one of the first three files changes on `main`.
+The workflow `.github/workflows/mstest-sync-api-status.yml` regenerates the reference when one of the first three files changes on `main`. When the generated reference changes, the workflow commits it with a new plugin patch version. A dispatch that regenerates identical bytes keeps the current version.
 
 ## Versions (`versions.yaml`)
 

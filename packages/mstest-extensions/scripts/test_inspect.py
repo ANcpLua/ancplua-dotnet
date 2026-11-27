@@ -41,5 +41,22 @@ class RestoreFreshnessTests(unittest.TestCase):
         self.assertEqual([], inspector.check_requests(evaluated, self.assets(), "net10.0"))
 
 
+class RuntimeIdentifierTests(unittest.TestCase):
+    targets = {"net11.0": {}, "net11.0/osx-arm64": {"native": "mac"},
+               "net10.0/linux-x64": {"native": "linux"}}
+
+    def test_runtime_identifier_selects_only_its_restored_graph(self):
+        self.assertEqual({"net11.0/osx-arm64": {"native": "mac"}},
+                         inspector.restored_targets(self.targets, "net11.0", "osx-arm64"))
+
+    def test_missing_runtime_graph_requires_a_restore_for_that_runtime(self):
+        with self.assertRaisesRegex(ValueError, "Restore required: no assets target for net11[.]0/linux-x64"):
+            inspector.restored_targets(self.targets, "net11.0", "linux-x64")
+
+    def test_unspecified_runtime_enumerates_the_frameworks_restored_graphs(self):
+        self.assertEqual({"net11.0": {}, "net11.0/osx-arm64": {"native": "mac"}},
+                         inspector.restored_targets(self.targets, "net11.0", ""))
+
+
 if __name__ == "__main__":
     unittest.main()

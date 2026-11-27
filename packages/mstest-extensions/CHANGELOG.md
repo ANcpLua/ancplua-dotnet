@@ -1,5 +1,14 @@
 # Changelog
 
+## 4.1.1 — 2026-11-28
+
+- Inspect the exact restored framework/RID graph when a runtime identifier is
+  selected. A missing runtime graph now returns exit 2 and names the required
+  target. With no runtime selected, inspection still lists all restored targets
+  for the framework.
+- The API sync workflow now publishes changed reference files and a matching
+  plugin patch version in one Git commit.
+
 ## 4.1.0 — 2026-11-15
 
 - Move the checked stack to MSTest.Sdk/MSTest 4.5.3 with Microsoft.Testing.Platform

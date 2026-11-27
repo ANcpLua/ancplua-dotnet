@@ -36,7 +36,7 @@
       },
       "publication": {
         "countries": [],
-        "release_notes": "Check against MSTest 4.5.3, Microsoft.Testing.Platform 2.5.3 and .NET SDK 11.0.100, including SDK 11 runner selection and zero-test and minimum-test rules."
+        "release_notes": "Inspect the exact restored graph for an evaluated runtime identifier and report a missing framework/RID target before reusing API evidence."
       }
     }
   },
