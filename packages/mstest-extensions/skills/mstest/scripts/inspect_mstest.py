@@ -80,8 +80,10 @@ def package_evidence(package_id, version, library, package_folders, target_asset
     files = []
     for relative_path in selected:
         path = root / relative_path
-        if path.suffix != ".dll" or not path.exists():
+        if path.suffix.lower() != ".dll":
             continue
+        if not path.is_file():
+            raise ValueError(f"Package cache missing selected DLL: {package_id}/{version}/{relative_path}")
         record = {"path": relative_path, "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
         documentation = path.with_suffix(".xml")
         if documentation.exists():

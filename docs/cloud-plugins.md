@@ -38,6 +38,8 @@ make check-cloud
 
 The script performs packaging and planning only. Plugin Creator performs authenticated uploads. No tokens or cookies belong in this repository. Personal Pro currently has no workspace GitHub marketplace synchronization, so a Git push is followed by this upload step. Future updates reuse the four IDs and do not require uninstalling and reinstalling another distribution.
 
+The Mac publisher automates delivery for `mstest-extensions`. After verifying its private account release, it updates only the MSTest entry in `cloud/releases.json` on `main` with the release ID, package version and SHA-256 of the full canonical ZIP. The resulting receipt-only commit leaves the package digest and receipt unchanged, so the next sync skips both the plugin upload and a new Git commit.
+
 ## Installation and troubleshooting
 
 All four entries were verified installed and enabled in the account and locally on 2026-10-28. Web shows them in **Plugins → Personal** and under **Installed**. Codex uses the same remote IDs under `created-by-me-remote`; its caches are materialized copies, not new Git installations. A fresh chat reloads available skills. Executing .NET builds still requires repository access and the appropriate toolchain in that execution environment.

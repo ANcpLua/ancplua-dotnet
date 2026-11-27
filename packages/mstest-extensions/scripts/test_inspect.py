@@ -1,5 +1,6 @@
 import importlib.util
 from pathlib import Path
+from tempfile import TemporaryDirectory
 import unittest
 
 path = Path(__file__).resolve().parents[1] / "skills/mstest/scripts/inspect_mstest.py"
@@ -56,6 +57,28 @@ class RuntimeIdentifierTests(unittest.TestCase):
     def test_unspecified_runtime_enumerates_the_frameworks_restored_graphs(self):
         self.assertEqual({"net11.0": {}, "net11.0/osx-arm64": {"native": "mac"}},
                          inspector.restored_targets(self.targets, "net11.0", ""))
+
+
+class PackageEvidenceTests(unittest.TestCase):
+    def test_missing_selected_dll_identifies_package_version_and_asset(self):
+        with TemporaryDirectory() as cache:
+            (Path(cache) / "mstest.testframework/4.5.3").mkdir(parents=True)
+            for group in ("compile", "runtime"):
+                with self.subTest(group=group), self.assertRaisesRegex(
+                        ValueError, r"MSTest\.TestFramework/4\.5\.3/lib/net9\.0/MSTest\.TestFramework\.dll"):
+                    inspector.package_evidence("MSTest.TestFramework", "4.5.3", {}, [cache],
+                                               {group: {"lib/net9.0/MSTest.TestFramework.dll": {}}})
+
+    def test_selected_dll_without_xml_is_usable_and_placeholder_is_ignored(self):
+        with TemporaryDirectory() as cache:
+            folder = Path(cache) / "mstest.testframework/4.5.3/lib/net9.0"
+            folder.mkdir(parents=True)
+            (folder / "Framework.DLL").write_bytes(b"fixture")
+            evidence = inspector.package_evidence("MSTest.TestFramework", "4.5.3", {}, [cache],
+                                                  {"compile": {"lib/net9.0/Framework.DLL": {}},
+                                                   "runtime": {"lib/net9.0/_._": {}}})
+            self.assertEqual(["lib/net9.0/Framework.DLL"], [a["path"] for a in evidence["assets"]])
+            self.assertNotIn("xml", evidence["assets"][0])
 
 
 if __name__ == "__main__":
