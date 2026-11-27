@@ -129,7 +129,7 @@ execution, project inclusion, extensions, reviews and an unrelated request.
 This is not a fresh-host automatic-selection benchmark. No regression tests
 were added; the existing helper checks and packaged-skill validation were used.
 
-Current-release checkpoint (4.1.0, 2026-11-15): on .NET SDK 11.0.100, the 31
+For 4.1.0, verification on 2026-11-15 used .NET SDK 11.0.100. The 31
 `net10.0` examples and five runner probes passed against MSTest.Sdk 4.5.3 with
 the host rolled forward to the 11.0 runtime (no .NET 10 runtime was installed).
 The capability verifier passed for `net11.0` with hosting 4.5.3-alpha.26561.10 and

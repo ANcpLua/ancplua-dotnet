@@ -64,6 +64,9 @@ For an isolated API inventory, from this skill directory:
 python3 scripts/inspect_mstest.py --project /path/to/Tests.csproj
 ```
 
+For a runtime-specific investigation, pass `--property RuntimeIdentifier=<rid>`.
+Restore that framework/RID target if the inspector reports it missing with exit 2.
+
 The inspector does not upgrade or edit the consumer. For runner, host-disposal
 or published AOT proof, use [the capability verifier](references/executable-evidence.md)
 with explicit versions. A managed pass does not establish Native AOT support.

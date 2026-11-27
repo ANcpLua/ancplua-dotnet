@@ -4,6 +4,7 @@ check:
 	python3 -B scripts/test_package.py
 
 test:
+	python3 -B scripts/test_prepare_api_release.py
 	python3 -B scripts/test_inspect.py
 	python3 -B scripts/test_install.py
 	python3 -B scripts/test_package.py

@@ -100,6 +100,20 @@ def sdk_evidence(evaluation):
     return None
 
 
+def restored_targets(targets, framework, runtime_identifier):
+    if runtime_identifier:
+        requested = f"{framework}/{runtime_identifier}"
+        if requested not in targets:
+            raise ValueError(f"Restore required: no assets target for {requested}")
+        return {requested: targets[requested]}
+
+    selected = {key: entries for key, entries in targets.items()
+                if key.split("/", 1)[0] == framework}
+    if not selected:
+        raise ValueError(f"Restore required: no assets target for {framework}")
+    return selected
+
+
 def inspect(project, properties=()):
     evaluation = evaluate(project, properties)
     props = evaluation["Properties"]
@@ -114,10 +128,7 @@ def inspect(project, properties=()):
             raise ValueError(f"Restore required: {assets_path} is absent")
         assets = json.loads(assets_path.read_text())
         problems.extend(check_requests(current, assets, framework))
-        targets = {key: value for key, value in assets["targets"].items()
-                   if key.split("/", 1)[0] == framework}
-        if not targets:
-            raise ValueError(f"Restore required: no assets target for {framework}")
+        targets = restored_targets(assets["targets"], framework, current["Properties"]["RuntimeIdentifier"])
         for target, entries in targets.items():
             packages = []
             for key, data in sorted(entries.items()):

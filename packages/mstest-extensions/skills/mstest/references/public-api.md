@@ -3,6 +3,11 @@
 
 Public API from the files configured in `scripts/versions.yaml` in `microsoft/testfx` for MSTest 4.3.0, 4.4.1, 4.5.1, 4.5.3; current is 4.5.3. Includes the common and `net9.0` framework-extension surfaces for `TestContext`, matching the MSTest asset selected by a `net11.0` consumer. These source paths do not set the consumer's SDK or target framework. One row per symbol, so search for a type or member name. "Introduced" is the first listed version that contains the symbol, not necessarily its original release; "removed" means it is missing from 4.5.3 in those files. Other target-specific API surfaces are not exhaustively covered.
 
+To check whether a listed member is usable in a project, identify the DLL selected
+by its restore and compile the call against that DLL. For a runtime-specific build,
+pass the same framework and `RuntimeIdentifier` to the
+[MSTest package inspector](version-resolution.md).
+
 | Symbol | Status | Introduced | Last seen |
 |---|---|---|---|
 | `Microsoft.Extensions.DependencyInjection.MSTestHostingServiceCollectionExtensions` | experimental | 4.5.1 | 4.5.3 |

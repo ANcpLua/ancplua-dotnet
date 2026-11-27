@@ -7,6 +7,7 @@ on:
       - packages/mstest-extensions/skills/mstest/scripts/versions.yaml
       - packages/mstest-extensions/skills/mstest/scripts/generate_api.py
       - packages/mstest-extensions/skills/mstest/scripts/api_table.md.j2
+      - packages/mstest-extensions/scripts/prepare_api_release.py
       - packages/mstest-extensions/pyproject.toml
       - packages/mstest-extensions/uv.lock
   workflow_dispatch:
@@ -32,7 +33,8 @@ jobs:
 
       - name: Commit changes
         run: |
-          git add skills/mstest/references/public-api.md
+          python3 -B scripts/prepare_api_release.py
+          git add skills/mstest/references/public-api.md plugin.json CHANGELOG.md ../../README.md
           if git diff --cached --quiet; then
             echo "Keine Änderungen."
             exit 0
