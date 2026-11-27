@@ -6,9 +6,9 @@
       "sha256": "a43b40af10c73f2b0757e805d33de987c98cc25abd6c1dff9c31fd8f1c2c30b8"
     },
     "mstest-extensions": {
-      "release_id": "pluginrel_6b0a0f3203a8819197929ffac8febcda",
-      "version": "4.1.1",
-      "sha256": "179a8f258b5dc2d72bc3851204708428efc540d93e59968ce7b3bdc5d5425679"
+      "release_id": "pluginrel_6b0a189572c481918543562350362be5",
+      "version": "4.1.2",
+      "sha256": "c733034954434b153f30b9d12b50cd23f486b28790917196714b2ddb964309ff"
     },
     "nami": {
       "release_id": "pluginrel_6ae1525b51d88191ba72182fefb95d7b",
